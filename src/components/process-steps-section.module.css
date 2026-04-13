@@ -1,0 +1,294 @@
+.labelsSeperator {
+  align-self: stretch;
+  background-color: var(--color-whitesmoke);
+  overflow: hidden;
+  padding: var(--padding-120);
+  gap: var(--gap-80);
+  z-index: 2;
+  text-align: center;
+  font-size: var(--fs-20);
+  color: var(--color-white);
+  font-family: var(--font-sf-pro);
+}
+.labelsSeperator,
+.processContainer,
+.processContainerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.processContainerWrapper {
+  width: 100%;
+  max-width: var(--max-w-1440);
+  text-align: center;
+  font-size: var(--fs-16);
+  color: var(--color-darkslateblue-100);
+  font-family: var(--font-sf-pro);
+}
+.processContainer {
+  width: 100%;
+  max-width: min(880px, 100%);
+  box-sizing: border-box;
+  gap: var(--gap-24);
+}
+.titleContainer {
+  border-radius: var(--br-8);
+  background-color: var(--color-whitesmoke);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-8) var(--padding-16);
+}
+.comienzaAhoraY,
+.nuestroPasoA {
+  position: relative;
+  letter-spacing: -0.01em;
+  line-height: 120%;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.comienzaAhoraY {
+  align-self: stretch;
+  font-size: var(--fs-56);
+  letter-spacing: -0.03em;
+  line-height: 110%;
+  font-weight: 500;
+}
+.tenemosProcesoSimple {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--fs-20);
+  letter-spacing: -0.01em;
+  line-height: 120%;
+  opacity: var(--opacity-0_6);
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.processSteps {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--padding-20);
+  box-sizing: border-box;
+}
+
+/* Una tarjeta por paso: número + contenido (evita 4 números seguidos en móvil) */
+.stepsGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--gap-16);
+  row-gap: var(--gap-24);
+  width: 100%;
+  max-width: min(1200px, 100%);
+  box-sizing: border-box;
+  align-items: stretch;
+}
+
+.stepCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  gap: 0;
+}
+
+.stepNumberCell {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: var(--padding-32);
+  min-height: 76px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+.stepNumberInner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+}
+.stepColumn {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 0;
+  width: 100%;
+  gap: var(--gap-24);
+  padding: var(--padding-0) var(--padding-16) var(--padding-24);
+  border-radius: var(--br-16);
+  background-color: var(--color-whitesmoke);
+  box-sizing: border-box;
+  font-size: var(--fs-24);
+  color: var(--color-darkslateblue-100);
+  font-family: var(--font-sf-pro);
+  flex: 1 1 auto;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--br-99);
+  background-color: var(--color-deepskyblue-200);
+  padding: var(--padding-8);
+  position: relative;
+  z-index: 1;
+  color: var(--color-white);
+}
+.h3 {
+  position: relative;
+  margin: 0;
+  width: var(--width-24);
+  display: inline-block;
+  flex-shrink: 0;
+  color: var(--color-white);
+}
+.stepHeadings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-4);
+  width: 100%;
+  min-width: 0;
+}
+.cotizaConSara,
+.enMinutos {
+  margin: 0;
+  position: relative;
+  text-align: center;
+  align-self: center;
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.enMinutos {
+  opacity: var(--opacity-0_6);
+}
+.stepImage {
+  width: 100%;
+  max-width: var(--width-240);
+  aspect-ratio: 240 / 280;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--br-8);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.quotationActions {
+  width: 100%;
+  max-width: min(var(--width-240), 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--padding-10);
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1200px) {
+  .stepsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .labelsSeperator {
+    padding-top: var(--padding-78);
+    padding-bottom: var(--padding-78);
+    box-sizing: border-box;
+  }
+  .comienzaAhoraY {
+    font-size: var(--fs-45);
+    line-height: var(--lh-49);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .labelsSeperator {
+    gap: var(--gap-40);
+    padding: var(--padding-51) var(--padding-24);
+    box-sizing: border-box;
+  }
+  .stepsGrid {
+    grid-template-columns: 1fr;
+    max-width: min(420px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .stepCard {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--gap-16);
+    max-width: 100%;
+  }
+  .stepNumberCell {
+    padding-top: var(--padding-8);
+    min-height: 0;
+    width: auto;
+    flex-shrink: 0;
+  }
+  .stepColumn {
+    align-items: flex-start;
+    text-align: left;
+    padding: var(--padding-16);
+    flex: 1;
+    min-width: 0;
+  }
+  .stepHeadings {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .cotizaConSara,
+  .enMinutos {
+    text-align: left;
+    align-self: stretch;
+  }
+  .stepImage {
+    max-width: 100%;
+  }
+  .quotationActions {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .labelsSeperator {
+    padding-left: var(--padding-20);
+    padding-right: var(--padding-20);
+    box-sizing: border-box;
+  }
+  .labelsSeperator,
+  .processContainerWrapper {
+    gap: var(--gap-20);
+  }
+  .comienzaAhoraY {
+    font-size: var(--fs-34);
+    line-height: var(--lh-37);
+  }
+  .h3,
+  .tenemosProcesoSimple {
+    font-size: var(--fs-16);
+    line-height: var(--lh-19);
+  }
+  .stepColumn {
+    padding-bottom: var(--padding-20);
+    box-sizing: border-box;
+  }
+  .cotizaConSara {
+    font-size: var(--fs-19);
+    line-height: var(--lh-23);
+  }
+  .enMinutos {
+    font-size: var(--fs-16);
+    line-height: var(--lh-19);
+  }
+}

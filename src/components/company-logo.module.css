@@ -1,0 +1,127 @@
+.root {
+  width: var(--width-126_7);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-8_3);
+}
+
+/* Logos reales a color → mismo aspecto B/N que el diseño */
+.monochrome .logomarkIcon,
+.monochrome .logotextIcon {
+  filter: grayscale(100%);
+}
+.root[data-company="Acme Corp"][data-darkMode="true"][data-style="Default"] {
+  align-items: center;
+  gap: var(--gap-5);
+}
+.root[data-company="AlphaWave"][data-darkMode="true"][data-style="Default"] {
+  gap: 6.7px;
+}
+.root[data-company="Capsule"][data-darkMode="true"][data-style="Default"],
+.root[data-company="Catalog"][data-darkMode="true"][data-style="Default"] {
+  align-items: center;
+}
+.root[data-company="Clandestine"][data-darkMode="true"][data-style="Default"] {
+  gap: 6.7px;
+}
+.root[data-company="45 Degrees"][data-darkMode="true"][data-style="Default"]
+  .logomarkIcon {
+  width: var(--width-20);
+}
+.root[data-company="Acme Corp"][data-darkMode="true"][data-style="Default"]
+  .logomarkIcon {
+  width: var(--width-40);
+}
+.root[data-company="AlphaWave"][data-darkMode="true"][data-style="Default"]
+  .logomarkIcon {
+  width: 39.2px;
+}
+.root[data-company="BuildingBlocks"][data-darkMode="true"][data-style="Default"]
+  .logomarkIcon {
+  width: 30.8px;
+}
+.root[data-company="Clandestine"][data-darkMode="true"][data-style="Default"]
+  .logomarkIcon {
+  width: 31.7px;
+}
+.root[data-company="Calescence"][data-darkMode="true"][data-style="Default"]
+  .logomarkIcon {
+  width: 28.3px;
+}
+.root[data-company="CloudWatch"][data-darkMode="true"][data-style="Default"]
+  .logomarkIcon {
+  width: 35px;
+}
+.root[data-company="Command+R"][data-darkMode="true"][data-style="Default"]
+  .logomarkIcon {
+  width: 26.7px;
+}
+.root[data-company="45 Degrees"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 128.3px;
+}
+.root[data-company="Acme Corp"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 119.2px;
+}
+.root[data-company="Alt+Shift"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 85.8px;
+}
+.root[data-company="Biosynthesis"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 135.8px;
+}
+.root[data-company="Boltshift"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 87.5px;
+}
+.root[data-company="AlphaWave"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 110.8px;
+}
+.root[data-company="BuildingBlocks"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 162.5px;
+}
+.root[data-company="Capsule"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 82.5px;
+}
+.root[data-company="Chromatools"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 131.7px;
+}
+.root[data-company="Clandestine"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 130.8px;
+}
+.root[data-company="Calescence"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 122.5px;
+}
+.root[data-company="CloudWatch"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 140.8px;
+}
+.root[data-company="Command+R"][data-darkMode="true"][data-style="Default"]
+  .logotextIcon {
+  width: 141.7px;
+}
+.logomarkIcon,
+.logotextIcon {
+  height: var(--height-40);
+  width: var(--width-33_3);
+  position: relative;
+}
+
+/* Un solo SVG (logo completo), p. ej. /public/logo — tamaño fino en trusted-clients */
+.singleMark {
+  width: auto;
+  max-width: min(360px, 100%);
+  object-fit: contain;
+  object-position: center;
+}
+.logotextIcon {
+  width: var(--width-85);
+}

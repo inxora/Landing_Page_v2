@@ -1,0 +1,104 @@
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 64px;
+  padding: 10px 12px;
+  border-radius: var(--br-8);
+  border: 1px solid rgba(25, 25, 25, 0.12);
+  background-color: var(--color-gray-300);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font-header);
+  letter-spacing: 0.02em;
+  color: var(--color-gray-100);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.trigger:hover {
+  background-color: rgba(25, 25, 25, 0.06);
+}
+
+.globe {
+  display: flex;
+  color: var(--color-gray-100);
+  opacity: 0.9;
+}
+
+.code {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  min-width: 176px;
+  background: var(--color-white);
+  border: 1px solid rgba(25, 25, 25, 0.1);
+  border-radius: var(--br-8);
+  box-shadow: 0 12px 32px rgba(23, 29, 76, 0.12);
+  z-index: 220;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-family: var(--font-header);
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-gray-100);
+  transition: background 0.15s;
+}
+
+.option:hover {
+  background: rgba(19, 158, 212, 0.08);
+}
+
+.optionActive {
+  font-weight: 600;
+  background: rgba(19, 158, 212, 0.06);
+}
+
+.optionCode {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  min-width: 28px;
+  color: #139ed4;
+}
+
+.optionLabel {
+  flex: 1;
+}
+
+.check {
+  color: #139ed4;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 720px) {
+  .trigger {
+    min-width: 56px;
+    padding: 8px 10px;
+    font-size: 14px;
+    gap: 4px;
+  }
+}

@@ -1,0 +1,228 @@
+.section {
+  align-self: stretch;
+  background-color: var(--color-white);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding-100) var(--padding-20);
+  box-sizing: border-box;
+  max-width: 100%;
+  z-index: 1;
+}
+.fewerFlaresMoreGoodDaysParent {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-80);
+  max-width: var(--max-w-1200);
+}
+.fewerFlaresMoreGoodDays,
+.frameParent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.fewerFlaresMoreGoodDays {
+  width: 100%;
+  max-width: min(560px, 100%);
+  justify-content: space-between;
+  gap: var(--gap-20);
+  box-sizing: border-box;
+  text-align: left;
+  font-size: var(--fs-16);
+  color: var(--color-darkslateblue-100);
+  font-family: var(--font-sf-pro);
+}
+.frameParent {
+  gap: var(--gap-24);
+}
+.ventajasDeInxoraWrapper {
+  border-radius: var(--br-8);
+  background-color: var(--color-whitesmoke);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-8) var(--padding-16);
+  text-align: center;
+}
+.somosLaSolucin,
+.ventajasDeInxora {
+  position: relative;
+  letter-spacing: -0.01em;
+  line-height: 120%;
+}
+.somosLaSolucin {
+  align-self: stretch;
+  font-size: var(--fs-56);
+  letter-spacing: -0.03em;
+  line-height: 110%;
+  font-weight: 500;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.inxoraTransformaEl {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--fs-20);
+  letter-spacing: -0.01em;
+  line-height: 120%;
+  opacity: var(--opacity-0_6);
+}
+.accordionList {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: var(--fs-20);
+  width: 100%;
+}
+.accordionItem {
+  align-self: stretch;
+  border-bottom: var(--border-11);
+}
+.accordionTrigger {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gap-16);
+  padding: var(--padding-24) var(--padding-0) var(--padding-22);
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  font-family: var(--font-sf-pro);
+}
+.accordionTrigger:focus-visible {
+  outline: 2px solid var(--color-deepskyblue-200);
+  outline-offset: 2px;
+  border-radius: var(--br-8);
+}
+.accordionTitleRow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+  min-width: 0;
+}
+.accordionLeadIcon {
+  height: var(--height-24);
+  width: var(--width-24);
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.iconExpanded {
+  opacity: 1;
+}
+.iconCollapsed {
+  opacity: 0.55;
+}
+.accordionTitle {
+  flex: 1;
+  position: relative;
+  font-size: var(--fs-20);
+  letter-spacing: -0.01em;
+  line-height: 120%;
+}
+.titleExpanded {
+  color: var(--color-darkslateblue-100);
+  font-weight: 500;
+}
+.titleCollapsed {
+  color: var(--color-gray-100);
+  opacity: var(--opacity-0_6);
+  font-weight: 400;
+}
+.accordionToggleIcon {
+  height: var(--height-40);
+  width: var(--width-40);
+  flex-shrink: 0;
+  border-radius: var(--br-99);
+}
+.accordionPanel {
+  padding: 0 var(--padding-0) var(--padding-16) var(--padding-36);
+  box-sizing: border-box;
+  animation: accordionIn 0.2s ease;
+}
+@keyframes accordionIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.accordionDescription {
+  margin: 0;
+  font-size: var(--fs-16);
+  letter-spacing: -0.01em;
+  line-height: 120%;
+  color: var(--color-deepskyblue-200);
+}
+.frameChild {
+  height: auto;
+  min-height: min(70vw, 420px);
+  max-height: 700px;
+  width: 100%;
+  max-width: min(560px, 100%);
+  aspect-ratio: 560 / 700;
+  border-radius: var(--br-16);
+  object-fit: cover;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 1200px) {
+  .fewerFlaresMoreGoodDaysParent {
+    gap: var(--gap-40);
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .section {
+    padding-top: 65px;
+    padding-bottom: 65px;
+    box-sizing: border-box;
+  }
+  .somosLaSolucin {
+    font-size: var(--fs-45);
+    line-height: var(--lh-49);
+  }
+}
+@media screen and (max-width: 750px) {
+  .section {
+    gap: var(--gap-28);
+  }
+  .fewerFlaresMoreGoodDaysParent {
+    gap: var(--gap-20);
+  }
+  .accordionTrigger {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 450px) {
+  .section {
+    padding-top: 42px;
+    padding-bottom: 42px;
+    box-sizing: border-box;
+  }
+  .somosLaSolucin {
+    font-size: var(--fs-34);
+    line-height: var(--lh-37);
+  }
+  .inxoraTransformaEl {
+    font-size: var(--fs-16);
+    line-height: var(--lh-19);
+  }
+
+  .accordionTitle {
+    font-size: var(--fs-16);
+    line-height: var(--lh-19);
+  }
+}

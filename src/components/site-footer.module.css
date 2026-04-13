@@ -1,0 +1,231 @@
+.root {
+  align-self: stretch;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(
+    105deg,
+    #0f1438 0%,
+    #171d4c 28%,
+    #251b45 58%,
+    #3a1f4d 100%
+  );
+  color: var(--color-white);
+  font-family: var(--font-ui);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.inner {
+  max-width: var(--max-w-1200);
+  margin: 0 auto;
+  padding: var(--padding-60) var(--padding-24) var(--padding-32);
+  box-sizing: border-box;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.15fr repeat(3, minmax(0, 1fr));
+  gap: var(--gap-40) var(--gap-32);
+  align-items: start;
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-20);
+  text-align: left;
+}
+
+.logoLink {
+  display: inline-block;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.logo {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+.slogan {
+  margin: 0;
+  font-size: var(--fs-16);
+  line-height: 150%;
+  font-weight: 400;
+  opacity: 0.92;
+  max-width: 280px;
+}
+
+.contactList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-12);
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-12);
+  font-size: 14px;
+  line-height: 145%;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.contactIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-deepskyblue-100);
+}
+
+.socialRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-8);
+  margin-top: var(--gap-4);
+}
+
+.socialBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--br-8);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--color-white);
+  transition: background 0.2s;
+}
+
+.socialBtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.navCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-16);
+  text-align: left;
+}
+
+.navTitle {
+  margin: 0;
+  font-size: var(--fs-16);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.navTitle::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin-top: var(--padding-8);
+  border-radius: 2px;
+  background: linear-gradient(90deg, #2eb8ed 0%, #e040fb 100%);
+}
+
+.linkList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-12);
+}
+
+.link {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: var(--color-white);
+}
+
+.complaints {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-8);
+  margin-top: var(--gap-16);
+  padding-top: var(--gap-16);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.complaintsLink {
+  display: inline-block;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.complaintsBadge {
+  display: block;
+  width: auto;
+  max-width: 180px;
+  height: auto;
+  object-fit: contain;
+}
+
+.divider {
+  margin: var(--gap-40) 0 var(--gap-24);
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bottomBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-16);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.credits {
+  margin: 0;
+}
+
+.creditsAccent {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+@media screen and (max-width: 1050px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .brandCol {
+    grid-column: 1 / -1;
+    max-width: 420px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .inner {
+    padding-left: var(--padding-20);
+    padding-right: var(--padding-20);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

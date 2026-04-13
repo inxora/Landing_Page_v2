@@ -1,0 +1,42 @@
+.ahorroContainer {
+  align-self: stretch;
+  border-bottom: var(--border-11);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-16) var(--padding-0) var(--padding-14);
+  gap: var(--gap-12);
+  text-align: left;
+  font-size: var(--fs-20);
+  color: var(--color-darkslateblue-100);
+  font-family: var(--font-sf-pro);
+}
+.coinsHandIcon {
+  height: var(--height-24);
+  width: var(--width-24);
+  position: relative;
+}
+.ahorroEconomico {
+  margin: 0;
+  flex: 1;
+  position: relative;
+  display: inline-block;
+  opacity: var(--opacity-0_6);
+  min-width: 132px;
+}
+.ahorroContainerChild {
+  height: var(--height-40);
+  width: var(--width-40);
+  border-radius: var(--br-99);
+}
+@media screen and (max-width: 750px) {
+  .ahorroContainer {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 450px) {
+  .ahorroEconomico {
+    font-size: var(--fs-16);
+    line-height: var(--lh-19);
+  }
+}

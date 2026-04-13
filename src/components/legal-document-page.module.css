@@ -1,0 +1,29 @@
+.prose {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(23, 29, 76, 0.92);
+}
+
+.prose :global(h2) {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.75rem;
+  color: #171d4c;
+}
+
+.prose :global(h2:first-child) {
+  margin-top: 0;
+}
+
+.prose :global(p) {
+  margin: 0 0 1rem;
+}
+
+.prose :global(ul) {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.prose :global(li) {
+  margin-bottom: 0.35rem;
+}

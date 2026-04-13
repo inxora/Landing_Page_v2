@@ -1,0 +1,6 @@
+# https://www.inxora.com — landing INXORA
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://www.inxora.com/sitemap.xml

@@ -1,0 +1,112 @@
+.rectangleParent {
+  width: 100%;
+  max-width: min(920px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  isolation: isolate;
+  gap: clamp(var(--gap-40), 6vw, var(--gap-80));
+  text-align: left;
+  color: var(--color-white);
+  font-family: var(--font-sf-pro);
+  box-sizing: border-box;
+}
+.headlineHighlight {
+  display: inline-block;
+  margin-top: 0.06em;
+  background-color: var(--color-darkslateblue-100);
+  padding: 0.05em 0.28em 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.ameContainer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-40);
+  z-index: 1;
+  flex-shrink: 0;
+}
+.elNuevoEstndar {
+  align-self: stretch;
+  position: relative;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  font-weight: 500;
+  font-size: clamp(1.75rem, 4vw + 1.1rem, 4.75rem);
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.vendemosContainer {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+  max-width: min(62ch, 100%);
+  font-size: clamp(var(--fs-16), 1.5vw + 0.65rem, var(--fs-20));
+}
+.vendemosSuministrosIndustria {
+  flex: 1;
+  position: relative;
+  letter-spacing: -0.01em;
+  line-height: 120%;
+}
+.instantContainerParent {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-8);
+  z-index: 2;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.dispatchContainer,
+.instantContainer {
+  height: var(--height-56);
+  padding: var(--padding-10) var(--padding-16) var(--padding-10)
+    var(--padding-24);
+  box-sizing: border-box;
+}
+.dispatchContainer {
+  backdrop-filter: blur(24px);
+}
+@media screen and (max-width: 1050px) {
+  .rectangleParent {
+    gap: var(--gap-40);
+  }
+}
+@media screen and (max-width: 750px) {
+  .rectangleParent {
+    align-items: center;
+    text-align: center;
+  }
+  .ameContainer {
+    align-items: center;
+  }
+  .vendemosContainer {
+    justify-content: center;
+    max-width: 100%;
+  }
+  .instantContainerParent {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .dispatchContainer,
+  .instantContainer {
+    flex: 0 1 auto;
+    max-width: min(100%, 340px);
+    width: auto;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 450px) {
+  .ameContainer,
+  .rectangleParent {
+    gap: var(--gap-20);
+  }
+}

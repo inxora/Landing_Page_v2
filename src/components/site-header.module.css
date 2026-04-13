@@ -1,0 +1,328 @@
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin: 0 !important;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  min-height: 0;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+  box-sizing: border-box;
+  padding: 12px 48px;
+  z-index: 100;
+  box-shadow: 0 1px 0 rgba(23, 29, 76, 0.06);
+  text-align: left;
+  font-size: 17px;
+  color: var(--color-gray-100);
+  font-family: var(--font-header);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.footerNavigation {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) auto minmax(200px, 1fr);
+  align-items: center;
+  gap: var(--gap-24);
+  width: 100%;
+  max-width: var(--max-w-1200);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 160;
+  min-height: 48px;
+}
+
+.companyFooter {
+  height: 48px;
+  width: auto;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  justify-self: start;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.maskGroupIcon {
+  width: 92px;
+  height: auto;
+  position: relative;
+  max-height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.navigationLinks {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--color-gray-100);
+  font-family: var(--font-header);
+  justify-self: center;
+  white-space: nowrap;
+}
+
+.ventajas {
+  position: relative;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ventajas:hover {
+  color: var(--color-deepskyblue-200);
+}
+
+.headerActionsDesktop {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--gap-8);
+  justify-self: end;
+}
+
+.menuToggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  padding: 0;
+  border: 1px solid rgba(25, 25, 25, 0.12);
+  border-radius: var(--br-8);
+  background: var(--color-white);
+  color: var(--color-gray-100);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.menuToggle:hover {
+  background: var(--color-whitesmoke);
+  border-color: rgba(25, 25, 25, 0.18);
+}
+
+.menuToggle:focus-visible {
+  outline: 2px solid var(--color-deepskyblue-200);
+  outline-offset: 2px;
+}
+
+.menuBackdrop {
+  display: none;
+}
+
+.menuPanel {
+  display: none;
+}
+
+.contactLanguage,
+.contactLanguage2 {
+  border-radius: var(--br-8);
+  background-color: var(--color-gray-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: var(--font-header);
+  letter-spacing: 0.02em;
+}
+
+.contactLanguage2 {
+  cursor: pointer;
+  border: 0;
+  background-color: var(--color-deepskyblue-200);
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.contactLanguage2:hover {
+  background-color: var(--color-deepskyblue-100);
+}
+
+.solicitarCotizacion {
+  position: relative;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  font-family: var(--font-header);
+  color: var(--color-white);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* —— Menú móvil —— */
+.menuNav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  margin: 0 0 var(--gap-16);
+}
+
+.navMobileLink {
+  display: block;
+  padding: 14px 4px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--color-gray-100);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.navMobileLink:hover {
+  color: var(--color-deepskyblue-200);
+}
+
+.menuPanelFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--gap-12);
+  padding-top: var(--gap-8);
+}
+
+.menuPanelFooter .contactLanguage2 {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .footerNavigation {
+    max-width: 100%;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--gap-16);
+  }
+
+  .navigationLinks {
+    gap: var(--gap-24);
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .footerNavigation {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-12);
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .navigationLinks {
+    display: none;
+  }
+
+  .headerActionsDesktop {
+    display: none;
+  }
+
+  .menuToggle {
+    display: inline-flex;
+  }
+
+  .menuBackdrop {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 140;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: rgba(23, 29, 76, 0.35);
+    cursor: pointer;
+    animation: menuBackdropIn 0.2s ease;
+  }
+
+  .menuPanel {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 150;
+    max-height: min(72vh, calc(100dvh - 56px));
+    overflow-y: auto;
+    padding: var(--padding-16) var(--padding-20) var(--padding-24);
+    box-sizing: border-box;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-200);
+    box-shadow: 0 16px 40px rgba(23, 29, 76, 0.12);
+    animation: menuPanelIn 0.22s ease;
+  }
+}
+
+@keyframes menuBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes menuPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .footerContainer {
+    padding-left: var(--padding-16);
+    padding-right: var(--padding-16);
+  }
+
+  .contactLanguage2 {
+    padding: 10px 12px;
+  }
+
+  .solicitarCotizacion {
+    font-size: 15px;
+    letter-spacing: 0.01em;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .footerContainer {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .solicitarCotizacion {
+    font-size: 14px;
+  }
+}

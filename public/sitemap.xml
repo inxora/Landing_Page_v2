@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://www.inxora.com/</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/nosotros</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/nosotros?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/nosotros?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/nosotros?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/nosotros" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/contacto</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/contacto?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/contacto?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/contacto?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/contacto" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/faq</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/faq?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/faq?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/faq?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/faq" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/cotizaciones</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/cotizaciones?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/cotizaciones?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/cotizaciones?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/cotizaciones" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/catalogo</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/catalogo?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/catalogo?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/catalogo?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/catalogo" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/suministros</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/suministros?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/suministros?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/suministros?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/suministros" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/seguridad</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/seguridad?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/seguridad?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/seguridad?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/seguridad" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/herramientas</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/herramientas?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/herramientas?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/herramientas?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/herramientas" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/aviso-legal</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.45</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/aviso-legal?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/aviso-legal?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/aviso-legal?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/aviso-legal" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/politica-de-privacidad</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.45</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/politica-de-privacidad?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/politica-de-privacidad?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/politica-de-privacidad?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/politica-de-privacidad" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/politica-de-cookies</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.45</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/politica-de-cookies?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/politica-de-cookies?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/politica-de-cookies?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/politica-de-cookies" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/terminos-y-condiciones</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.45</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/terminos-y-condiciones?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/terminos-y-condiciones?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/terminos-y-condiciones?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/terminos-y-condiciones" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/envios</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/envios?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/envios?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/envios?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/envios" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/devoluciones</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/devoluciones?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/devoluciones?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/devoluciones?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/devoluciones" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/libro-de-reclamaciones</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/libro-de-reclamaciones?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/libro-de-reclamaciones?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/libro-de-reclamaciones?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/libro-de-reclamaciones" />
+  </url>
+
+</urlset>

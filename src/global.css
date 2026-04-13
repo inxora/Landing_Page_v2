@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=SF+Pro:ital,wght@0,400;0,500;0,700&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+body {
+  margin: 0;
+  line-height: normal;
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:root {
+  /* Common Style Variables */
+
+  /* Color */
+  --color-darkslateblue-100: #171d4c;
+  --color-darkslateblue-200: rgba(23, 29, 76, 0.16);
+  --color-deepskyblue-100: #2eb8ed;
+  --color-deepskyblue-200: #139ed4;
+  --color-dimgray: rgba(77, 77, 77, 0.04);
+  --color-gray-100: #181818;
+  --color-gray-200: rgba(25, 25, 25, 0.08);
+  --color-gray-300: rgba(25, 25, 25, 0.04);
+  --color-gray-400: rgba(255, 255, 255, 0.24);
+  --color-white: #fff;
+  --color-whitesmoke: #f4f4f4;
+
+  /* Gap */
+  --gap-4: 4px;
+  --gap-5: 5px;
+  --gap-8: 8px;
+  --gap-12: 12px;
+  --gap-16: 16px;
+  --gap-18: 18px;
+  --gap-20: 20px;
+  --gap-24: 24px;
+  --gap-28: 28px;
+  --gap-30: 30px;
+  --gap-32: 32px;
+  --gap-40: 40px;
+  --gap-60: 60px;
+  --gap-80: 80px;
+  --gap-8_3: 8.3px;
+
+  /* Padding */
+  --padding-0: 0px;
+  --padding-6: 6px;
+  --padding-8: 8px;
+  --padding-10: 10px;
+  --padding-14: 14px;
+  --padding-16: 16px;
+  --padding-20: 20px;
+  --padding-21: 21px;
+  --padding-22: 22px;
+  --padding-24: 24px;
+  --padding-32: 32px;
+  --padding-36: 36px;
+  --padding-40: 40px;
+  --padding-51: 51px;
+  --padding-60: 60px;
+  --padding-78: 78px;
+  --padding-80: 80px;
+  --padding-100: 100px;
+  --padding-120: 120px;
+
+  /* BorderRadius */
+  --br-8: 8px;
+  --br-12: 12px;
+  --br-16: 16px;
+  --br-99: 99px;
+
+  /* Font */
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sf-pro: "Inter", SF Pro, system-ui, sans-serif;
+  --font-header: var(--font-ui);
+
+  /* FontSize */
+  --fs-16: 16px;
+  --fs-19: 19px;
+  --fs-20: 20px;
+  --fs-24: 24px;
+  --fs-34: 34px;
+  --fs-45: 45px;
+  --fs-56: 56px;
+
+  /* Borders */
+  --border-1: 1px solid var(--color-gray-400);
+  --border-11: 1px solid var(--color-darkslateblue-200);
+
+  /* WidthHeights */
+  --height-1: 1px;
+  --height-19: 19px;
+  --height-24: 24px;
+  --height-40: 40px;
+  --height-56: 56px;
+  --height-280: 280px;
+  --height-291: 291px;
+  --height-420: 420px;
+  --height-68_3: 68.3px;
+  --max-w-241: 241px;
+  --max-w-288: 288px;
+  --max-w-1200: 1200px;
+  --max-w-1440: 1440px;
+  --min-w-158: 158px;
+  --min-w-197: 197px;
+  --min-w-236: 236px;
+  --min-w-265: 265px;
+  --width-20: 20px;
+  --width-24: 24px;
+  --width-40: 40px;
+  --width-85: 85px;
+  --width-240: 240px;
+  --width-540: 540px;
+  --width-1200: 1200px;
+  --width-126_7: 126.7px;
+  --width-33_3: 33.3px;
+
+  /* LineHeights */
+  --lh-19: 19px;
+  --lh-23: 23px;
+  --lh-37: 37px;
+  --lh-49: 49px;
+
+  /* LetterSpacings */
+  --ls--0_01: -0.01;
+  --ls--0_03: -0.03;
+
+  /* Opacities */
+  --opacity-0_6: 0.6;
+
+  /* Layout — sync with site header height for hero offset */
+  --header-offset: 96px;
+  /* Hero: columna desde la izquierda (NO centrada). Más aire a la izquierda que a la derecha = bloque ancho, menos “vacío” en el medio */
+  --hero-page-gutter-start: clamp(28px, 5vw, 72px);
+  --hero-page-gutter-end: clamp(16px, 2.5vw, 40px);
+}

@@ -1,0 +1,272 @@
+.main {
+  align-self: stretch;
+  height: auto;
+  min-height: 0;
+  background-color: var(--color-white);
+  overflow: visible;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding-120) var(--padding-20);
+  box-sizing: border-box;
+  max-width: 100%;
+  z-index: 3;
+}
+
+@media screen and (min-width: 1051px) {
+  .main {
+    min-height: 900px;
+  }
+}
+.frameParent {
+  width: 100%;
+  max-width: min(var(--width-1200), 100%);
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 120px;
+  box-sizing: border-box;
+}
+.frameContainer,
+.frameGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.frameGroup {
+  height: auto;
+  min-height: 0;
+  width: 100%;
+  max-width: min(var(--width-540), 100%);
+  justify-content: space-between;
+  gap: var(--gap-20);
+  text-align: left;
+  font-size: var(--fs-16);
+  color: var(--color-darkslateblue-100);
+  font-family: var(--font-sf-pro);
+  box-sizing: border-box;
+}
+.frameContainer {
+  align-self: stretch;
+  gap: var(--gap-24);
+}
+.nuestrosProveedoresWrapper {
+  border-radius: var(--br-8);
+  background-color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-8) var(--padding-16);
+  text-align: center;
+}
+.nuestrosProveedores {
+  position: relative;
+  letter-spacing: -0.01em;
+  line-height: 120%;
+}
+.trabajandoConProvedores {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--fs-56);
+  letter-spacing: -0.03em;
+  line-height: 110%;
+  font-weight: 500;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.trabajamosConLos {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--fs-20);
+  letter-spacing: -0.01em;
+  line-height: 120%;
+  opacity: var(--opacity-0_6);
+}
+.frameChild {
+  height: var(--height-56);
+  padding: var(--padding-10) var(--padding-16) var(--padding-10)
+    var(--padding-24);
+  box-sizing: border-box;
+}
+.brandContainerParent {
+  flex-direction: column;
+  min-width: 351px;
+  max-width: var(--max-w-1440);
+  /* Sube un poco la cuadrícula respecto al bloque de texto (alineación visual) */
+  margin-top: -28px;
+}
+.brandContainer,
+.brandContainerParent {
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-16);
+}
+.companyContainer,
+.companyLogoWrapper2,
+.companyLogoWrapper8 {
+  align-self: stretch;
+  flex: 1;
+  backdrop-filter: blur(24px);
+  border-radius: var(--br-8);
+  background-color: var(--color-white);
+  border: var(--border-1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-24);
+}
+.companyContainer {
+  min-width: var(--min-w-197);
+}
+
+/* Misma “caja” para todos los logos; la imagen escala con object-fit dentro */
+.brandLogoSlot {
+  width: 100%;
+  min-width: 0;
+  height: clamp(72px, 9vw, 96px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* SVGs con viewBox muy ancho o mucho padding: subir un poco el peso visual */
+.brandLogoSlot[data-brand="Karcher"] .brandLogo :global(img),
+.brandLogoSlot[data-brand="Mitutoyo"] .brandLogo :global(img),
+.brandLogoSlot[data-brand="Toscano"] .brandLogo :global(img),
+.brandLogoSlot[data-brand="Wiha"] .brandLogo :global(img) {
+  transform: scale(1.18);
+  transform-origin: center center;
+}
+.companyLogoWrapper2,
+.companyLogoWrapper8 {
+  min-width: 222px;
+}
+.companyLogoWrapper8 {
+  min-width: 204px;
+}
+
+.brandLogo {
+  align-items: center !important;
+  justify-content: center;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+}
+
+/* Logos /public/brand: misma celda + contain; B/N vía CompanyLogo monochrome */
+.brandLogo :global(img) {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  object-position: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .frameParent {
+    gap: var(--gap-60);
+    max-width: 100%;
+  }
+
+  .brandContainerParent {
+    margin-top: -20px;
+  }
+
+  .brandLogoSlot {
+    height: clamp(64px, 8.5vw, 84px);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .brandLogoSlot {
+    height: clamp(56px, 10vw, 72px);
+  }
+}
+@media screen and (max-width: 1050px) {
+  .main {
+    padding-top: var(--padding-78);
+    padding-bottom: var(--padding-78);
+    box-sizing: border-box;
+  }
+  .trabajandoConProvedores {
+    font-size: var(--fs-45);
+    line-height: var(--lh-49);
+  }
+}
+@media screen and (max-width: 750px) {
+  .main {
+    gap: var(--gap-28);
+    min-height: 0;
+    padding-top: var(--padding-78);
+    padding-bottom: var(--padding-78);
+  }
+  .frameParent {
+    gap: var(--gap-30);
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+  }
+  .frameGroup {
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+  .frameContainer {
+    align-items: center;
+  }
+  .frameChild {
+    align-self: center;
+  }
+  .brandContainer {
+    flex-wrap: wrap;
+  }
+
+  .brandContainerParent {
+    margin-top: -12px;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .main {
+    padding-top: var(--padding-51);
+    padding-bottom: var(--padding-51);
+    box-sizing: border-box;
+  }
+  .trabajandoConProvedores {
+    font-size: var(--fs-34);
+    line-height: var(--lh-37);
+  }
+  .trabajamosConLos {
+    font-size: var(--fs-16);
+    line-height: var(--lh-19);
+  }
+  .brandContainerParent {
+    min-width: 100%;
+  }
+
+  .brandLogoSlot {
+    height: clamp(52px, 14vw, 64px);
+  }
+
+  .brandLogoSlot[data-brand="Karcher"] .brandLogo :global(img),
+  .brandLogoSlot[data-brand="Mitutoyo"] .brandLogo :global(img),
+  .brandLogoSlot[data-brand="Toscano"] .brandLogo :global(img),
+  .brandLogoSlot[data-brand="Wiha"] .brandLogo :global(img) {
+    transform: scale(1.12);
+  }
+}
