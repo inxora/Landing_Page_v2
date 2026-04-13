@@ -5,6 +5,7 @@
   padding: var(--padding-120) var(--padding-20);
   gap: 56px;
   z-index: 5;
+  font-family: var(--font-hero-display);
 }
 .ecommerceContainer,
 .ecommerceLayout,
@@ -22,7 +23,7 @@
   text-align: center;
   font-size: var(--fs-16);
   color: var(--color-darkslateblue-100);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-hero-display);
 }
 .ecommerceContainer {
   align-self: stretch;
@@ -100,24 +101,38 @@
 }
 @media screen and (max-width: 750px) {
   .main {
-    gap: var(--gap-28);
-    padding-top: var(--padding-51);
-    padding-bottom: var(--padding-51);
+    gap: var(--gap-12);
+    padding-top: var(--padding-32);
+    padding-bottom: var(--padding-32);
     box-sizing: border-box;
   }
+  .ecommerceContainer {
+    gap: var(--gap-16);
+  }
   .ecommerceLayout {
-    gap: var(--gap-20);
+    gap: var(--gap-12);
     padding-left: var(--padding-20);
     padding-right: var(--padding-20);
     box-sizing: border-box;
+  }
+  .ecommerceCtaRow {
+    margin-top: var(--gap-4);
   }
   .ecommerceButton {
     width: 100%;
     max-width: min(100%, 380px);
   }
   .industryCardsParent {
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    justify-items: stretch;
+    column-gap: var(--gap-12);
+    row-gap: var(--gap-12);
+    width: 100%;
+    max-width: 100%;
+    /* Aire inferior para el launcher de Sara (evita solaparse con la última fila) */
+    padding-bottom: var(--padding-60);
   }
 }
 @media screen and (max-width: 450px) {

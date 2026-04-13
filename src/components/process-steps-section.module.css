@@ -8,7 +8,7 @@
   text-align: center;
   font-size: var(--fs-20);
   color: var(--color-white);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-hero-display);
 }
 .labelsSeperator,
 .processContainer,
@@ -23,7 +23,7 @@
   text-align: center;
   font-size: var(--fs-16);
   color: var(--color-darkslateblue-100);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-hero-display);
 }
 .processContainer {
   width: 100%;
@@ -129,7 +129,7 @@
   box-sizing: border-box;
   font-size: var(--fs-24);
   color: var(--color-darkslateblue-100);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-hero-display);
   flex: 1 1 auto;
 }
 .wrapper {
@@ -179,7 +179,8 @@
   max-width: var(--width-240);
   aspect-ratio: 240 / 280;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   border-radius: var(--br-8);
   display: block;
   margin-left: auto;
@@ -214,12 +215,16 @@
 
 @media screen and (max-width: 750px) {
   .labelsSeperator {
-    gap: var(--gap-40);
-    padding: var(--padding-51) var(--padding-24);
+    gap: var(--gap-28);
+    padding: var(--padding-40) var(--padding-24);
     box-sizing: border-box;
+  }
+  .processContainer {
+    gap: var(--gap-16);
   }
   .stepsGrid {
     grid-template-columns: 1fr;
+    row-gap: var(--gap-20);
     max-width: min(420px, 100%);
     margin-left: auto;
     margin-right: auto;
@@ -227,11 +232,11 @@
   .stepCard {
     flex-direction: row;
     align-items: flex-start;
-    gap: var(--gap-16);
+    gap: var(--gap-12);
     max-width: 100%;
   }
   .stepNumberCell {
-    padding-top: var(--padding-8);
+    padding-top: var(--padding-4);
     min-height: 0;
     width: auto;
     flex-shrink: 0;
@@ -239,21 +244,29 @@
   .stepColumn {
     align-items: flex-start;
     text-align: left;
-    padding: var(--padding-16);
+    padding: var(--padding-12) var(--padding-14) var(--padding-16);
     flex: 1;
     min-width: 0;
+    gap: var(--gap-16);
   }
   .stepHeadings {
     align-items: flex-start;
     text-align: left;
+    gap: var(--gap-2);
   }
   .cotizaConSara,
   .enMinutos {
     text-align: left;
     align-self: stretch;
   }
+  /* Más compacto: escala con el viewport, sin recorte (contain) */
   .stepImage {
     max-width: 100%;
+    width: auto;
+    max-height: min(32vh, 200px);
+    aspect-ratio: auto;
+    height: auto;
+    object-fit: contain;
   }
   .quotationActions {
     max-width: 100%;
@@ -264,11 +277,13 @@
   .labelsSeperator {
     padding-left: var(--padding-20);
     padding-right: var(--padding-20);
+    padding-top: var(--padding-36);
+    padding-bottom: var(--padding-36);
     box-sizing: border-box;
   }
   .labelsSeperator,
   .processContainerWrapper {
-    gap: var(--gap-20);
+    gap: var(--gap-16);
   }
   .comienzaAhoraY {
     font-size: var(--fs-34);
@@ -290,5 +305,8 @@
   .enMinutos {
     font-size: var(--fs-16);
     line-height: var(--lh-19);
+  }
+  .stepImage {
+    max-height: min(30vh, 176px);
   }
 }

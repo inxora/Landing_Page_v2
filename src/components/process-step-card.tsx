@@ -24,6 +24,7 @@ const ProcessStepCard: FunctionComponent<ProcessStepCardProps> = ({
             variant="inherit"
             variantMapping={{ inherit: "h3" }}
             sx={{
+              fontFamily: "var(--font-hero-display)",
               fontWeight: "400",
               lineHeight: "120%",
               letterSpacing: "-0.01em",
@@ -36,6 +37,7 @@ const ProcessStepCard: FunctionComponent<ProcessStepCardProps> = ({
             variant="inherit"
             variantMapping={{ inherit: "h3" }}
             sx={{
+              fontFamily: "var(--font-hero-display)",
               fontWeight: "400",
               fontSize: "var(--fs-20)",
               lineHeight: "120%",

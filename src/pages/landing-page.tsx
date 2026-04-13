@@ -35,13 +35,19 @@ const LandingPage: FunctionComponent = () => {
       <div id="ventajas" className={styles.sectionAnchor}>
         <AdvantagesSection />
       </div>
+      <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="pasos" className={styles.sectionAnchor}>
         <ProcessStepsSection />
       </div>
+      <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="proveedores" className={styles.sectionAnchor}>
         <SuppliersSection />
       </div>
-      <RecognitionsSection />
+      <div className={styles.brandRibbonDivider} aria-hidden />
+      <div id="respaldados" className={styles.sectionAnchor}>
+        <RecognitionsSection />
+      </div>
+      <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="tienda" className={styles.sectionAnchor}>
         <EcommerceSection />
       </div>

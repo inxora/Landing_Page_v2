@@ -298,9 +298,44 @@
   pointer-events: none;
 }
 
+/* Por debajo de “desktop”: burbuja de Sara más compacta */
+@media screen and (max-width: 1024px) {
+  .launcherButton {
+    padding: 10px 14px;
+    font-size: 16px;
+    border-radius: 14px 14px 0 14px;
+  }
+  .spacerIcon {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .launcherButton {
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.35;
+    max-width: min(240px, calc(100vw - 108px));
+  }
+  .spacerIcon {
+    width: 64px;
+    height: 64px;
+  }
+}
+
 @media screen and (max-width: 450px) {
   .anchor {
     right: 16px;
     bottom: 16px;
+  }
+  .launcherButton {
+    padding: 8px 10px;
+    font-size: 13px;
+    max-width: min(210px, calc(100vw - 96px));
+  }
+  .spacerIcon {
+    width: 56px;
+    height: 56px;
   }
 }

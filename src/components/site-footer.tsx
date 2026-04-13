@@ -2,6 +2,11 @@ import { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 import libroReclamacionesImg from "../assets/libro_reclamaciones.png";
+import {
+  INXORA_GOOGLE_MAPS_EMBED_BASE,
+  INXORA_GOOGLE_MAPS_PLACE_URL,
+} from "../constants/googleMaps";
+import { useLanguage } from "../context/LanguageContext";
 import { ROUTES } from "../routes/paths";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import styles from "./site-footer.module.css";
@@ -86,6 +91,8 @@ function IconLinkedIn() {
 
 const SiteFooter: FunctionComponent = () => {
   const t = useLandingTranslations();
+  const { lang } = useLanguage();
+  const mapEmbedSrc = `${INXORA_GOOGLE_MAPS_EMBED_BASE}&hl=${lang}`;
 
   return (
     <footer className={styles.root}>
@@ -102,10 +109,6 @@ const SiteFooter: FunctionComponent = () => {
             <p className={styles.slogan}>{t.footer.slogan}</p>
             <ul className={styles.contactList}>
               <li className={styles.contactItem}>
-                <IconLocation className={styles.contactIcon} />
-                <span>Av. Óscar R. Benavides 3046, Lima 15081, Perú</span>
-              </li>
-              <li className={styles.contactItem}>
                 <IconPhone className={styles.contactIcon} />
                 <a className={styles.link} href="tel:+51913087207">
                   +51 913 087 207
@@ -117,7 +120,36 @@ const SiteFooter: FunctionComponent = () => {
                   contacto@inxora.com
                 </a>
               </li>
+              <li className={styles.contactItem}>
+                <IconLocation className={styles.contactIcon} />
+                <a
+                  className={styles.link}
+                  href={INXORA_GOOGLE_MAPS_PLACE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Av. Óscar R. Benavides 3046, Lima 15081, Perú
+                </a>
+              </li>
             </ul>
+            <div className={styles.mapBlock}>
+              <iframe
+                title={t.footer.mapIframeTitle}
+                className={styles.mapIframe}
+                src={mapEmbedSrc}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              <a
+                className={styles.mapOpenLink}
+                href={INXORA_GOOGLE_MAPS_PLACE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.footer.mapOpenGoogle}
+              </a>
+            </div>
             <div className={styles.socialRow}>
               <a
                 className={styles.socialBtn}

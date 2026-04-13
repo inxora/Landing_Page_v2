@@ -9,17 +9,19 @@
   text-align: left;
   font-size: var(--fs-24);
   color: var(--color-darkslateblue-100);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-hero-display);
 }
 .industryDividersIcon {
   align-self: stretch;
-  height: var(--height-280);
+  width: 100%;
+  height: auto;
+  max-height: 240px;
   position: relative;
   border-radius: var(--br-12);
   max-width: 100%;
-  overflow: hidden;
   flex-shrink: 0;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
 }
 .industryContainer,
 .industryDetails {
@@ -36,6 +38,7 @@
   margin: 0;
   align-self: stretch;
   position: relative;
+  font-size: var(--fs-24);
 }
 .disponibleParaDelivery,
 .masDe160 {
@@ -45,51 +48,92 @@
 }
 .masDe160 {
   margin: 0;
+  font-size: var(--fs-20);
 }
 .disponibleParaDelivery {
   font-size: var(--fs-16);
   letter-spacing: -0.01em;
   line-height: 120%;
 }
-.detailActions {
-  cursor: pointer;
-  border: 0;
-  padding: var(--padding-10);
-  background-color: var(--color-gray-300);
-  border-radius: var(--br-8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.detailActions:hover {
-  background-color: var(--color-dimgray);
-}
-.verMasDetalles {
-  position: relative;
+.detailLink {
+  align-self: flex-start;
+  margin: 0;
+  padding: var(--padding-4) 0;
   font-size: var(--fs-16);
   letter-spacing: -0.01em;
-  line-height: 120%;
-  font-family: var(--font-sf-pro);
-  color: var(--color-gray-100);
-  text-align: left;
+  line-height: 130%;
+  font-family: var(--font-hero-display);
+  font-weight: 500;
+  color: var(--inx-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.detailLink:hover {
+  color: var(--inx-sky);
+}
+.detailLink:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--inx-blue) 55%, transparent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+@supports not (color: color-mix(in srgb, white, black)) {
+  .detailLink:focus-visible {
+    outline-color: rgba(19, 158, 212, 0.45);
+  }
 }
 @media screen and (max-width: 750px) {
   .industryCards {
     min-width: 0;
-    max-width: min(100%, 400px);
+    max-width: none;
     width: 100%;
-    flex: 0 1 auto;
+    flex: none;
+    align-self: stretch;
+    align-items: center;
+    text-align: center;
+    gap: var(--gap-8);
+  }
+  .industryContainer,
+  .industryDetails {
+    align-items: center;
+  }
+  .industryDividersIcon {
+    max-height: min(26vw, 104px);
+  }
+  .industryContainer {
+    gap: var(--gap-12);
+  }
+  .industryDetails {
+    gap: var(--gap-4);
+  }
+  .electricidad {
+    font-size: clamp(14px, 3.6vw, 17px);
+    line-height: 118%;
+  }
+  .masDe160 {
+    font-size: clamp(11px, 2.9vw, 13px);
+    line-height: 120%;
+  }
+  .disponibleParaDelivery {
+    font-size: clamp(10px, 2.7vw, 12px);
+    line-height: 118%;
+  }
+  .detailLink {
     align-self: center;
+    text-align: center;
+    font-size: clamp(12px, 3vw, 14px);
+    padding: var(--padding-6) var(--padding-4);
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 @media screen and (max-width: 450px) {
-  .electricidad {
-    font-size: var(--fs-19);
-    line-height: var(--lh-23);
-  }
-  .masDe160 {
-    font-size: var(--fs-16);
-    line-height: var(--lh-19);
+  .industryDividersIcon {
+    max-height: min(24vw, 96px);
   }
 }

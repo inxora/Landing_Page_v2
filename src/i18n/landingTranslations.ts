@@ -15,6 +15,7 @@ export type LandingCopy = {
     navVentajas: string;
     navPasos: string;
     navProveedores: string;
+    navRespaldados: string;
     navTienda: string;
     requestQuote: string;
     langAria: string;
@@ -33,7 +34,9 @@ export type LandingCopy = {
   };
   advantages: {
     kicker: string;
-    title: string;
+    titleBefore: string;
+    titleHighlight: string;
+    titleAfter: string;
     lede: string;
     items: [AdvantageItemCopy, AdvantageItemCopy, AdvantageItemCopy, AdvantageItemCopy];
   };
@@ -63,6 +66,7 @@ export type LandingCopy = {
     titleLine2: string;
     lede: string;
     cta: string;
+    detailLink: string;
     industries: [string, string, string, string];
   };
   assistance: {
@@ -100,6 +104,8 @@ export type LandingCopy = {
     linkEnvios: string;
     linkDevoluciones: string;
     libroAlt: string;
+    mapIframeTitle: string;
+    mapOpenGoogle: string;
     rights: string;
     developedBy: string;
     developedAccent: string;
@@ -112,6 +118,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navVentajas: "Ventajas",
       navPasos: "Paso a paso",
       navProveedores: "Proveedores",
+      navRespaldados: "Respaldados",
       navTienda: "Tienda",
       requestQuote: "Solicitar cotización",
       langAria: "Seleccionar idioma",
@@ -126,11 +133,13 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       ctaDispatch: "Gestionar despacho",
     },
     trusted: {
-      title: "Nuestros clientes de confianza:",
+      title: "Confían en nosotros para su abastecimiento",
     },
     advantages: {
       kicker: "Ventajas de Inxora",
-      title: "Somos la solución más inteligente para tus compras industriales",
+      titleBefore: "Somos la ",
+      titleHighlight: "solución",
+      titleAfter: " más inteligente para tus compras industriales",
       lede: "INXORA transforma el proceso tradicional de adquisición de suministros industriales, optimizando tiempos de respuesta.",
       items: [
         {
@@ -178,7 +187,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     },
     recognitions: {
       kicker: "Reconocimientos",
-      title: "Respaldados por el ecosistema de innovación del Perú",
+      title: "Respaldados por el ecosistema de innovación del Perú y del mundo",
       lede: "Inxora es impulsada por instituciones que validan nuestro compromiso con la transformación digital y la excelencia operativa en el sector industrial.",
     },
     ecommerce: {
@@ -187,6 +196,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       titleLine2: "productos en nuestro e-commerce",
       lede: "Selecciona tu industria y conoce los productos que tenemos para ti.",
       cta: "Visitar el e-commerce",
+      detailLink: "Ver más detalles",
       industries: [
         "Electricidad",
         "Iluminación",
@@ -233,6 +243,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       linkEnvios: "Envíos",
       linkDevoluciones: "Devoluciones",
       libroAlt: "Libro de reclamaciones",
+      mapIframeTitle: "Mapa de la oficina INXORA en Lima",
+      mapOpenGoogle: "Abrir en Google Maps",
       rights: "Todos los derechos reservados.",
       developedBy: "Desarrollado por",
       developedAccent: "INXORA",
@@ -244,6 +256,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navVentajas: "Advantages",
       navPasos: "Step by step",
       navProveedores: "Suppliers",
+      navRespaldados: "Recognition",
       navTienda: "Store",
       requestQuote: "Request a quote",
       langAria: "Select language",
@@ -258,11 +271,13 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       ctaDispatch: "Manage dispatch",
     },
     trusted: {
-      title: "Trusted by leading companies:",
+      title: "They trust us for their supply chain",
     },
     advantages: {
       kicker: "INXORA advantages",
-      title: "The smarter way to manage industrial purchasing",
+      titleBefore: "We are the smartest ",
+      titleHighlight: "solution",
+      titleAfter: " for your industrial purchases",
       lede: "INXORA transforms traditional industrial procurement with faster response times and a streamlined buying experience.",
       items: [
         {
@@ -310,8 +325,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     },
     recognitions: {
       kicker: "Recognition",
-      title: "Backed by Peru’s innovation ecosystem",
-      lede: "Inxora is supported by institutions that endorse our commitment to digital transformation and operational excellence in industry.",
+      title: "Backed by the innovation ecosystem of Peru and the world",
+      lede: "Inxora is driven by institutions that validate our commitment to digital transformation and operational excellence in the industrial sector.",
     },
     ecommerce: {
       kicker: "Don’t wait",
@@ -319,6 +334,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       titleLine2: "products in our e-commerce",
       lede: "Choose your industry and discover the products we have for you.",
       cta: "Visit the e-commerce",
+      detailLink: "View more details",
       industries: [
         "Electrical",
         "Lighting",
@@ -365,6 +381,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       linkEnvios: "Shipping",
       linkDevoluciones: "Returns",
       libroAlt: "Complaints book",
+      mapIframeTitle: "INXORA office location map in Lima",
+      mapOpenGoogle: "Open in Google Maps",
       rights: "All rights reserved.",
       developedBy: "Developed by",
       developedAccent: "INXORA",
@@ -376,6 +394,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navVentajas: "Vantagens",
       navPasos: "Passo a passo",
       navProveedores: "Fornecedores",
+      navRespaldados: "Reconhecimentos",
       navTienda: "Loja",
       requestQuote: "Solicitar cotação",
       langAria: "Selecionar idioma",
@@ -390,11 +409,13 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       ctaDispatch: "Gerenciar envio",
     },
     trusted: {
-      title: "Nossos clientes de confiança:",
+      title: "Confiam em nós para o seu abastecimento",
     },
     advantages: {
       kicker: "Vantagens da Inxora",
-      title: "A solução mais inteligente para suas compras industriais",
+      titleBefore: "A ",
+      titleHighlight: "solução",
+      titleAfter: " mais inteligente para suas compras industriais",
       lede: "A INXORA transforma o processo tradicional de aquisição de insumos industriais, otimizando prazos de resposta.",
       items: [
         {
@@ -442,7 +463,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     },
     recognitions: {
       kicker: "Reconhecimentos",
-      title: "Apoiados pelo ecossistema de inovação do Peru",
+      title: "Apoiados pelo ecossistema de inovação do Peru e do mundo",
       lede: "A Inxora é impulsionada por instituições que validam nosso compromisso com a transformação digital e a excelência operacional no setor industrial.",
     },
     ecommerce: {
@@ -451,6 +472,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       titleLine2: "produtos no e-commerce",
       lede: "Selecione seu setor e conheça os produtos que temos para você.",
       cta: "Visitar o e-commerce",
+      detailLink: "Ver mais detalhes",
       industries: [
         "Eletricidade",
         "Iluminação",
@@ -497,6 +519,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       linkEnvios: "Envios",
       linkDevoluciones: "Devoluções",
       libroAlt: "Livro de reclamações",
+      mapIframeTitle: "Mapa do escritório INXORA em Lima",
+      mapOpenGoogle: "Abrir no Google Maps",
       rights: "Todos os direitos reservados.",
       developedBy: "Desenvolvido por",
       developedAccent: "INXORA",

@@ -2,7 +2,7 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 92px 16px 64px;
-  color: #171d4c;
+  color: var(--inx-navy);
   font-family: var(--font-ui);
   box-sizing: border-box;
 }
@@ -46,7 +46,7 @@
 }
 
 .lrFieldset {
-  border: 1px solid rgba(19, 158, 212, 0.45);
+  border: 1px solid color-mix(in srgb, var(--inx-blue) 45%, transparent);
   border-radius: 12px;
   padding: 16px;
   margin: 0;
@@ -54,7 +54,7 @@
 
 .lrLegend {
   font-weight: 600;
-  color: #139ed4;
+  color: var(--inx-blue);
   padding: 0 8px;
 }
 
@@ -94,7 +94,7 @@
 }
 
 .lrInput:focus {
-  outline: 2px solid rgba(19, 158, 212, 0.35);
+  outline: 2px solid color-mix(in srgb, var(--inx-blue) 35%, transparent);
   outline-offset: 1px;
 }
 
@@ -135,7 +135,7 @@ textarea.lrInput {
 
 .lrSubmit {
   width: 100%;
-  background: #139ed4;
+  background: var(--inx-blue);
   color: #fff;
   border: 0;
   padding: 14px 16px;
@@ -148,6 +148,10 @@ textarea.lrInput {
   justify-content: center;
   gap: 8px;
   font-family: inherit;
+}
+
+.lrSubmit:hover:not(:disabled) {
+  background: var(--inx-sky);
 }
 
 .lrSubmit:disabled {

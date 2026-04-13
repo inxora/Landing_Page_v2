@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=SF+Pro:ital,wght@0,400;0,500;0,700&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "./styles/anisette-petite.css";
 
 body {
   margin: 0;
@@ -12,11 +13,56 @@ body {
 :root {
   /* Common Style Variables */
 
-  /* Color */
-  --color-darkslateblue-100: #171d4c;
+  /* Color — marca Inxora (oficial)
+     Cómo usarlo sin “ensuciar” ni convertir la web en arcoíris:
+     · Azul #139ED4 → acciones principales (CTA sólido, enlaces activos). Es el único color
+       que debe llevar el peso visual en bloques con foto (hero): un botón, no fondos enteros.
+     · Celeste #88D4E4 → acentos suaves: hovers de botón secundario, iconos, bordes o
+       brillos a baja opacidad sobre fondos claros — nunca bloques grandes sobre la foto del hero.
+     · Azul oscuro #171D4C → texto fuerte / chips sobre imagen (alto contraste con blanco).
+     · Vino #771A53 y fucsia #D90E8C → solo en detalles breves: una línea en degradé, un
+       subrayado, un foco — no listas de botones de colores distintos. Si marketing pide “más
+       color”, ampliar UNA franja decorativa (p. ej. esta gradient) antes que repartir colores
+       en tarjetas sueltas. */
+  --inx-blue: #139ed4;
+  --inx-sky: #88d4e4;
+  --inx-navy: #171d4c;
+  --inx-wine: #771a53;
+  --inx-fuchsia: #d90e8c;
+  /* Hover sobre fondos navy (botones secundarios en legales, etc.) */
+  --inx-navy-hover: #252b5c;
+
+  /* Alias semánticos (nuevo código y documentación) */
+  --color-brand-primary: var(--inx-blue);
+  --color-brand-soft: var(--inx-sky);
+  --color-brand-navy: var(--inx-navy);
+  --color-brand-wine: var(--inx-wine);
+  --color-brand-fuchsia: var(--inx-fuchsia);
+  /* Degradé corto “marca” (subrayados, divisores). No sustituye CTAs sólidos. */
+  --gradient-brand-accent: linear-gradient(
+    90deg,
+    var(--inx-blue) 0%,
+    var(--inx-sky) 38%,
+    var(--inx-fuchsia) 72%,
+    var(--inx-wine) 100%
+  );
+  /* Header + footer: menos peso en el azul puro, más aire y fucsia/vino visibles */
+  --gradient-chrome-bg: linear-gradient(
+    105deg,
+    #1c2758 0%,
+    #263162 18%,
+    #2f2a5e 36%,
+    #3d245c 54%,
+    #4f2864 72%,
+    #5e2a6a 88%,
+    #6b2a62 100%
+  );
+
+  /* Compatibilidad con tokens ya usados en la landing */
+  --color-darkslateblue-100: var(--inx-navy);
   --color-darkslateblue-200: rgba(23, 29, 76, 0.16);
-  --color-deepskyblue-100: #2eb8ed;
-  --color-deepskyblue-200: #139ed4;
+  --color-deepskyblue-100: var(--inx-sky);
+  --color-deepskyblue-200: var(--inx-blue);
   --color-dimgray: rgba(77, 77, 77, 0.04);
   --color-gray-100: #181818;
   --color-gray-200: rgba(25, 25, 25, 0.08);
@@ -73,6 +119,8 @@ body {
   --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-sf-pro: "Inter", SF Pro, system-ui, sans-serif;
   --font-header: var(--font-ui);
+  /* Anisette Petite (local o /fonts/*) + Outfit; landing: hero, secciones, header y footer */
+  --font-hero-display: "Anisette Petite", "Anisette Petit", "Outfit", var(--font-ui);
 
   /* FontSize */
   --fs-16: 16px;

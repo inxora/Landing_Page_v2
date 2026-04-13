@@ -9,7 +9,7 @@
   text-align: left;
   font-size: var(--fs-20);
   color: var(--color-darkslateblue-100);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-hero-display);
 }
 .coinsHandIcon {
   height: var(--height-24);

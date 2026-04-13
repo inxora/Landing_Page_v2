@@ -3,6 +3,7 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -16,6 +17,15 @@ import styles from "./site-header.module.css";
 export type SiteHeaderProps = {
   className?: string;
 };
+
+/** Orden = orden en la landing; debe coincidir con `id` en `landing-page.tsx` */
+const LANDING_SCROLL_SECTION_IDS = [
+  "ventajas",
+  "pasos",
+  "proveedores",
+  "respaldados",
+  "tienda",
+] as const;
 
 function MenuIcon() {
   return (
@@ -65,8 +75,46 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
   const headerRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(72);
+  const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+  const sectionNav = useMemo(
+    () =>
+      [
+        { id: "ventajas" as const, label: t.header.navVentajas },
+        { id: "pasos" as const, label: t.header.navPasos },
+        { id: "proveedores" as const, label: t.header.navProveedores },
+        { id: "respaldados" as const, label: t.header.navRespaldados },
+        { id: "tienda" as const, label: t.header.navTienda },
+      ] as const,
+    [
+      t.header.navVentajas,
+      t.header.navPasos,
+      t.header.navProveedores,
+      t.header.navRespaldados,
+      t.header.navTienda,
+    ]
+  );
+
+  const updateActiveFromScroll = useCallback(() => {
+    if (location.pathname !== "/") {
+      setActiveSectionId(null);
+      return;
+    }
+    const headerH = headerRef.current?.offsetHeight ?? 72;
+    const triggerY = window.scrollY + headerH + 28;
+    let active: string | null = null;
+    for (const id of LANDING_SCROLL_SECTION_IDS) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      if (triggerY >= top) {
+        active = id;
+      }
+    }
+    setActiveSectionId(active);
+  }, [location.pathname]);
 
   useLayoutEffect(() => {
     const el = headerRef.current;
@@ -85,6 +133,18 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
   useEffect(() => {
     closeMenu();
   }, [location.pathname, location.hash, closeMenu]);
+
+  useEffect(() => {
+    if (location.pathname !== "/") return;
+    updateActiveFromScroll();
+    const onScroll = () => updateActiveFromScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [location.pathname, updateActiveFromScroll, headerHeight]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -109,30 +169,10 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
     return () => mq.removeEventListener("change", onChange);
   }, [closeMenu]);
 
-  const navLinks = (
-    <>
-      <Link
-        className={styles.navMobileLink}
-        to="/#ventajas"
-        onClick={closeMenu}
-      >
-        {t.header.navVentajas}
-      </Link>
-      <Link className={styles.navMobileLink} to="/#pasos" onClick={closeMenu}>
-        {t.header.navPasos}
-      </Link>
-      <Link
-        className={styles.navMobileLink}
-        to="/#proveedores"
-        onClick={closeMenu}
-      >
-        {t.header.navProveedores}
-      </Link>
-      <Link className={styles.navMobileLink} to="/#tienda" onClick={closeMenu}>
-        {t.header.navTienda}
-      </Link>
-    </>
-  );
+  const navClass = (id: string, mobile: boolean) =>
+    [mobile ? styles.navMobileLink : styles.ventajas, activeSectionId === id ? styles.navLinkActive : ""]
+      .filter(Boolean)
+      .join(" ");
 
   return (
     <header
@@ -149,21 +189,19 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
           />
         </Link>
         <nav className={styles.navigationLinks} aria-label="Principal">
-          <Link className={styles.ventajas} to="/#ventajas">
-            {t.header.navVentajas}
-          </Link>
-          <Link className={styles.ventajas} to="/#pasos">
-            {t.header.navPasos}
-          </Link>
-          <Link className={styles.ventajas} to="/#proveedores">
-            {t.header.navProveedores}
-          </Link>
-          <Link className={styles.ventajas} to="/#tienda">
-            {t.header.navTienda}
-          </Link>
+          {sectionNav.map(({ id, label }) => (
+            <Link
+              key={id}
+              className={navClass(id, false)}
+              to={`/#${id}`}
+              aria-current={activeSectionId === id ? "location" : undefined}
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
         <Box className={styles.headerActionsDesktop}>
-          <LanguageSelector />
+          <LanguageSelector variant="onDark" />
           <a
             className={styles.contactLanguage2}
             href={WHATSAPP_QUOTE_URL}
@@ -204,7 +242,17 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
             style={{ top: headerHeight }}
           >
             <nav className={styles.menuNav} aria-label="Principal">
-              {navLinks}
+              {sectionNav.map(({ id, label }) => (
+                <Link
+                  key={id}
+                  className={navClass(id, true)}
+                  to={`/#${id}`}
+                  aria-current={activeSectionId === id ? "location" : undefined}
+                  onClick={closeMenu}
+                >
+                  {label}
+                </Link>
+              ))}
             </nav>
             <Box className={styles.menuPanelFooter}>
               <LanguageSelector />

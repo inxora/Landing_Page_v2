@@ -43,7 +43,13 @@ const AdvantagesSection: FunctionComponent<AdvantagesSectionProps> = ({
                 {t.advantages.kicker}
               </div>
             </Box>
-            <div className={styles.somosLaSolucin}>{t.advantages.title}</div>
+            <div className={styles.somosLaSolucin}>
+              {t.advantages.titleBefore}
+              <span className={styles.titleHighlight}>
+                {t.advantages.titleHighlight}
+              </span>
+              {t.advantages.titleAfter}
+            </div>
             <div className={styles.inxoraTransformaEl}>{t.advantages.lede}</div>
           </Box>
           <Box className={styles.accordionList} role="list">
@@ -63,13 +69,18 @@ const AdvantagesSection: FunctionComponent<AdvantagesSectionProps> = ({
                     aria-controls={`adv-panel-${index}`}
                   >
                     <div className={styles.accordionTitleRow}>
-                      <img
+                      <span
                         className={[
                           styles.accordionLeadIcon,
-                          isOpen ? styles.iconExpanded : styles.iconCollapsed,
+                          isOpen
+                            ? styles.leadIconExpanded
+                            : styles.leadIconCollapsed,
                         ].join(" ")}
-                        alt=""
-                        src={item.icon}
+                        style={{
+                          WebkitMaskImage: `url(${item.icon})`,
+                          maskImage: `url(${item.icon})`,
+                        }}
+                        aria-hidden
                       />
                       <span
                         className={[
@@ -82,7 +93,11 @@ const AdvantagesSection: FunctionComponent<AdvantagesSectionProps> = ({
                     </div>
                     <img
                       className={styles.accordionToggleIcon}
-                      src={isOpen ? "/Frame-86.svg" : "/Frame-861.svg"}
+                      src={
+                        isOpen
+                          ? "/advantages-toggle-open.svg"
+                          : "/Frame-861.svg"
+                      }
                       alt=""
                       width={40}
                       height={40}

@@ -17,6 +17,14 @@ const INDUSTRY_IMAGES = [
 
 const TIENDA_INXORA_URL = "https://tienda.inxora.com/es";
 
+/** Categorías de la tienda (mismo orden que `ecommerce.industries`) */
+const TIENDA_CATEGORY_URLS = [
+  "https://tienda.inxora.com/es/electricidad-y-componentes-electricos",
+  "https://tienda.inxora.com/es/iluminacion-industrial",
+  "https://tienda.inxora.com/es/instrumentacion-medicion-y-automatizacion",
+  "https://tienda.inxora.com/es/mecanica-industrial",
+] as const;
+
 const EcommerceSection: FunctionComponent<EcommerceSectionProps> = ({
   className = "",
 }) => {
@@ -58,12 +66,13 @@ const EcommerceSection: FunctionComponent<EcommerceSectionProps> = ({
             disableElevation
             variant="contained"
             sx={{
+              fontFamily: "var(--font-hero-display)",
               textTransform: "none",
               color: "#fff",
               fontSize: "18",
-              background: "#139ed4",
+              background: "var(--inx-blue)",
               borderRadius: "8px",
-              "&:hover": { background: "#139ed4" },
+              "&:hover": { background: "var(--inx-sky)" },
               height: 56,
             }}
           >
@@ -77,6 +86,8 @@ const EcommerceSection: FunctionComponent<EcommerceSectionProps> = ({
             key={index}
             industryDividers={item.industryDividers}
             electricidad={item.electricidad}
+            detailHref={TIENDA_CATEGORY_URLS[index]}
+            detailLabel={t.ecommerce.detailLink}
           />
         ))}
       </Box>

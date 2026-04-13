@@ -9,7 +9,7 @@
   gap: clamp(var(--gap-40), 6vw, var(--gap-80));
   text-align: left;
   color: var(--color-white);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-hero-display);
   box-sizing: border-box;
 }
 .headlineHighlight {
@@ -32,7 +32,7 @@
 .elNuevoEstndar {
   align-self: stretch;
   position: relative;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   line-height: 1.08;
   font-weight: 500;
   font-size: clamp(1.75rem, 4vw + 1.1rem, 4.75rem);

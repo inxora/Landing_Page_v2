@@ -31,6 +31,8 @@ const BRAND_ROWS: { company: string; src: string }[][] = [
   ],
 ];
 
+const BRAND_ITEMS = BRAND_ROWS.flat();
+
 const SuppliersSection: FunctionComponent<SuppliersSectionProps> = ({
   className = "",
 }) => {
@@ -57,19 +59,20 @@ const SuppliersSection: FunctionComponent<SuppliersSectionProps> = ({
             disableElevation
             variant="contained"
             sx={{
+              fontFamily: "var(--font-hero-display)",
               textTransform: "none",
               color: "#fff",
               fontSize: "18",
-              background: "#139ed4",
+              background: "var(--inx-blue)",
               borderRadius: "8px",
-              "&:hover": { background: "#139ed4" },
+              "&:hover": { background: "var(--inx-sky)" },
               height: 56,
             }}
           >
             {t.suppliers.ctaSupplier}
           </Button>
         </section>
-        <section className={styles.brandContainerParent}>
+        <section className={styles.brandContainerParentDesktop}>
           {BRAND_ROWS.map((pair, rowIdx) => (
             <Box className={styles.brandContainer} key={rowIdx}>
               {pair.map(({ company, src }) => (
@@ -93,6 +96,51 @@ const SuppliersSection: FunctionComponent<SuppliersSectionProps> = ({
             </Box>
           ))}
         </section>
+        <div
+          className={styles.brandMarquee}
+          role="region"
+          aria-label={t.suppliers.title}
+        >
+          <div className={styles.brandMarqueeTrack}>
+            <div className={styles.brandMarqueeSet}>
+              {BRAND_ITEMS.map(({ company, src }) => (
+                <Box className={styles.companyContainer} key={company}>
+                  <Box className={styles.brandLogoSlot} data-brand={company}>
+                    <CompanyLogo
+                      className={styles.brandLogo}
+                      company={company}
+                      darkMode
+                      style="Default"
+                      logotext={false}
+                      logomark={src}
+                      companyLogoWidth="100%"
+                    />
+                  </Box>
+                </Box>
+              ))}
+            </div>
+            <div className={styles.brandMarqueeSet} aria-hidden="true">
+              {BRAND_ITEMS.map(({ company, src }) => (
+                <Box
+                  className={styles.companyContainer}
+                  key={`${company}-dup`}
+                >
+                  <Box className={styles.brandLogoSlot} data-brand={company}>
+                    <CompanyLogo
+                      className={styles.brandLogo}
+                      company={company}
+                      darkMode
+                      style="Default"
+                      logotext={false}
+                      logomark={src}
+                      companyLogoWidth="100%"
+                    />
+                  </Box>
+                </Box>
+              ))}
+            </div>
+          </div>
+        </div>
       </Box>
     </section>
   );

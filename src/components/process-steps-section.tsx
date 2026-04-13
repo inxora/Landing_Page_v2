@@ -60,6 +60,7 @@ const ProcessStepsSection: FunctionComponent<ProcessStepsSectionProps> = ({
                       component="span"
                       variantMapping={{ inherit: "span" }}
                       sx={{
+                        fontFamily: "var(--font-hero-display)",
                         fontWeight: "700",
                         lineHeight: "120%",
                         letterSpacing: "-0.01em",
@@ -78,6 +79,7 @@ const ProcessStepsSection: FunctionComponent<ProcessStepsSectionProps> = ({
                     variant="inherit"
                     variantMapping={{ inherit: "h3" }}
                     sx={{
+                      fontFamily: "var(--font-hero-display)",
                       fontWeight: "400",
                       lineHeight: "120%",
                       letterSpacing: "-0.01em",
@@ -90,6 +92,7 @@ const ProcessStepsSection: FunctionComponent<ProcessStepsSectionProps> = ({
                     variant="inherit"
                     variantMapping={{ inherit: "h3" }}
                     sx={{
+                      fontFamily: "var(--font-hero-display)",
                       fontWeight: "400",
                       fontSize: "var(--fs-20)",
                       lineHeight: "120%",
@@ -113,12 +116,13 @@ const ProcessStepsSection: FunctionComponent<ProcessStepsSectionProps> = ({
                     rel="noopener noreferrer"
                     underline="none"
                     sx={{
+                      fontFamily: "var(--font-hero-display)",
                       textTransform: "none",
                       color: "#fff",
                       fontSize: "16",
-                      background: "#139ed4",
+                      background: "var(--inx-blue)",
                       borderRadius: "8px",
-                      "&:hover": { background: "#139ed4" },
+                      "&:hover": { background: "var(--inx-sky)" },
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",

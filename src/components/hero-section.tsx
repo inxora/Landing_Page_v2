@@ -37,12 +37,13 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
           rel="noopener noreferrer"
           underline="none"
           sx={{
+            fontFamily: "var(--font-hero-display)",
             textTransform: "none",
             color: "#fff",
             fontSize: "18",
-            background: "#139ed4",
+            background: "var(--inx-blue)",
             borderRadius: "8px",
-            "&:hover": { background: "#139ed4" },
+            "&:hover": { background: "var(--inx-sky)" },
             height: 56,
             display: "inline-flex",
             alignItems: "center",
@@ -61,6 +62,7 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
           }
           variant="contained"
           sx={{
+            fontFamily: "var(--font-hero-display)",
             textTransform: "none",
             color: "#fff",
             fontSize: "18",

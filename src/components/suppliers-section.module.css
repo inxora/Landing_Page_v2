@@ -12,6 +12,7 @@
   box-sizing: border-box;
   max-width: 100%;
   z-index: 3;
+  font-family: var(--font-hero-display);
 }
 
 @media screen and (min-width: 1051px) {
@@ -46,7 +47,7 @@
   text-align: left;
   font-size: var(--fs-16);
   color: var(--color-darkslateblue-100);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-hero-display);
   box-sizing: border-box;
 }
 .frameContainer {
@@ -91,7 +92,7 @@
     var(--padding-24);
   box-sizing: border-box;
 }
-.brandContainerParent {
+.brandContainerParentDesktop {
   flex-direction: column;
   min-width: 351px;
   max-width: var(--max-w-1440);
@@ -99,12 +100,78 @@
   margin-top: -28px;
 }
 .brandContainer,
-.brandContainerParent {
+.brandContainerParentDesktop {
   align-self: stretch;
   flex: 1;
   display: flex;
   align-items: flex-start;
   gap: var(--gap-16);
+}
+
+.brandMarquee {
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  max-width: var(--max-w-1440);
+  align-self: stretch;
+  margin-top: -28px;
+  box-sizing: border-box;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.brandMarqueeTrack {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: max-content;
+  animation: suppliersBrandMarquee 40s linear infinite;
+  will-change: transform;
+}
+
+.brandMarqueeSet {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--gap-16);
+  flex-shrink: 0;
+}
+
+.brandMarqueeSet .companyContainer {
+  flex: 0 0 auto;
+  min-width: min(180px, 42vw);
+  max-width: none;
+}
+
+.brandMarqueeSet .brandLogoSlot {
+  height: clamp(52px, 12vw, 76px);
+}
+
+.brandMarquee:hover .brandMarqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes suppliersBrandMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 .companyContainer,
 .companyLogoWrapper2,
@@ -145,6 +212,58 @@
   transform: scale(1.18);
   transform-origin: center center;
 }
+
+/*
+  Carrusel: equilibrio entre SVGs (mismo slot, distinto arte interno).
+  · Reducir marcas con trazo/wordmark que llena mucho el viewBox.
+  · Subir marcas que vienen “flojas” (Kärcher, Mitutoyo, Milwaukee, Wiha).
+  Los valores anulan el scale(1.18) global de Karcher/Mitutoyo/Toscano/Wiha en esta vista.
+*/
+.brandMarquee .brandLogoSlot[data-brand="Hellermann"] .brandLogo :global(img) {
+  transform: scale(0.55);
+  transform-origin: center center;
+}
+
+.brandMarquee .brandLogoSlot[data-brand="Abro"] .brandLogo :global(img),
+.brandMarquee .brandLogoSlot[data-brand="Bosch"] .brandLogo :global(img) {
+  transform: scale(0.6);
+  transform-origin: center center;
+}
+
+.brandMarquee .brandLogoSlot[data-brand="Loctite"] .brandLogo :global(img) {
+  transform: scale(0.7);
+  transform-origin: center center;
+}
+
+.brandMarquee .brandLogoSlot[data-brand="Karcher"] .brandLogo :global(img) {
+  transform: scale(1.22);
+  transform-origin: center center;
+}
+
+.brandMarquee .brandLogoSlot[data-brand="Mitutoyo"] .brandLogo :global(img) {
+  transform: scale(1.2);
+  transform-origin: center center;
+}
+
+.brandMarquee .brandLogoSlot[data-brand="Milwaukee"] .brandLogo :global(img) {
+  transform: scale(1.24);
+  transform-origin: center center;
+}
+
+.brandMarquee .brandLogoSlot[data-brand="Wiha"] .brandLogo :global(img) {
+  transform: scale(1.2);
+  transform-origin: center center;
+}
+
+.brandMarquee .brandLogoSlot[data-brand="DeWalt"] .brandLogo :global(img) {
+  transform: scale(1.12);
+  transform-origin: center center;
+}
+
+.brandMarquee .brandLogoSlot[data-brand="Toscano"] .brandLogo :global(img) {
+  transform: scale(1.1);
+  transform-origin: center center;
+}
 .companyLogoWrapper2,
 .companyLogoWrapper8 {
   min-width: 222px;
@@ -180,7 +299,12 @@
     max-width: 100%;
   }
 
-  .brandContainerParent {
+  .brandContainerParentDesktop {
+    display: none;
+  }
+
+  .brandMarquee {
+    display: block;
     margin-top: -20px;
   }
 
@@ -234,11 +358,15 @@
     flex-wrap: wrap;
   }
 
-  .brandContainerParent {
+  .brandContainerParentDesktop {
     margin-top: -12px;
     min-width: 0;
     width: 100%;
     max-width: 100%;
+  }
+
+  .brandMarquee {
+    margin-top: -12px;
   }
 }
 @media screen and (max-width: 450px) {
@@ -255,7 +383,7 @@
     font-size: var(--fs-16);
     line-height: var(--lh-19);
   }
-  .brandContainerParent {
+  .brandContainerParentDesktop {
     min-width: 100%;
   }
 
@@ -268,5 +396,11 @@
   .brandLogoSlot[data-brand="Toscano"] .brandLogo :global(img),
   .brandLogoSlot[data-brand="Wiha"] .brandLogo :global(img) {
     transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brandMarqueeTrack {
+    animation: none;
   }
 }

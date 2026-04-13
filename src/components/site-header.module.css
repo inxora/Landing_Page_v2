@@ -9,16 +9,16 @@
   right: 0;
   left: 0;
   min-height: 0;
-  background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-gray-200);
+  background: var(--gradient-chrome-bg);
+  border-bottom: 1px solid rgba(217, 14, 140, 0.22);
   box-sizing: border-box;
   padding: 12px 48px;
   z-index: 100;
-  box-shadow: 0 1px 0 rgba(23, 29, 76, 0.06);
+  box-shadow: 0 4px 28px rgba(80, 35, 95, 0.28);
   text-align: left;
   font-size: 17px;
-  color: var(--color-gray-100);
-  font-family: var(--font-header);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-hero-display);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -69,8 +69,8 @@
   text-align: center;
   font-size: 17px;
   font-weight: 500;
-  color: var(--color-gray-100);
-  font-family: var(--font-header);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-hero-display);
   justify-self: center;
   white-space: nowrap;
 }
@@ -86,7 +86,16 @@
 }
 
 .ventajas:hover {
-  color: var(--color-deepskyblue-200);
+  color: var(--inx-sky);
+}
+
+.navLinkActive {
+  color: var(--inx-fuchsia);
+  font-weight: 600;
+}
+
+.ventajas.navLinkActive:hover {
+  color: var(--inx-fuchsia);
 }
 
 .headerActionsDesktop {
@@ -105,10 +114,10 @@
   height: 44px;
   margin-left: auto;
   padding: 0;
-  border: 1px solid rgba(25, 25, 25, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: var(--br-8);
-  background: var(--color-white);
-  color: var(--color-gray-100);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
   flex-shrink: 0;
   transition:
@@ -117,12 +126,12 @@
 }
 
 .menuToggle:hover {
-  background: var(--color-whitesmoke);
-  border-color: rgba(25, 25, 25, 0.18);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.32);
 }
 
 .menuToggle:focus-visible {
-  outline: 2px solid var(--color-deepskyblue-200);
+  outline: 2px solid var(--inx-sky);
   outline-offset: 2px;
 }
 
@@ -144,7 +153,7 @@
   padding: 12px 14px;
   font-size: 15px;
   font-weight: 500;
-  font-family: var(--font-header);
+  font-family: var(--font-hero-display);
   letter-spacing: 0.02em;
 }
 
@@ -168,7 +177,7 @@
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.25;
-  font-family: var(--font-header);
+  font-family: var(--font-hero-display);
   color: var(--color-white);
   text-align: center;
   white-space: nowrap;
@@ -197,6 +206,15 @@
 
 .navMobileLink:hover {
   color: var(--color-deepskyblue-200);
+}
+
+.navMobileLink.navLinkActive {
+  color: var(--inx-fuchsia);
+  font-weight: 600;
+}
+
+.navMobileLink.navLinkActive:hover {
+  color: var(--inx-fuchsia);
 }
 
 .menuPanelFooter {

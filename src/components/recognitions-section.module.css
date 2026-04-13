@@ -1,6 +1,7 @@
 .section {
   align-self: stretch;
-  height: 711px;
+  min-height: 711px;
+  height: auto;
   background-color: var(--color-whitesmoke);
   overflow: hidden;
   flex-shrink: 0;
@@ -12,6 +13,7 @@
   gap: 71px;
   max-width: 100%;
   z-index: 4;
+  font-family: var(--font-hero-display);
 }
 .recognitionContainer,
 .recognitionLayout {
@@ -27,7 +29,7 @@
   text-align: center;
   font-size: var(--fs-16);
   color: var(--color-darkslateblue-100);
-  font-family: var(--font-sf-pro);
+  font-family: var(--font-hero-display);
   box-sizing: border-box;
 }
 .recognitionContainer {
@@ -50,6 +52,16 @@
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
+/* Misma idea que el subrayado degradé del footer (.navTitle::after), centrado bajo el titular */
+.respaldadosPorEl::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin: var(--gap-12) auto 0;
+  border-radius: 2px;
+  background: var(--gradient-brand-accent);
+}
 .inxoraEsImpulsada {
   align-self: stretch;
   position: relative;
@@ -59,42 +71,111 @@
   opacity: var(--opacity-0_6);
 }
 .logoRowOne,
-.recognitionLogos {
-  height: var(--height-68_3);
+.recognitionLogosDesktop {
   display: flex;
   align-items: flex-start;
   max-width: 100%;
 }
-.recognitionLogos {
+/* Una fila debajo de otra a ancho completo: evita 2×540px (logos minúsculos en 8 columnas) */
+.recognitionLogosDesktop {
   width: 100%;
-  max-width: min(1093px, 100%);
-  gap: 13px;
+  max-width: min(1160px, 100%);
+  flex-direction: column;
+  align-items: stretch;
+  gap: 36px;
   box-sizing: border-box;
+  height: auto;
+}
+
+.recognitionMarquee {
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  max-width: min(1240px, 100%);
+  box-sizing: border-box;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.recognitionMarqueeTrack {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: max-content;
+  animation: recognitionsLogoMarquee 52s linear infinite;
+  will-change: transform;
+}
+
+.recognitionMarqueeSet {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+.recognitionMarqueeSet .logoPairsOne {
+  flex: 0 0 auto;
+  min-width: min(228px, 52vw);
+  max-width: none;
+}
+
+.recognitionMarquee:hover .recognitionMarqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes recognitionsLogoMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .logoRowOne {
-  width: var(--width-540);
-  gap: var(--gap-16);
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  gap: var(--gap-32);
+  justify-content: space-between;
+  align-items: center;
 }
+/* Sin “cards”: logos sobre el fondo de la sección */
 .logoPairsOne {
   align-self: stretch;
-  flex: 1;
-  backdrop-filter: blur(24px);
-  padding: var(--padding-24);
+  flex: 1 1 0;
+  min-width: 0;
+  padding: var(--padding-12) var(--padding-8);
   box-sizing: border-box;
-  background-color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 0;
 }
 
 .recognitionLogoSlot {
   width: 100%;
-  min-height: clamp(48px, 6vw, 72px);
-  height: clamp(52px, 7vw, 80px);
+  max-width: 280px;
+  margin: 0 auto;
+  min-height: clamp(72px, 11vw, 120px);
+  height: clamp(80px, 12vw, 132px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,9 +194,21 @@
     height: auto;
     gap: 35px;
   }
-  .recognitionLogos {
+  .recognitionLogosDesktop {
+    display: none;
+  }
+
+  .recognitionMarquee {
+    display: block;
     height: auto;
-    flex-wrap: wrap;
+  }
+  .recognitionMarqueeSet .logoPairsOne {
+    min-width: min(260px, 78vw);
+  }
+  .recognitionMarquee .recognitionLogoSlot {
+    min-height: clamp(64px, 22vw, 112px);
+    height: clamp(72px, 24vw, 120px);
+    max-width: min(300px, 88vw);
   }
 }
 @media screen and (max-width: 1050px) {
@@ -143,5 +236,11 @@
   .inxoraEsImpulsada {
     font-size: var(--fs-16);
     line-height: var(--lh-19);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recognitionMarqueeTrack {
+    animation: none;
   }
 }

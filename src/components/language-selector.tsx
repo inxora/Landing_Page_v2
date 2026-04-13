@@ -11,7 +11,14 @@ import type { Language } from "../types/language";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import styles from "./language-selector.module.css";
 
-const LanguageSelector: FunctionComponent = () => {
+export type LanguageSelectorProps = {
+  /** Fondo oscuro (p. ej. header con degradé tipo footer) */
+  variant?: "default" | "onDark";
+};
+
+const LanguageSelector: FunctionComponent<LanguageSelectorProps> = ({
+  variant = "default",
+}) => {
   const { lang, setLang } = useLanguage();
   const t = useLandingTranslations();
   const [open, setOpen] = useState(false);
@@ -39,7 +46,12 @@ const LanguageSelector: FunctionComponent = () => {
   };
 
   return (
-    <div className={styles.root} ref={rootRef}>
+    <div
+      className={[styles.root, variant === "onDark" ? styles.rootOnDark : ""]
+        .filter(Boolean)
+        .join(" ")}
+      ref={rootRef}
+    >
       <button
         type="button"
         className={styles.trigger}

@@ -30,7 +30,12 @@ const BenefitCard: FunctionComponent<BenefitCardProps> = ({
         className={styles.ahorroEconomico}
         variant="inherit"
         variantMapping={{ inherit: "h3" }}
-        sx={{ fontWeight: "400", lineHeight: "120%", letterSpacing: "-0.01em" }}
+        sx={{
+          fontFamily: "var(--font-hero-display)",
+          fontWeight: "400",
+          lineHeight: "120%",
+          letterSpacing: "-0.01em",
+        }}
         style={ahorroEconomicoStyle}
       >
         {ahorroEconomico}

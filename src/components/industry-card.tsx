@@ -6,12 +6,16 @@ export type IndustryCardProps = {
   className?: string;
   industryDividers?: string;
   electricidad?: string;
+  detailHref: string;
+  detailLabel: string;
 };
 
 const IndustryCard: FunctionComponent<IndustryCardProps> = ({
   className = "",
   industryDividers,
   electricidad,
+  detailHref,
+  detailLabel,
 }) => {
   return (
     <section className={[styles.industryCards, className].join(" ")}>
@@ -27,6 +31,7 @@ const IndustryCard: FunctionComponent<IndustryCardProps> = ({
             variant="inherit"
             variantMapping={{ inherit: "h3" }}
             sx={{
+              fontFamily: "var(--font-hero-display)",
               fontWeight: "400",
               lineHeight: "120%",
               letterSpacing: "-0.01em",
@@ -39,8 +44,8 @@ const IndustryCard: FunctionComponent<IndustryCardProps> = ({
             variant="inherit"
             variantMapping={{ inherit: "h3" }}
             sx={{
+              fontFamily: "var(--font-hero-display)",
               fontWeight: "400",
-              fontSize: "var(--fs-20)",
               lineHeight: "120%",
               letterSpacing: "-0.01em",
             }}
@@ -51,9 +56,14 @@ const IndustryCard: FunctionComponent<IndustryCardProps> = ({
             Disponible para Delivery
           </div>
         </Box>
-        <button className={styles.detailActions}>
-          <div className={styles.verMasDetalles}>Ver mas detalles</div>
-        </button>
+        <a
+          className={styles.detailLink}
+          href={detailHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {detailLabel}
+        </a>
       </Box>
     </section>
   );

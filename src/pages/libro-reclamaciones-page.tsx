@@ -138,8 +138,8 @@ export default function LibroReclamacionesPage() {
         sx={{
           mb: 2,
           textTransform: "none",
-          background: "#171d4c",
-          "&:hover": { background: "#252b5c" },
+          background: "var(--inx-navy)",
+          "&:hover": { background: "var(--inx-navy-hover)" },
         }}
       >
         {t.atras}

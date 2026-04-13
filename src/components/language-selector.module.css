@@ -4,6 +4,49 @@
   align-items: center;
 }
 
+.rootOnDark .trigger {
+  border-color: rgba(255, 255, 255, 0.28);
+  background-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.rootOnDark .trigger:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+.rootOnDark .globe {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.rootOnDark .menu {
+  background: var(--gradient-chrome-bg);
+  border: 1px solid rgba(217, 14, 140, 0.28);
+  box-shadow:
+    0 12px 40px rgba(70, 32, 88, 0.42),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+.rootOnDark .option {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.rootOnDark .option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.rootOnDark .optionActive {
+  background: rgba(217, 14, 140, 0.16);
+}
+
+.rootOnDark .optionCode {
+  color: var(--inx-sky);
+}
+
+.rootOnDark .check {
+  color: var(--inx-fuchsia);
+}
+
 .trigger {
   display: inline-flex;
   align-items: center;
@@ -16,7 +59,7 @@
   background-color: var(--color-gray-300);
   font-size: 15px;
   font-weight: 600;
-  font-family: var(--font-header);
+  font-family: var(--font-hero-display);
   letter-spacing: 0.02em;
   color: var(--color-gray-100);
   cursor: pointer;
@@ -62,7 +105,7 @@
   border: none;
   background: transparent;
   font-size: 14px;
-  font-family: var(--font-header);
+  font-family: var(--font-hero-display);
   text-align: left;
   cursor: pointer;
   color: var(--color-gray-100);
@@ -82,7 +125,7 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   min-width: 28px;
-  color: #139ed4;
+  color: var(--inx-blue);
 }
 
 .optionLabel {
@@ -90,7 +133,7 @@
 }
 
 .check {
-  color: #139ed4;
+  color: var(--inx-blue);
   font-weight: 700;
 }
 

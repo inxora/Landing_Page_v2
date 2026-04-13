@@ -36,8 +36,8 @@ const LegalDocumentPage: FunctionComponent<LegalDocumentPageProps> = ({
         sx={{
           textTransform: "none",
           mb: 3,
-          background: "#171d4c",
-          "&:hover": { background: "#252b5c" },
+          background: "var(--inx-navy)",
+          "&:hover": { background: "var(--inx-navy-hover)" },
         }}
       >
         ← Volver al inicio
@@ -45,7 +45,7 @@ const LegalDocumentPage: FunctionComponent<LegalDocumentPageProps> = ({
       <Typography
         variant="h4"
         component="h1"
-        sx={{ mb: 3, fontWeight: 700, color: "#171d4c" }}
+        sx={{ mb: 3, fontWeight: 700, color: "var(--inx-navy)" }}
       >
         {title}
       </Typography>
