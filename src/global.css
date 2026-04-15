@@ -176,8 +176,8 @@ body {
   /* Opacities */
   --opacity-0_6: 0.6;
 
-  /* Layout — sync with site header height for hero offset */
-  --header-offset: 96px;
+  /* Layout — sync with site header height for hero offset (logo más alto en cabecera) */
+  --header-offset: 104px;
   /* Hero: columna desde la izquierda (NO centrada). Más aire a la izquierda que a la derecha = bloque ancho, menos “vacío” en el medio */
   --hero-page-gutter-start: clamp(28px, 5vw, 72px);
   --hero-page-gutter-end: clamp(16px, 2.5vw, 40px);

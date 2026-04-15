@@ -74,7 +74,7 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
   const location = useLocation();
   const headerRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [headerHeight, setHeaderHeight] = useState(72);
+  const [headerHeight, setHeaderHeight] = useState(88);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
@@ -102,7 +102,7 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
       setActiveSectionId(null);
       return;
     }
-    const headerH = headerRef.current?.offsetHeight ?? 72;
+    const headerH = headerRef.current?.offsetHeight ?? 88;
     const triggerY = window.scrollY + headerH + 28;
     let active: string | null = null;
     for (const id of LANDING_SCROLL_SECTION_IDS) {
@@ -183,9 +183,10 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
         <Link to="/" className={styles.companyFooter}>
           <img
             className={styles.maskGroupIcon}
-            loading="lazy"
+            loading="eager"
+            decoding="async"
             alt="INXORA"
-            src="/Mask-group@2x.png"
+            src="/LOGO-35.svg"
           />
         </Link>
         <nav className={styles.navigationLinks} aria-label="Principal">

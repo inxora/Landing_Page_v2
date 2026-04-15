@@ -25,7 +25,7 @@
 
 .footerNavigation {
   display: grid;
-  grid-template-columns: minmax(120px, 1fr) auto minmax(200px, 1fr);
+  grid-template-columns: minmax(140px, 1fr) auto minmax(200px, 1fr);
   align-items: center;
   gap: var(--gap-24);
   width: 100%;
@@ -35,13 +35,14 @@
   box-sizing: border-box;
   position: relative;
   z-index: 160;
-  min-height: 48px;
+  min-height: 50px;
 }
 
 .companyFooter {
-  height: 48px;
+  min-height: 46px;
+  height: auto;
   width: auto;
-  max-width: 220px;
+  max-width: min(100%, 246px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -52,11 +53,13 @@
 }
 
 .maskGroupIcon {
-  width: 92px;
-  height: auto;
+  width: auto;
+  height: 46px;
   position: relative;
-  max-height: 48px;
+  max-height: 52px;
+  max-width: min(100%, 228px);
   object-fit: contain;
+  object-position: left center;
   flex-shrink: 0;
 }
 
@@ -254,6 +257,18 @@
     max-width: 100%;
   }
 
+  .companyFooter {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: min(calc(100vw - 120px), 246px);
+  }
+
+  .maskGroupIcon {
+    height: clamp(40px, 10vw, 48px);
+    max-height: 50px;
+    max-width: min(64vw, 228px);
+  }
+
   .navigationLinks {
     display: none;
   }
@@ -322,6 +337,11 @@
   .footerContainer {
     padding-left: var(--padding-16);
     padding-right: var(--padding-16);
+  }
+
+  .maskGroupIcon {
+    height: clamp(38px, 11vw, 46px);
+    max-width: min(68vw, 220px);
   }
 
   .contactLanguage2 {
