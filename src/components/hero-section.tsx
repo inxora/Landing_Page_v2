@@ -1,11 +1,46 @@
 import { FunctionComponent } from "react";
-import { Box, Button, Link } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import { WHATSAPP_QUOTE_URL } from "../constants/whatsapp";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import styles from "./hero-section.module.css";
 
 export type HeroSectionProps = {
   className?: string;
+};
+
+/** Misma caja para ambos CTAs (evita diferencias MUI Button vs Link). */
+const heroCtaLinkBase = {
+  fontFamily: "var(--hero-cta-font-family)",
+  textTransform: "none" as const,
+  color: "#fff",
+  fontSize: "var(--hero-cta-font-size)",
+  fontWeight: "var(--hero-cta-font-weight)",
+  letterSpacing: "var(--hero-cta-letter-spacing)",
+  borderRadius: "8px",
+  height: 56,
+  minHeight: 56,
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "8px",
+  boxSizing: "border-box" as const,
+};
+
+const heroCtaSxPrimary = {
+  ...heroCtaLinkBase,
+  background: "var(--inx-blue)",
+  "&:hover": { background: "var(--inx-sky)" },
+};
+
+const heroCtaSxSecondary = {
+  ...heroCtaLinkBase,
+  background: "rgba(255, 255, 255, 0.16)",
+  cursor: "default",
+  border: "none",
+  WebkitAppearance: "none",
+  appearance: "none",
+  font: "inherit",
+  "&:hover": { background: "rgba(255, 255, 255, 0.22)" },
 };
 
 const HeroSection: FunctionComponent<HeroSectionProps> = ({
@@ -16,14 +51,16 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
   return (
     <Box className={[styles.rectangleParent, className].join(" ")}>
       <Box className={styles.ameContainer}>
-        <div className={styles.elNuevoEstndar}>
+        <div className={[styles.elNuevoEstndar, styles.headlineFlyIn].join(" ")}>
           {t.hero.headlineBefore}{" "}
           <br />
           <span className={styles.headlineHighlight}>
             {t.hero.headlineHighlight}
           </span>
         </div>
-        <Box className={styles.vendemosContainer}>
+        <Box
+          className={[styles.vendemosContainer, styles.bodyFlyIn].join(" ")}
+        >
           <div className={styles.vendemosSuministrosIndustria}>
             {t.hero.body}
           </div>
@@ -31,49 +68,27 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
       </Box>
       <Box className={styles.instantContainerParent}>
         <Link
-          className={styles.instantContainer}
+          className={[styles.instantContainer, styles.btnZoomPrimary].join(" ")}
           href={WHATSAPP_QUOTE_URL}
           target="_blank"
           rel="noopener noreferrer"
           underline="none"
-          sx={{
-            fontFamily: "var(--font-hero-display)",
-            textTransform: "none",
-            color: "#fff",
-            fontSize: "18",
-            background: "var(--inx-blue)",
-            borderRadius: "8px",
-            "&:hover": { background: "var(--inx-sky)" },
-            height: 56,
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "8px",
-            boxSizing: "border-box",
-          }}
+          sx={heroCtaSxPrimary}
         >
           {t.hero.ctaQuote}
           <img width="24" height="24" src="/boxicons-chevron-up.png" alt="" />
         </Link>
-        <Button
-          className={styles.dispatchContainer}
-          endIcon={
-            <img width="24px" height="24px" src="/boxicons-chevron-up.png" />
-          }
-          variant="contained"
-          sx={{
-            fontFamily: "var(--font-hero-display)",
-            textTransform: "none",
-            color: "#fff",
-            fontSize: "18",
-            background: "rgba(255, 255, 255, 0.16)",
-            borderRadius: "8px",
-            "&:hover": { background: "rgba(255, 255, 255, 0.16)" },
-            height: 56,
-          }}
+        <Box
+          component="button"
+          type="button"
+          className={[styles.dispatchContainer, styles.btnZoomSecondary].join(
+            " ",
+          )}
+          sx={heroCtaSxSecondary}
         >
           {t.hero.ctaDispatch}
-        </Button>
+          <img width="24" height="24" src="/boxicons-chevron-up.png" alt="" />
+        </Box>
       </Box>
     </Box>
   );

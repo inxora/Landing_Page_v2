@@ -1,4 +1,10 @@
-import { FunctionComponent } from "react";
+import {
+  FunctionComponent,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { Box } from "@mui/material";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import styles from "./recognitions-section.module.css";
@@ -39,9 +45,65 @@ const RecognitionsSection: FunctionComponent<RecognitionsSectionProps> = ({
   className = "",
 }) => {
   const t = useLandingTranslations();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setReducedMotion(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (reducedMotion) {
+      setInView(true);
+      return;
+    }
+    const el = sectionRef.current;
+    if (!el) return;
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const rect = el.getBoundingClientRect();
+    if (rect.bottom > 32 && rect.top < vh - 32) {
+      setInView(true);
+    }
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [reducedMotion]);
+
+  const introOn = inView || reducedMotion;
 
   return (
-    <section className={[styles.section, className].join(" ")}>
+    <section
+      ref={sectionRef}
+      className={[
+        styles.section,
+        introOn ? styles.recognitionsSectionVisible : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <section className={styles.recognitionLayout}>
         <Box className={styles.recognitionContainer}>
           <div className={styles.reconocimientos}>{t.recognitions.kicker}</div>

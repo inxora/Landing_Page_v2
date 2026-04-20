@@ -1,3 +1,61 @@
+/* Hero: Fly In desde la derecha (texto) + Zoom (CTAs) — aparición gradual */
+@keyframes ppHeroFlyInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+  45% {
+    opacity: 0.45;
+    transform: translateX(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ppHeroZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.headlineFlyIn {
+  animation: ppHeroFlyInFromRight 1.35s cubic-bezier(0.16, 0.84, 0.24, 1) both;
+}
+
+.bodyFlyIn {
+  animation: ppHeroFlyInFromRight 1.25s cubic-bezier(0.16, 0.84, 0.24, 1) 0.18s both;
+}
+
+.btnZoomPrimary {
+  animation: ppHeroZoomIn 1.05s cubic-bezier(0.18, 0.9, 0.22, 1) 0.5s both;
+}
+
+.btnZoomSecondary {
+  animation: ppHeroZoomIn 1.05s cubic-bezier(0.18, 0.9, 0.22, 1) 0.68s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .headlineFlyIn,
+  .bodyFlyIn,
+  .btnZoomPrimary,
+  .btnZoomSecondary {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .rectangleParent {
   width: 100%;
   max-width: min(920px, 100%);
@@ -46,13 +104,16 @@
   justify-content: flex-start;
   padding: 0;
   max-width: min(62ch, 100%);
-  font-size: clamp(var(--fs-16), 1.5vw + 0.65rem, var(--fs-20));
+  font-size: var(--hero-lede-font-size);
 }
 .vendemosSuministrosIndustria {
   flex: 1;
   position: relative;
-  letter-spacing: -0.01em;
-  line-height: 120%;
+  font-family: var(--hero-lede-font-family);
+  font-weight: var(--hero-lede-font-weight);
+  letter-spacing: var(--hero-lede-letter-spacing);
+  line-height: var(--hero-lede-line-height);
+  color: var(--hero-lede-color);
 }
 .instantContainerParent {
   display: flex;
@@ -75,22 +136,33 @@
 .dispatchContainer {
   backdrop-filter: blur(24px);
 }
-@media screen and (max-width: 1050px) {
+/* Por debajo de desktop (≤1200px): bloque a ancho completo + texto centrado (ref. móvil/tablet) */
+@media screen and (max-width: 1200px) {
+  /* Evita que el hijo de mainInner quede al ancho del contenido con align-items:center */
   .rectangleParent {
+    align-self: stretch;
     gap: var(--gap-40);
-  }
-}
-@media screen and (max-width: 750px) {
-  .rectangleParent {
     align-items: center;
     text-align: center;
+    max-width: 100%;
   }
   .ameContainer {
     align-items: center;
+    width: 100%;
+  }
+  .elNuevoEstndar {
+    text-align: center;
   }
   .vendemosContainer {
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     max-width: 100%;
+  }
+  .vendemosSuministrosIndustria {
+    flex: none;
+    width: 100%;
+    text-align: center;
   }
   .instantContainerParent {
     flex-wrap: wrap;

@@ -1,4 +1,11 @@
-import { FunctionComponent, useMemo } from "react";
+import {
+  FunctionComponent,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Box, Button } from "@mui/material";
 import IndustryCard from "./industry-card";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
@@ -29,6 +36,53 @@ const EcommerceSection: FunctionComponent<EcommerceSectionProps> = ({
   className = "",
 }) => {
   const t = useLandingTranslations();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setReducedMotion(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (reducedMotion) {
+      setInView(true);
+      return;
+    }
+    const el = sectionRef.current;
+    if (!el) return;
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const rect = el.getBoundingClientRect();
+    if (rect.bottom > 32 && rect.top < vh - 32) {
+      setInView(true);
+    }
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [reducedMotion]);
+
+  const introOn = inView || reducedMotion;
 
   const industryCardsItems = useMemo(
     () =>
@@ -40,7 +94,16 @@ const EcommerceSection: FunctionComponent<EcommerceSectionProps> = ({
   );
 
   return (
-    <main className={[styles.main, className].join(" ")}>
+    <main
+      ref={sectionRef}
+      className={[
+        styles.main,
+        introOn ? styles.ecommerceSectionVisible : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <section className={styles.ecommerceLayout}>
         <Box className={styles.ecommerceContainer}>
           <Box className={styles.ecommerceTitle}>
@@ -66,14 +129,18 @@ const EcommerceSection: FunctionComponent<EcommerceSectionProps> = ({
             disableElevation
             variant="contained"
             sx={{
-              fontFamily: "var(--font-hero-display)",
+              fontFamily: "var(--hero-cta-font-family)",
               textTransform: "none",
               color: "#fff",
-              fontSize: "18",
+              fontSize: "var(--hero-cta-font-size)",
+              fontWeight: "var(--hero-cta-font-weight)",
+              letterSpacing: "var(--hero-cta-letter-spacing)",
               background: "var(--inx-blue)",
               borderRadius: "8px",
               "&:hover": { background: "var(--inx-sky)" },
               height: 56,
+              minHeight: 56,
+              boxSizing: "border-box",
             }}
           >
             {t.ecommerce.cta}

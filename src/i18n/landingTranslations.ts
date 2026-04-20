@@ -129,8 +129,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       headlineBefore: "El nuevo estándar del abastecimiento en",
       headlineHighlight: "Latinoamérica",
       body: "Vendemos suministros industriales críticos a las empresas más importantes de Perú y Latinoamérica, diferenciándonos por nuestra confianza y rapidez.",
-      ctaQuote: "Cotizar al instante ahora",
-      ctaDispatch: "Gestionar despacho",
+      ctaQuote: "Cotizar al instante",
+      ctaDispatch: "Tu espacio Inxora",
     },
     trusted: {
       title: "Confían en nosotros para su abastecimiento",
@@ -268,7 +268,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       headlineHighlight: "Latin America",
       body: "We supply critical industrial products to leading companies in Peru and Latin America—trusted, fast, and dependable.",
       ctaQuote: "Get an instant quote",
-      ctaDispatch: "Manage dispatch",
+      ctaDispatch: "Your Inxora workspace",
     },
     trusted: {
       title: "They trust us for their supply chain",
@@ -406,7 +406,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       headlineHighlight: "América Latina",
       body: "Fornecemos insumos industriais críticos às principais empresas do Peru e da América Latina, com confiança e agilidade.",
       ctaQuote: "Cotar agora mesmo",
-      ctaDispatch: "Gerenciar envio",
+      ctaDispatch: "Seu espaço Inxora",
     },
     trusted: {
       title: "Confiam em nós para o seu abastecimento",

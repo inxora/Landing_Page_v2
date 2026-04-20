@@ -1,12 +1,23 @@
-import { FunctionComponent } from "react";
+import {
+  FunctionComponent,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { Box, Button } from "@mui/material";
 import CompanyLogo from "./company-logo";
+import { WHATSAPP_QUOTE_URL } from "../constants/whatsapp";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import styles from "./suppliers-section.module.css";
 
 export type SuppliersSectionProps = {
   className?: string;
 };
+
+const WHATSAPP_SUPPLIER_URL = `${WHATSAPP_QUOTE_URL}&text=${encodeURIComponent(
+  "Hola, me interesa ser proveedor en Inxora.",
+)}`;
 
 const BRAND_ROWS: { company: string; src: string }[][] = [
   [
@@ -37,9 +48,65 @@ const SuppliersSection: FunctionComponent<SuppliersSectionProps> = ({
   className = "",
 }) => {
   const t = useLandingTranslations();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setReducedMotion(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (reducedMotion) {
+      setInView(true);
+      return;
+    }
+    const el = sectionRef.current;
+    if (!el) return;
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const rect = el.getBoundingClientRect();
+    if (rect.bottom > 32 && rect.top < vh - 32) {
+      setInView(true);
+    }
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [reducedMotion]);
+
+  const introOn = inView || reducedMotion;
 
   return (
-    <section className={[styles.main, className].join(" ")}>
+    <section
+      ref={sectionRef}
+      className={[
+        styles.main,
+        introOn ? styles.suppliersSectionVisible : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <Box className={styles.frameParent}>
         <section className={styles.frameGroup}>
           <Box className={styles.frameContainer}>
@@ -53,20 +120,28 @@ const SuppliersSection: FunctionComponent<SuppliersSectionProps> = ({
           </Box>
           <Button
             className={styles.frameChild}
+            component="a"
+            href={WHATSAPP_SUPPLIER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             endIcon={
-              <img width="24px" height="24px" src="/boxicons-chevron-up.png" />
+              <img width="24px" height="24px" src="/boxicons-chevron-up.png" alt="" />
             }
             disableElevation
             variant="contained"
             sx={{
-              fontFamily: "var(--font-hero-display)",
+              fontFamily: "var(--hero-cta-font-family)",
               textTransform: "none",
               color: "#fff",
-              fontSize: "18",
+              fontSize: "var(--hero-cta-font-size)",
+              fontWeight: "var(--hero-cta-font-weight)",
+              letterSpacing: "var(--hero-cta-letter-spacing)",
               background: "var(--inx-blue)",
               borderRadius: "8px",
               "&:hover": { background: "var(--inx-sky)" },
               height: 56,
+              minHeight: 56,
+              boxSizing: "border-box",
             }}
           >
             {t.suppliers.ctaSupplier}

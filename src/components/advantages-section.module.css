@@ -48,25 +48,28 @@
   gap: var(--gap-24);
 }
 .ventajasDeInxoraWrapper {
-  border-radius: var(--br-8);
-  background: rgba(38, 38, 44, 0.07);
-  border: none;
+  border-radius: var(--section-kicker-radius);
+  background-color: var(--section-kicker-bg);
+  border: var(--section-kicker-border);
+  box-shadow: var(--section-kicker-shadow);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--padding-8) var(--padding-16);
+  padding: var(--section-kicker-padding);
   text-align: center;
+  box-sizing: border-box;
 }
 .somosLaSolucin,
 .ventajasDeInxora {
   position: relative;
-  letter-spacing: -0.01em;
-  line-height: 120%;
 }
 .ventajasDeInxora {
-  color: #3a3b44;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-family: var(--section-kicker-font-family);
+  font-size: var(--section-kicker-font-size);
+  font-weight: var(--section-kicker-font-weight);
+  letter-spacing: var(--section-kicker-letter-spacing);
+  line-height: var(--section-kicker-line-height);
+  color: var(--section-kicker-color);
 }
 .somosLaSolucin {
   align-self: stretch;
@@ -95,12 +98,13 @@
 .inxoraTransformaEl {
   align-self: stretch;
   position: relative;
-  font-size: var(--fs-20);
-  letter-spacing: -0.01em;
-  line-height: 120%;
+  font-family: var(--section-lede-font-family);
+  font-size: var(--section-lede-font-size);
+  font-weight: var(--section-lede-font-weight);
+  letter-spacing: var(--section-lede-letter-spacing);
+  line-height: var(--section-lede-line-height);
   opacity: 1;
-  /* Cuerpo intro: gris violeta cálido (menos “frío” que solo navy al 60 %) */
-  color: rgba(58, 54, 68, 0.82);
+  color: var(--section-lede-color-on-light);
 }
 .accordionList {
   align-self: stretch;
@@ -249,21 +253,44 @@
   max-height: min(58vh, 520px);
   margin-left: auto;
   margin-right: auto;
-  border-radius: var(--br-16);
+  border-radius: var(--br-12);
   object-fit: contain;
   object-position: center;
   box-sizing: border-box;
-  box-shadow:
-    0 12px 40px rgba(119, 26, 83, 0.09),
-    0 0 0 1px rgba(217, 14, 140, 0.1);
+  /* Sin “tarjeta”: sombra/borde añadían un marco y, con contain + ancho fijo, bandas vacías */
+  box-shadow: none;
 }
 @media screen and (max-width: 1200px) {
   .fewerFlaresMoreGoodDaysParent {
     gap: var(--gap-40);
-    flex-wrap: wrap;
     max-width: 100%;
   }
 }
+
+/* Tablet / viewport estrecho: texto + imagen en fila (imagen a la derecha, menos alto total) */
+@media screen and (max-width: 1200px) and (min-width: 751px) {
+  .fewerFlaresMoreGoodDaysParent {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+  .fewerFlaresMoreGoodDays {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+  }
+  .frameChild {
+    flex: 0 1 auto;
+    width: auto;
+    min-width: 0;
+    max-width: min(380px, 42%);
+    margin-left: 0;
+    margin-right: 0;
+    max-height: min(48vh, 400px);
+    object-fit: contain;
+    align-self: center;
+  }
+}
+
 @media screen and (max-width: 1050px) {
   .section {
     padding-top: 65px;
@@ -280,6 +307,7 @@
     gap: var(--gap-28);
   }
   .fewerFlaresMoreGoodDaysParent {
+    flex-wrap: wrap;
     gap: var(--gap-20);
   }
   .accordionTrigger {
@@ -299,10 +327,6 @@
     font-size: var(--fs-34);
     line-height: var(--lh-37);
   }
-  .inxoraTransformaEl {
-    font-size: var(--fs-16);
-    line-height: var(--lh-19);
-  }
 
   .accordionTitle {
     font-size: var(--fs-16);
@@ -310,5 +334,165 @@
   }
   .frameChild {
     max-height: min(34vh, 220px);
+  }
+}
+
+/* —— Animaciones al entrar en vista (Ventajas): aparición suave, sin “parpadeo” —— */
+/* Curva larga al final = desaceleración visible (efecto emerge) */
+@keyframes advKickerDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  45% {
+    opacity: 0.55;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes advTitleFlyLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  40% {
+    opacity: 0.35;
+    transform: translateX(-12px);
+  }
+  70% {
+    opacity: 0.85;
+    transform: translateX(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes advLedeDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes advRowCascade {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  55% {
+    opacity: 0.65;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes advImageZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  35% {
+    opacity: 0.45;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.section:not(.advantagesInView) .advAnimKicker,
+.section:not(.advantagesInView) .advAnimTitle,
+.section:not(.advantagesInView) .advAnimLede,
+.section:not(.advantagesInView) .advAnimRow,
+.section:not(.advantagesInView) .advAnimImage {
+  opacity: 0;
+}
+
+.section:not(.advantagesInView) .advAnimKicker {
+  transform: translateY(-14px);
+}
+
+.section:not(.advantagesInView) .advAnimTitle {
+  transform: translateX(-28px);
+}
+
+.section:not(.advantagesInView) .advAnimLede {
+  transform: translateY(-12px);
+}
+
+.section:not(.advantagesInView) .advAnimRow {
+  transform: translateY(12px);
+}
+
+.section:not(.advantagesInView) .advAnimImage {
+  transform: scale(0.96);
+}
+
+.section.advantagesInView .advAnimKicker {
+  animation: advKickerDrop 1.05s cubic-bezier(0.16, 0.84, 0.24, 1) 0s forwards;
+}
+
+/* Título principal: entrada lenta desde la izquierda */
+.section.advantagesInView .advAnimTitle {
+  animation: advTitleFlyLeft 2.05s cubic-bezier(0.15, 0.85, 0.22, 1) 0.12s forwards;
+}
+
+.section.advantagesInView .advAnimLede {
+  animation: advLedeDrop 1.25s cubic-bezier(0.16, 0.84, 0.24, 1) 0.55s forwards;
+}
+
+.section.advantagesInView .advAnimRow:nth-child(1) {
+  animation: advRowCascade 0.95s cubic-bezier(0.16, 0.84, 0.24, 1) 1.05s both;
+}
+
+.section.advantagesInView .advAnimRow:nth-child(2) {
+  animation: advRowCascade 0.95s cubic-bezier(0.16, 0.84, 0.24, 1) 1.32s both;
+}
+
+.section.advantagesInView .advAnimRow:nth-child(3) {
+  animation: advRowCascade 0.95s cubic-bezier(0.16, 0.84, 0.24, 1) 1.59s both;
+}
+
+.section.advantagesInView .advAnimRow:nth-child(4) {
+  animation: advRowCascade 0.95s cubic-bezier(0.16, 0.84, 0.24, 1) 1.86s both;
+}
+
+.section.advantagesInView .advAnimImage {
+  animation: advImageZoom 1.55s cubic-bezier(0.15, 0.88, 0.2, 1) 0.55s forwards;
+  transform-origin: center center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section:not(.advantagesInView) .advAnimKicker,
+  .section:not(.advantagesInView) .advAnimTitle,
+  .section:not(.advantagesInView) .advAnimLede,
+  .section:not(.advantagesInView) .advAnimRow,
+  .section:not(.advantagesInView) .advAnimImage,
+  .section.advantagesInView .advAnimKicker,
+  .section.advantagesInView .advAnimTitle,
+  .section.advantagesInView .advAnimLede,
+  .section.advantagesInView .advAnimRow,
+  .section.advantagesInView .advAnimImage {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

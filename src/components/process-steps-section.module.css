@@ -32,22 +32,32 @@
   gap: var(--gap-24);
 }
 .titleContainer {
-  border-radius: var(--br-8);
-  background-color: var(--color-whitesmoke);
+  border-radius: var(--section-kicker-radius);
+  background-color: var(--section-kicker-bg);
+  border: var(--section-kicker-border);
+  box-shadow: var(--section-kicker-shadow);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--padding-8) var(--padding-16);
+  padding: var(--section-kicker-padding);
+  box-sizing: border-box;
 }
 .comienzaAhoraY,
 .nuestroPasoA {
-  position: relative;
-  letter-spacing: -0.01em;
-  line-height: 120%;
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
+.nuestroPasoA {
+  position: relative;
+  font-family: var(--section-kicker-font-family);
+  font-size: var(--section-kicker-font-size);
+  font-weight: var(--section-kicker-font-weight);
+  letter-spacing: var(--section-kicker-letter-spacing);
+  line-height: var(--section-kicker-line-height);
+  color: var(--section-kicker-color);
+}
 .comienzaAhoraY {
+  position: relative;
   align-self: stretch;
   font-size: var(--fs-56);
   letter-spacing: -0.03em;
@@ -57,10 +67,12 @@
 .tenemosProcesoSimple {
   align-self: stretch;
   position: relative;
-  font-size: var(--fs-20);
-  letter-spacing: -0.01em;
-  line-height: 120%;
-  opacity: var(--opacity-0_6);
+  font-family: var(--section-lede-font-family);
+  font-size: var(--section-lede-font-size);
+  font-weight: var(--section-lede-font-weight);
+  letter-spacing: var(--section-lede-letter-spacing);
+  line-height: var(--section-lede-line-height);
+  opacity: 0.76;
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
@@ -75,12 +87,107 @@
   box-sizing: border-box;
 }
 
+/* —— Escritorio: mismo ancho máximo que .processContainer (880px) para alinear con título/intro —— */
+.stepsGridDesktop {
+  display: none;
+  width: 100%;
+  max-width: min(880px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--gap-24);
+  row-gap: var(--gap-24);
+  align-items: start;
+}
+
+/* Trazo horizontal en 3 tramos (animación scaleX por etapa JS) */
+.desktopTrackOverlay {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  width: 100%;
+  height: 0;
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.desktopTrackFlex {
+  display: flex;
+  align-items: center;
+  width: calc(75% + 18px);
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.desktopTrackCircleGap {
+  flex: 0 0 44px;
+  width: 44px;
+  flex-shrink: 0;
+}
+
+.connectorSegment {
+  flex: 1 1 0;
+  min-width: 12px;
+  height: 0;
+  align-self: center;
+  border: none;
+  border-top: 2px dashed rgba(38, 38, 44, 0.22);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.connectorSegment.connectorLineVisible {
+  transform: scaleX(1);
+}
+
+.stepCircleCellDesktop {
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  position: relative;
+  min-width: 0;
+  padding-bottom: var(--gap-8);
+}
+
+.stepCardDesktop {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
+  opacity: 0;
+  transform: scale(0.92);
+  transition:
+    opacity 0.7s cubic-bezier(0.18, 0.9, 0.22, 1),
+    transform 0.7s cubic-bezier(0.18, 0.9, 0.22, 1);
+}
+
+.stepCardDesktop.stepCardVisible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Línea vertical móvil (animación scaleY según etapa); oculta en desktop */
+.mobileTimelineLine {
+  display: none;
+}
+
 /* Una tarjeta por paso: número + contenido (evita 4 números seguidos en móvil) */
 .stepsGrid {
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  column-gap: var(--gap-16);
+  column-gap: var(--gap-20);
   row-gap: var(--gap-24);
   width: 100%;
   max-width: min(1200px, 100%);
@@ -91,7 +198,7 @@
 .stepCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   min-width: 0;
   gap: 0;
 }
@@ -123,7 +230,7 @@
   min-width: 0;
   width: 100%;
   gap: var(--gap-24);
-  padding: var(--padding-0) var(--padding-16) var(--padding-24);
+  padding: var(--padding-0) var(--padding-12) var(--padding-24);
   border-radius: var(--br-16);
   background-color: var(--color-whitesmoke);
   box-sizing: border-box;
@@ -155,9 +262,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--gap-4);
+  gap: var(--gap-8);
   width: 100%;
   min-width: 0;
+  min-height: 0;
+  justify-content: center;
 }
 .cotizaConSara,
 .enMinutos {
@@ -172,14 +281,24 @@
   hyphens: auto;
 }
 .enMinutos {
-  opacity: var(--opacity-0_6);
+  opacity: 0.72;
 }
-.stepImage {
+
+/* Imagen + CTA (paso 1): siempre apilados y centrados como unidad */
+.stepMediaBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
+  gap: var(--gap-16);
+}
+
+.stepImage {
+  width: min(100%, var(--width-240));
   max-width: var(--width-240);
-  aspect-ratio: 240 / 280;
+  aspect-ratio: 1 / 1;
   height: auto;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   border-radius: var(--br-8);
   display: block;
@@ -187,17 +306,373 @@
   margin-right: auto;
 }
 .quotationActions {
-  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: fit-content;
   max-width: min(var(--width-240), 100%);
+  min-height: var(--height-56);
   margin-left: auto;
   margin-right: auto;
-  padding: var(--padding-10);
-  box-sizing: border-box;
+  padding: var(--padding-10) var(--padding-16) var(--padding-10)
+    var(--padding-24);
+  border: 0;
+  border-radius: var(--br-8);
+  background-color: var(--color-deepskyblue-200);
+  font-family: var(--hero-cta-font-family);
+  font-size: var(--hero-cta-font-size);
+  font-weight: var(--hero-cta-font-weight);
+  letter-spacing: var(--hero-cta-letter-spacing);
+  line-height: 1.25;
+  text-decoration: none;
+  color: var(--color-white);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.quotationActions:hover {
+  background-color: var(--color-deepskyblue-100);
+}
+
+/* —— Intro: título “cayendo”, subtítulo zoom —— */
+@keyframes processTitleFall {
+  0% {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+  55% {
+    opacity: 0.75;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes processSubZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.93);
+  }
+  70% {
+    opacity: 0.92;
+    transform: scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.labelsSeperator:not(.processSectionVisible) .comienzaAhoraY {
+  opacity: 0;
+  transform: translateY(-18px);
+}
+
+.labelsSeperator:not(.processSectionVisible) .tenemosProcesoSimple {
+  opacity: 0;
+  transform: scale(0.93);
+}
+
+.labelsSeperator.processSectionVisible .comienzaAhoraY {
+  animation: processTitleFall 1.1s cubic-bezier(0.16, 0.84, 0.24, 1) forwards;
+}
+
+.labelsSeperator.processSectionVisible .tenemosProcesoSimple {
+  animation: processSubZoom 1.05s cubic-bezier(0.18, 0.9, 0.22, 1) 0.38s both;
+}
+
+.connectorCircleWrap {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.88);
+  transition:
+    opacity 0.65s cubic-bezier(0.18, 0.9, 0.22, 1),
+    transform 0.65s cubic-bezier(0.18, 0.9, 0.22, 1);
+}
+
+.connectorCircleWrap.connectorPieceVisible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Línea vertical (debajo de escritorio): tramo entre pasos — mismo timing que .connectorSegment */
+.railVSegment {
+  width: 0;
+  align-self: center;
+  border: none;
+  border-left: 2px dashed rgba(38, 38, 44, 0.22);
+  flex: 1 1 20px;
+  min-height: 16px;
+  transform: scaleY(0);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.railVSegmentTop {
+  transform-origin: top center;
+}
+
+.railVSegmentBottom {
+  transform-origin: top center;
+}
+
+.railVSegment.connectorLineVisible {
+  transform: scaleY(1);
+}
+
+/* Números solo en móvil / tablet; en escritorio ancho van en .stepsGridDesktop */
+.stepNumberMobileOnly {
+  display: flex;
+}
+
+@media screen and (min-width: 1201px) {
+  .stepsGridDesktop {
+    display: grid;
+  }
+
+  .stepsGrid {
+    display: none !important;
+  }
+
+  .stepNumberMobileOnly {
+    display: none !important;
+  }
+
+  .stepCard {
+    padding-top: 0;
+  }
+
+  .stepNumberCell {
+    min-height: 0;
+    padding-top: 0;
+  }
+
+  .stepColumn {
+    gap: var(--gap-20);
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    text-align: center;
+    align-items: center;
+  }
+
+  .stepHeadings {
+    gap: var(--gap-4);
+    min-height: 4.25rem;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .cotizaConSara,
+  .enMinutos {
+    text-align: center;
+  }
+
+  .stepMediaBlock {
+    width: 100%;
+    align-items: center;
+  }
+}
+
+/* Pasos: zoom al revelar (secuencia por JS: stage) */
+.stepCard {
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 0.7s cubic-bezier(0.18, 0.9, 0.22, 1),
+    transform 0.7s cubic-bezier(0.18, 0.9, 0.22, 1);
+}
+
+.stepCardVisible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .labelsSeperator:not(.processSectionVisible) .comienzaAhoraY,
+  .labelsSeperator:not(.processSectionVisible) .tenemosProcesoSimple {
+    opacity: 1;
+    transform: none;
+  }
+
+  .labelsSeperator.processSectionVisible .comienzaAhoraY,
+  .labelsSeperator.processSectionVisible .tenemosProcesoSimple {
+    animation: none;
+  }
+
+  .connectorCircleWrap {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .connectorSegment {
+    transform: none !important;
+    transition: none;
+  }
+
+  .railVSegment {
+    transform: none !important;
+    transition: none;
+  }
+
+  .stepCard {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .stepCardDesktop {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .mobileTimelineLine {
+    transform: scaleY(1) !important;
+    transition: none;
+  }
 }
 
 @media screen and (max-width: 1200px) {
+  /* Evita que el carril / círculos queden recortados por overflow del section */
+  .labelsSeperator {
+    overflow: visible;
+  }
+
+  .processSteps {
+    padding-left: max(24px, calc(env(safe-area-inset-left, 0px) + 16px));
+    padding-right: max(24px, calc(env(safe-area-inset-right, 0px) + 16px));
+    box-sizing: border-box;
+  }
+
+  .stepNumberMobileOnly {
+    display: flex;
+  }
+
+  /* Una columna: línea vertical continua + círculos alineados al texto (no al centro de la tarjeta) */
   .stepsGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    position: relative;
+    grid-template-columns: 1fr;
+    max-width: min(520px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    row-gap: 0;
+    padding-left: 2px;
+    box-sizing: border-box;
+  }
+
+  .mobileTimelineLine {
+    display: block;
+    position: absolute;
+    left: 22px;
+    top: 12px;
+    bottom: auto;
+    height: max(36px, calc(100% - 12px - clamp(156px, 17.5vh, 248px)));
+    width: 0;
+    border: none;
+    border-left: 2px dashed rgba(38, 38, 44, 0.22);
+    z-index: 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    -webkit-clip-path: inset(0 0 6px 0);
+    clip-path: inset(0 0 6px 0);
+  }
+
+  .stepCard {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--gap-8);
+    max-width: 100%;
+    margin-bottom: 0;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stepNumberCell {
+    flex-direction: column;
+    align-items: center;
+    align-self: flex-start;
+    justify-content: flex-start;
+    width: 44px;
+    flex-shrink: 0;
+    padding-top: var(--padding-12);
+    min-height: 0;
+    padding-left: 0;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .stepNumberInner {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .connectorCircleWrap {
+    position: relative;
+    z-index: 2;
+  }
+
+  .railVSegment {
+    display: none !important;
+  }
+
+  /* Espacio entre pasos en el bloque gris: el carril sigue una sola columna sin hueco entre tarjetas */
+  .stepColumn {
+    align-items: stretch;
+    text-align: left;
+    padding: var(--padding-12) var(--padding-14) var(--padding-16);
+    flex: 1;
+    min-width: 0;
+    gap: var(--gap-16);
+    margin-bottom: var(--gap-20);
+  }
+
+  .stepCard:last-child .stepColumn {
+    margin-bottom: 0;
+  }
+
+  .stepHeadings {
+    align-items: flex-start;
+    text-align: left;
+    gap: var(--gap-2);
+    width: 100%;
+  }
+
+  .cotizaConSara,
+  .enMinutos {
+    text-align: left;
+    align-self: stretch;
+  }
+
+  .stepMediaBlock {
+    align-self: stretch;
+  }
+
+  .stepImage {
+    max-width: 100%;
+    width: auto;
+    max-height: min(34vh, 220px);
+    aspect-ratio: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .quotationActions {
+    max-width: 100%;
   }
 }
 
@@ -223,53 +698,10 @@
     gap: var(--gap-16);
   }
   .stepsGrid {
-    grid-template-columns: 1fr;
-    row-gap: var(--gap-20);
     max-width: min(420px, 100%);
-    margin-left: auto;
-    margin-right: auto;
   }
-  .stepCard {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: var(--gap-12);
-    max-width: 100%;
-  }
-  .stepNumberCell {
-    padding-top: var(--padding-4);
-    min-height: 0;
-    width: auto;
-    flex-shrink: 0;
-  }
-  .stepColumn {
-    align-items: flex-start;
-    text-align: left;
-    padding: var(--padding-12) var(--padding-14) var(--padding-16);
-    flex: 1;
-    min-width: 0;
-    gap: var(--gap-16);
-  }
-  .stepHeadings {
-    align-items: flex-start;
-    text-align: left;
-    gap: var(--gap-2);
-  }
-  .cotizaConSara,
-  .enMinutos {
-    text-align: left;
-    align-self: stretch;
-  }
-  /* Más compacto: escala con el viewport, sin recorte (contain) */
   .stepImage {
-    max-width: 100%;
-    width: auto;
     max-height: min(32vh, 200px);
-    aspect-ratio: auto;
-    height: auto;
-    object-fit: contain;
-  }
-  .quotationActions {
-    max-width: 100%;
   }
 }
 
@@ -289,8 +721,7 @@
     font-size: var(--fs-34);
     line-height: var(--lh-37);
   }
-  .h3,
-  .tenemosProcesoSimple {
+  .h3 {
     font-size: var(--fs-16);
     line-height: var(--lh-19);
   }

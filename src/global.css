@@ -181,4 +181,86 @@ body {
   /* Hero: columna desde la izquierda (NO centrada). Más aire a la izquierda que a la derecha = bloque ancho, menos “vacío” en el medio */
   --hero-page-gutter-start: clamp(28px, 5vw, 72px);
   --hero-page-gutter-end: clamp(16px, 2.5vw, 40px);
+
+  /* Tag / kicker de sección (referencia: Proceso — “Nuestro paso a paso”) */
+  --section-kicker-bg: var(--color-white);
+  --section-kicker-border: 1px solid rgba(23, 29, 76, 0.1);
+  --section-kicker-shadow: 0 6px 18px rgba(23, 29, 76, 0.08);
+  --section-kicker-radius: var(--br-8);
+  --section-kicker-padding: var(--padding-8) var(--padding-16);
+  --section-kicker-font-family: var(--font-hero-display);
+  --section-kicker-font-size: var(--fs-16);
+  --section-kicker-font-weight: 500;
+  --section-kicker-letter-spacing: -0.01em;
+  --section-kicker-line-height: 120%;
+  --section-kicker-color: var(--color-darkslateblue-100);
+
+  /* Subtítulo / párrafo intro — Inter (UI), distinto de titulares (Anisette/Outfit); mismo tamaño en todos los breakpoints */
+  --section-lede-font-family: var(--font-ui);
+  --section-lede-font-size: var(--fs-20);
+  --section-lede-font-weight: 400;
+  --section-lede-letter-spacing: -0.01em;
+  --section-lede-line-height: 1.5;
+  --section-lede-color-on-light: rgba(56, 52, 64, 0.78);
+
+  /* Hero: cuerpo bajo titular (Inter, coherente con subtítulos de sección) */
+  --hero-lede-font-family: var(--font-ui);
+  --hero-lede-font-size: var(--fs-20);
+  --hero-lede-font-weight: 400;
+  --hero-lede-letter-spacing: -0.01em;
+  --hero-lede-line-height: 1.5;
+  --hero-lede-color: #ffffff;
+
+  /* Botones CTA alineados al Hero (primario azul, misma caja tipográfica) */
+  --hero-cta-font-family: var(--font-hero-display);
+  --hero-cta-font-size: 18px;
+  --hero-cta-font-weight: 500;
+  --hero-cta-letter-spacing: -0.01em;
+}
+
+/* Intro secciones: mismo ritmo que “Paso a paso” (título cae, subtítulo zoom) — referencia processTitleFall / processSubZoom */
+@keyframes sectionIntroTitleFall {
+  0% {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+  55% {
+    opacity: 0.75;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sectionIntroSubZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.93);
+  }
+  70% {
+    opacity: 0.92;
+    transform: scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Subtítulo con opacidad final ~0.6 (Proveedores / Reconocimientos / Tienda) */
+@keyframes sectionIntroSubZoomMuted {
+  0% {
+    opacity: 0;
+    transform: scale(0.93);
+  }
+  70% {
+    opacity: 0.55;
+    transform: scale(1.01);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
 }

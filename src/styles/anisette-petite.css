@@ -1,8 +1,7 @@
 /* Anisette Petite — titular del hero.
    Coloca los archivos con licencia en public/fonts/ (p. ej. AnisettePetite.woff2).
-   Si no existen, el navegador usa Outfit hasta que copies las fuentes de la empresa. */
-
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap");
+   Outfit se carga desde index.html (evita @import tardío y reduce FOUT).
+   font-display: optional + preload en HTML → si la fuente llega a tiempo, sin “parpadeo”. */
 
 @font-face {
   font-family: "Anisette Petite";
@@ -14,5 +13,5 @@
     url("/fonts/AnisettePetite.woff") format("woff");
   font-weight: 400 700;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
 }
