@@ -1,12 +1,19 @@
 import { FunctionComponent } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { Box, Link } from "@mui/material";
 import { WHATSAPP_QUOTE_URL } from "../constants/whatsapp";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
+import { ROUTES } from "../routes/paths";
+import DashboardMockup from "./DashboardMockup";
 import styles from "./hero-section.module.css";
 
 export type HeroSectionProps = {
   className?: string;
 };
+
+/** Misma página + ancla: string evita dudas con MUI+Router. */
+const PLANES_HREF = `${ROUTES.home}#planes`;
+const demoHashLink = { pathname: ROUTES.home, hash: "demo" };
 
 /** Misma caja para ambos CTAs (evita diferencias MUI Button vs Link). */
 const heroCtaLinkBase = {
@@ -35,7 +42,7 @@ const heroCtaSxPrimary = {
 const heroCtaSxSecondary = {
   ...heroCtaLinkBase,
   background: "rgba(255, 255, 255, 0.16)",
-  cursor: "default",
+  cursor: "pointer",
   border: "none",
   WebkitAppearance: "none",
   appearance: "none",
@@ -50,46 +57,81 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
 
   return (
     <Box className={[styles.rectangleParent, className].join(" ")}>
-      <Box className={styles.ameContainer}>
-        <div className={[styles.elNuevoEstndar, styles.headlineFlyIn].join(" ")}>
-          {t.hero.headlineBefore}{" "}
-          <br />
-          <span className={styles.headlineHighlight}>
-            {t.hero.headlineHighlight}
-          </span>
-        </div>
-        <Box
-          className={[styles.vendemosContainer, styles.bodyFlyIn].join(" ")}
-        >
-          <div className={styles.vendemosSuministrosIndustria}>
-            {t.hero.body}
+      <div className={styles.heroCopyColumn}>
+        <Box className={styles.ameContainer}>
+          <div
+            className={[styles.elNuevoEstndar, styles.headlineFlyIn].join(" ")}
+          >
+            {t.hero.h1Line1}
+            <br />
+            <em>{t.hero.h1Em}</em>
           </div>
+          <Box
+            className={[styles.vendemosContainer, styles.bodyFlyIn].join(" ")}
+          >
+            <div className={styles.vendemosSuministrosIndustria}>
+              {t.hero.sub}
+            </div>
+          </Box>
         </Box>
-      </Box>
-      <Box className={styles.instantContainerParent}>
-        <Link
-          className={[styles.instantContainer, styles.btnZoomPrimary].join(" ")}
-          href={WHATSAPP_QUOTE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          underline="none"
-          sx={heroCtaSxPrimary}
-        >
-          {t.hero.ctaQuote}
-          <img width="24" height="24" src="/boxicons-chevron-up.png" alt="" />
-        </Link>
-        <Box
-          component="button"
-          type="button"
-          className={[styles.dispatchContainer, styles.btnZoomSecondary].join(
-            " ",
-          )}
-          sx={heroCtaSxSecondary}
-        >
-          {t.hero.ctaDispatch}
-          <img width="24" height="24" src="/boxicons-chevron-up.png" alt="" />
+        <Box className={styles.instantContainerParent}>
+          <Link
+            component={RouterLink}
+            to={PLANES_HREF}
+            className={[styles.instantContainer, styles.btnZoomPrimary].join(
+              " ",
+            )}
+            underline="none"
+            sx={heroCtaSxPrimary}
+          >
+            {t.hero.ctaSubscribe}
+            <span
+              className="material-symbols-rounded"
+              style={{ fontSize: 22 }}
+              aria-hidden
+            >
+              arrow_forward
+            </span>
+          </Link>
+          <Link
+            className={[styles.dispatchContainer, styles.btnZoomSecondary].join(
+              " ",
+            )}
+            href={WHATSAPP_QUOTE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            underline="none"
+            sx={heroCtaSxSecondary}
+          >
+            {t.hero.ctaDemo}
+          </Link>
         </Box>
-      </Box>
+      </div>
+
+      <div className={styles.heroMockupColumn}>
+        <div className={styles.heroMockupBlock}>
+          <div className={styles.heroMockupWrap}>
+            <DashboardMockup />
+            <RouterLink
+              className={styles.heroPlay}
+              to={demoHashLink}
+              aria-label={t.hero.play}
+              title={t.hero.play}
+            >
+              <span className={styles.heroPlayRing} aria-hidden />
+              <span
+                className={[
+                  "material-symbols-rounded",
+                  styles.heroPlayIcon,
+                ].join(" ")}
+                aria-hidden
+              >
+                play_arrow
+              </span>
+            </RouterLink>
+          </div>
+        </div>
+      </div>
     </Box>
   );
 };

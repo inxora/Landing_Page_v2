@@ -14,11 +14,10 @@ export type AdvantagesSectionProps = {
   className?: string;
 };
 
-const ADVANTAGE_ICONS = [
+const PILLAR_ICONS = [
   "/heart-hand.svg",
   "/coins-hand.svg",
   "/clock-plus.svg",
-  "/life-buoy-02.svg",
 ] as const;
 
 const AdvantagesSection: FunctionComponent<AdvantagesSectionProps> = ({
@@ -41,8 +40,6 @@ const AdvantagesSection: FunctionComponent<AdvantagesSectionProps> = ({
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  /* Antes del primer pintado: si la sección ya está en viewport, activar animación
-     (evita un frame con opacidad 0 y layout “vacío” a la derecha). */
   useLayoutEffect(() => {
     if (reducedMotion) {
       setInView(true);
@@ -76,11 +73,12 @@ const AdvantagesSection: FunctionComponent<AdvantagesSectionProps> = ({
 
   const items = useMemo(
     () =>
-      t.advantages.items.map((item, i) => ({
-        ...item,
-        icon: ADVANTAGE_ICONS[i],
+      t.advantages.pillars.map((pillar, i) => ({
+        title: pillar.title,
+        bullets: pillar.bullets,
+        icon: PILLAR_ICONS[i] ?? PILLAR_ICONS[0],
       })),
-    [t.advantages.items],
+    [t.advantages.pillars],
   );
 
   const toggle = (index: number) => {
@@ -100,8 +98,8 @@ const AdvantagesSection: FunctionComponent<AdvantagesSectionProps> = ({
         .filter(Boolean)
         .join(" ")}
     >
-      <Box className={styles.fewerFlaresMoreGoodDaysParent}>
-        <section className={styles.fewerFlaresMoreGoodDays}>
+      <div className={styles.contentRow}>
+        <div className={styles.advantagesColumn}>
           <Box className={styles.frameParent}>
             <Box
               className={[styles.ventajasDeInxoraWrapper, styles.advAnimKicker].join(
@@ -134,10 +132,8 @@ const AdvantagesSection: FunctionComponent<AdvantagesSectionProps> = ({
               const isOpen = openIndex === index;
               return (
                 <div
-                  key={index}
-                  className={[styles.accordionItem, styles.advAnimRow].join(
-                    " ",
-                  )}
+                  key={item.title}
+                  className={[styles.accordionItem, styles.advAnimRow].join(" ")}
                   role="listitem"
                 >
                   <button
@@ -187,23 +183,25 @@ const AdvantagesSection: FunctionComponent<AdvantagesSectionProps> = ({
                       className={styles.accordionPanel}
                       id={`adv-panel-${index}`}
                     >
-                      <p className={styles.accordionDescription}>
-                        {item.description}
-                      </p>
+                      <ul className={styles.accordionBulletList}>
+                        {item.bullets.map((b, bi) => (
+                          <li key={`${item.title}-b${bi}`}>{b}</li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                 </div>
               );
             })}
           </Box>
-        </section>
+        </div>
         <img
           className={[styles.frameChild, styles.advAnimImage].join(" ")}
           loading="lazy"
           alt=""
           src="/Frame-181@2x.png"
         />
-      </Box>
+      </div>
     </section>
   );
 };

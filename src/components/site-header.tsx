@@ -21,10 +21,9 @@ export type SiteHeaderProps = {
 /** Orden = orden en la landing; debe coincidir con `id` en `landing-page.tsx` */
 const LANDING_SCROLL_SECTION_IDS = [
   "ventajas",
-  "pasos",
-  "proveedores",
   "respaldados",
-  "tienda",
+  "planes",
+  "demo",
 ] as const;
 
 function MenuIcon() {
@@ -83,17 +82,15 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
     () =>
       [
         { id: "ventajas" as const, label: t.header.navVentajas },
-        { id: "pasos" as const, label: t.header.navPasos },
-        { id: "proveedores" as const, label: t.header.navProveedores },
         { id: "respaldados" as const, label: t.header.navRespaldados },
-        { id: "tienda" as const, label: t.header.navTienda },
+        { id: "planes" as const, label: t.header.navPlanes },
+        { id: "demo" as const, label: t.header.navDemo },
       ] as const,
     [
       t.header.navVentajas,
-      t.header.navPasos,
-      t.header.navProveedores,
       t.header.navRespaldados,
-      t.header.navTienda,
+      t.header.navPlanes,
+      t.header.navDemo,
     ]
   );
 

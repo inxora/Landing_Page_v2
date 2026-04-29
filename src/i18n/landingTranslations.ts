@@ -1,8 +1,12 @@
 import type { Language } from "../types/language";
+import type { ExcelCtaCopy } from "./excelCtaCopy";
+import { excelCtaCopy } from "./excelCtaCopy";
+import type { PricingSectionCopy } from "./pricingPlans";
+import { pricingSectionCopy } from "./pricingPlans";
 
-export type AdvantageItemCopy = {
+export type AdvantagePillarCopy = {
   title: string;
-  description: string;
+  bullets: string[];
 };
 
 export type ProcessStepCopy = {
@@ -16,18 +20,20 @@ export type LandingCopy = {
     navPasos: string;
     navProveedores: string;
     navRespaldados: string;
-    navTienda: string;
+    navPlanes: string;
+    navDemo: string;
     requestQuote: string;
     langAria: string;
     openMenu: string;
     closeMenu: string;
   };
   hero: {
-    headlineBefore: string;
-    headlineHighlight: string;
-    body: string;
-    ctaQuote: string;
-    ctaDispatch: string;
+    h1Line1: string;
+    h1Em: string;
+    sub: string;
+    ctaSubscribe: string;
+    ctaDemo: string;
+    play: string;
   };
   trusted: {
     title: string;
@@ -38,7 +44,7 @@ export type LandingCopy = {
     titleHighlight: string;
     titleAfter: string;
     lede: string;
-    items: [AdvantageItemCopy, AdvantageItemCopy, AdvantageItemCopy, AdvantageItemCopy];
+    pillars: [AdvantagePillarCopy, AdvantagePillarCopy, AdvantagePillarCopy];
   };
   process: {
     kicker: string;
@@ -60,15 +66,8 @@ export type LandingCopy = {
     title: string;
     lede: string;
   };
-  ecommerce: {
-    kicker: string;
-    titleLine1: string;
-    titleLine2: string;
-    lede: string;
-    cta: string;
-    detailLink: string;
-    industries: [string, string, string, string];
-  };
+  pricing: PricingSectionCopy;
+  excelCta: ExcelCtaCopy;
   assistance: {
     label: string;
     chatTitle: string;
@@ -119,18 +118,20 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPasos: "Paso a paso",
       navProveedores: "Proveedores",
       navRespaldados: "Respaldados",
-      navTienda: "Tienda",
+      navPlanes: "Planes",
+      navDemo: "Demo",
       requestQuote: "Solicitar cotización",
       langAria: "Seleccionar idioma",
       openMenu: "Abrir menú",
       closeMenu: "Cerrar menú",
     },
     hero: {
-      headlineBefore: "El nuevo estándar del abastecimiento en",
-      headlineHighlight: "Latinoamérica",
-      body: "Vendemos suministros industriales críticos a las empresas más importantes de Perú y Latinoamérica, diferenciándonos por nuestra confianza y rapidez.",
-      ctaQuote: "Cotizar al instante",
-      ctaDispatch: "Tu espacio Inxora",
+      h1Line1: "Control total sobre tus proveedores",
+      h1Em: "Sin Excel, sin riesgos ocultos.",
+      sub: "INXORA es un SRM para equipos de compras industriales. Centraliza evaluaciones, contratos y pagos en un solo panel. Recupera la trazabilidad de tu cadena de suministro hoy.",
+      ctaSubscribe: "Suscríbete",
+      ctaDemo: "Solicita una demo",
+      play: "Ver el producto en 60 s",
     },
     trusted: {
       title: "Confían en nosotros para su abastecimiento",
@@ -140,27 +141,32 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       titleBefore: "Somos la ",
       titleHighlight: "solución",
       titleAfter: " más inteligente para tus compras industriales",
-      lede: "INXORA transforma el proceso tradicional de adquisición de suministros industriales, optimizando tiempos de respuesta.",
-      items: [
+      lede:
+        "Todo en un solo panel con las 3 T: Transparencia, Trazabilidad, Tranquilidad.",
+      pillars: [
         {
-          title: "Garantía de calidad",
-          description:
-            "Reduce el tiempo de cotización y adquisición de productos hasta en un 70%.",
+          title: "Transparencia",
+          bullets: [
+            "Tableros y reportes: gasto, categorías y negocio en un solo vistazo —decisiones con datos, no con Excel suelto—.",
+            "KPIs de compra alineados a tu operación: base única, sin cifras duplicadas ni versiones en paralelo.",
+            "Más visibilidad para liderar: de la requisición al proveedor, sin puntos ciegos.",
+          ],
         },
         {
-          title: "Ahorro económico",
-          description:
-            "Consolidamos tus compras para ofrecerte mejores precios y condiciones comerciales claras.",
+          title: "Trazabilidad",
+          bullets: [
+            "Ciclos más cortos en la ruta de solicitud a OC: menos fricción entre equipos, más claridad (referencia: hasta −42% en tiempo de ciclo con equipos acompañados).",
+            "Cada paso con autor y registro: trazabilidad auditable, sin “se perdió en el correo”.",
+            "Seguimiento de corte, recepción y versiones: de la requisición al proveedor con historial completo.",
+          ],
         },
         {
-          title: "Ahorro de tiempo",
-          description:
-            "Automatiza cotizaciones y seguimiento para que tu equipo priorice lo estratégico.",
-        },
-        {
-          title: "Soporte especializado",
-          description:
-            "Acompañamiento técnico y comercial en cada etapa del proceso de compra.",
+          title: "Tranquilidad",
+          bullets: [
+            "Más proveedores evaluados con el mismo equipo: mayor cobertura sin aumentar plantilla (hasta +3,2× de evaluación en referencias de implementación).",
+            "Indicadores y ahorro comparativo en el panel: deja de consolidar a mano.",
+            "Puesta en marcha en semanas, no en trimestres: onboarding, datos y formación con referencia típica de go-live alrededor de 30 días.",
+          ],
         },
       ],
     },
@@ -190,20 +196,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       title: "Respaldados por el ecosistema de innovación del Perú y del mundo",
       lede: "Inxora es impulsada por instituciones que validan nuestro compromiso con la transformación digital y la excelencia operativa en el sector industrial.",
     },
-    ecommerce: {
-      kicker: "No esperes más",
-      titleLine1: "Explora nuestros mejores",
-      titleLine2: "productos en nuestro e-commerce",
-      lede: "Selecciona tu industria y conoce los productos que tenemos para ti.",
-      cta: "Visitar el e-commerce",
-      detailLink: "Ver más detalles",
-      industries: [
-        "Electricidad",
-        "Iluminación",
-        "Instrumentación",
-        "Mecánica industrial",
-      ],
-    },
+    pricing: pricingSectionCopy.es,
+    excelCta: excelCtaCopy.es,
     assistance: {
       label: "Estoy lista para ayudarte",
       chatTitle: "Sara Xora",
@@ -257,18 +251,20 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPasos: "Step by step",
       navProveedores: "Suppliers",
       navRespaldados: "Recognition",
-      navTienda: "Store",
+      navPlanes: "Plans",
+      navDemo: "Demo",
       requestQuote: "Request a quote",
       langAria: "Select language",
       openMenu: "Open menu",
       closeMenu: "Close menu",
     },
     hero: {
-      headlineBefore: "The new standard for industrial procurement in",
-      headlineHighlight: "Latin America",
-      body: "We supply critical industrial products to leading companies in Peru and Latin America—trusted, fast, and dependable.",
-      ctaQuote: "Get an instant quote",
-      ctaDispatch: "Your Inxora workspace",
+      h1Line1: "Total control of your industrial suppliers",
+      h1Em: "No spreadsheets. No hidden risks.",
+      sub: "INXORA is an SRM for industrial procurement teams. Centralize assessments, contracts, and payments in one place—and restore end-to-end traceability across your supply chain.",
+      ctaSubscribe: "Subscribe",
+      ctaDemo: "Get a quick demo",
+      play: "60-second product tour",
     },
     trusted: {
       title: "They trust us for their supply chain",
@@ -278,27 +274,32 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       titleBefore: "We are the smartest ",
       titleHighlight: "solution",
       titleAfter: " for your industrial purchases",
-      lede: "INXORA transforms traditional industrial procurement with faster response times and a streamlined buying experience.",
-      items: [
+      lede:
+        "Everything in one place with the 3 Ts: Transparency, Traceability, Peace of mind.",
+      pillars: [
         {
-          title: "Quality assurance",
-          description:
-            "Cut quoting and purchasing time by up to 70% with reliable sourcing.",
+          title: "Transparency",
+          bullets: [
+            "Dashboards and reports: spend, categories, and operations in one place—data-led decisions, not flying spreadsheets.",
+            "Procurement KPIs aligned to your business: one source of truth without duplicate numbers.",
+            "Clear line of sight from request to vendor for leadership.",
+          ],
         },
         {
-          title: "Cost savings",
-          description:
-            "We consolidate your purchases to unlock better pricing and clear commercial terms.",
+          title: "Traceability",
+          bullets: [
+            "Shorter paths from request to purchase order: less friction, clearer handoffs (illustrative: up to ~42% PO cycle time improvement on supported rollouts).",
+            "Each step with ownership and timestamps: auditable traceability instead of “lost in email.”",
+            "Track cutoffs, receipt, and revisions with full history on every event.",
+          ],
         },
         {
-          title: "Time savings",
-          description:
-            "Automate quotes and follow-ups so your team can focus on strategy.",
-        },
-        {
-          title: "Specialized support",
-          description:
-            "Technical and commercial guidance at every stage of the buying process.",
+          title: "Peace of mind",
+          bullets: [
+            "More vendors vetted with the same team: broader coverage without headcount (illustrative: up to ~3.2× evaluation coverage in reference scenarios).",
+            "Comparative savings and metrics in the panel—less manual consolidation.",
+            "Go-lives in weeks, not quarters: onboarding, data, and training, with a typical go-live in the ~30-day range.",
+          ],
         },
       ],
     },
@@ -328,20 +329,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       title: "Backed by the innovation ecosystem of Peru and the world",
       lede: "Inxora is driven by institutions that validate our commitment to digital transformation and operational excellence in the industrial sector.",
     },
-    ecommerce: {
-      kicker: "Don’t wait",
-      titleLine1: "Explore our best",
-      titleLine2: "products in our e-commerce",
-      lede: "Choose your industry and discover the products we have for you.",
-      cta: "Visit the e-commerce",
-      detailLink: "View more details",
-      industries: [
-        "Electrical",
-        "Lighting",
-        "Instrumentation",
-        "Industrial mechanics",
-      ],
-    },
+    pricing: pricingSectionCopy.en,
+    excelCta: excelCtaCopy.en,
     assistance: {
       label: "I’m ready to help you",
       chatTitle: "Sara Xora",
@@ -395,18 +384,20 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPasos: "Passo a passo",
       navProveedores: "Fornecedores",
       navRespaldados: "Reconhecimentos",
-      navTienda: "Loja",
+      navPlanes: "Planos",
+      navDemo: "Demo",
       requestQuote: "Solicitar cotação",
       langAria: "Selecionar idioma",
       openMenu: "Abrir menu",
       closeMenu: "Fechar menu",
     },
     hero: {
-      headlineBefore: "O novo padrão de abastecimento na",
-      headlineHighlight: "América Latina",
-      body: "Fornecemos insumos industriais críticos às principais empresas do Peru e da América Latina, com confiança e agilidade.",
-      ctaQuote: "Cotar agora mesmo",
-      ctaDispatch: "Seu espaço Inxora",
+      h1Line1: "Controle total dos seus fornecedores",
+      h1Em: "Sem planilhas, sem riscos invisíveis.",
+      sub: "A INXORA é um SRM (gestão de relacionamento com fornecedores) para equipes de compras industriais. Centralize avaliações, contratos e pagamentos em um só painel. Recupere a rastreabilidade da cadeia de suprimentos hoje.",
+      ctaSubscribe: "Assine",
+      ctaDemo: "Solicite uma demo",
+      play: "Ver o produto em 60 s",
     },
     trusted: {
       title: "Confiam em nós para o seu abastecimento",
@@ -416,27 +407,32 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       titleBefore: "A ",
       titleHighlight: "solução",
       titleAfter: " mais inteligente para suas compras industriais",
-      lede: "A INXORA transforma o processo tradicional de aquisição de insumos industriais, otimizando prazos de resposta.",
-      items: [
+      lede:
+        "Tudo em um só painel com as 3 T: Transparência, Rastreabilidade, Tranquilidade.",
+      pillars: [
         {
-          title: "Garantia de qualidade",
-          description:
-            "Reduza o tempo de cotação e aquisição de produtos em até 70%.",
+          title: "Transparência",
+          bullets: [
+            "Relatórios e painéis: gasto, categorias e operação no mesmo lugar —decisões com dados, sem planilhas soltas—.",
+            "KPIs de compras alinhados ao negócio: base única, sem números duplicados.",
+            "Mais visibilidade da requisição ao fornecedor, para liderar com clareza.",
+          ],
         },
         {
-          title: "Economia financeira",
-          description:
-            "Consolidamos suas compras para oferecer melhores preços e condições comerciais claras.",
+          title: "Rastreabilidade",
+          bullets: [
+            "Ciclos mais curtos do pedido à ordem de compra: menos atrito, mais clareza (referência: até cerca de −42% no tempo de ciclo em acompanhamentos de referência).",
+            "Cada etapa com autoria e registro: rastreabilidade auditável, nada de “perdeu no e-mail”.",
+            "Seguimento de corte, recepção e versões, com histórico completo.",
+          ],
         },
         {
-          title: "Economia de tempo",
-          description:
-            "Automatize cotações e acompanhamento para sua equipe focar no estratégico.",
-        },
-        {
-          title: "Suporte especializado",
-          description:
-            "Acompanhamento técnico e comercial em cada etapa do processo de compra.",
+          title: "Tranquilidade",
+          bullets: [
+            "Mais fornecedores avaliados com o mesmo time: maior cobertura sem ampliar cabeça (referência: até cerca de +3,2× a cobertura de avaliação).",
+            "Indicadores e economia comparativa no painel, sem consolidar na mão.",
+            "Entrada em produção em semanas, não em trimestres: onboarding, dados e treinamento, com go-live de referência em torno de 30 dias.",
+          ],
         },
       ],
     },
@@ -466,20 +462,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       title: "Apoiados pelo ecossistema de inovação do Peru e do mundo",
       lede: "A Inxora é impulsionada por instituições que validam nosso compromisso com a transformação digital e a excelência operacional no setor industrial.",
     },
-    ecommerce: {
-      kicker: "Não espere mais",
-      titleLine1: "Explore nossos melhores",
-      titleLine2: "produtos no e-commerce",
-      lede: "Selecione seu setor e conheça os produtos que temos para você.",
-      cta: "Visitar o e-commerce",
-      detailLink: "Ver mais detalhes",
-      industries: [
-        "Eletricidade",
-        "Iluminação",
-        "Instrumentação",
-        "Mecânica industrial",
-      ],
-    },
+    pricing: pricingSectionCopy.pt,
+    excelCta: excelCtaCopy.pt,
     assistance: {
       label: "Estou pronta para ajudar você",
       chatTitle: "Sara Xora",

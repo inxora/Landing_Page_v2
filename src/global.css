@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=SF+Pro:ital,wght@0,400;0,500;0,700&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import "./styles/anisette-petite.css";
+@import "./components/dashboard-mockup.css";
 
 body {
   margin: 0;
@@ -216,6 +217,27 @@ body {
   --hero-cta-font-size: 18px;
   --hero-cta-font-weight: 500;
   --hero-cta-letter-spacing: -0.01em;
+
+  /* Tokens del mockup dashboard (alias SaaS → marca Inxora) */
+  --brand-navy: var(--inx-navy);
+  --brand-fuchsia: var(--inx-fuchsia);
+  --brand-wine: var(--inx-wine);
+  --brand-blue: var(--inx-blue);
+  --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+  --muted: rgba(23, 29, 76, 0.55);
+  --line: rgba(23, 29, 76, 0.12);
+  --line-2: rgba(23, 29, 76, 0.08);
+  --glass-border: rgba(23, 29, 76, 0.1);
+  --shadow-card: 0 20px 50px -24px rgba(15, 23, 42, 0.18);
+  --radius-lg: 12px;
+  --ok: #15803d;
+  --risk: #b91c1c;
+  --warn: #b45309;
+  --ink: #111827;
+  --ink-2: #374151;
+  --fw-display: 500;
+  --fw-ui: 500;
+  --fw-body: 400;
 }
 
 /* Intro secciones: mismo ritmo que “Paso a paso” (título cae, subtítulo zoom) — referencia processTitleFall / processSubZoom */

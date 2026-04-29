@@ -56,27 +56,59 @@
   }
 }
 
+/* Escritorio: ancho completo del mainInner, hueco amplio entre copy y mockup, mockup anclado a la derecha */
 .rectangleParent {
   width: 100%;
-  max-width: min(920px, 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, min(31rem, 40%)) minmax(0, 1fr);
+  column-gap: clamp(2.5rem, 5vw, 3.5rem);
+  row-gap: 0;
+  align-items: center;
   position: relative;
   isolation: isolate;
-  gap: clamp(var(--gap-40), 6vw, var(--gap-80));
   text-align: left;
   color: var(--color-white);
   font-family: var(--font-hero-display);
   box-sizing: border-box;
 }
-.headlineHighlight {
+
+@media screen and (min-width: 1201px) {
+  .rectangleParent {
+    grid-template-columns: minmax(0, 0.36fr) minmax(0, 1fr);
+    column-gap: clamp(3.5rem, 7.5vw, 9rem);
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .rectangleParent {
+    column-gap: clamp(4.5rem, 8.5vw, 10.5rem);
+  }
+}
+
+.heroCopyColumn {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--gap-32), 4vw, var(--gap-60));
+  min-width: 0;
+  max-width: min(36rem, 100%);
+}
+
+.heroMockupColumn {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* Segunda línea del H1 (misma idea que SaaS: acento fucsia, sin caja navy) */
+.elNuevoEstndar em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--inx-fuchsia);
   display: inline-block;
   margin-top: 0.06em;
-  background-color: var(--color-darkslateblue-100);
-  padding: 0.05em 0.28em 0.12em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
 }
 .ameContainer {
   align-self: stretch;
@@ -138,14 +170,34 @@
 }
 /* Por debajo de desktop (≤1200px): bloque a ancho completo + texto centrado (ref. móvil/tablet) */
 @media screen and (max-width: 1200px) {
-  /* Evita que el hijo de mainInner quede al ancho del contenido con align-items:center */
   .rectangleParent {
+    grid-template-columns: 1fr;
     align-self: stretch;
-    gap: var(--gap-40);
+    max-width: 100%;
     align-items: center;
     text-align: center;
-    max-width: 100%;
   }
+
+  .heroCopyColumn {
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    gap: var(--gap-40);
+  }
+
+  .heroMockupColumn {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+  }
+
+  .heroMockupBlock {
+    max-width: 100%;
+    margin-top: clamp(1.75rem, 4vw, 2.5rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .ameContainer {
     align-items: center;
     width: 100%;
@@ -180,5 +232,91 @@
   .ameContainer,
   .rectangleParent {
     gap: var(--gap-20);
+  }
+}
+
+/* Mockup: grande en columna; en escritorio lo movemos unos px a la izquierda (hacia el texto) */
+.heroMockupBlock {
+  width: 100%;
+  max-width: min(1180px, 100%);
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroMockupWrap {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 1201px) {
+  /* Un solo nudge a la izquierda (hacia el copy) */
+  .heroMockupBlock {
+    max-width: min(1220px, 104%);
+    transform: translateX(-0.75rem);
+  }
+}
+
+.heroMockupWrap :global(.dash-wrap) {
+  margin-top: 0;
+  padding-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+.heroMockupWrap :global(.dash-mock-container.dash-wrap) {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.heroPlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(23, 29, 76, 0.5);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background 0.2s;
+  text-decoration: none;
+}
+
+.heroPlay:hover,
+.heroPlay:focus-visible {
+  transform: translate(-50%, -50%) scale(1.06);
+  background: rgba(119, 26, 83, 0.88);
+}
+
+.heroPlayIcon {
+  font-size: 40px;
+  margin-left: 4px;
+}
+
+.heroPlayRing {
+  position: absolute;
+  inset: -3px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroPlay {
+    transition: none;
+  }
+
+  .heroPlay:hover,
+  .heroPlay:focus-visible {
+    transform: translate(-50%, -50%);
   }
 }

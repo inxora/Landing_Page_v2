@@ -4,10 +4,9 @@ import { Box } from "@mui/material";
 import HeroSection from "../components/hero-section";
 import TrustedClientsSection from "../components/trusted-clients-section";
 import AdvantagesSection from "../components/advantages-section";
-import ProcessStepsSection from "../components/process-steps-section";
-import SuppliersSection from "../components/suppliers-section";
 import RecognitionsSection from "../components/recognitions-section";
-import EcommerceSection from "../components/ecommerce-section";
+import PricingSection from "../components/pricing-section";
+import ExcelCtaSection from "../components/excel-cta-section";
 import styles from "./landing-page.module.css";
 
 const LandingPage: FunctionComponent = () => {
@@ -36,20 +35,16 @@ const LandingPage: FunctionComponent = () => {
         <AdvantagesSection />
       </div>
       <div className={styles.brandRibbonDivider} aria-hidden />
-      <div id="pasos" className={styles.sectionAnchor}>
-        <ProcessStepsSection />
-      </div>
-      <div className={styles.brandRibbonDivider} aria-hidden />
-      <div id="proveedores" className={styles.sectionAnchor}>
-        <SuppliersSection />
-      </div>
-      <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="respaldados" className={styles.sectionAnchor}>
         <RecognitionsSection />
       </div>
       <div className={styles.brandRibbonDivider} aria-hidden />
-      <div id="tienda" className={styles.sectionAnchor}>
-        <EcommerceSection />
+      <div id="planes" className={styles.sectionAnchor}>
+        <PricingSection />
+      </div>
+      <div className={styles.brandRibbonDivider} aria-hidden />
+      <div id="demo" className={styles.sectionAnchor}>
+        <ExcelCtaSection />
       </div>
     </Box>
   );
