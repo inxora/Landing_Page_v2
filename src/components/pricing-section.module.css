@@ -271,20 +271,77 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .grid {
-    grid-template-columns: 1fr;
-    max-width: 420px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .title {
     max-width: none;
   }
 }
 
+/* ── Slider (mobile / tablet ≤ 1024px) ── */
+.sliderWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  cursor: grab;
+  padding-bottom: var(--gap-32);
+}
+
+.sliderWrapper:active {
+  cursor: grabbing;
+}
+
+/* El track tiene tantos "slots" de 100% como planes hay */
+.sliderTrack {
+  display: flex;
+  width: 100%;
+  transition: transform 0.48s cubic-bezier(0.32, 0.94, 0.6, 1);
+  will-change: transform;
+}
+
+/* Cada slide ocupa exactamente el 100% del wrapper → nunca se corta */
+.sliderSlide {
+  flex: 0 0 100%;
+  width: 100%;
+  box-sizing: border-box;
+  /* Padding lateral para que la tarjeta no toque los bordes */
+  padding: 12px clamp(16px, 5vw, 40px) 0;
+}
+
+/* Dots de navegación */
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: var(--gap-20);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(23, 29, 76, 0.2);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, width 0.25s ease, border-radius 0.25s ease;
+}
+
+.dotActive {
+  background: var(--inx-blue);
+  width: 24px;
+  border-radius: 4px;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .sliderTrack {
+    transition: none;
+  }
   .cta {
     transition: none;
   }
+  .dot {
+    transition: none;
+  }
 }
+
