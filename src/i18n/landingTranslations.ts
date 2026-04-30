@@ -22,6 +22,7 @@ export type LandingCopy = {
     navRespaldados: string;
     navPlanes: string;
     navDemo: string;
+    navTienda: string;
     requestQuote: string;
     langAria: string;
     openMenu: string;
@@ -120,6 +121,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navRespaldados: "Respaldados",
       navPlanes: "Planes",
       navDemo: "Demo",
+      navTienda: "Tienda",
       requestQuote: "Solicitar cotización",
       langAria: "Seleccionar idioma",
       openMenu: "Abrir menú",
@@ -128,7 +130,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     hero: {
       h1Line1: "Control total sobre tus proveedores",
       h1Em: "Sin Excel, sin riesgos ocultos.",
-      sub: "INXORA es un SRM para equipos de compras industriales. Centraliza evaluaciones, contratos y pagos en un solo panel. Recupera la trazabilidad de tu cadena de suministro hoy.",
+      sub: "INXORA es tu software de control y seguimiento de proveedores. Centraliza evaluaciones, contratos y pagos en un solo panel. Recupera la trazabilidad de tu cadena de suministro hoy.",
       ctaSubscribe: "Suscríbete",
       ctaDemo: "Solicita una demo",
       play: "Ver el producto en 60 s",
@@ -253,6 +255,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navRespaldados: "Recognition",
       navPlanes: "Plans",
       navDemo: "Demo",
+      navTienda: "Store",
       requestQuote: "Request a quote",
       langAria: "Select language",
       openMenu: "Open menu",
@@ -261,7 +264,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     hero: {
       h1Line1: "Total control of your industrial suppliers",
       h1Em: "No spreadsheets. No hidden risks.",
-      sub: "INXORA is an SRM for industrial procurement teams. Centralize assessments, contracts, and payments in one place—and restore end-to-end traceability across your supply chain.",
+      sub: "INXORA is your supplier control and tracking software. Centralize assessments, contracts, and payments in one place—and restore end-to-end traceability across your supply chain.",
       ctaSubscribe: "Subscribe",
       ctaDemo: "Get a quick demo",
       play: "60-second product tour",
@@ -386,6 +389,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navRespaldados: "Reconhecimentos",
       navPlanes: "Planos",
       navDemo: "Demo",
+      navTienda: "Loja",
       requestQuote: "Solicitar cotação",
       langAria: "Selecionar idioma",
       openMenu: "Abrir menu",
@@ -394,7 +398,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     hero: {
       h1Line1: "Controle total dos seus fornecedores",
       h1Em: "Sem planilhas, sem riscos invisíveis.",
-      sub: "A INXORA é um SRM (gestão de relacionamento com fornecedores) para equipes de compras industriais. Centralize avaliações, contratos e pagamentos em um só painel. Recupere a rastreabilidade da cadeia de suprimentos hoje.",
+      sub: "A INXORA é o seu software de controle e acompanhamento de fornecedores. Centralize avaliações, contratos e pagamentos em um só painel. Recupere a rastreabilidade da cadeia de suprimentos hoje.",
       ctaSubscribe: "Assine",
       ctaDemo: "Solicite uma demo",
       play: "Ver o produto em 60 s",

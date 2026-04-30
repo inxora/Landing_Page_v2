@@ -9,9 +9,9 @@ export type RouteSeo = {
 const brand = "INXORA";
 
 const home: RouteSeo = {
-  title: `${brand} · Marketplace industrial B2B y suministros en Perú`,
+  title: `${brand} - Centraliza tus proveedores`,
   description:
-    "Cotiza suministros industriales en minutos. Plataforma B2B con asesoría técnica, catálogo multimarca y despacho a nivel nacional. INXORA, tu socio en compras industriales.",
+    "INXORA SaaS es tu software de control y seguimiento de proveedores para equipos de compras industriales. Centraliza evaluaciones, contratos y pagos en un solo panel. Recupera la trazabilidad de tu cadena de suministro.",
 };
 
 const ROUTES_META: Record<string, RouteSeo> = {
@@ -74,7 +74,7 @@ const ROUTES_META: Record<string, RouteSeo> = {
   [ROUTES.terminos]: {
     title: `Términos y condiciones · ${brand}`,
     description:
-      "Condiciones generales de uso del marketplace y servicios INXORA: pedidos, precios, responsabilidades y legislación aplicable.",
+      "Condiciones generales de uso de la plataforma INXORA y sus servicios de control y seguimiento de proveedores: contratación, precios, responsabilidades y legislación aplicable.",
   },
   [ROUTES.envios]: {
     title: `Envíos y entregas · ${brand}`,

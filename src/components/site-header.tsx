@@ -197,6 +197,14 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
               {label}
             </Link>
           ))}
+          <a
+            className={styles.ventajas}
+            href="https://tienda.inxora.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t.header.navTienda}
+          </a>
         </nav>
         <Box className={styles.headerActionsDesktop}>
           <LanguageSelector variant="onDark" />
@@ -251,6 +259,15 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
                   {label}
                 </Link>
               ))}
+              <a
+                className={styles.navMobileLink}
+                href="https://tienda.inxora.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+              >
+                {t.header.navTienda}
+              </a>
             </nav>
             <Box className={styles.menuPanelFooter}>
               <LanguageSelector />

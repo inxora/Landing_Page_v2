@@ -2,8 +2,8 @@
 export const infoPagesEs = {
   nosotros: {
     title: "Nosotros",
-    html: `<p>INXORA S.A.C. es un marketplace B2B especializado en suministros industriales críticos para empresas en Perú y Latinoamérica. Conectamos a compradores con fabricantes y distribuidores de confianza, con procesos ágiles de cotización y soporte cercano.</p>
-<p>Nuestra misión es simplificar el abastecimiento industrial con tecnología, transparencia y un equipo comprometido con la continuidad operativa de nuestros clientes.</p>`,
+    html: `<p>INXORA S.A.C. es una plataforma de control y seguimiento de proveedores especializada en la gestión de relaciones con proveedores industriales para empresas en Perú y Latinoamérica. Centralizamos evaluaciones, contratos, cotizaciones y pagos en un solo panel, con trazabilidad total y soporte cercano.</p>
+<p>Nuestra misión es transformar la gestión de proveedores industriales con tecnología, transparencia y un equipo comprometido con la eficiencia operativa de nuestros clientes.</p>`,
   },
   contacto: {
     title: "Contacto",

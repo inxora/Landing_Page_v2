@@ -1,0 +1,296 @@
+/* ======================================
+   Results Section — Paleta oficial Inxora
+   Tokens: global.css → --inx-*, --section-*, --font-*, --fs-*, etc.
+   ====================================== */
+
+.section {
+  align-self: stretch;
+  background: linear-gradient(180deg, #ffffff 0%, #faf9fb 48%, #f9f8fa 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding-100) var(--padding-20);
+  box-sizing: border-box;
+  max-width: 100%;
+  font-family: var(--font-hero-display);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  max-width: min(1320px, 100%);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Columna izquierda: texto ── */
+.textColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 0 1 auto;
+  width: 100%;
+  max-width: min(480px, 46%);
+  box-sizing: border-box;
+  gap: var(--gap-24);
+  text-align: left;
+  font-family: var(--font-hero-display);
+}
+
+/* Kicker — igual que AdvantagesSection */
+.kicker {
+  border-radius: var(--section-kicker-radius);
+  background-color: var(--section-kicker-bg);
+  border: var(--section-kicker-border);
+  box-shadow: var(--section-kicker-shadow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--section-kicker-padding);
+  text-align: center;
+  box-sizing: border-box;
+  font-family: var(--section-kicker-font-family);
+  font-size: var(--section-kicker-font-size);
+  font-weight: var(--section-kicker-font-weight);
+  letter-spacing: var(--section-kicker-letter-spacing);
+  line-height: var(--section-kicker-line-height);
+  color: var(--section-kicker-color);
+  width: max-content;
+}
+
+/* Título principal — igual que somosLaSolucin en Advantages */
+.title {
+  align-self: stretch;
+  font-family: var(--font-hero-display);
+  font-size: var(--fs-56);
+  letter-spacing: -0.03em;
+  line-height: 110%;
+  font-weight: 500;
+  color: #1e1f24;
+  margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Acento degradado bajo el título — igual que advantages */
+.title::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin-top: var(--gap-12);
+  border-radius: 2px;
+  background: var(--gradient-brand-accent);
+}
+
+/* Color fucsia para la palabra destacada */
+.highlight {
+  color: var(--inx-fuchsia);
+  font-weight: 600;
+}
+
+/* Descripción / lede — igual que inxoraTransformaEl */
+.description {
+  align-self: stretch;
+  font-family: var(--section-lede-font-family);
+  font-size: var(--section-lede-font-size);
+  font-weight: var(--section-lede-font-weight);
+  letter-spacing: var(--section-lede-letter-spacing);
+  line-height: var(--section-lede-line-height);
+  color: var(--section-lede-color-on-light);
+  margin: 0;
+}
+
+/* ── Columna derecha: tarjetas ── */
+.cardsColumn {
+  flex: 1 1 auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+/* Mancha de fondo con gradiente de marca suave */
+.cardsBackground {
+  position: absolute;
+  top: -5%;
+  bottom: -5%;
+  left: 4%;
+  right: -4%;
+  background: linear-gradient(
+    135deg,
+    rgba(136, 212, 228, 0.18) 0%,
+    rgba(217, 14, 140, 0.07) 60%,
+    rgba(119, 26, 83, 0.1) 100%
+  );
+  border-radius: var(--br-16);
+  transform: skewY(-4deg);
+  z-index: 0;
+}
+
+.cardsGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-20);
+  width: 100%;
+}
+
+/* ── Tarjeta ── */
+.card {
+  background-color: var(--color-white);
+  border-radius: var(--br-16);
+  border: var(--border-11);
+  padding: var(--padding-24);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-12);
+  transition: transform 0.28s cubic-bezier(0.16, 0.84, 0.24, 1),
+    box-shadow 0.28s cubic-bezier(0.16, 0.84, 0.24, 1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 28px 56px -16px rgba(23, 29, 76, 0.22);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--width-40);
+  height: var(--height-40);
+  background-color: rgba(136, 212, 228, 0.15);
+  border-radius: var(--br-8);
+  color: var(--inx-navy);
+  flex-shrink: 0;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+/* Valor numérico grande — tipografía display marca */
+.value {
+  font-family: var(--font-hero-display);
+  font-size: var(--fs-34);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--inx-navy);
+}
+
+/* Título tarjeta normal */
+.cardTitle {
+  font-family: var(--font-hero-display);
+  font-size: var(--fs-16);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #1e1f24;
+  margin: 0;
+}
+
+/* Título tarjeta destacado (fucsia) */
+.cardTitleHighlight {
+  font-family: var(--font-hero-display);
+  font-size: var(--fs-16);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--inx-wine);
+  margin: 0;
+}
+
+/* Descripción tarjeta */
+.cardDescription {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: var(--fw-body);
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--gap-40);
+    max-width: 100%;
+  }
+
+  .textColumn {
+    max-width: 100%;
+  }
+
+  .cardsColumn {
+    width: 100%;
+  }
+}
+
+/* Tablet: lado a lado */
+@media screen and (max-width: 1200px) and (min-width: 751px) {
+  .container {
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  .textColumn {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: min(52%, 480px);
+  }
+
+  .cardsColumn {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .section {
+    padding-top: 65px;
+    padding-bottom: 65px;
+  }
+
+  .title {
+    font-size: var(--fs-45);
+    line-height: var(--lh-49);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .cardsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .section {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
+  .title {
+    font-size: var(--fs-34);
+    line-height: var(--lh-37);
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+}

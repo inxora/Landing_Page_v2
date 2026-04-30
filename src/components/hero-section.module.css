@@ -168,10 +168,11 @@
 .dispatchContainer {
   backdrop-filter: blur(24px);
 }
-/* Por debajo de desktop (≤1200px): bloque a ancho completo + texto centrado (ref. móvil/tablet) */
+/* Por debajo de desktop (≤1200px): columna única, texto arriba centrado, mockup abajo más pequeño */
 @media screen and (max-width: 1200px) {
   .rectangleParent {
     grid-template-columns: 1fr;
+    row-gap: clamp(2rem, 4vw, 3rem);
     align-self: stretch;
     max-width: 100%;
     align-items: center;
@@ -181,19 +182,24 @@
   .heroCopyColumn {
     align-items: center;
     width: 100%;
-    max-width: 100%;
-    gap: var(--gap-40);
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: var(--gap-32);
   }
 
   .heroMockupColumn {
     width: 100%;
-    max-width: 100%;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
     align-items: center;
+    order: 2;
   }
 
   .heroMockupBlock {
     max-width: 100%;
-    margin-top: clamp(1.75rem, 4vw, 2.5rem);
+    margin-top: 0;
     margin-left: auto;
     margin-right: auto;
   }
@@ -228,7 +234,18 @@
     justify-content: center;
   }
 }
+
+/* Móvil medio: mockup más pequeño, mismo diseño */
+@media screen and (max-width: 768px) {
+  .heroMockupColumn {
+    max-width: 540px;
+  }
+}
+
 @media screen and (max-width: 450px) {
+  .heroMockupColumn {
+    max-width: 380px;
+  }
   .ameContainer,
   .rectangleParent {
     gap: var(--gap-20);
