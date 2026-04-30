@@ -12,7 +12,7 @@ export type ExcelCtaCopy = {
 
 export const excelCtaCopy: Record<Language, ExcelCtaCopy> = {
   es: {
-    badge: "Demo guiada · 32 minutos",
+    badge: "Demo",
     titleLine1: "Deja de operar con Excel.",
     titleLine2Before: "Empieza a operar con",
     titleLine2Brand: "INXORA",
@@ -21,7 +21,7 @@ export const excelCtaCopy: Record<Language, ExcelCtaCopy> = {
     cta: "Solicitar demo",
   },
   en: {
-    badge: "Guided demo · 32 minutes",
+    badge: "Demo",
     titleLine1: "Stop running on spreadsheets.",
     titleLine2Before: "Start running on",
     titleLine2Brand: "INXORA",
@@ -30,7 +30,7 @@ export const excelCtaCopy: Record<Language, ExcelCtaCopy> = {
     cta: "Request a demo",
   },
   pt: {
-    badge: "Demo guiada · 32 minutos",
+    badge: "Demo",
     titleLine1: "Pare de operar no Excel.",
     titleLine2Before: "Comece a operar na",
     titleLine2Brand: "INXORA",

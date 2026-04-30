@@ -187,10 +187,10 @@ body {
   --section-kicker-bg: var(--color-white);
   --section-kicker-border: 1px solid rgba(23, 29, 76, 0.1);
   --section-kicker-shadow: 0 6px 18px rgba(23, 29, 76, 0.08);
-  --section-kicker-radius: var(--br-8);
-  --section-kicker-padding: var(--padding-8) var(--padding-16);
+  --section-kicker-radius: 12px;
+  --section-kicker-padding: 12px 24px;
   --section-kicker-font-family: var(--font-hero-display);
-  --section-kicker-font-size: var(--fs-16);
+  --section-kicker-font-size: 24px;
   --section-kicker-font-weight: 500;
   --section-kicker-letter-spacing: -0.01em;
   --section-kicker-line-height: 120%;
