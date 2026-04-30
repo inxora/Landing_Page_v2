@@ -122,7 +122,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPlanes: "Planes",
       navDemo: "Demo",
       navTienda: "Tienda",
-      requestQuote: "Solicitar cotización",
+      requestQuote: "Solicita una Demo",
       langAria: "Seleccionar idioma",
       openMenu: "Abrir menú",
       closeMenu: "Cerrar menú",
@@ -144,7 +144,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       titleHighlight: "solución",
       titleAfter: " más inteligente para tus compras industriales",
       lede:
-        "Todo en un solo panel con las 3 T: Transparencia, Trazabilidad, Tranquilidad.",
+        "Todo en un solo panel con las 3T: Transparencia, Trazabilidad, Tranquilidad.",
       pillars: [
         {
           title: "Transparencia",
@@ -256,7 +256,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPlanes: "Plans",
       navDemo: "Demo",
       navTienda: "Store",
-      requestQuote: "Request a quote",
+      requestQuote: "Request a Demo",
       langAria: "Select language",
       openMenu: "Open menu",
       closeMenu: "Close menu",
@@ -278,7 +278,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       titleHighlight: "solution",
       titleAfter: " for your industrial purchases",
       lede:
-        "Everything in one place with the 3 Ts: Transparency, Traceability, Peace of mind.",
+        "Everything in one place with the 3T: Transparency, Traceability, Peace of mind.",
       pillars: [
         {
           title: "Transparency",
@@ -390,7 +390,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPlanes: "Planos",
       navDemo: "Demo",
       navTienda: "Loja",
-      requestQuote: "Solicitar cotação",
+      requestQuote: "Solicitar Demo",
       langAria: "Selecionar idioma",
       openMenu: "Abrir menu",
       closeMenu: "Fechar menu",
@@ -412,7 +412,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       titleHighlight: "solução",
       titleAfter: " mais inteligente para suas compras industriais",
       lede:
-        "Tudo em um só painel com as 3 T: Transparência, Rastreabilidade, Tranquilidade.",
+        "Tudo em um só painel com as 3T: Transparência, Rastreabilidade, Tranquilidade.",
       pillars: [
         {
           title: "Transparência",

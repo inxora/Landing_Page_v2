@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Box, Link } from "@mui/material";
-import { WHATSAPP_QUOTE_URL } from "../constants/whatsapp";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import { ROUTES } from "../routes/paths";
+import { useDemoModal } from "../context/DemoModalContext";
 import DashboardMockup from "./DashboardMockup";
 import styles from "./hero-section.module.css";
 
@@ -54,6 +54,7 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
   className = "",
 }) => {
   const t = useLandingTranslations();
+  const { openModal } = useDemoModal();
 
   return (
     <Box className={[styles.rectangleParent, className].join(" ")}>
@@ -94,14 +95,11 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
             </span>
           </Link>
           <Link
-            className={[styles.dispatchContainer, styles.btnZoomSecondary].join(
-              " ",
-            )}
-            href={WHATSAPP_QUOTE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            component="button"
+            className={[styles.dispatchContainer, styles.btnZoomSecondary].join(" ")}
             underline="none"
             sx={heroCtaSxSecondary}
+            onClick={openModal}
           >
             {t.hero.ctaDemo}
           </Link>

@@ -125,9 +125,11 @@
   letter-spacing: -0.02em;
   line-height: 1.08;
   font-weight: 500;
-  font-size: clamp(1.75rem, 4vw + 1.1rem, 4.75rem);
-  word-wrap: break-word;
-  overflow-wrap: anywhere;
+  /* Rango amplio: nunca corta palabras en ningún breakpoint */
+  font-size: clamp(1.55rem, 3.2vw + 0.9rem, 4.75rem);
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 .vendemosContainer {
   align-self: stretch;

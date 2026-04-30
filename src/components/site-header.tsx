@@ -9,8 +9,9 @@ import {
 } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
-import { WHATSAPP_QUOTE_URL } from "../constants/whatsapp";
+import { WHATSAPP_QUOTE_URL as _wurl } from "../constants/whatsapp";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
+import { useDemoModal } from "../context/DemoModalContext";
 import LanguageSelector from "./language-selector";
 import styles from "./site-header.module.css";
 
@@ -75,6 +76,7 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(88);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
+  const { openModal } = useDemoModal();
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -208,16 +210,15 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
         </nav>
         <Box className={styles.headerActionsDesktop}>
           <LanguageSelector variant="onDark" />
-          <a
+          <button
+            type="button"
             className={styles.contactLanguage2}
-            href={WHATSAPP_QUOTE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={openModal}
           >
             <div className={styles.solicitarCotizacion}>
               {t.header.requestQuote}
             </div>
-          </a>
+          </button>
         </Box>
         <button
           type="button"
@@ -271,17 +272,15 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
             </nav>
             <Box className={styles.menuPanelFooter}>
               <LanguageSelector />
-              <a
+              <button
+                type="button"
                 className={styles.contactLanguage2}
-                href={WHATSAPP_QUOTE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={closeMenu}
+                onClick={() => { openModal(); closeMenu(); }}
               >
                 <div className={styles.solicitarCotizacion}>
                   {t.header.requestQuote}
                 </div>
-              </a>
+              </button>
             </Box>
           </div>
         </>

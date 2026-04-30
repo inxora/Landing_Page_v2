@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
-import { WHATSAPP_QUOTE_URL } from "../constants/whatsapp";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
+import { useDemoModal } from "../context/DemoModalContext";
 import styles from "./excel-cta-section.module.css";
 
 export type ExcelCtaSectionProps = {
@@ -11,6 +11,7 @@ const ExcelCtaSection: FunctionComponent<ExcelCtaSectionProps> = ({
   className = "",
 }) => {
   const t = useLandingTranslations();
+  const { openModal } = useDemoModal();
 
   return (
     <section
@@ -31,11 +32,10 @@ const ExcelCtaSection: FunctionComponent<ExcelCtaSectionProps> = ({
           {t.excelCta.titleLine2After}
         </h2>
         <p className={styles.sub}>{t.excelCta.sub}</p>
-        <a
+        <button
+          type="button"
           className={styles.cta}
-          href={WHATSAPP_QUOTE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={openModal}
         >
           {t.excelCta.cta}
           <span
@@ -44,7 +44,7 @@ const ExcelCtaSection: FunctionComponent<ExcelCtaSectionProps> = ({
           >
             arrow_forward
           </span>
-        </a>
+        </button>
       </div>
     </section>
   );

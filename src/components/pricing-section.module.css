@@ -13,9 +13,11 @@
 }
 
 .kicker {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--gap-24);
   padding: var(--section-kicker-padding);
   border-radius: var(--section-kicker-radius);
   background-color: var(--section-kicker-bg);
@@ -25,7 +27,7 @@
   font-weight: var(--section-kicker-font-weight);
   letter-spacing: var(--section-kicker-letter-spacing);
   color: var(--section-kicker-color);
-  margin-bottom: var(--gap-24);
+  text-align: center;
 }
 
 .title {
@@ -35,24 +37,28 @@
   letter-spacing: -0.02em;
   line-height: 1.12;
   color: var(--inx-navy);
-  max-width: 20ch;
+  max-width: 100%;
+  text-align: center;
 }
 
 .lede {
   margin: 0 0 var(--gap-40);
   max-width: 52ch;
+  margin-left: auto;
+  margin-right: auto;
   font-family: var(--font-ui);
   font-size: var(--section-lede-font-size);
   font-weight: var(--section-lede-font-weight);
   letter-spacing: var(--section-lede-letter-spacing);
   line-height: var(--section-lede-line-height);
   color: var(--section-lede-color-on-light);
+  text-align: center;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--gap-24);
+  gap: var(--gap-20);
   align-items: stretch;
 }
 
@@ -60,7 +66,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 40px var(--padding-24) var(--padding-24);
+  padding: 32px var(--padding-20) var(--padding-20);
   border-radius: var(--br-16);
   background: #fff;
   border: 1px solid rgba(23, 29, 76, 0.1);
@@ -73,7 +79,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 40px var(--padding-24) var(--padding-24);
+  padding: 32px var(--padding-20) var(--padding-20);
   border-radius: var(--br-16);
   background: #fff;
   border: 1px solid rgba(19, 158, 212, 0.45);
@@ -115,8 +121,8 @@
 }
 
 .planName {
-  margin: var(--gap-12) 0 0;
-  font-size: 1.35rem;
+  margin: var(--gap-8) 0 0;
+  font-size: 1.15rem;
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--inx-navy);
@@ -131,7 +137,7 @@
 }
 
 .price {
-  font-size: 2rem;
+  font-size: 1.65rem;
   font-weight: 500;
   letter-spacing: -0.03em;
   color: var(--inx-navy);
@@ -144,12 +150,13 @@
 }
 
 .description {
-  margin: var(--gap-16) 0 var(--gap-24);
+  margin: var(--gap-12) 0 var(--gap-20);
   font-family: var(--font-ui);
   font-size: var(--fs-16);
   line-height: 1.5;
   color: var(--section-lede-color-on-light);
-  flex: 1;
+  /* Fuerza que todos los grupos empiecen a la misma altura */
+  min-height: 4.5em;
 }
 
 .group {
@@ -208,7 +215,7 @@
 }
 
 .dash {
-  color: rgba(23, 29, 76, 0.28);
+  color: var(--inx-fuchsia);
   font-size: 20px;
 }
 

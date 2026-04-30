@@ -305,13 +305,10 @@
 }
 
 .contentRow .frameChild {
-  display: block;
-  flex: 0 1 auto;
-  max-width: min(400px, 36vw);
-  min-width: 0;
-  align-self: center;
-  margin: 0;
+  max-width: min(520px, 46vw);
+  max-height: min(70vh, 640px);
   margin-left: auto;
+  margin-right: 0;
 }
 
 @media screen and (max-width: 1200px) {
