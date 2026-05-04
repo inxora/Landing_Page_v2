@@ -12,7 +12,6 @@ export type HeroSectionProps = {
 };
 
 /** Misma página + ancla: string evita dudas con MUI+Router. */
-const PLANES_HREF = `${ROUTES.home}#planes`;
 const demoHashLink = { pathname: ROUTES.home, hash: "demo" };
 
 /** Misma caja para ambos CTAs (evita diferencias MUI Button vs Link). */
@@ -77,13 +76,13 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
         </Box>
         <Box className={styles.instantContainerParent}>
           <Link
-            component={RouterLink}
-            to={PLANES_HREF}
+            component="button"
             className={[styles.instantContainer, styles.btnZoomPrimary].join(
               " ",
             )}
             underline="none"
             sx={heroCtaSxPrimary}
+            onClick={openModal}
           >
             {t.hero.ctaSubscribe}
             <span

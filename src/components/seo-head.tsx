@@ -7,7 +7,7 @@ import {
   hreflangUrls,
 } from "../seo/routesMeta";
 
-const defaultOgImage = `${SITE_ORIGIN}/logo_inxora/LOGO-03.svg`;
+const defaultOgImage = `${SITE_ORIGIN}/LOGO-03.svg`;
 
 export default function SeoHead() {
   const { pathname } = useLocation();

@@ -5,7 +5,6 @@ import HeroSection from "../components/hero-section";
 import TrustedClientsSection from "../components/trusted-clients-section";
 import AdvantagesSection from "../components/advantages-section";
 import RecognitionsSection from "../components/recognitions-section";
-import PricingSection from "../components/pricing-section";
 import ExcelCtaSection from "../components/excel-cta-section";
 import ResultsSection from "../components/results-section";
 import styles from "./landing-page.module.css";
@@ -39,11 +38,7 @@ const LandingPage: FunctionComponent = () => {
       <div id="resultados" className={styles.sectionAnchor}>
         <ResultsSection />
       </div>
-      <div className={styles.brandRibbonDivider} aria-hidden />
-      <div id="planes" className={styles.sectionAnchor}>
-        <PricingSection />
-      </div>
-      <div className={styles.brandRibbonDivider} aria-hidden />
+      <div id="planes" aria-hidden />
       <div id="respaldados" className={styles.sectionAnchor}>
         <RecognitionsSection />
       </div>

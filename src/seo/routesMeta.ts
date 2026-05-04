@@ -19,42 +19,42 @@ const ROUTES_META: Record<string, RouteSeo> = {
   [ROUTES.nosotros]: {
     title: `Nosotros · ${brand}`,
     description:
-      "Conoce la misión de INXORA: digitalizar el abastecimiento industrial en Perú y Latinoamérica con tecnología, logística y soporte técnico especializado.",
+      "Conoce la misión de INXORA: digitalizar la gestión de proveedores en Perú y Latinoamérica con tecnología SaaS para equipos de compras industriales.",
   },
   [ROUTES.contacto]: {
     title: `Contacto · ${brand}`,
     description:
-      "Datos de contacto INXORA: dirección en Lima, teléfono, correo y canales para cotizaciones, soporte y consultas comerciales.",
+      "Contacta con el equipo INXORA: dirección en Lima, teléfono, correo y canales para soporte y consultas comerciales sobre nuestra plataforma SaaS.",
   },
   [ROUTES.faq]: {
     title: `Preguntas frecuentes · ${brand}`,
     description:
-      "Respuestas sobre cotizaciones, envíos, pagos, garantías y uso de la plataforma industrial INXORA.",
+      "Respuestas sobre el uso de la plataforma INXORA, onboarding, integración, planes y soporte para equipos de compras industriales.",
   },
   [ROUTES.cotizaciones]: {
-    title: `Cotizaciones industriales · ${brand}`,
+    title: `Solicitar demo · ${brand}`,
     description:
-      "Solicita cotización de suministros industriales: proceso rápido, comparación de opciones y acompañamiento del equipo INXORA.",
+      "Solicita una demo personalizada de INXORA: te mostramos cómo centralizar la gestión de tus proveedores y recuperar la trazabilidad de tus compras.",
   },
   [ROUTES.catalogo]: {
-    title: `Catálogo de productos industriales · ${brand}`,
+    title: `Funcionalidades · ${brand}`,
     description:
-      "Explora el catálogo INXORA: electricidad, herramientas, seguridad, neumática, iluminación y más líneas para tu operación.",
+      "Explora las funcionalidades de INXORA: evaluación de proveedores, gestión de contratos, seguimiento de pagos y trazabilidad de compras en un solo panel.",
   },
   [ROUTES.suministros]: {
-    title: `Suministros industriales · ${brand}`,
+    title: `Gestión de proveedores · ${brand}`,
     description:
-      "Soluciones de abastecimiento industrial: categorías, marcas líderes y entrega trazable con INXORA.",
+      "INXORA centraliza la gestión de proveedores industriales: evaluaciones, contratos, pagos y trazabilidad de tu cadena de suministro en una sola plataforma.",
   },
   [ROUTES.seguridad]: {
-    title: `Seguridad industrial y EPP · ${brand}`,
+    title: `Seguridad y cumplimiento · ${brand}`,
     description:
-      "Equipos y elementos de protección personal, señalización y soluciones de seguridad industrial disponibles vía INXORA.",
+      "Gestiona el cumplimiento y los criterios de seguridad de tus proveedores industriales con INXORA: auditoría, trazabilidad y control en un solo panel.",
   },
   [ROUTES.herramientas]: {
-    title: `Herramientas y equipos de trabajo · ${brand}`,
+    title: `Herramientas de gestión · ${brand}`,
     description:
-      "Herramientas manuales y eléctricas, mediciones y equipos para taller y planta. Consulta disponibilidad en INXORA.",
+      "Herramientas de control y seguimiento de proveedores para equipos de compras industriales. Digitaliza tu proceso de abastecimiento con INXORA.",
   },
   [ROUTES.avisoLegal]: {
     title: `Aviso legal · ${brand}`,
@@ -77,14 +77,14 @@ const ROUTES_META: Record<string, RouteSeo> = {
       "Condiciones generales de uso de la plataforma INXORA y sus servicios de control y seguimiento de proveedores: contratación, precios, responsabilidades y legislación aplicable.",
   },
   [ROUTES.envios]: {
-    title: `Envíos y entregas · ${brand}`,
+    title: `Política de envíos · ${brand}`,
     description:
-      "Información sobre cobertura de envíos, tiempos orientativos y seguimiento de pedidos INXORA en Perú.",
+      "Política de envíos y entregas de INXORA: condiciones aplicables a los servicios contratados a través de la plataforma.",
   },
   [ROUTES.devoluciones]: {
-    title: `Devoluciones y garantías · ${brand}`,
+    title: `Política de devoluciones · ${brand}`,
     description:
-      "Procedimiento de devoluciones, plazos y condiciones de garantía para compras realizadas a través de INXORA.",
+      "Política de devoluciones y cancelaciones de INXORA: procedimiento, plazos y condiciones aplicables a los servicios de la plataforma.",
   },
   [ROUTES.libroReclamaciones]: {
     title: `Libro de reclamaciones · ${brand}`,

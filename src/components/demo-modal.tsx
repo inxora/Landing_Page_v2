@@ -46,7 +46,7 @@ export default function DemoModal() {
     e.preventDefault();
     setSending(true);
     try {
-      await fetch("https://app.inxora.com/api/v1/demo/solicitar", {
+      await fetch("https://apisaas.inxora.com/api/v1/demo/solicitar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
