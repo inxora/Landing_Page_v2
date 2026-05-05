@@ -9,9 +9,7 @@ import {
 } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
-import { WHATSAPP_QUOTE_URL as _wurl } from "../constants/whatsapp";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
-import { useDemoModal } from "../context/DemoModalContext";
 import LanguageSelector from "./language-selector";
 import styles from "./site-header.module.css";
 
@@ -23,7 +21,6 @@ export type SiteHeaderProps = {
 const LANDING_SCROLL_SECTION_IDS = [
   "ventajas",
   "respaldados",
-  "planes",
   "demo",
 ] as const;
 
@@ -76,7 +73,6 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(88);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
-  const { openModal } = useDemoModal();
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -85,13 +81,11 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
       [
         { id: "ventajas" as const, label: t.header.navVentajas },
         { id: "respaldados" as const, label: t.header.navRespaldados },
-        { id: "planes" as const, label: t.header.navPlanes },
         { id: "demo" as const, label: t.header.navDemo },
       ] as const,
     [
       t.header.navVentajas,
       t.header.navRespaldados,
-      t.header.navPlanes,
       t.header.navDemo,
     ]
   );
@@ -210,15 +204,16 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
         </nav>
         <Box className={styles.headerActionsDesktop}>
           <LanguageSelector variant="onDark" />
-          <button
-            type="button"
+          <a
             className={styles.contactLanguage2}
-            onClick={openModal}
+            href="https://saas.inxora.com"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <div className={styles.solicitarCotizacion}>
-              {t.header.requestQuote}
+              {t.header.signIn}
             </div>
-          </button>
+          </a>
         </Box>
         <button
           type="button"
@@ -271,16 +266,18 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
               </a>
             </nav>
             <Box className={styles.menuPanelFooter}>
-              <LanguageSelector />
-              <button
-                type="button"
+              <LanguageSelector menuAlign="left" />
+              <a
                 className={styles.contactLanguage2}
-                onClick={() => { openModal(); closeMenu(); }}
+                href="https://saas.inxora.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
               >
                 <div className={styles.solicitarCotizacion}>
-                  {t.header.requestQuote}
+                  {t.header.signIn}
                 </div>
-              </button>
+              </a>
             </Box>
           </div>
         </>

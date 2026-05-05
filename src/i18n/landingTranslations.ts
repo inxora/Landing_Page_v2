@@ -23,7 +23,7 @@ export type LandingCopy = {
     navPlanes: string;
     navDemo: string;
     navTienda: string;
-    requestQuote: string;
+    signIn: string;
     langAria: string;
     openMenu: string;
     closeMenu: string;
@@ -122,7 +122,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPlanes: "Planes",
       navDemo: "Demo",
       navTienda: "Tienda",
-      requestQuote: "Solicita una Demo",
+      signIn: "Inicia Sesión",
       langAria: "Seleccionar idioma",
       openMenu: "Abrir menú",
       closeMenu: "Cerrar menú",
@@ -256,7 +256,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPlanes: "Plans",
       navDemo: "Demo",
       navTienda: "Store",
-      requestQuote: "Request a Demo",
+      signIn: "Sign In",
       langAria: "Select language",
       openMenu: "Open menu",
       closeMenu: "Close menu",
@@ -390,7 +390,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPlanes: "Planos",
       navDemo: "Demo",
       navTienda: "Loja",
-      requestQuote: "Solicitar Demo",
+      signIn: "Iniciar Sessão",
       langAria: "Selecionar idioma",
       openMenu: "Abrir menu",
       closeMenu: "Fechar menu",

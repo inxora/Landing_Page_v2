@@ -96,6 +96,11 @@
   z-index: 220;
 }
 
+.menuAlignLeft {
+  right: auto;
+  left: 0;
+}
+
 .option {
   display: flex;
   align-items: center;

@@ -4,6 +4,8 @@ import { Box, Link } from "@mui/material";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import { ROUTES } from "../routes/paths";
 import { useDemoModal } from "../context/DemoModalContext";
+import { useLanguage } from "../context/LanguageContext";
+import { buildWhatsAppDemoUrl } from "../constants/whatsapp";
 import DashboardMockup from "./DashboardMockup";
 import styles from "./hero-section.module.css";
 
@@ -54,6 +56,8 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
 }) => {
   const t = useLandingTranslations();
   const { openModal } = useDemoModal();
+  const { lang } = useLanguage();
+  const whatsappDemoUrl = buildWhatsAppDemoUrl(lang);
 
   return (
     <Box className={[styles.rectangleParent, className].join(" ")}>
@@ -94,11 +98,12 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
             </span>
           </Link>
           <Link
-            component="button"
             className={[styles.dispatchContainer, styles.btnZoomSecondary].join(" ")}
             underline="none"
             sx={heroCtaSxSecondary}
-            onClick={openModal}
+            href={whatsappDemoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             {t.hero.ctaDemo}
           </Link>

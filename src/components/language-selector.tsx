@@ -14,10 +14,13 @@ import styles from "./language-selector.module.css";
 export type LanguageSelectorProps = {
   /** Fondo oscuro (p. ej. header con degradé tipo footer) */
   variant?: "default" | "onDark";
+  /** Borde del dropdown que se ancla al trigger. "right" (por defecto) abre hacia la izquierda; "left" abre hacia la derecha. */
+  menuAlign?: "left" | "right";
 };
 
 const LanguageSelector: FunctionComponent<LanguageSelectorProps> = ({
   variant = "default",
+  menuAlign = "right",
 }) => {
   const { lang, setLang } = useLanguage();
   const t = useLandingTranslations();
@@ -68,7 +71,15 @@ const LanguageSelector: FunctionComponent<LanguageSelectorProps> = ({
         <span className={styles.code}>{current?.code ?? "ES"}</span>
       </button>
       {open && (
-        <ul className={styles.menu} role="listbox">
+        <ul
+          className={[
+            styles.menu,
+            menuAlign === "left" ? styles.menuAlignLeft : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          role="listbox"
+        >
           {LANGUAGE_OPTIONS.map((opt) => (
             <li key={opt.value} role="none">
               <button

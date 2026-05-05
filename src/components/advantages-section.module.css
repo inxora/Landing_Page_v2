@@ -331,30 +331,6 @@
   }
 }
 
-/* Tablet: texto + acordeón y al lado la imagen, con aire entre ambos */
-@media screen and (max-width: 1200px) and (min-width: 751px) {
-  .contentRow {
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: clamp(2rem, 4.5vw, 3.5rem);
-  }
-
-  .advantagesColumn {
-    flex: 1 1 0;
-    min-width: 0;
-    max-width: min(52%, 500px);
-  }
-
-  .contentRow .frameChild {
-    max-width: min(360px, 40vw);
-    max-height: min(48vh, 400px);
-    margin-left: auto;
-    margin-right: 0;
-  }
-}
-
 @media screen and (max-width: 1050px) {
   .section {
     padding-top: 65px;
