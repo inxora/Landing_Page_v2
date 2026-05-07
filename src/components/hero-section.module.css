@@ -150,22 +150,21 @@
   color: var(--hero-lede-color);
 }
 .instantContainerParent {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   gap: var(--gap-8);
   z-index: 2;
-  flex-shrink: 0;
   width: 100%;
-  max-width: 100%;
+  max-width: 520px;
   box-sizing: border-box;
 }
 .dispatchContainer,
 .instantContainer {
   height: var(--height-56);
-  padding: var(--padding-10) var(--padding-16) var(--padding-10)
-    var(--padding-24);
+  padding: var(--padding-10) var(--padding-16);
   box-sizing: border-box;
+  width: 100%;
 }
 .dispatchContainer {
   backdrop-filter: blur(24px);
@@ -225,15 +224,20 @@
     text-align: center;
   }
   .instantContainerParent {
-    flex-wrap: wrap;
-    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
   }
   .dispatchContainer,
   .instantContainer {
-    flex: 0 1 auto;
-    max-width: min(100%, 340px);
-    width: auto;
+    width: 100%;
     justify-content: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .instantContainerParent {
+    grid-template-columns: 1fr;
+    max-width: 360px;
   }
 }
 

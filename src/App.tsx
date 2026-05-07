@@ -12,6 +12,7 @@ import PoliticaPrivacidadPage from "./pages/politica-privacidad-page";
 import PoliticaCookiesPage from "./pages/politica-cookies-page";
 import TerminosCondicionesPage from "./pages/terminos-condiciones-page";
 import LibroReclamacionesPage from "./pages/libro-reclamaciones-page";
+import CrearCuentaPage from "./pages/crear-cuenta-page";
 import {
   NosotrosPage,
   ContactoPage,
@@ -25,8 +26,6 @@ import {
   DevolucionesPage,
 } from "./pages/info-static-pages";
 import { ROUTES } from "./routes/paths";
-import { DemoModalProvider } from "./context/DemoModalContext";
-import DemoModal from "./components/demo-modal";
 
 const pathSeg = (full: string) => full.replace(/^\//, "");
 
@@ -42,9 +41,7 @@ function App() {
   }, [action, pathname]);
 
   return (
-    <DemoModalProvider>
-      <DemoModal />
-      <Routes>
+    <Routes>
         <Route element={<SiteLayout />}>
           <Route index element={<LandingPage />} />
           <Route path={pathSeg(ROUTES.nosotros)} element={<NosotrosPage />} />
@@ -72,8 +69,11 @@ function App() {
             element={<LibroReclamacionesPage />}
           />
         </Route>
+        <Route
+          path={pathSeg(ROUTES.crearCuenta)}
+          element={<CrearCuentaPage />}
+        />
       </Routes>
-    </DemoModalProvider>
   );
 }
 

@@ -11,6 +11,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import LanguageSelector from "./language-selector";
+import AccountMenu from "./account-menu";
 import styles from "./site-header.module.css";
 
 export type SiteHeaderProps = {
@@ -204,16 +205,7 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
         </nav>
         <Box className={styles.headerActionsDesktop}>
           <LanguageSelector variant="onDark" />
-          <a
-            className={styles.contactLanguage2}
-            href="https://saas.inxora.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className={styles.solicitarCotizacion}>
-              {t.header.signIn}
-            </div>
-          </a>
+          <AccountMenu variant="desktop" />
         </Box>
         <button
           type="button"
@@ -267,17 +259,7 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
             </nav>
             <Box className={styles.menuPanelFooter}>
               <LanguageSelector menuAlign="left" />
-              <a
-                className={styles.contactLanguage2}
-                href="https://saas.inxora.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={closeMenu}
-              >
-                <div className={styles.solicitarCotizacion}>
-                  {t.header.signIn}
-                </div>
-              </a>
+              <AccountMenu variant="mobile" onNavigate={closeMenu} />
             </Box>
           </div>
         </>

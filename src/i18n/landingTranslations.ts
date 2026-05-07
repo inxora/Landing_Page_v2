@@ -24,6 +24,10 @@ export type LandingCopy = {
     navDemo: string;
     navTienda: string;
     signIn: string;
+    account: string;
+    accountAria: string;
+    noAccount: string;
+    createAccount: string;
     langAria: string;
     openMenu: string;
     closeMenu: string;
@@ -122,7 +126,11 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPlanes: "Planes",
       navDemo: "Demo",
       navTienda: "Tienda",
-      signIn: "Inicia Sesión",
+      signIn: "Iniciar Sesión",
+      account: "Cuenta",
+      accountAria: "Abrir menú de cuenta",
+      noAccount: "¿No tienes cuenta de Inxora?",
+      createAccount: "Crear Cuenta",
       langAria: "Seleccionar idioma",
       openMenu: "Abrir menú",
       closeMenu: "Cerrar menú",
@@ -131,8 +139,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       h1Line1: "Control total sobre tus proveedores",
       h1Em: "Sin Excel, sin riesgos ocultos.",
       sub: "INXORA es tu software de control y seguimiento de proveedores. Centraliza evaluaciones, contratos y pagos en un solo panel. Recupera la trazabilidad de tu cadena de suministro hoy.",
-      ctaSubscribe: "Suscríbete",
-      ctaDemo: "Solicita una demo",
+      ctaSubscribe: "Solicitar Demo",
+      ctaDemo: "Hablar por WhatsApp",
       play: "Ver el producto en 60 s",
     },
     trusted: {
@@ -257,6 +265,10 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navDemo: "Demo",
       navTienda: "Store",
       signIn: "Sign In",
+      account: "Account",
+      accountAria: "Open account menu",
+      noAccount: "Don't have an Inxora account?",
+      createAccount: "Create Account",
       langAria: "Select language",
       openMenu: "Open menu",
       closeMenu: "Close menu",
@@ -265,8 +277,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       h1Line1: "Total control of your industrial suppliers",
       h1Em: "No spreadsheets. No hidden risks.",
       sub: "INXORA is your supplier control and tracking software. Centralize assessments, contracts, and payments in one place—and restore end-to-end traceability across your supply chain.",
-      ctaSubscribe: "Subscribe",
-      ctaDemo: "Get a quick demo",
+      ctaSubscribe: "Request a demo",
+      ctaDemo: "Chat on WhatsApp",
       play: "60-second product tour",
     },
     trusted: {
@@ -390,7 +402,11 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       navPlanes: "Planos",
       navDemo: "Demo",
       navTienda: "Loja",
-      signIn: "Iniciar Sessão",
+      signIn: "Entrar",
+      account: "Conta",
+      accountAria: "Abrir menu da conta",
+      noAccount: "Ainda não tem conta na Inxora?",
+      createAccount: "Criar Conta",
       langAria: "Selecionar idioma",
       openMenu: "Abrir menu",
       closeMenu: "Fechar menu",
@@ -399,8 +415,8 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       h1Line1: "Controle total dos seus fornecedores",
       h1Em: "Sem planilhas, sem riscos invisíveis.",
       sub: "A INXORA é o seu software de controle e acompanhamento de fornecedores. Centralize avaliações, contratos e pagamentos em um só painel. Recupere a rastreabilidade da cadeia de suprimentos hoje.",
-      ctaSubscribe: "Assine",
-      ctaDemo: "Solicite uma demo",
+      ctaSubscribe: "Solicitar Demo",
+      ctaDemo: "Falar pelo WhatsApp",
       play: "Ver o produto em 60 s",
     },
     trusted: {

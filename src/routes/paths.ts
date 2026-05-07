@@ -16,4 +16,5 @@ export const ROUTES = {
   envios: "/envios",
   devoluciones: "/devoluciones",
   libroReclamaciones: "/libro-de-reclamaciones",
+  crearCuenta: "/crear-cuenta",
 } as const;
