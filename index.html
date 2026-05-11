@@ -6,6 +6,15 @@
   <link rel="icon" type="image/svg+xml" href="/LOGO-03.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- LCP: la imagen de fondo del hero se descarga antes de que arranque el JS -->
+  <link rel="preload" as="image" href="/image-6@2x.png" fetchpriority="high" />
+
+  <!-- Vídeo del hero (fachada YouTube): adelanta la conexión a la miniatura;
+       dns-prefetch para el reproductor que solo carga al hacer clic -->
+  <link rel="preconnect" href="https://i.ytimg.com" crossorigin />
+  <link rel="dns-prefetch" href="//www.youtube-nocookie.com" />
+  <link rel="dns-prefetch" href="//i.ytimg.com" />
+
   <!-- Fuentes: preconnect + preload reduce FOUT (parpadeo sistema → marca) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

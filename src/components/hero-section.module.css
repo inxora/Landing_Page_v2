@@ -14,6 +14,17 @@
   }
 }
 
+/* Título H1 (= elemento LCP): NO usa opacity para no retrasar el Largest
+   Contentful Paint. Solo desliza desde la derecha. */
+@keyframes ppHeroHeadlineSlideIn {
+  0% {
+    transform: translateX(36px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 @keyframes ppHeroZoomIn {
   0% {
     opacity: 0;
@@ -30,7 +41,7 @@
 }
 
 .headlineFlyIn {
-  animation: ppHeroFlyInFromRight 1.35s cubic-bezier(0.16, 0.84, 0.24, 1) both;
+  animation: ppHeroHeadlineSlideIn 1.1s cubic-bezier(0.16, 0.84, 0.24, 1) both;
 }
 
 .bodyFlyIn {

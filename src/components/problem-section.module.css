@@ -1,0 +1,281 @@
+.section {
+  align-self: stretch;
+  background: linear-gradient(180deg, #ffffff 0%, #faf9fb 48%, #f9f8fa 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding-100) var(--padding-20);
+  box-sizing: border-box;
+  max-width: 100%;
+  z-index: 1;
+  font-family: var(--font-hero-display);
+  gap: clamp(40px, 6vw, 72px);
+}
+
+/* ── Intro centrada ── */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--gap-24);
+  width: 100%;
+  max-width: min(1100px, 100%);
+}
+
+.kickerWrapper {
+  border-radius: var(--section-kicker-radius);
+  background-color: var(--section-kicker-bg);
+  border: var(--section-kicker-border);
+  box-shadow: var(--section-kicker-shadow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--section-kicker-padding);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.kicker {
+  position: relative;
+  font-family: var(--section-kicker-font-family);
+  font-size: var(--section-kicker-font-size);
+  font-weight: var(--section-kicker-font-weight);
+  letter-spacing: var(--section-kicker-letter-spacing);
+  line-height: var(--section-kicker-line-height);
+  color: var(--section-kicker-color);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-56);
+  letter-spacing: -0.03em;
+  line-height: 110%;
+  font-weight: 500;
+  color: #1e1f24;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.titleHighlight {
+  color: var(--inx-fuchsia);
+  font-weight: 600;
+}
+
+.title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin: var(--gap-16) auto 0;
+  border-radius: 2px;
+  background: var(--gradient-brand-accent);
+}
+
+.lede {
+  margin: 0;
+  font-family: var(--section-lede-font-family);
+  font-size: var(--section-lede-font-size);
+  font-weight: var(--section-lede-font-weight);
+  letter-spacing: var(--section-lede-letter-spacing);
+  line-height: var(--section-lede-line-height);
+  color: var(--section-lede-color-on-light);
+  max-width: 640px;
+}
+
+/* ── Imagen central, bordes desvaneciéndose hacia el fondo ── */
+.problemImage {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: min(72vh, 620px);
+  object-fit: contain;
+  object-position: center;
+  box-shadow: none;
+  box-sizing: border-box;
+  -webkit-mask-image: radial-gradient(ellipse 95% 92% at 50% 50%, #000 45%, transparent 100%);
+  mask-image: radial-gradient(ellipse 95% 92% at 50% 50%, #000 45%, transparent 100%);
+}
+
+/* ── Showcase: cards flanqueando la imagen ── */
+.showcase {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "card0 image card2"
+    "card1 image card3";
+  gap: clamp(16px, 2vw, 24px);
+  width: 100%;
+  max-width: 1280px;
+  align-items: stretch;
+}
+
+.pointsList {
+  display: contents;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slot0 {
+  grid-area: card0;
+}
+.slot1 {
+  grid-area: card1;
+}
+.slot2 {
+  grid-area: card2;
+}
+.slot3 {
+  grid-area: card3;
+}
+
+.imageSlot {
+  grid-area: image;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+}
+
+.pointCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: var(--gap-8);
+  background: #ffffff;
+  border: 1px solid rgba(23, 29, 76, 0.10);
+  border-radius: 14px;
+  padding: clamp(12px, 1.4vw, 18px);
+  box-shadow: 0 6px 18px rgba(23, 29, 76, 0.06);
+  box-sizing: border-box;
+  height: 100%;
+  transform-origin: center center;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Cards a la izquierda: inclinación +5° (top-right hacia arriba) */
+.slot0,
+.slot1 {
+  transform: rotate(5deg);
+}
+
+/* Cards a la derecha: inclinación -5° (top-left hacia arriba) */
+.slot2,
+.slot3 {
+  transform: rotate(-5deg);
+}
+
+.pointCard:hover {
+  border-color: rgba(217, 14, 140, 0.28);
+  box-shadow: 0 12px 28px rgba(23, 29, 76, 0.10);
+}
+
+.slot0:hover,
+.slot1:hover {
+  transform: rotate(5deg) translateY(-2px);
+}
+
+.slot2:hover,
+.slot3:hover {
+  transform: rotate(-5deg) translateY(-2px);
+}
+
+.pointIconWrap {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(217, 14, 140, 0.06);
+  border: 1px solid rgba(217, 14, 140, 0.22);
+}
+
+.pointIcon {
+  font-size: 20px;
+  color: var(--inx-fuchsia);
+}
+
+.pointTitle {
+  font-family: var(--font-hero-display);
+  font-size: var(--fs-16);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--inx-navy);
+  line-height: 1.3;
+}
+
+.pointText {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--section-lede-color-on-light);
+}
+
+/* ── Responsive: bajo desktop, imagen arriba y cards abajo ── */
+@media screen and (max-width: 1024px) {
+  .showcase {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "image image"
+      "card0 card2"
+      "card1 card3";
+    max-width: 720px;
+  }
+  .imageSlot {
+    align-items: stretch;
+  }
+  .slot0,
+  .slot1,
+  .slot2,
+  .slot3 {
+    transform: none;
+  }
+  .slot0:hover,
+  .slot1:hover,
+  .slot2:hover,
+  .slot3:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .title {
+    font-size: clamp(2rem, 7vw + 0.5rem, 3rem);
+  }
+  .showcase {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas:
+      "image"
+      "card0"
+      "card1"
+      "card2"
+      "card3";
+    max-width: 480px;
+  }
+  .problemImage {
+    max-height: 420px;
+  }
+  .imageBlush {
+    filter: blur(36px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pointCard {
+    transition: none;
+  }
+  .pointCard:hover {
+    transform: none;
+  }
+}

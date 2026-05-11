@@ -9,6 +9,24 @@ export type AdvantagePillarCopy = {
   bullets: string[];
 };
 
+export type ProblemPointCopy = {
+  title: string;
+  body: string;
+};
+
+export type PlatformItemCopy = {
+  title: string;
+  body: string;
+};
+
+export type PlatformVisualCopy = {
+  rucLine: string;
+  poEvents7d: string;
+  erp: string;
+  inxora: string;
+  riskRules: string;
+};
+
 export type ProcessStepCopy = {
   title: string;
   subtitle: string;
@@ -42,6 +60,31 @@ export type LandingCopy = {
   };
   trusted: {
     title: string;
+  };
+  problem: {
+    kicker: string;
+    titleLine1: string;
+    titleAccent: string;
+    lede: string;
+    imageAlt: string;
+    points: [ProblemPointCopy, ProblemPointCopy, ProblemPointCopy, ProblemPointCopy];
+  };
+  platform: {
+    kicker: string;
+    titleLead: string;
+    titleAccent: string;
+    titleSuffix: string;
+    lede: string;
+    cta: string;
+    visual: PlatformVisualCopy;
+    items: [
+      PlatformItemCopy,
+      PlatformItemCopy,
+      PlatformItemCopy,
+      PlatformItemCopy,
+      PlatformItemCopy,
+      PlatformItemCopy,
+    ];
   };
   advantages: {
     kicker: string;
@@ -145,6 +188,75 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     },
     trusted: {
       title: "Confían en nosotros para su abastecimiento",
+    },
+    problem: {
+      kicker: "El problema",
+      titleLine1: "Tu equipo de compras opera a ciegas.",
+      titleAccent: "Y eso tiene un costo.",
+      lede:
+        "Hojas de cálculo desperdigadas, documentos en correos, proveedores sin evaluación formal. Cuando un pedido se frena, nadie sabe dónde.",
+      imageAlt:
+        "Responsable de compras preocupado revisando documentos sin un sistema centralizado",
+      points: [
+        {
+          title: "Cero visibilidad sobre tus proveedores",
+          body: "No sabes quién cumple, quién incumple, ni quién representa un riesgo para tu cadena de suministro.",
+        },
+        {
+          title: "Órdenes de compra sin control",
+          body: "Cada OC vive en un correo distinto. No hay estado claro, ni alertas, ni historial auditable.",
+        },
+        {
+          title: "Contratos y pagos desalineados",
+          body: "Finanzas aprueba facturas que Compras no pudo validar. Los términos quedan en un PDF olvidado.",
+        },
+        {
+          title: "Riesgos que aparecen tarde",
+          body: "Te enteras de que un proveedor crítico tiene problemas cuando ya detuvo tu línea de producción.",
+        },
+      ],
+    },
+    platform: {
+      kicker: "Plataforma",
+      titleLead: "Capacidades que hacen diferente a ",
+      titleAccent: "INXORA",
+      titleSuffix: "",
+      lede:
+        "Más allá de un repositorio de proveedores: reglas, integraciones, analítica y trazabilidad con la seguridad que exige un entorno B2B industrial.",
+      cta: "Hablar con un experto",
+      visual: {
+        rucLine: "RUC / proveedor",
+        poEvents7d: "Eventos de OC (7d)",
+        erp: "ERP",
+        inxora: "INXORA",
+        riskRules: "Riesgo · reglas",
+      },
+      items: [
+        {
+          title: "Registro y evaluación",
+          body: "KYC, documentos, certificaciones y scoring en un solo flujo, sin hojas sueltas.",
+        },
+        {
+          title: "Órdenes de compra",
+          body: "Emisión, aprobación y vinculación a ERP con historial y versionado de cada OC.",
+        },
+        {
+          title: "Contratos activos",
+          body: "Plazos, cláusulas, SLAs y renegociación bajo un mismo techo, con avisos.",
+        },
+        {
+          title: "Pagos y conciliación",
+          body: "Factura vs. OC, circuitos de pago y conciliación bancaria sin fricción.",
+        },
+        {
+          title: "Riesgo y compliance",
+          body: "Radar de indicadores, alertas y trazas para auditoría y terceros de control.",
+        },
+        {
+          title: "Cuenta proveedor (SRM)",
+          body: "Relación, actividades y seguimiento: cada proveedor con su espacio dedicado.",
+        },
+      ],
     },
     advantages: {
       kicker: "Ventajas de Inxora",
@@ -284,6 +396,75 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     trusted: {
       title: "They trust us for their supply chain",
     },
+    problem: {
+      kicker: "The problem",
+      titleLine1: "Your procurement team is flying blind.",
+      titleAccent: "And that has a real cost.",
+      lede:
+        "Spreadsheets everywhere, documents stuck in inboxes, vendors with no formal evaluation. When an order stalls, no one can pinpoint why.",
+      imageAlt:
+        "Procurement lead worried while reviewing documents without a centralized system",
+      points: [
+        {
+          title: "No visibility on your suppliers",
+          body: "You cannot tell who delivers, who fails, and who is a true risk to your supply chain.",
+        },
+        {
+          title: "POs with no real control",
+          body: "Every purchase order lives in a different email thread. No clear status, alerts, or auditable history.",
+        },
+        {
+          title: "Contracts and payments misaligned",
+          body: "Finance approves invoices Procurement never validated. Terms are buried in a PDF nobody revisits.",
+        },
+        {
+          title: "Risks you discover too late",
+          body: "You only learn a critical vendor is in trouble when production has already stopped.",
+        },
+      ],
+    },
+    platform: {
+      kicker: "Platform",
+      titleLead: "Capabilities that set ",
+      titleAccent: "INXORA",
+      titleSuffix: " apart",
+      lede:
+        "Beyond a vendor database: business rules, integrations, analytics, and end-to-end traceability with the security and governance industrial B2B needs.",
+      cta: "Talk to an expert",
+      visual: {
+        rucLine: "TIN / vendor",
+        poEvents7d: "PO events (7d)",
+        erp: "ERP",
+        inxora: "INXORA",
+        riskRules: "Risk · rules",
+      },
+      items: [
+        {
+          title: "Onboarding & assessment",
+          body: "KYC, documents, certifications, and scores in one flow—no more spreadsheet chaos.",
+        },
+        {
+          title: "Purchase orders",
+          body: "Issue, approve, and connect to your ERP with full version history for every PO.",
+        },
+        {
+          title: "Active contracts",
+          body: "Milestones, terms, and SLAs in one place, with renewals and alerts covered.",
+        },
+        {
+          title: "Payments & matching",
+          body: "Invoice-to-PO matching, payment cycles, and bank reconciliation without the glue work.",
+        },
+        {
+          title: "Risk & compliance",
+          body: "Signals, alerts, and an audit trail ready for your risk and control teams.",
+        },
+        {
+          title: "Supplier account hub (SRM)",
+          body: "Contacts, activities, and pipeline—each vendor in one dedicated workspace.",
+        },
+      ],
+    },
     advantages: {
       kicker: "INXORA advantages",
       titleBefore: "We are the smartest ",
@@ -421,6 +602,75 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     },
     trusted: {
       title: "Confiam em nós para o seu abastecimento",
+    },
+    problem: {
+      kicker: "O problema",
+      titleLine1: "Sua equipe de compras opera no escuro.",
+      titleAccent: "E isso tem um custo.",
+      lede:
+        "Planilhas espalhadas, anexos em e-mails, fornecedores sem avaliação formal. Quando um pedido trava, ninguém sabe o porquê.",
+      imageAlt:
+        "Responsável de compras preocupado revisando documentos sem um sistema centralizado",
+      points: [
+        {
+          title: "Zero visibilidade dos fornecedores",
+          body: "Não fica claro quem cumpre, quem fura prazo e quem representa risco para a cadeia de suprimentos.",
+        },
+        {
+          title: "Ordens de compra fora de controle",
+          body: "Cada OC fica em um fio de e-mail diferente. Não há status claro, alertas ou histórico auditável.",
+        },
+        {
+          title: "Contratos e pagamentos desalinhados",
+          body: "O Financeiro aprova notas que Compras não validou. Termos ficam presos em um PDF esquecido.",
+        },
+        {
+          title: "Riscos que chegam tarde",
+          body: "Você descobre que um fornecedor crítico tem problema quando a linha de produção já parou.",
+        },
+      ],
+    },
+    platform: {
+      kicker: "Plataforma",
+      titleLead: "Capacidades que colocam a ",
+      titleAccent: "INXORA",
+      titleSuffix: " em outro patamar",
+      lede:
+        "Além de um repositório de fornecedores: regras, integrações, análise e rastreabilidade com a segurança e governança que o B2B industrial exige.",
+      cta: "Falar com um especialista",
+      visual: {
+        rucLine: "RUC / fornecedor",
+        poEvents7d: "Eventos de OC (7d)",
+        erp: "ERP",
+        inxora: "INXORA",
+        riskRules: "Risco · regras",
+      },
+      items: [
+        {
+          title: "Cadastro e avaliação",
+          body: "KYC, documentos, certificações e score no mesmo fluxo, sem arquivos soltos.",
+        },
+        {
+          title: "Ordens de compra",
+          body: "Emissão, aprovação e ligação ao ERP com histórico e versionamento de cada OC.",
+        },
+        {
+          title: "Contratos ativos",
+          body: "Prazos, cláusulas, SLAs e renegociação em um só lugar, com alertas.",
+        },
+        {
+          title: "Pagamentos e conciliação",
+          body: "Nota vs. OC, fluxos de pagamento e conciliação bancária sem fricção.",
+        },
+        {
+          title: "Risco e compliance",
+          body: "Indicadores, alertas e rastros para auditoria e áreas de controle.",
+        },
+        {
+          title: "Conta fornecedor (SRM)",
+          body: "Relacionamento, atividades e funil: cada fornecedor com seu espaço dedicado.",
+        },
+      ],
     },
     advantages: {
       kicker: "Vantagens da Inxora",

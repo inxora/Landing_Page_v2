@@ -1,0 +1,86 @@
+/* Fachada de YouTube para vídeo vertical (9:16, Shorts) — marco tipo "móvil" */
+.wrap {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 30px 60px -22px rgba(23, 29, 76, 0.4);
+}
+
+@media screen and (max-width: 1200px) {
+  .wrap {
+    max-width: 320px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .wrap {
+    max-width: 260px;
+    border-radius: 18px;
+  }
+}
+
+.iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: block;
+  cursor: pointer;
+  background: #000;
+  font: inherit;
+}
+
+.posterImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.playBtn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 48px;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+  transition: transform 0.2s ease;
+}
+
+.poster:hover .playBtn,
+.poster:focus-visible .playBtn {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.poster:focus-visible {
+  outline: 3px solid var(--inx-fuchsia);
+  outline-offset: 2px;
+}
+
+/* Botón en fucsia de marca en lugar del rojo de YouTube */
+.playBg {
+  fill: var(--inx-fuchsia);
+  opacity: 0.92;
+}
+
+.poster:hover .playBg,
+.poster:focus-visible .playBg {
+  opacity: 1;
+}

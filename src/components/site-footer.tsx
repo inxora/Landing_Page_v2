@@ -110,8 +110,8 @@ const SiteFooter: FunctionComponent = () => {
             <ul className={styles.contactList}>
               <li className={styles.contactItem}>
                 <IconPhone className={styles.contactIcon} />
-                <a className={styles.link} href="tel:+51913087207">
-                  +51 913 087 207
+                <a className={styles.link} href="tel:+51946885531">
+                  +51 946 885 531
                 </a>
               </li>
               <li className={styles.contactItem}>

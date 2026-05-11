@@ -1,32 +1,34 @@
 import { FunctionComponent } from "react";
-import { Box } from "@mui/material";
 import styles from "./results-section.module.css";
 
 const RESULTS = [
   {
-    icon: "group",
-    value: "-42%",
-    title: "Tiempo de ciclo de OC",
-    description: "De la solicitud a la OC aprobada al proveedor.",
+    icon: "schedule",
+    image: "/ahorro_tiempo.webp",
+    title: "Ahorro de tiempo",
+    description: "Reduce procesos de días a minutos.",
+    pill: "Hasta 80% menos tiempo",
   },
   {
-    icon: "sync",
-    value: "+3.2x",
-    title: "Proveedores evaluados",
-    description: "Más cobertura de evaluación con el mismo equipo.",
-    highlightTitle: true,
+    icon: "groups",
+    image: "/Mayor_control.webp",
+    title: "Mayor control",
+    description: "Gestiona proveedores y compras en un solo lugar.",
+    pill: "Todo en un solo sistema",
   },
   {
-    icon: "verified",
-    value: "100%",
-    title: "Trazabilidad auditable",
-    description: "Cada paso con autoría y registro de tiempo.",
+    icon: "trending_up",
+    image: "/Mejores_decisiones.webp",
+    title: "Mejores decisiones",
+    description: "Compara precios, tiempos y opciones fácilmente.",
+    pill: "Decisiones más inteligentes",
   },
   {
-    icon: "calendar_month",
-    value: "30d",
-    title: "Go-live promedio",
-    description: "Onboarding, datos y formación incluidas.",
+    icon: "fact_check",
+    image: "/Orden_y_trazabilidad.webp",
+    title: "Orden y trazabilidad",
+    description: "Historial completo de cada compra.",
+    pill: "100% trazabilidad",
   },
 ];
 
@@ -51,16 +53,22 @@ export const ResultsSection: FunctionComponent = () => {
           <div className={styles.cardsGrid}>
             {RESULTS.map((item, index) => (
               <div key={index} className={styles.card}>
-                <div className={styles.cardHeader}>
+                <div className={styles.cardImageWrapper}>
+                  <img
+                    className={styles.cardImage}
+                    src={item.image}
+                    alt={item.title}
+                    loading="lazy"
+                  />
                   <div className={styles.iconWrapper}>
-                    <span className={`material-symbols-rounded ${styles.icon}`}>{item.icon}</span>
+                    <span className={`material-symbols-rounded ${styles.icon}`}>
+                      {item.icon}
+                    </span>
                   </div>
-                  <div className={styles.value}>{item.value}</div>
                 </div>
-                <h3 className={item.highlightTitle ? styles.cardTitleHighlight : styles.cardTitle}>
-                  {item.title}
-                </h3>
+                <h3 className={styles.cardTitle}>{item.title}</h3>
                 <p className={styles.cardDescription}>{item.description}</p>
+                <span className={styles.cardPill}>{item.pill}</span>
               </div>
             ))}
           </div>

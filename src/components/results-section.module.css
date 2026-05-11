@@ -147,10 +147,12 @@
   background-color: var(--color-white);
   border-radius: var(--br-16);
   border: var(--border-11);
-  padding: var(--padding-24);
+  padding: clamp(20px, 2vw, 28px);
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: var(--gap-12);
   transition: transform 0.28s cubic-bezier(0.16, 0.84, 0.24, 1),
     box-shadow 0.28s cubic-bezier(0.16, 0.84, 0.24, 1);
@@ -161,55 +163,50 @@
   box-shadow: 0 28px 56px -16px rgba(23, 29, 76, 0.22);
 }
 
-.cardHeader {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-12);
+/* Imagen de portada de la card */
+.cardImageWrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px; /* deja sitio al icono que asoma por debajo */
+}
+
+.cardImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--br-12);
 }
 
 .iconWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--width-40);
-  height: var(--height-40);
-  background-color: rgba(136, 212, 228, 0.15);
-  border-radius: var(--br-8);
-  color: var(--inx-navy);
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  width: 56px;
+  height: 56px;
+  background-color: var(--color-white);
+  border: 1px solid rgba(217, 14, 140, 0.18);
+  border-radius: 50%;
+  color: var(--inx-fuchsia);
   flex-shrink: 0;
+  box-shadow: 0 8px 20px -8px rgba(23, 29, 76, 0.28);
 }
 
 .icon {
-  font-size: 20px;
+  font-size: 28px;
 }
 
-/* Valor numérico grande — tipografía display marca */
-.value {
-  font-family: var(--font-hero-display);
-  font-size: var(--fs-34);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  color: var(--inx-navy);
-}
-
-/* Título tarjeta normal */
+/* Título tarjeta */
 .cardTitle {
   font-family: var(--font-hero-display);
-  font-size: var(--fs-16);
+  font-size: var(--fs-20);
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: #1e1f24;
-  margin: 0;
-}
-
-/* Título tarjeta destacado (fucsia) */
-.cardTitleHighlight {
-  font-family: var(--font-hero-display);
-  font-size: var(--fs-16);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--inx-wine);
+  color: var(--inx-navy);
   margin: 0;
 }
 
@@ -219,8 +216,23 @@
   font-size: 14px;
   font-weight: var(--fw-body);
   line-height: 1.5;
-  color: var(--muted);
+  color: var(--section-lede-color-on-light);
   margin: 0;
+  flex: 1;
+}
+
+/* Pill al pie de la card */
+.cardPill {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(217, 14, 140, 0.08);
+  color: var(--inx-fuchsia);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 /* ── Responsive ── */
