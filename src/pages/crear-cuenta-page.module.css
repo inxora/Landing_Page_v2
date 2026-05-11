@@ -103,13 +103,13 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 36px;
 }
 
 .section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .sectionTitle {
@@ -481,7 +481,7 @@ select.input {
   /* Campos: apilados (etiqueta arriba a la izquierda, luego control, luego ayuda) */
   .field {
     grid-template-columns: 1fr;
-    row-gap: 6px;
+    row-gap: 7px;
   }
   .label {
     text-align: left;
@@ -492,6 +492,17 @@ select.input {
   }
   .fieldHint {
     padding-top: 2px;
+  }
+  /* Más aire entre campos cuando van apilados */
+  .section {
+    gap: 30px;
+  }
+  .form {
+    gap: 40px;
+  }
+  /* Los inputs en línea (documento, nombre completo) también más separados al apilarse */
+  .inlineField {
+    gap: 36px;
   }
 }
 

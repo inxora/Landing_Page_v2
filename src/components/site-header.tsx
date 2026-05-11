@@ -151,9 +151,12 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // Marca para que otros widgets fixed (p. ej. el chat de Sara) se oculten
+    document.body.classList.add("inx-mobile-menu-open");
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
+      document.body.classList.remove("inx-mobile-menu-open");
     };
   }, [menuOpen, closeMenu]);
 

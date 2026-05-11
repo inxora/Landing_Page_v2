@@ -40,6 +40,32 @@
   outline-offset: 2px;
 }
 
+/* En el menú móvil el panel es blanco → el trigger debe ser oscuro y visible */
+.rootMobile .trigger {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(23, 29, 76, 0.18);
+  background: rgba(23, 29, 76, 0.04);
+  color: var(--inx-navy);
+}
+
+.rootMobile .trigger:hover {
+  background: rgba(23, 29, 76, 0.08);
+  border-color: rgba(23, 29, 76, 0.32);
+}
+
+.rootMobile .trigger:focus-visible {
+  outline: 2px solid var(--inx-fuchsia);
+}
+
+.rootMobile .triggerIcon,
+.rootMobile .chevron {
+  color: var(--inx-fuchsia);
+  opacity: 1;
+}
+
 .triggerIcon {
   font-size: 20px;
 }
@@ -52,26 +78,38 @@
 /* ── Desktop popover ── */
 .popover {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 12px);
   right: 0;
-  min-width: 280px;
-  padding: 16px;
-  border-radius: 16px;
+  min-width: 340px;
+  padding: 24px 22px 22px;
+  border-radius: 20px;
   background: #ffffff;
   border: 1px solid rgba(23, 29, 76, 0.10);
   box-shadow:
-    0 24px 60px rgba(8, 10, 32, 0.22),
-    0 6px 14px rgba(8, 10, 32, 0.10);
+    0 32px 80px rgba(8, 10, 32, 0.28),
+    0 8px 20px rgba(8, 10, 32, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
   z-index: 220;
-  animation: popoverIn 0.16s ease;
+  overflow: hidden;
+  animation: popoverIn 0.18s ease;
+}
+
+/* Banda de marca en la parte superior — más "vistoso" */
+.popover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-brand-accent);
 }
 
 @keyframes popoverIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(-8px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* ── Sign in button (within popover/sheet) ── */
@@ -79,40 +117,43 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  height: 44px;
-  padding: 0 16px;
-  border-radius: 10px;
+  gap: 9px;
+  height: 52px;
+  padding: 0 18px;
+  border-radius: 13px;
   background: var(--inx-navy);
   color: #fff;
   text-decoration: none;
   font-family: var(--font-hero-display);
-  font-size: 15px;
+  font-size: 16.5px;
   font-weight: 600;
   letter-spacing: 0.02em;
   border: 1px solid rgba(23, 29, 76, 0.35);
-  transition: background 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 12px 26px -10px rgba(23, 29, 76, 0.45);
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .signInBtn:hover {
   background: var(--inx-navy-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px -10px rgba(23, 29, 76, 0.5);
 }
 
 .signInIcon {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .divider {
   height: 1px;
   background: rgba(23, 29, 76, 0.10);
-  margin: 4px 0 2px;
+  margin: 6px 0 4px;
 }
 
 .noAccount {
   margin: 0;
   font-family: var(--font-ui);
-  font-size: 12.5px;
-  color: rgba(23, 29, 76, 0.60);
+  font-size: 13.5px;
+  color: rgba(23, 29, 76, 0.62);
   text-align: center;
   line-height: 1.45;
 }
@@ -121,23 +162,30 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 38px;
-  padding: 0 12px;
-  border-radius: 10px;
-  background: transparent;
-  border: 1px solid rgba(200, 30, 130, 0.35);
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 13px;
+  background: rgba(200, 30, 130, 0.05);
+  border: 1px solid rgba(200, 30, 130, 0.4);
   color: var(--inx-fuchsia);
   text-decoration: none;
   font-family: var(--font-hero-display);
-  font-size: 14.5px;
+  font-size: 15.5px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
 }
 
 .createLink:hover {
-  background: rgba(200, 30, 130, 0.08);
-  border-color: rgba(200, 30, 130, 0.6);
+  background: rgba(200, 30, 130, 0.10);
+  border-color: rgba(200, 30, 130, 0.65);
+  transform: translateY(-1px);
+}
+
+/* En el bottom sheet móvil el botón crear no necesita el realce de hover-lift */
+.rootMobile .createLink:hover,
+.rootMobile .signInBtn:hover {
+  transform: none;
 }
 
 /* ── Mobile bottom sheet ── */

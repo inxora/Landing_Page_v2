@@ -11,6 +11,11 @@
   z-index: 200;
 }
 
+/* Mientras el menú móvil de la cabecera está abierto, el widget de Sara estorba → se oculta */
+:global(body.inx-mobile-menu-open) .anchor {
+  display: none;
+}
+
 .launcherButton {
   backdrop-filter: blur(24px);
   padding: 12px var(--padding-16);

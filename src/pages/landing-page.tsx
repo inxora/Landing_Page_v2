@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import HeroSection from "../components/hero-section";
-import TrustedClientsSection from "../components/trusted-clients-section";
+// import TrustedClientsSection from "../components/trusted-clients-section"; // oculto del hero a pedido
 import ProblemSection from "../components/problem-section";
 import AdvantagesSection from "../components/advantages-section";
 import PlatformSection from "../components/platform-section";
@@ -37,7 +37,7 @@ const LandingPage: FunctionComponent = () => {
           <section className={styles.mainInner}>
             <HeroSection />
           </section>
-          <TrustedClientsSection />
+          {/* <TrustedClientsSection /> — oculto del hero a pedido */}
         </div>
       </section>
       <div className={styles.brandRibbonDivider} aria-hidden />
