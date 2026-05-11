@@ -1,14 +1,34 @@
 .prose {
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 17px;
+  line-height: 1.7;
   color: rgba(23, 29, 76, 0.92);
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* En desktop el cuerpo crece un poco más para mejor legibilidad */
+@media (min-width: 901px) {
+  .prose {
+    font-size: 18px;
+    line-height: 1.72;
+  }
 }
 
 .prose :global(h2) {
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin: 1.75rem 0 0.75rem;
+  margin: 2.25rem 0 0.85rem;
   color: var(--inx-navy);
+  text-align: left;
+  hyphens: manual;
+  line-height: 1.3;
+}
+
+@media (min-width: 901px) {
+  .prose :global(h2) {
+    font-size: 1.55rem;
+  }
 }
 
 .prose :global(h2:first-child) {
@@ -16,14 +36,34 @@
 }
 
 .prose :global(p) {
-  margin: 0 0 1rem;
+  margin: 0 0 1.05rem;
+}
+
+.prose :global(p > strong:only-child) {
+  display: inline-block;
+  margin-top: 0.4rem;
 }
 
 .prose :global(ul) {
-  margin: 0 0 1rem;
-  padding-left: 1.25rem;
+  margin: 0 0 1.15rem;
+  padding-left: 1.4rem;
+  text-align: left; /* listas siempre a la izquierda; justify se ve raro */
 }
 
 .prose :global(li) {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.45rem;
+}
+
+.prose :global(a) {
+  color: var(--inx-fuchsia);
+  text-decoration: none;
+}
+
+.prose :global(a:hover) {
+  text-decoration: underline;
+}
+
+.prose :global(em) {
+  color: rgba(23, 29, 76, 0.6);
+  font-style: italic;
 }

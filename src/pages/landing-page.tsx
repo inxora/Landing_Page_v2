@@ -9,6 +9,7 @@ import PlatformSection from "../components/platform-section";
 import RecognitionsSection from "../components/recognitions-section";
 import ExcelCtaSection from "../components/excel-cta-section";
 import ResultsSection from "../components/results-section";
+import VideoSection from "../components/video-section";
 import styles from "./landing-page.module.css";
 
 const LandingPage: FunctionComponent = () => {
@@ -39,12 +40,15 @@ const LandingPage: FunctionComponent = () => {
           <TrustedClientsSection />
         </div>
       </section>
+      <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="problema" className={styles.sectionAnchor}>
         <ProblemSection />
       </div>
+      <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="ventajas" className={styles.sectionAnchor}>
         <AdvantagesSection />
       </div>
+      <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="plataforma" className={styles.sectionAnchor}>
         <PlatformSection />
       </div>
@@ -53,8 +57,13 @@ const LandingPage: FunctionComponent = () => {
         <ResultsSection />
       </div>
       <div id="planes" aria-hidden />
+      <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="respaldados" className={styles.sectionAnchor}>
         <RecognitionsSection />
+      </div>
+      <div className={styles.brandRibbonDivider} aria-hidden />
+      <div id="video" className={styles.sectionAnchor}>
+        <VideoSection />
       </div>
       <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="demo" className={styles.sectionAnchor}>

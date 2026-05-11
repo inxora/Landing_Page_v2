@@ -34,7 +34,11 @@ export type ProcessStepCopy = {
 
 export type LandingCopy = {
   header: {
+    navProblema: string;
     navVentajas: string;
+    navPlataforma: string;
+    navResultados: string;
+    navVideo: string;
     navPasos: string;
     navProveedores: string;
     navRespaldados: string;
@@ -57,6 +61,8 @@ export type LandingCopy = {
     ctaSubscribe: string;
     ctaDemo: string;
     play: string;
+    /** Globos flotantes alrededor del mockup (4). */
+    bubbles: [string, string, string, string];
   };
   trusted: {
     title: string;
@@ -68,6 +74,7 @@ export type LandingCopy = {
     lede: string;
     imageAlt: string;
     points: [ProblemPointCopy, ProblemPointCopy, ProblemPointCopy, ProblemPointCopy];
+    warning: string;
   };
   platform: {
     kicker: string;
@@ -162,7 +169,11 @@ export type LandingCopy = {
 export const landingTranslations: Record<Language, LandingCopy> = {
   es: {
     header: {
+      navProblema: "El problema",
       navVentajas: "Ventajas",
+      navPlataforma: "Plataforma",
+      navResultados: "Resultados",
+      navVideo: "Video",
       navPasos: "Paso a paso",
       navProveedores: "Proveedores",
       navRespaldados: "Respaldados",
@@ -185,6 +196,12 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       ctaSubscribe: "Solicitar Demo",
       ctaDemo: "Hablar por WhatsApp",
       play: "Ver el producto en 60 s",
+      bubbles: [
+        "Centraliza todos tus proveedores",
+        "Automatiza solicitudes y cotizaciones",
+        "Compara opciones en segundos",
+        "Genera órdenes de compra fácilmente",
+      ],
     },
     trusted: {
       title: "Confían en nosotros para su abastecimiento",
@@ -199,22 +216,23 @@ export const landingTranslations: Record<Language, LandingCopy> = {
         "Responsable de compras preocupado revisando documentos sin un sistema centralizado",
       points: [
         {
-          title: "Cero visibilidad sobre tus proveedores",
-          body: "No sabes quién cumple, quién incumple, ni quién representa un riesgo para tu cadena de suministro.",
+          title: "Información dispersa",
+          body: "Datos en Excel, correos y chats: nadie tiene la foto completa de tus compras.",
         },
         {
-          title: "Órdenes de compra sin control",
-          body: "Cada OC vive en un correo distinto. No hay estado claro, ni alertas, ni historial auditable.",
+          title: "Cotizaciones desordenadas",
+          body: "Comparas precios a mano, sin historial ni versiones claras de cada propuesta.",
         },
         {
-          title: "Contratos y pagos desalineados",
-          body: "Finanzas aprueba facturas que Compras no pudo validar. Los términos quedan en un PDF olvidado.",
+          title: "Poco control de proveedores",
+          body: "Sin scoring, ni evaluación, ni alertas: te enteras de los problemas tarde.",
         },
         {
-          title: "Riesgos que aparecen tarde",
-          body: "Te enteras de que un proveedor crítico tiene problemas cuando ya detuvo tu línea de producción.",
+          title: "Decisiones lentas",
+          body: "Cada aprobación se traba en un correo distinto y frena tus pedidos.",
         },
       ],
+      warning: "Esto genera retrasos, errores y pérdida de dinero.",
     },
     platform: {
       kicker: "Plataforma",
@@ -369,7 +387,11 @@ export const landingTranslations: Record<Language, LandingCopy> = {
 
   en: {
     header: {
+      navProblema: "The problem",
       navVentajas: "Advantages",
+      navPlataforma: "Platform",
+      navResultados: "Results",
+      navVideo: "Video",
       navPasos: "Step by step",
       navProveedores: "Suppliers",
       navRespaldados: "Recognition",
@@ -392,6 +414,12 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       ctaSubscribe: "Request a demo",
       ctaDemo: "Chat on WhatsApp",
       play: "60-second product tour",
+      bubbles: [
+        "Centralize all your suppliers",
+        "Automate requests and quotes",
+        "Compare options in seconds",
+        "Generate purchase orders easily",
+      ],
     },
     trusted: {
       title: "They trust us for their supply chain",
@@ -406,22 +434,23 @@ export const landingTranslations: Record<Language, LandingCopy> = {
         "Procurement lead worried while reviewing documents without a centralized system",
       points: [
         {
-          title: "No visibility on your suppliers",
-          body: "You cannot tell who delivers, who fails, and who is a true risk to your supply chain.",
+          title: "Scattered information",
+          body: "Data in spreadsheets, emails and chats — no one has the full picture of your purchasing.",
         },
         {
-          title: "POs with no real control",
-          body: "Every purchase order lives in a different email thread. No clear status, alerts, or auditable history.",
+          title: "Disorganized quotes",
+          body: "You compare prices by hand, with no history or clear versions of each proposal.",
         },
         {
-          title: "Contracts and payments misaligned",
-          body: "Finance approves invoices Procurement never validated. Terms are buried in a PDF nobody revisits.",
+          title: "Little supplier control",
+          body: "No scoring, no evaluation, no alerts: you find out about problems too late.",
         },
         {
-          title: "Risks you discover too late",
-          body: "You only learn a critical vendor is in trouble when production has already stopped.",
+          title: "Slow decisions",
+          body: "Every approval gets stuck in a different email thread and stalls your orders.",
         },
       ],
+      warning: "This causes delays, errors and money lost.",
     },
     platform: {
       kicker: "Platform",
@@ -576,7 +605,11 @@ export const landingTranslations: Record<Language, LandingCopy> = {
 
   pt: {
     header: {
+      navProblema: "O problema",
       navVentajas: "Vantagens",
+      navPlataforma: "Plataforma",
+      navResultados: "Resultados",
+      navVideo: "Vídeo",
       navPasos: "Passo a passo",
       navProveedores: "Fornecedores",
       navRespaldados: "Reconhecimentos",
@@ -599,6 +632,12 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       ctaSubscribe: "Solicitar Demo",
       ctaDemo: "Falar pelo WhatsApp",
       play: "Ver o produto em 60 s",
+      bubbles: [
+        "Centralize todos os seus fornecedores",
+        "Automatize solicitações e cotações",
+        "Compare opções em segundos",
+        "Gere ordens de compra facilmente",
+      ],
     },
     trusted: {
       title: "Confiam em nós para o seu abastecimento",
@@ -613,22 +652,23 @@ export const landingTranslations: Record<Language, LandingCopy> = {
         "Responsável de compras preocupado revisando documentos sem um sistema centralizado",
       points: [
         {
-          title: "Zero visibilidade dos fornecedores",
-          body: "Não fica claro quem cumpre, quem fura prazo e quem representa risco para a cadeia de suprimentos.",
+          title: "Informação dispersa",
+          body: "Dados em planilhas, e-mails e chats: ninguém tem a visão completa das suas compras.",
         },
         {
-          title: "Ordens de compra fora de controle",
-          body: "Cada OC fica em um fio de e-mail diferente. Não há status claro, alertas ou histórico auditável.",
+          title: "Cotações desorganizadas",
+          body: "Você compara preços na mão, sem histórico nem versões claras de cada proposta.",
         },
         {
-          title: "Contratos e pagamentos desalinhados",
-          body: "O Financeiro aprova notas que Compras não validou. Termos ficam presos em um PDF esquecido.",
+          title: "Pouco controle de fornecedores",
+          body: "Sem score, sem avaliação, sem alertas: você descobre os problemas tarde.",
         },
         {
-          title: "Riscos que chegam tarde",
-          body: "Você descobre que um fornecedor crítico tem problema quando a linha de produção já parou.",
+          title: "Decisões lentas",
+          body: "Cada aprovação fica presa em um fio de e-mail diferente e trava seus pedidos.",
         },
       ],
+      warning: "Isso gera atrasos, erros e perda de dinheiro.",
     },
     platform: {
       kicker: "Plataforma",

@@ -1,0 +1,220 @@
+/* ======================================
+   Video Section — "INXORA en acción" (Short vertical)
+   Reutiliza tokens globales: --inx-*, --section-*, --font-*, --fs-*, etc.
+   ====================================== */
+
+.section {
+  align-self: stretch;
+  background: linear-gradient(180deg, #ffffff 0%, #faf9fb 48%, #f9f8fa 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding-100) var(--padding-20);
+  box-sizing: border-box;
+  max-width: 100%;
+  font-family: var(--font-hero-display);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  max-width: min(1280px, 100%);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Columna izquierda: texto ── */
+.textColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  max-width: min(560px, 54%);
+  box-sizing: border-box;
+  gap: var(--gap-24);
+  text-align: left;
+  font-family: var(--font-hero-display);
+}
+
+.kicker {
+  border-radius: var(--section-kicker-radius);
+  background-color: var(--section-kicker-bg);
+  border: var(--section-kicker-border);
+  box-shadow: var(--section-kicker-shadow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--section-kicker-padding);
+  box-sizing: border-box;
+  font-family: var(--section-kicker-font-family);
+  font-size: var(--section-kicker-font-size);
+  font-weight: var(--section-kicker-font-weight);
+  letter-spacing: var(--section-kicker-letter-spacing);
+  line-height: var(--section-kicker-line-height);
+  color: var(--section-kicker-color);
+  width: max-content;
+}
+
+.title {
+  align-self: stretch;
+  font-family: var(--font-hero-display);
+  font-size: var(--fs-45);
+  letter-spacing: -0.03em;
+  line-height: 112%;
+  font-weight: 500;
+  color: #1e1f24;
+  margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.title::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin-top: var(--gap-12);
+  border-radius: 2px;
+  background: var(--gradient-brand-accent);
+}
+
+.highlight {
+  color: var(--inx-fuchsia);
+  font-weight: 600;
+}
+
+.description {
+  align-self: stretch;
+  font-family: var(--section-lede-font-family);
+  font-size: var(--section-lede-font-size);
+  font-weight: var(--section-lede-font-weight);
+  letter-spacing: var(--section-lede-letter-spacing);
+  line-height: var(--section-lede-line-height);
+  color: var(--section-lede-color-on-light);
+  margin: 0;
+}
+
+.pointsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-12);
+  align-self: stretch;
+}
+
+.point {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-12);
+  font-family: var(--font-ui);
+  font-size: var(--fs-16);
+  line-height: 1.5;
+  color: var(--section-lede-color-on-light);
+}
+
+.pointIcon {
+  font-size: 22px;
+  color: var(--inx-fuchsia);
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--gap-4);
+  padding: 14px 24px;
+  border-radius: var(--br-99);
+  background: var(--inx-navy);
+  color: var(--color-white);
+  font-family: var(--font-ui);
+  font-size: var(--fs-16);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -12px rgba(23, 29, 76, 0.4);
+}
+
+.cta:focus-visible {
+  outline: 3px solid var(--inx-fuchsia);
+  outline-offset: 2px;
+}
+
+/* ── Columna derecha: el Short vertical (el componente YouTubeFacade
+   ya impone su propio aspect-ratio 9:16 y "marco móvil") ── */
+.videoColumn {
+  flex: 0 0 auto;
+  width: min(400px, 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .videoColumn {
+    width: min(320px, 100%);
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .videoColumn {
+    width: min(260px, 100%);
+  }
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--gap-40);
+  }
+
+  .textColumn {
+    max-width: min(620px, 100%);
+    align-items: center;
+    text-align: center;
+  }
+
+  .title::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .point {
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .section {
+    padding-top: 65px;
+    padding-bottom: 65px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .section {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
+  .title {
+    font-size: var(--fs-34);
+    line-height: var(--lh-37);
+  }
+}

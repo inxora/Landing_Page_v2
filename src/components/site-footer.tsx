@@ -89,6 +89,22 @@ function IconLinkedIn() {
   );
 }
 
+function IconYouTube() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  );
+}
+
+function IconTikTok() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-5.394 10.692 6.33 6.33 0 0 0 10.857-4.424V8.687a8.182 8.182 0 0 0 4.773 1.526V6.79a4.831 4.831 0 0 1-1.003-.104z" />
+    </svg>
+  );
+}
+
 const SiteFooter: FunctionComponent = () => {
   const t = useLandingTranslations();
   const { lang } = useLanguage();
@@ -178,6 +194,24 @@ const SiteFooter: FunctionComponent = () => {
               >
                 <IconLinkedIn />
               </a>
+              <a
+                className={styles.socialBtn}
+                href="https://www.youtube.com/@INXORA"
+                aria-label="YouTube"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <IconYouTube />
+              </a>
+              <a
+                className={styles.socialBtn}
+                href="https://www.tiktok.com/@inxora5"
+                aria-label="TikTok"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <IconTikTok />
+              </a>
             </div>
           </div>
 
@@ -254,6 +288,11 @@ const SiteFooter: FunctionComponent = () => {
               <li>
                 <Link className={styles.link} to={ROUTES.terminos}>
                   {t.footer.linkTerminos}
+                </Link>
+              </li>
+              <li>
+                <Link className={styles.link} to={ROUTES.acuerdoPiloto}>
+                  Acuerdo de Usuario Piloto
                 </Link>
               </li>
               <li>

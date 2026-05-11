@@ -354,3 +354,175 @@
     transform: translate(-50%, -50%);
   }
 }
+
+/* ── Globos flotantes alrededor del mockup del hero ── */
+.heroBubble {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  width: clamp(7.5rem, 9.5vw, 8.9rem);
+  padding: 0.7rem 0.7rem 0.85rem;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid rgba(23, 29, 76, 0.06);
+  border-radius: 16px;
+  box-shadow:
+    0 16px 38px -12px rgba(23, 29, 76, 0.24),
+    0 2px 8px rgba(23, 29, 76, 0.06);
+  pointer-events: none;
+  animation: heroBubbleFloat 5.5s ease-in-out infinite;
+}
+
+.heroBubbleIconWrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(136, 212, 228, 0.24),
+    rgba(217, 14, 140, 0.16)
+  );
+  color: var(--inx-fuchsia);
+}
+
+.heroBubbleIcon {
+  font-size: 22px;
+}
+
+.heroBubbleText {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  line-height: 1.28;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--inx-navy);
+}
+
+/* Posiciones: enmarcan el dashboard */
+.heroBubbleTL {
+  top: 2%;
+  left: -3%;
+  animation-delay: 0s;
+}
+.heroBubbleTR {
+  top: -3%;
+  right: -3%;
+  animation-delay: 1.3s;
+}
+.heroBubbleBL {
+  bottom: 13%;
+  left: -4%;
+  animation-delay: 2.6s;
+}
+.heroBubbleBR {
+  bottom: 4%;
+  right: -3%;
+  animation-delay: 3.9s;
+}
+
+@keyframes heroBubbleFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+/* Desktop: globos más grandes y con más presencia */
+@media screen and (min-width: 1201px) {
+  .heroBubble {
+    width: clamp(9.5rem, 11vw, 11.75rem);
+    padding: 0.95rem 1rem 1.05rem;
+    border-radius: 20px;
+    gap: 10px;
+    box-shadow:
+      0 22px 48px -14px rgba(23, 29, 76, 0.28),
+      0 3px 10px rgba(23, 29, 76, 0.07);
+  }
+  .heroBubbleIconWrap {
+    width: 52px;
+    height: 52px;
+  }
+  .heroBubbleIcon {
+    font-size: 28px;
+  }
+  .heroBubbleText {
+    font-size: 0.92rem;
+    line-height: 1.3;
+  }
+  .heroBubbleTL {
+    top: 1%;
+    left: -5%;
+  }
+  .heroBubbleTR {
+    top: -4%;
+    right: -5%;
+  }
+  .heroBubbleBL {
+    bottom: 14%;
+    left: -6%;
+  }
+  .heroBubbleBR {
+    bottom: 3%;
+    right: -5%;
+  }
+}
+
+/* Tablet: globos más compactos y casi sin sobresalir */
+@media screen and (max-width: 1200px) {
+  .heroBubble {
+    width: clamp(6.5rem, 17vw, 7.6rem);
+    padding: 0.55rem 0.55rem 0.65rem;
+    border-radius: 13px;
+    gap: 6px;
+  }
+  .heroBubbleIconWrap {
+    width: 34px;
+    height: 34px;
+  }
+  .heroBubbleIcon {
+    font-size: 19px;
+  }
+  .heroBubbleText {
+    font-size: 0.72rem;
+  }
+  .heroBubbleTL {
+    top: 1%;
+    left: -1%;
+  }
+  .heroBubbleTR {
+    top: -2%;
+    right: -1%;
+  }
+  .heroBubbleBL {
+    bottom: 11%;
+    left: -1%;
+  }
+  .heroBubbleBR {
+    bottom: 3%;
+    right: -1%;
+  }
+}
+
+/* Móvil / hero apilado: el mockup es pequeño, los globos estorban → fuera */
+@media screen and (max-width: 860px) {
+  .heroBubble {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroBubble {
+    animation: none;
+  }
+}

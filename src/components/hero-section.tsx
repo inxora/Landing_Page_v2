@@ -12,8 +12,22 @@ export type HeroSectionProps = {
   className?: string;
 };
 
-/** Misma página + ancla: string evita dudas con MUI+Router. */
-const demoHashLink = { pathname: ROUTES.home, hash: "demo" };
+/** Lleva al usuario a la sección "INXORA en acción" (Short de YouTube). */
+const demoHashLink = { pathname: ROUTES.home, hash: "video" };
+
+/** Globos flotantes alrededor del mockup del hero (icono + posición por índice). */
+const HERO_BUBBLE_ICONS = [
+  "groups",
+  "settings_suggest",
+  "compare_arrows",
+  "assignment_turned_in",
+] as const;
+const HERO_BUBBLE_POS = [
+  styles.heroBubbleTL,
+  styles.heroBubbleTR,
+  styles.heroBubbleBL,
+  styles.heroBubbleBR,
+] as const;
 
 /** Misma caja para ambos CTAs (evita diferencias MUI Button vs Link). */
 const heroCtaLinkBase = {
@@ -138,6 +152,21 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
                 play_arrow
               </span>
             </RouterLink>
+
+            {t.hero.bubbles.map((text, i) => (
+              <div
+                key={i}
+                className={[styles.heroBubble, HERO_BUBBLE_POS[i]].join(" ")}
+                aria-hidden
+              >
+                <span className={styles.heroBubbleIconWrap}>
+                  <span className={`material-symbols-rounded ${styles.heroBubbleIcon}`}>
+                    {HERO_BUBBLE_ICONS[i]}
+                  </span>
+                </span>
+                <span className={styles.heroBubbleText}>{text}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

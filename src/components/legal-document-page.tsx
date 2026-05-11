@@ -1,6 +1,5 @@
 import { FunctionComponent, useEffect } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import styles from "./legal-document-page.module.css";
 
 export type LegalDocumentPageProps = {
@@ -21,27 +20,13 @@ const LegalDocumentPage: FunctionComponent<LegalDocumentPageProps> = ({
 
   return (
     <Container
-      maxWidth="md"
+      maxWidth="lg"
       sx={{
-        pt: { xs: "92px", sm: "84px" },
-        py: 4,
+        pt: { xs: "120px", sm: "140px" },
         pb: 10,
-        px: 2,
+        px: { xs: 2, md: 4 },
       }}
     >
-      <Button
-        component={RouterLink}
-        to="/"
-        variant="contained"
-        sx={{
-          textTransform: "none",
-          mb: 3,
-          background: "var(--inx-navy)",
-          "&:hover": { background: "var(--inx-navy-hover)" },
-        }}
-      >
-        ← Volver al inicio
-      </Button>
       <Typography
         variant="h4"
         component="h1"

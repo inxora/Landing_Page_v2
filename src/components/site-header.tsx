@@ -21,7 +21,8 @@ export type SiteHeaderProps = {
 /** Orden = orden en la landing; debe coincidir con `id` en `landing-page.tsx` */
 const LANDING_SCROLL_SECTION_IDS = [
   "ventajas",
-  "respaldados",
+  "resultados",
+  "video",
   "demo",
 ] as const;
 
@@ -81,12 +82,14 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
     () =>
       [
         { id: "ventajas" as const, label: t.header.navVentajas },
-        { id: "respaldados" as const, label: t.header.navRespaldados },
+        { id: "resultados" as const, label: t.header.navResultados },
+        { id: "video" as const, label: t.header.navVideo },
         { id: "demo" as const, label: t.header.navDemo },
       ] as const,
     [
       t.header.navVentajas,
-      t.header.navRespaldados,
+      t.header.navResultados,
+      t.header.navVideo,
       t.header.navDemo,
     ]
   );

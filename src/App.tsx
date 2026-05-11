@@ -11,6 +11,7 @@ import AvisoLegalPage from "./pages/aviso-legal-page";
 import PoliticaPrivacidadPage from "./pages/politica-privacidad-page";
 import PoliticaCookiesPage from "./pages/politica-cookies-page";
 import TerminosCondicionesPage from "./pages/terminos-condiciones-page";
+import AcuerdoPilotoPage from "./pages/acuerdo-piloto-page";
 import LibroReclamacionesPage from "./pages/libro-reclamaciones-page";
 import CrearCuentaPage from "./pages/crear-cuenta-page";
 import {
@@ -62,6 +63,10 @@ function App() {
             element={<PoliticaCookiesPage />}
           />
           <Route path={pathSeg(ROUTES.terminos)} element={<TerminosCondicionesPage />} />
+          <Route
+            path={pathSeg(ROUTES.acuerdoPiloto)}
+            element={<AcuerdoPilotoPage />}
+          />
           <Route path={pathSeg(ROUTES.envios)} element={<EnviosPage />} />
           <Route path={pathSeg(ROUTES.devoluciones)} element={<DevolucionesPage />} />
           <Route

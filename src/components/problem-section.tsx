@@ -8,10 +8,10 @@ export type ProblemSectionProps = {
 };
 
 const POINT_ICONS = [
-  "visibility_off",
-  "receipt_long",
-  "sync_disabled",
-  "crisis_alert",
+  "description",
+  "request_quote",
+  "groups",
+  "schedule",
 ] as const;
 
 const ProblemSection: FunctionComponent<ProblemSectionProps> = ({
@@ -40,27 +40,6 @@ const ProblemSection: FunctionComponent<ProblemSectionProps> = ({
       </Box>
 
       <div className={styles.showcase}>
-        <ul className={styles.pointsList}>
-          {t.problem.points.map((point, idx) => (
-            <li
-              key={point.title}
-              className={[styles.pointCard, styles[`slot${idx}`]]
-                .filter(Boolean)
-                .join(" ")}
-            >
-              <div className={styles.pointIconWrap} aria-hidden>
-                <span
-                  className={`material-symbols-rounded ${styles.pointIcon}`}
-                >
-                  {POINT_ICONS[idx] ?? POINT_ICONS[0]}
-                </span>
-              </div>
-              <strong className={styles.pointTitle}>{point.title}</strong>
-              <p className={styles.pointText}>{point.body}</p>
-            </li>
-          ))}
-        </ul>
-
         <div className={styles.imageSlot}>
           <img
             className={styles.problemImage}
@@ -69,6 +48,35 @@ const ProblemSection: FunctionComponent<ProblemSectionProps> = ({
             loading="lazy"
             decoding="async"
           />
+        </div>
+
+        <div className={styles.pointsColumn}>
+          <ul className={styles.pointsList}>
+            {t.problem.points.map((point, idx) => (
+              <li key={point.title} className={styles.pointCard}>
+                <div className={styles.pointIconWrap} aria-hidden>
+                  <span
+                    className={`material-symbols-rounded ${styles.pointIcon}`}
+                  >
+                    {POINT_ICONS[idx] ?? POINT_ICONS[0]}
+                  </span>
+                </div>
+                <strong className={styles.pointTitle}>{point.title}</strong>
+                {point.body && (
+                  <p className={styles.pointText}>{point.body}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+          <p className={styles.pointsWarning} role="note">
+            <span
+              className={`material-symbols-rounded ${styles.warningIcon}`}
+              aria-hidden
+            >
+              warning
+            </span>
+            <span>{t.problem.warning}</span>
+          </p>
         </div>
       </div>
     </section>

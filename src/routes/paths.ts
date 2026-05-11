@@ -13,6 +13,7 @@ export const ROUTES = {
   politicaPrivacidad: "/politica-de-privacidad",
   politicaCookies: "/politica-de-cookies",
   terminos: "/terminos-y-condiciones",
+  acuerdoPiloto: "/acuerdo-de-usuario-piloto",
   envios: "/envios",
   devoluciones: "/devoluciones",
   libroReclamaciones: "/libro-de-reclamaciones",
