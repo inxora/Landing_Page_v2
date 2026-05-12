@@ -67,6 +67,7 @@ export type LandingCopy = {
     ctaSubscribe: string;
     ctaDemo: string;
     play: string;
+    closeVideo: string;
     /** Globos flotantes alrededor del mockup (4). */
     bubbles: [string, string, string, string];
   };
@@ -296,6 +297,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       ctaSubscribe: "Solicitar Demo",
       ctaDemo: "Hablar por WhatsApp",
       play: "Ver el producto en 60 s",
+      closeVideo: "Cerrar video",
       bubbles: [
         "Centraliza todos tus proveedores",
         "Automatiza solicitudes y cotizaciones",
@@ -646,6 +648,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       ctaSubscribe: "Request a demo",
       ctaDemo: "Chat on WhatsApp",
       play: "60-second product tour",
+      closeVideo: "Close video",
       bubbles: [
         "Centralize all your suppliers",
         "Automate requests and quotes",
@@ -995,6 +998,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       ctaSubscribe: "Solicitar Demo",
       ctaDemo: "Falar pelo WhatsApp",
       play: "Ver o produto em 60 s",
+      closeVideo: "Fechar vídeo",
       bubbles: [
         "Centralize todos os seus fornecedores",
         "Automatize solicitações e cotações",

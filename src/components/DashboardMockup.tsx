@@ -35,7 +35,8 @@ const DashboardMockup: React.FC = () => {
 
     const update = () => {
       const w = viewport.clientWidth;
-      const nextScale = Math.min(1, w / DASH_DESIGN_WIDTH_PX);
+      // Sin tope en 1: el mockup llena su contenedor (así "encaja" con el video del hero)
+      const nextScale = w / DASH_DESIGN_WIDTH_PX;
       setScale(nextScale);
 
       const inner = innerRef.current;

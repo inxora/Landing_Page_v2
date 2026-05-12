@@ -1,8 +1,6 @@
-import { FunctionComponent } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { FunctionComponent, useState } from "react";
 import { Box, Link } from "@mui/material";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
-import { ROUTES } from "../routes/paths";
 import { useLanguage } from "../context/LanguageContext";
 import { buildWhatsAppDemoUrl } from "../constants/whatsapp";
 import DashboardMockup from "./DashboardMockup";
@@ -12,8 +10,8 @@ export type HeroSectionProps = {
   className?: string;
 };
 
-/** Lleva al usuario a la sección "INXORA en acción" (Short de YouTube). */
-const demoHashLink = { pathname: ROUTES.home, hash: "video" };
+/** Demo de la plataforma que se reproduce al pulsar el botón del dashboard. */
+const HERO_DEMO_VIDEO_SRC = "/demostracion_plataforma.mp4";
 
 /** Globos flotantes alrededor del mockup del hero (icono + posición por índice). */
 const HERO_BUBBLE_ICONS = [
@@ -70,6 +68,7 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
   const t = useLandingTranslations();
   const { lang } = useLanguage();
   const whatsappDemoUrl = buildWhatsAppDemoUrl(lang);
+  const [playingDemo, setPlayingDemo] = useState(false);
 
   return (
     <Box className={[styles.rectangleParent, className].join(" ")}>
@@ -134,39 +133,68 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
       <div className={styles.heroMockupColumn}>
         <div className={styles.heroMockupBlock}>
           <div className={styles.heroMockupWrap}>
-            <DashboardMockup />
-            <RouterLink
-              className={styles.heroPlay}
-              to={demoHashLink}
-              aria-label={t.hero.play}
-              title={t.hero.play}
-            >
-              <span className={styles.heroPlayRing} aria-hidden />
-              <span
-                className={[
-                  "material-symbols-rounded",
-                  styles.heroPlayIcon,
-                ].join(" ")}
-                aria-hidden
-              >
-                play_arrow
-              </span>
-            </RouterLink>
-
-            {t.hero.bubbles.map((text, i) => (
-              <div
-                key={i}
-                className={[styles.heroBubble, HERO_BUBBLE_POS[i]].join(" ")}
-                aria-hidden
-              >
-                <span className={styles.heroBubbleIconWrap}>
-                  <span className={`material-symbols-rounded ${styles.heroBubbleIcon}`}>
-                    {HERO_BUBBLE_ICONS[i]}
+            {playingDemo ? (
+              <div className={styles.heroVideoCard}>
+                <video
+                  className={styles.heroVideo}
+                  src={HERO_DEMO_VIDEO_SRC}
+                  controls
+                  autoPlay
+                  playsInline
+                  preload="metadata"
+                />
+                <button
+                  type="button"
+                  className={styles.heroVideoClose}
+                  onClick={() => setPlayingDemo(false)}
+                  aria-label={t.hero.closeVideo}
+                  title={t.hero.closeVideo}
+                >
+                  <span className="material-symbols-rounded" aria-hidden>
+                    close
                   </span>
-                </span>
-                <span className={styles.heroBubbleText}>{text}</span>
+                </button>
               </div>
-            ))}
+            ) : (
+              <>
+                <DashboardMockup />
+                <button
+                  type="button"
+                  className={styles.heroPlay}
+                  onClick={() => setPlayingDemo(true)}
+                  aria-label={t.hero.play}
+                  title={t.hero.play}
+                >
+                  <span className={styles.heroPlayRing} aria-hidden />
+                  <span
+                    className={[
+                      "material-symbols-rounded",
+                      styles.heroPlayIcon,
+                    ].join(" ")}
+                    aria-hidden
+                  >
+                    play_arrow
+                  </span>
+                </button>
+
+                {t.hero.bubbles.map((text, i) => (
+                  <div
+                    key={i}
+                    className={[styles.heroBubble, HERO_BUBBLE_POS[i]].join(" ")}
+                    aria-hidden
+                  >
+                    <span className={styles.heroBubbleIconWrap}>
+                      <span
+                        className={`material-symbols-rounded ${styles.heroBubbleIcon}`}
+                      >
+                        {HERO_BUBBLE_ICONS[i]}
+                      </span>
+                    </span>
+                    <span className={styles.heroBubbleText}>{text}</span>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
