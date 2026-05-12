@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.inxora.com/</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/?lang=es" />
@@ -102,6 +102,17 @@
   </url>
 
   <url>
+    <loc>https://www.inxora.com/crear-cuenta</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/crear-cuenta?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/crear-cuenta?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/crear-cuenta?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/crear-cuenta" />
+  </url>
+
+  <url>
     <loc>https://www.inxora.com/aviso-legal</loc>
     <lastmod>2026-04-10</lastmod>
     <changefreq>yearly</changefreq>
@@ -114,7 +125,7 @@
 
   <url>
     <loc>https://www.inxora.com/politica-de-privacidad</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.45</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/politica-de-privacidad?lang=es" />
@@ -136,13 +147,24 @@
 
   <url>
     <loc>https://www.inxora.com/terminos-y-condiciones</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.45</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/terminos-y-condiciones?lang=es" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/terminos-y-condiciones?lang=en" />
     <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/terminos-y-condiciones?lang=pt" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/terminos-y-condiciones" />
+  </url>
+
+  <url>
+    <loc>https://www.inxora.com/acuerdo-de-usuario-piloto</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.45</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.inxora.com/acuerdo-de-usuario-piloto?lang=es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.inxora.com/acuerdo-de-usuario-piloto?lang=en" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.inxora.com/acuerdo-de-usuario-piloto?lang=pt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.inxora.com/acuerdo-de-usuario-piloto" />
   </url>
 
   <url>

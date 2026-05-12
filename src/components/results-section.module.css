@@ -289,6 +289,21 @@
   .cardsGrid {
     grid-template-columns: 1fr 1fr;
   }
+
+  /* En móvil quitamos la mancha de fondo (cyan/fucsia translúcida) */
+  .cardsBackground {
+    display: none;
+  }
+
+  /* Kicker bien encuadrado en móvil: snug, sin desbordarse y bien alineado */
+  .kicker {
+    align-self: flex-start;
+    max-width: 100%;
+    width: auto;
+    white-space: normal;
+    text-align: left;
+    padding: 9px 16px;
+  }
 }
 
 @media screen and (max-width: 450px) {
