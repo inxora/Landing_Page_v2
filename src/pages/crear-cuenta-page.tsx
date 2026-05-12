@@ -14,7 +14,13 @@ import {
   fetchPaises,
   registrarEmpresa,
 } from "../services/gestionApi";
+import { useLandingTranslations } from "../hooks/useLandingTranslations";
+import type { LandingCopy } from "../i18n/landingTranslations";
 import styles from "./crear-cuenta-page.module.css";
+
+const SAAS_LOGIN_URL = "https://saas.inxora.com";
+
+type SignupCopy = LandingCopy["signup"];
 
 type FormState = RegistroPayload & {
   admin_password_confirm: string;
@@ -43,22 +49,17 @@ function isPeru(pais: Pais | undefined): boolean {
   return pais.codigo?.toUpperCase() === "PE";
 }
 
-/* Mismas reglas que valida el backend (POST /auth/registro). */
-type PasswordChecks = {
-  length: boolean;
-  upper: boolean;
-  lower: boolean;
-  digit: boolean;
-  special: boolean;
-};
-
-const PASSWORD_RULES: { key: keyof PasswordChecks; label: string }[] = [
-  { key: "length", label: "Entre 8 y 64 caracteres" },
-  { key: "upper", label: "Al menos una letra mayúscula (A-Z)" },
-  { key: "lower", label: "Al menos una letra minúscula (a-z)" },
-  { key: "digit", label: "Al menos un número (0-9)" },
-  { key: "special", label: "Al menos un carácter especial (!@#$%…)" },
+/* Reglas que valida el backend (POST /auth/registro). Las etiquetas legibles
+   vienen de las traducciones (t.signup.pwdRules), en este mismo orden. */
+type PasswordCheckKey = "length" | "upper" | "lower" | "digit" | "special";
+const PASSWORD_RULE_KEYS: PasswordCheckKey[] = [
+  "length",
+  "upper",
+  "lower",
+  "digit",
+  "special",
 ];
+type PasswordChecks = Record<PasswordCheckKey, boolean>;
 
 function getPasswordChecks(pwd: string): PasswordChecks {
   return {
@@ -70,11 +71,12 @@ function getPasswordChecks(pwd: string): PasswordChecks {
   };
 }
 
-function getPasswordError(pwd: string): string | null {
+/** Devuelve un código de error de contraseña, o null si es válida. */
+function getPasswordErrorCode(pwd: string): "length" | "complexity" | null {
   const checks = getPasswordChecks(pwd);
-  if (!checks.length) return "La contraseña debe tener entre 8 y 64 caracteres.";
+  if (!checks.length) return "length";
   if (!checks.upper || !checks.lower || !checks.digit || !checks.special) {
-    return "La contraseña debe incluir al menos una mayúscula, una minúscula, un número y un carácter especial.";
+    return "complexity";
   }
   return null;
 }
@@ -101,6 +103,9 @@ function extractApiError(err: unknown, fallback: string): string {
 }
 
 const CrearCuentaPage = () => {
+  const t = useLandingTranslations();
+  const s = t.signup;
+
   const [form, setForm] = useState<FormState>(INITIAL);
   const [paises, setPaises] = useState<Pais[]>([]);
   const [paisesLoading, setPaisesLoading] = useState(true);
@@ -125,13 +130,11 @@ const CrearCuentaPage = () => {
       })
       .catch((err: unknown) => {
         if ((err as { name?: string })?.name === "AbortError") return;
-        setPaisesError(
-          "No pudimos cargar la lista de países. Intenta refrescar la página.",
-        );
+        setPaisesError(s.countryError);
       })
       .finally(() => setPaisesLoading(false));
     return () => ctrl.abort();
-  }, []);
+  }, [s.countryError]);
 
   const selectedPais = useMemo(
     () => paises.find((p) => p.codigo === form.empresa_pais),
@@ -152,7 +155,7 @@ const CrearCuentaPage = () => {
   const handleConsultarRuc = useCallback(async () => {
     const ruc = form.empresa_numero_documento.trim();
     if (!/^\d{11}$/.test(ruc)) {
-      setRucError("El RUC debe tener 11 dígitos.");
+      setRucError(s.rucDigitsError);
       return;
     }
     setRucError(null);
@@ -167,25 +170,27 @@ const CrearCuentaPage = () => {
           data.distrito || data.provincia || data.departamento || f.empresa_ciudad,
       }));
     } catch {
-      setRucError(
-        "No pudimos validar el RUC. Verifica el número o intenta de nuevo.",
-      );
+      setRucError(s.rucValidateError);
     } finally {
       setRucLoading(false);
     }
-  }, [form.empresa_numero_documento]);
+  }, [form.empresa_numero_documento, s.rucDigitsError, s.rucValidateError]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
 
-    const pwdError = getPasswordError(form.admin_password);
-    if (pwdError) {
-      setSubmitError(pwdError);
+    const pwdCode = getPasswordErrorCode(form.admin_password);
+    if (pwdCode === "length") {
+      setSubmitError(s.pwdLengthError);
+      return;
+    }
+    if (pwdCode === "complexity") {
+      setSubmitError(s.pwdComplexityError);
       return;
     }
     if (form.admin_password !== form.admin_password_confirm) {
-      setSubmitError("Las contraseñas no coinciden.");
+      setSubmitError(s.pwdNoMatch);
       return;
     }
 
@@ -213,11 +218,7 @@ const CrearCuentaPage = () => {
       await registrarEmpresa(payload);
       setSubmitted(true);
     } catch (err) {
-      const detail = (err as { detail?: { message?: string } })?.detail;
-      setSubmitError(
-        detail?.message ||
-          "No pudimos crear tu cuenta. Revisa los datos o intenta de nuevo en unos minutos.",
-      );
+      setSubmitError(extractApiError(err, s.submitError));
     } finally {
       setSubmitting(false);
     }
@@ -237,14 +238,14 @@ const CrearCuentaPage = () => {
             >
               check_circle
             </span>
-            <h1 className={styles.successTitle}>¡Cuenta creada!</h1>
+            <h1 className={styles.successTitle}>{s.successTitle}</h1>
             <p className={styles.successSub}>
-              Te enviamos un correo de confirmación a{" "}
-              <strong>{form.admin_email}</strong>. Sigue las instrucciones para
-              activar tu cuenta y empezar a usar INXORA.
+              {s.successSubPre}
+              <strong>{form.admin_email}</strong>
+              {s.successSubPost}
             </p>
-            <a className={styles.primaryBtn} href="https://saas.inxora.com">
-              Ir a Iniciar Sesión
+            <a className={styles.primaryBtn} href={SAAS_LOGIN_URL}>
+              {s.successCta}
             </a>
           </div>
         </div>
@@ -260,7 +261,7 @@ const CrearCuentaPage = () => {
             <span className="material-symbols-rounded" aria-hidden>
               arrow_back
             </span>
-            Volver al inicio
+            {s.back}
           </RouterLink>
         </header>
 
@@ -268,11 +269,11 @@ const CrearCuentaPage = () => {
           <RouterLink to={ROUTES.home} className={styles.brand}>
             <img src="/LOGO-35.svg" alt="INXORA" />
           </RouterLink>
-          <h1 className={styles.title}>Crea tu cuenta de INXORA</h1>
+          <h1 className={styles.title}>{s.title}</h1>
           <p className={styles.sub}>
-            ¿Ya tienes una cuenta?{" "}
-            <a className={styles.loginLink} href="https://saas.inxora.com">
-              Iniciar sesión
+            {s.haveAccount}{" "}
+            <a className={styles.loginLink} href={SAAS_LOGIN_URL}>
+              {s.signIn}
             </a>
           </p>
         </div>
@@ -280,9 +281,9 @@ const CrearCuentaPage = () => {
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
           {/* ── Datos de la empresa ── */}
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Datos de la empresa</h2>
+            <h2 className={styles.sectionTitle}>{s.companySection}</h2>
 
-            <Field label="País" htmlFor="empresa_pais">
+            <Field label={s.countryLabel} htmlFor="empresa_pais">
               <select
                 id="empresa_pais"
                 className={styles.input}
@@ -292,7 +293,7 @@ const CrearCuentaPage = () => {
                 disabled={paisesLoading || !!paisesError}
               >
                 <option value="">
-                  {paisesLoading ? "Cargando países…" : "Selecciona un país"}
+                  {paisesLoading ? s.countryLoading : s.countryPlaceholder}
                 </option>
                 {paises.map((p) => (
                   <option key={p.codigo} value={p.codigo}>
@@ -304,7 +305,7 @@ const CrearCuentaPage = () => {
             </Field>
 
             <Field
-              label="Documento de la empresa"
+              label={s.docLabel}
               htmlFor="empresa_numero_documento"
               wide
             >
@@ -315,17 +316,17 @@ const CrearCuentaPage = () => {
                   value={form.empresa_tipo_documento}
                   onChange={set("empresa_tipo_documento")}
                   required
-                  aria-label="Tipo de documento"
+                  aria-label={s.docTypeAria}
                 >
                   {peruSelected ? (
                     <>
-                      <option value="RUC">RUC</option>
-                      <option value="DNI">DNI</option>
+                      <option value="RUC">{s.docTypeRUC}</option>
+                      <option value="DNI">{s.docTypeDNI}</option>
                     </>
                   ) : (
                     <>
-                      <option value="ID">ID Fiscal</option>
-                      <option value="OTRO">Otro</option>
+                      <option value="ID">{s.docTypeID}</option>
+                      <option value="OTRO">{s.docTypeOther}</option>
                     </>
                   )}
                 </select>
@@ -333,7 +334,11 @@ const CrearCuentaPage = () => {
                   id="empresa_numero_documento"
                   className={styles.input}
                   type="text"
-                  placeholder={peruSelected ? "10724670038" : "Tu ID fiscal"}
+                  placeholder={
+                    peruSelected
+                      ? s.docNumberPlaceholderPE
+                      : s.docNumberPlaceholderOther
+                  }
                   value={form.empresa_numero_documento}
                   onChange={set("empresa_numero_documento")}
                   required
@@ -345,22 +350,20 @@ const CrearCuentaPage = () => {
                     onClick={handleConsultarRuc}
                     disabled={rucLoading}
                   >
-                    {rucLoading ? "Consultando…" : "Consultar RUC"}
+                    {rucLoading ? s.consultingRuc : s.consultRuc}
                   </button>
                 )}
               </div>
               {rucError && <p className={styles.fieldError}>{rucError}</p>}
-              <p className={styles.controlNote}>
-                Con el RUC podemos autocompletar los datos de tu empresa.
-              </p>
+              <p className={styles.controlNote}>{s.docHint}</p>
             </Field>
 
-            <Field label="Razón social / Nombre" htmlFor="empresa_nombre">
+            <Field label={s.companyNameLabel} htmlFor="empresa_nombre">
               <input
                 id="empresa_nombre"
                 className={styles.input}
                 type="text"
-                placeholder="TEST S.A.C"
+                placeholder={s.companyNamePlaceholder}
                 value={form.empresa_nombre}
                 onChange={set("empresa_nombre")}
                 required
@@ -368,15 +371,15 @@ const CrearCuentaPage = () => {
             </Field>
 
             <Field
-              label="Email corporativo"
+              label={s.companyEmailLabel}
               htmlFor="empresa_email"
-              hint="Para comunicaciones generales de tu organización."
+              hint={s.companyEmailHint}
             >
               <input
                 id="empresa_email"
                 className={styles.input}
                 type="email"
-                placeholder="contacto@empresa.com"
+                placeholder={s.companyEmailPlaceholder}
                 value={form.empresa_email}
                 onChange={set("empresa_email")}
                 required
@@ -384,12 +387,12 @@ const CrearCuentaPage = () => {
               />
             </Field>
 
-            <Field label="Teléfono" htmlFor="empresa_telefono">
+            <Field label={s.phoneLabel} htmlFor="empresa_telefono">
               <input
                 id="empresa_telefono"
                 className={styles.input}
                 type="tel"
-                placeholder="994210178"
+                placeholder={s.phonePlaceholder}
                 value={form.empresa_telefono}
                 onChange={set("empresa_telefono")}
                 required
@@ -397,24 +400,24 @@ const CrearCuentaPage = () => {
               />
             </Field>
 
-            <Field label="Dirección" htmlFor="empresa_direccion">
+            <Field label={s.addressLabel} htmlFor="empresa_direccion">
               <input
                 id="empresa_direccion"
                 className={styles.input}
                 type="text"
-                placeholder="Avenida Colonial 123"
+                placeholder={s.addressPlaceholder}
                 value={form.empresa_direccion}
                 onChange={set("empresa_direccion")}
                 required
               />
             </Field>
 
-            <Field label="Ciudad" htmlFor="empresa_ciudad">
+            <Field label={s.cityLabel} htmlFor="empresa_ciudad">
               <input
                 id="empresa_ciudad"
                 className={styles.input}
                 type="text"
-                placeholder="Lima"
+                placeholder={s.cityPlaceholder}
                 value={form.empresa_ciudad}
                 onChange={set("empresa_ciudad")}
                 required
@@ -424,15 +427,15 @@ const CrearCuentaPage = () => {
 
           {/* ── Usuario administrador ── */}
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Usuario administrador</h2>
+            <h2 className={styles.sectionTitle}>{s.adminSection}</h2>
 
-            <Field label="Nombre completo" htmlFor="admin_nombre" wide>
+            <Field label={s.fullNameLabel} htmlFor="admin_nombre" wide>
               <div className={styles.inlineField}>
                 <input
                   id="admin_nombre"
                   className={styles.input}
                   type="text"
-                  placeholder="Nombre"
+                  placeholder={s.firstNamePlaceholder}
                   value={form.admin_nombre}
                   onChange={set("admin_nombre")}
                   required
@@ -442,7 +445,7 @@ const CrearCuentaPage = () => {
                   id="admin_apellido_paterno"
                   className={styles.input}
                   type="text"
-                  placeholder="Apellido paterno"
+                  placeholder={s.lastNamePPlaceholder}
                   value={form.admin_apellido_paterno}
                   onChange={set("admin_apellido_paterno")}
                   required
@@ -452,7 +455,7 @@ const CrearCuentaPage = () => {
                   id="admin_apellido_materno"
                   className={styles.input}
                   type="text"
-                  placeholder="Apellido materno"
+                  placeholder={s.lastNameMPlaceholder}
                   value={form.admin_apellido_materno}
                   onChange={set("admin_apellido_materno")}
                   required
@@ -461,12 +464,12 @@ const CrearCuentaPage = () => {
               </div>
             </Field>
 
-            <Field label="Cargo" htmlFor="admin_cargo">
+            <Field label={s.positionLabel} htmlFor="admin_cargo">
               <input
                 id="admin_cargo"
                 className={styles.input}
                 type="text"
-                placeholder="Super Admin"
+                placeholder={s.positionPlaceholder}
                 value={form.admin_cargo}
                 onChange={set("admin_cargo")}
                 required
@@ -475,15 +478,15 @@ const CrearCuentaPage = () => {
             </Field>
 
             <Field
-              label="Email del administrador"
+              label={s.adminEmailLabel}
               htmlFor="admin_email"
-              hint="Será el usuario para iniciar sesión en INXORA."
+              hint={s.adminEmailHint}
             >
               <input
                 id="admin_email"
                 className={styles.input}
                 type="email"
-                placeholder="admin@empresa.com"
+                placeholder={s.adminEmailPlaceholder}
                 value={form.admin_email}
                 onChange={set("admin_email")}
                 required
@@ -491,13 +494,13 @@ const CrearCuentaPage = () => {
               />
             </Field>
 
-            <Field label="Contraseña" htmlFor="admin_password">
+            <Field label={s.passwordLabel} htmlFor="admin_password">
               <div className={styles.inputWrap}>
                 <input
                   id="admin_password"
                   className={`${styles.input} ${styles.inputWithAffix}`}
                   type={showPassword ? "text" : "password"}
-                  placeholder="Crea una contraseña segura"
+                  placeholder={s.passwordPlaceholder}
                   value={form.admin_password}
                   onChange={set("admin_password")}
                   required
@@ -508,35 +511,29 @@ const CrearCuentaPage = () => {
                   type="button"
                   className={styles.eyeBtn}
                   onClick={() => setShowPassword((v) => !v)}
-                  aria-label={
-                    showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
-                  }
+                  aria-label={showPassword ? s.pwdHide : s.pwdShow}
                   aria-pressed={showPassword}
-                  title={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  title={showPassword ? s.pwdHide : s.pwdShow}
                 >
                   <span className="material-symbols-rounded" aria-hidden>
                     {showPassword ? "visibility_off" : "visibility"}
                   </span>
                 </button>
               </div>
-              <PasswordStrength value={form.admin_password} />
+              <PasswordStrength value={form.admin_password} copy={s} />
             </Field>
 
             <Field
-              label="Repite la contraseña"
+              label={s.confirmPasswordLabel}
               htmlFor="admin_password_confirm"
               hint={
                 confirmFilled ? (
                   <span
                     className={passwordsMatch ? styles.matchOk : styles.matchBad}
                   >
-                    {passwordsMatch
-                      ? "Las contraseñas coinciden."
-                      : "Las contraseñas no coinciden."}
+                    {passwordsMatch ? s.pwdMatch : s.pwdNoMatch}
                   </span>
-                ) : (
-                  "Debe coincidir con la contraseña anterior."
-                )
+                ) : undefined
               }
             >
               <div className={styles.inputWrap}>
@@ -544,7 +541,7 @@ const CrearCuentaPage = () => {
                   id="admin_password_confirm"
                   className={`${styles.input} ${styles.inputWithAffix}`}
                   type="password"
-                  placeholder="Vuelve a escribir la contraseña"
+                  placeholder={s.confirmPasswordPlaceholder}
                   value={form.admin_password_confirm}
                   onChange={set("admin_password_confirm")}
                   required
@@ -578,7 +575,7 @@ const CrearCuentaPage = () => {
             className={styles.primaryBtn}
             disabled={submitting}
           >
-            {submitting ? "Creando cuenta…" : "Crear cuenta"}
+            {submitting ? s.submitting : s.submit}
             {!submitting && (
               <span className="material-symbols-rounded" aria-hidden>
                 arrow_forward
@@ -587,19 +584,15 @@ const CrearCuentaPage = () => {
           </button>
 
           <p className={styles.legalNote}>
-            Al crear tu cuenta aceptas nuestros{" "}
-            <RouterLink to={ROUTES.terminos}>
-              Términos y Condiciones de Uso
-            </RouterLink>
-            , el{" "}
-            <RouterLink to={ROUTES.acuerdoPiloto}>
-              Acuerdo de Usuario Piloto
-            </RouterLink>{" "}
-            y la{" "}
+            {s.legalPre}
+            <RouterLink to={ROUTES.terminos}>{s.legalTerms}</RouterLink>
+            {s.legalMid}
+            <RouterLink to={ROUTES.acuerdoPiloto}>{s.legalPilot}</RouterLink>
+            {s.legalAnd}
             <RouterLink to={ROUTES.politicaPrivacidad}>
-              Política de Privacidad y Confidencialidad
+              {s.legalPrivacy}
             </RouterLink>
-            .
+            {s.legalEnd}
           </p>
         </form>
       </div>
@@ -649,16 +642,26 @@ const Field = ({
 );
 
 /** Indicador de requisitos + barra de progreso de seguridad de la contraseña. */
-const PasswordStrength = ({ value }: { value: string }) => {
+const PasswordStrength = ({
+  value,
+  copy,
+}: {
+  value: string;
+  copy: SignupCopy;
+}) => {
   const checks = getPasswordChecks(value);
-  const score = PASSWORD_RULES.reduce(
-    (n, rule) => n + (checks[rule.key] ? 1 : 0),
+  const score = PASSWORD_RULE_KEYS.reduce(
+    (n, key) => n + (checks[key] ? 1 : 0),
     0,
   );
-  const pct = Math.round((score / PASSWORD_RULES.length) * 100);
+  const pct = Math.round((score / PASSWORD_RULE_KEYS.length) * 100);
   const level = score <= 2 ? "weak" : score <= 4 ? "medium" : "strong";
   const levelLabel =
-    level === "weak" ? "Débil" : level === "medium" ? "Media" : "Fuerte";
+    level === "weak"
+      ? copy.pwdWeak
+      : level === "medium"
+        ? copy.pwdMedium
+        : copy.pwdStrong;
   const fillClass =
     level === "weak"
       ? styles.pwdBarWeak
@@ -677,9 +680,9 @@ const PasswordStrength = ({ value }: { value: string }) => {
       <div
         className={styles.pwdBarTrack}
         role="progressbar"
-        aria-label="Seguridad de la contraseña"
+        aria-label={copy.passwordLabel}
         aria-valuemin={0}
-        aria-valuemax={PASSWORD_RULES.length}
+        aria-valuemax={PASSWORD_RULE_KEYS.length}
         aria-valuenow={score}
       >
         <span
@@ -690,25 +693,25 @@ const PasswordStrength = ({ value }: { value: string }) => {
       <p className={styles.pwdHint}>
         {value ? (
           <>
-            Seguridad:{" "}
+            {copy.pwdStrength}{" "}
             <strong className={textClass}>{levelLabel}</strong>
           </>
         ) : (
-          "Tu contraseña debe cumplir:"
+          copy.pwdMustMeet
         )}
       </p>
       <ul className={styles.pwdRules}>
-        {PASSWORD_RULES.map((rule) => {
-          const ok = checks[rule.key];
+        {PASSWORD_RULE_KEYS.map((key, i) => {
+          const ok = checks[key];
           return (
             <li
-              key={rule.key}
+              key={key}
               className={ok ? styles.pwdRuleOk : styles.pwdRulePending}
             >
               <span className="material-symbols-rounded" aria-hidden>
                 {ok ? "check_circle" : "radio_button_unchecked"}
               </span>
-              <span>{rule.label}</span>
+              <span>{copy.pwdRules[i]}</span>
             </li>
           );
         })}

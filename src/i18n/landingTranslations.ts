@@ -19,6 +19,12 @@ export type PlatformItemCopy = {
   body: string;
 };
 
+export type ResultItemCopy = {
+  title: string;
+  description: string;
+  pill: string;
+};
+
 export type PlatformVisualCopy = {
   rucLine: string;
   poEvents7d: string;
@@ -155,6 +161,7 @@ export type LandingCopy = {
     linkPrivacidad: string;
     linkCookies: string;
     linkTerminos: string;
+    linkAcuerdoPiloto: string;
     linkEnvios: string;
     linkDevoluciones: string;
     libroAlt: string;
@@ -163,6 +170,99 @@ export type LandingCopy = {
     rights: string;
     developedBy: string;
     developedAccent: string;
+  };
+  results: {
+    kicker: string;
+    titleLead: string;
+    titleAccent: string;
+    titleSuffix: string;
+    description: string;
+    items: [ResultItemCopy, ResultItemCopy, ResultItemCopy, ResultItemCopy];
+  };
+  video: {
+    kicker: string;
+    titleLead: string;
+    titleAccent: string;
+    titleSuffix: string;
+    description: string;
+    points: [string, string, string];
+    cta: string;
+    videoTitle: string;
+  };
+  signup: {
+    back: string;
+    title: string;
+    haveAccount: string;
+    signIn: string;
+    companySection: string;
+    adminSection: string;
+    countryLabel: string;
+    countryPlaceholder: string;
+    countryLoading: string;
+    countryError: string;
+    docLabel: string;
+    docTypeAria: string;
+    docNumberPlaceholderPE: string;
+    docNumberPlaceholderOther: string;
+    docTypeRUC: string;
+    docTypeDNI: string;
+    docTypeID: string;
+    docTypeOther: string;
+    consultRuc: string;
+    consultingRuc: string;
+    docHint: string;
+    rucDigitsError: string;
+    rucValidateError: string;
+    companyNameLabel: string;
+    companyNamePlaceholder: string;
+    companyEmailLabel: string;
+    companyEmailPlaceholder: string;
+    companyEmailHint: string;
+    phoneLabel: string;
+    phonePlaceholder: string;
+    addressLabel: string;
+    addressPlaceholder: string;
+    cityLabel: string;
+    cityPlaceholder: string;
+    fullNameLabel: string;
+    firstNamePlaceholder: string;
+    lastNamePPlaceholder: string;
+    lastNameMPlaceholder: string;
+    positionLabel: string;
+    positionPlaceholder: string;
+    adminEmailLabel: string;
+    adminEmailPlaceholder: string;
+    adminEmailHint: string;
+    passwordLabel: string;
+    passwordPlaceholder: string;
+    confirmPasswordLabel: string;
+    confirmPasswordPlaceholder: string;
+    pwdRules: [string, string, string, string, string];
+    pwdMustMeet: string;
+    pwdStrength: string;
+    pwdWeak: string;
+    pwdMedium: string;
+    pwdStrong: string;
+    pwdShow: string;
+    pwdHide: string;
+    pwdMatch: string;
+    pwdNoMatch: string;
+    pwdLengthError: string;
+    pwdComplexityError: string;
+    submit: string;
+    submitting: string;
+    submitError: string;
+    legalPre: string;
+    legalTerms: string;
+    legalMid: string;
+    legalPilot: string;
+    legalAnd: string;
+    legalPrivacy: string;
+    legalEnd: string;
+    successTitle: string;
+    successSubPre: string;
+    successSubPost: string;
+    successCta: string;
   };
 };
 
@@ -374,6 +474,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       linkPrivacidad: "Política de privacidad",
       linkCookies: "Política de cookies",
       linkTerminos: "Términos y condiciones",
+      linkAcuerdoPiloto: "Acuerdo de usuario piloto",
       linkEnvios: "Envíos",
       linkDevoluciones: "Devoluciones",
       libroAlt: "Libro de reclamaciones",
@@ -382,6 +483,137 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       rights: "Todos los derechos reservados.",
       developedBy: "Desarrollado por",
       developedAccent: "INXORA",
+    },
+    results: {
+      kicker: "Sobre resultados con INXORA",
+      titleLead: "Plataforma con datos,",
+      titleAccent: "diseñada para acelerar",
+      titleSuffix: "la compra industrial",
+      description:
+        "Todo en un solo panel: reducción de ciclos, más proveedores evaluados, trazabilidad total y puesta en marcha en semanas, no en trimestres.",
+      items: [
+        {
+          title: "Ahorro de tiempo",
+          description: "Reduce procesos de días a minutos.",
+          pill: "Hasta 80% menos tiempo",
+        },
+        {
+          title: "Mayor control",
+          description: "Gestiona proveedores y compras en un solo lugar.",
+          pill: "Todo en un solo sistema",
+        },
+        {
+          title: "Mejores decisiones",
+          description: "Compara precios, tiempos y opciones fácilmente.",
+          pill: "Decisiones más inteligentes",
+        },
+        {
+          title: "Orden y trazabilidad",
+          description: "Historial completo de cada compra.",
+          pill: "100% trazabilidad",
+        },
+      ],
+    },
+    video: {
+      kicker: "INXORA en acción",
+      titleLead: "Mira cómo INXORA",
+      titleAccent: "ordena tus compras",
+      titleSuffix: "en menos de un minuto",
+      description:
+        "Un recorrido rápido por la plataforma: del caos en Excel al control total de proveedores, contratos y pagos en un solo lugar.",
+      points: [
+        "De la requisición al pago, sin hojas sueltas.",
+        "Proveedores evaluados, contratos y pagos en un solo panel.",
+        "Visibilidad en tiempo real para decidir con datos.",
+      ],
+      cta: "Solicitar demo",
+      videoTitle: "INXORA en 1 minuto",
+    },
+    signup: {
+      back: "Volver al inicio",
+      title: "Crea tu cuenta de INXORA",
+      haveAccount: "¿Ya tienes una cuenta?",
+      signIn: "Iniciar sesión",
+      companySection: "Datos de la empresa",
+      adminSection: "Usuario administrador",
+      countryLabel: "País",
+      countryPlaceholder: "Selecciona un país",
+      countryLoading: "Cargando países…",
+      countryError:
+        "No pudimos cargar la lista de países. Intenta refrescar la página.",
+      docLabel: "Documento de la empresa",
+      docTypeAria: "Tipo de documento",
+      docNumberPlaceholderPE: "10724670038",
+      docNumberPlaceholderOther: "Tu ID fiscal",
+      docTypeRUC: "RUC",
+      docTypeDNI: "DNI",
+      docTypeID: "ID Fiscal",
+      docTypeOther: "Otro",
+      consultRuc: "Consultar RUC",
+      consultingRuc: "Consultando…",
+      docHint: "Con el RUC podemos autocompletar los datos de tu empresa.",
+      rucDigitsError: "El RUC debe tener 11 dígitos.",
+      rucValidateError:
+        "No pudimos validar el RUC. Verifica el número o intenta de nuevo.",
+      companyNameLabel: "Razón social / Nombre",
+      companyNamePlaceholder: "TEST S.A.C",
+      companyEmailLabel: "Email corporativo",
+      companyEmailPlaceholder: "contacto@empresa.com",
+      companyEmailHint: "Para comunicaciones generales de tu organización.",
+      phoneLabel: "Teléfono",
+      phonePlaceholder: "994210178",
+      addressLabel: "Dirección",
+      addressPlaceholder: "Avenida Colonial 123",
+      cityLabel: "Ciudad",
+      cityPlaceholder: "Lima",
+      fullNameLabel: "Nombre completo",
+      firstNamePlaceholder: "Nombre",
+      lastNamePPlaceholder: "Apellido paterno",
+      lastNameMPlaceholder: "Apellido materno",
+      positionLabel: "Cargo",
+      positionPlaceholder: "Super Admin",
+      adminEmailLabel: "Email del administrador",
+      adminEmailPlaceholder: "admin@empresa.com",
+      adminEmailHint: "Será el usuario para iniciar sesión en INXORA.",
+      passwordLabel: "Contraseña",
+      passwordPlaceholder: "Crea una contraseña segura",
+      confirmPasswordLabel: "Repite la contraseña",
+      confirmPasswordPlaceholder: "Vuelve a escribir la contraseña",
+      pwdRules: [
+        "Entre 8 y 64 caracteres",
+        "Al menos una letra mayúscula (A-Z)",
+        "Al menos una letra minúscula (a-z)",
+        "Al menos un número (0-9)",
+        "Al menos un carácter especial (!@#$%…)",
+      ],
+      pwdMustMeet: "Tu contraseña debe cumplir:",
+      pwdStrength: "Seguridad:",
+      pwdWeak: "Débil",
+      pwdMedium: "Media",
+      pwdStrong: "Fuerte",
+      pwdShow: "Mostrar contraseña",
+      pwdHide: "Ocultar contraseña",
+      pwdMatch: "Las contraseñas coinciden.",
+      pwdNoMatch: "Las contraseñas no coinciden.",
+      pwdLengthError: "La contraseña debe tener entre 8 y 64 caracteres.",
+      pwdComplexityError:
+        "La contraseña debe incluir al menos una mayúscula, una minúscula, un número y un carácter especial.",
+      submit: "Crear cuenta",
+      submitting: "Creando cuenta…",
+      submitError:
+        "No pudimos crear tu cuenta. Revisa los datos o intenta de nuevo en unos minutos.",
+      legalPre: "Al crear tu cuenta aceptas nuestros ",
+      legalTerms: "Términos y Condiciones de Uso",
+      legalMid: ", el ",
+      legalPilot: "Acuerdo de Usuario Piloto",
+      legalAnd: " y la ",
+      legalPrivacy: "Política de Privacidad y Confidencialidad",
+      legalEnd: ".",
+      successTitle: "¡Cuenta creada!",
+      successSubPre: "Te enviamos un correo de confirmación a ",
+      successSubPost:
+        ". Sigue las instrucciones para activar tu cuenta y empezar a usar INXORA.",
+      successCta: "Ir a Iniciar Sesión",
     },
   },
 
@@ -592,6 +824,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       linkPrivacidad: "Privacy policy",
       linkCookies: "Cookie policy",
       linkTerminos: "Terms & conditions",
+      linkAcuerdoPiloto: "Pilot user agreement",
       linkEnvios: "Shipping",
       linkDevoluciones: "Returns",
       libroAlt: "Complaints book",
@@ -600,6 +833,136 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       rights: "All rights reserved.",
       developedBy: "Developed by",
       developedAccent: "INXORA",
+    },
+    results: {
+      kicker: "About results with INXORA",
+      titleLead: "A data-driven platform,",
+      titleAccent: "built to accelerate",
+      titleSuffix: "industrial purchasing",
+      description:
+        "Everything in one panel: shorter cycles, more vetted suppliers, full traceability, and a go-live in weeks—not quarters.",
+      items: [
+        {
+          title: "Time saved",
+          description: "Turn processes that took days into minutes.",
+          pill: "Up to 80% less time",
+        },
+        {
+          title: "More control",
+          description: "Manage suppliers and purchasing in one place.",
+          pill: "All in one system",
+        },
+        {
+          title: "Better decisions",
+          description: "Compare prices, lead times and options easily.",
+          pill: "Smarter decisions",
+        },
+        {
+          title: "Order and traceability",
+          description: "A complete history of every purchase.",
+          pill: "100% traceability",
+        },
+      ],
+    },
+    video: {
+      kicker: "INXORA in action",
+      titleLead: "See how INXORA",
+      titleAccent: "organizes your purchasing",
+      titleSuffix: "in under a minute",
+      description:
+        "A quick tour of the platform: from spreadsheet chaos to full control of suppliers, contracts and payments in one place.",
+      points: [
+        "From requisition to payment, with no loose sheets.",
+        "Vetted suppliers, contracts and payments in a single panel.",
+        "Real-time visibility to decide with data.",
+      ],
+      cta: "Request a demo",
+      videoTitle: "INXORA in 1 minute",
+    },
+    signup: {
+      back: "Back to home",
+      title: "Create your INXORA account",
+      haveAccount: "Already have an account?",
+      signIn: "Sign in",
+      companySection: "Company details",
+      adminSection: "Administrator user",
+      countryLabel: "Country",
+      countryPlaceholder: "Select a country",
+      countryLoading: "Loading countries…",
+      countryError: "We couldn't load the country list. Please refresh the page.",
+      docLabel: "Company document",
+      docTypeAria: "Document type",
+      docNumberPlaceholderPE: "10724670038",
+      docNumberPlaceholderOther: "Your tax ID",
+      docTypeRUC: "RUC",
+      docTypeDNI: "DNI",
+      docTypeID: "Tax ID",
+      docTypeOther: "Other",
+      consultRuc: "Look up RUC",
+      consultingRuc: "Looking up…",
+      docHint: "With the RUC we can autofill your company details.",
+      rucDigitsError: "The RUC must have 11 digits.",
+      rucValidateError:
+        "We couldn't validate the RUC. Check the number or try again.",
+      companyNameLabel: "Legal / company name",
+      companyNamePlaceholder: "TEST S.A.C",
+      companyEmailLabel: "Company email",
+      companyEmailPlaceholder: "contact@company.com",
+      companyEmailHint: "Used for general communications with your organization.",
+      phoneLabel: "Phone",
+      phonePlaceholder: "994210178",
+      addressLabel: "Address",
+      addressPlaceholder: "123 Colonial Avenue",
+      cityLabel: "City",
+      cityPlaceholder: "Lima",
+      fullNameLabel: "Full name",
+      firstNamePlaceholder: "First name",
+      lastNamePPlaceholder: "Last name",
+      lastNameMPlaceholder: "Second last name",
+      positionLabel: "Role",
+      positionPlaceholder: "Super Admin",
+      adminEmailLabel: "Administrator email",
+      adminEmailPlaceholder: "admin@company.com",
+      adminEmailHint: "This will be the username to sign in to INXORA.",
+      passwordLabel: "Password",
+      passwordPlaceholder: "Create a strong password",
+      confirmPasswordLabel: "Repeat the password",
+      confirmPasswordPlaceholder: "Type the password again",
+      pwdRules: [
+        "Between 8 and 64 characters",
+        "At least one uppercase letter (A-Z)",
+        "At least one lowercase letter (a-z)",
+        "At least one number (0-9)",
+        "At least one special character (!@#$%…)",
+      ],
+      pwdMustMeet: "Your password must meet:",
+      pwdStrength: "Strength:",
+      pwdWeak: "Weak",
+      pwdMedium: "Medium",
+      pwdStrong: "Strong",
+      pwdShow: "Show password",
+      pwdHide: "Hide password",
+      pwdMatch: "Passwords match.",
+      pwdNoMatch: "Passwords don't match.",
+      pwdLengthError: "The password must be between 8 and 64 characters.",
+      pwdComplexityError:
+        "The password must include at least one uppercase letter, one lowercase letter, one number and one special character.",
+      submit: "Create account",
+      submitting: "Creating account…",
+      submitError:
+        "We couldn't create your account. Check the details or try again in a few minutes.",
+      legalPre: "By creating your account you accept our ",
+      legalTerms: "Terms of Use",
+      legalMid: ", the ",
+      legalPilot: "Pilot User Agreement",
+      legalAnd: " and the ",
+      legalPrivacy: "Privacy and Confidentiality Policy",
+      legalEnd: ".",
+      successTitle: "Account created!",
+      successSubPre: "We sent a confirmation email to ",
+      successSubPost:
+        ". Follow the instructions to activate your account and start using INXORA.",
+      successCta: "Go to Sign in",
     },
   },
 
@@ -810,6 +1173,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       linkPrivacidad: "Política de privacidade",
       linkCookies: "Política de cookies",
       linkTerminos: "Termos e condições",
+      linkAcuerdoPiloto: "Acordo de usuário piloto",
       linkEnvios: "Envios",
       linkDevoluciones: "Devoluções",
       libroAlt: "Livro de reclamações",
@@ -818,6 +1182,137 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       rights: "Todos os direitos reservados.",
       developedBy: "Desenvolvido por",
       developedAccent: "INXORA",
+    },
+    results: {
+      kicker: "Sobre resultados com a INXORA",
+      titleLead: "Plataforma com dados,",
+      titleAccent: "feita para acelerar",
+      titleSuffix: "a compra industrial",
+      description:
+        "Tudo em um só painel: redução de ciclos, mais fornecedores avaliados, rastreabilidade total e implantação em semanas, não em trimestres.",
+      items: [
+        {
+          title: "Economia de tempo",
+          description: "Reduz processos de dias para minutos.",
+          pill: "Até 80% menos tempo",
+        },
+        {
+          title: "Mais controle",
+          description: "Gerencie fornecedores e compras em um só lugar.",
+          pill: "Tudo em um só sistema",
+        },
+        {
+          title: "Melhores decisões",
+          description: "Compare preços, prazos e opções facilmente.",
+          pill: "Decisões mais inteligentes",
+        },
+        {
+          title: "Ordem e rastreabilidade",
+          description: "Histórico completo de cada compra.",
+          pill: "100% de rastreabilidade",
+        },
+      ],
+    },
+    video: {
+      kicker: "INXORA em ação",
+      titleLead: "Veja como a INXORA",
+      titleAccent: "organiza suas compras",
+      titleSuffix: "em menos de um minuto",
+      description:
+        "Um tour rápido pela plataforma: do caos das planilhas ao controle total de fornecedores, contratos e pagamentos em um só lugar.",
+      points: [
+        "Da requisição ao pagamento, sem planilhas soltas.",
+        "Fornecedores avaliados, contratos e pagamentos em um único painel.",
+        "Visibilidade em tempo real para decidir com dados.",
+      ],
+      cta: "Solicitar demo",
+      videoTitle: "INXORA em 1 minuto",
+    },
+    signup: {
+      back: "Voltar ao início",
+      title: "Crie sua conta INXORA",
+      haveAccount: "Já tem uma conta?",
+      signIn: "Entrar",
+      companySection: "Dados da empresa",
+      adminSection: "Usuário administrador",
+      countryLabel: "País",
+      countryPlaceholder: "Selecione um país",
+      countryLoading: "Carregando países…",
+      countryError:
+        "Não foi possível carregar a lista de países. Tente atualizar a página.",
+      docLabel: "Documento da empresa",
+      docTypeAria: "Tipo de documento",
+      docNumberPlaceholderPE: "10724670038",
+      docNumberPlaceholderOther: "Seu CNPJ / ID fiscal",
+      docTypeRUC: "RUC",
+      docTypeDNI: "DNI",
+      docTypeID: "ID fiscal",
+      docTypeOther: "Outro",
+      consultRuc: "Consultar RUC",
+      consultingRuc: "Consultando…",
+      docHint: "Com o RUC podemos preencher automaticamente os dados da sua empresa.",
+      rucDigitsError: "O RUC deve ter 11 dígitos.",
+      rucValidateError:
+        "Não foi possível validar o RUC. Verifique o número ou tente novamente.",
+      companyNameLabel: "Razão social / Nome",
+      companyNamePlaceholder: "TEST S.A.C",
+      companyEmailLabel: "E-mail corporativo",
+      companyEmailPlaceholder: "contato@empresa.com",
+      companyEmailHint: "Usado para comunicações gerais da sua organização.",
+      phoneLabel: "Telefone",
+      phonePlaceholder: "994210178",
+      addressLabel: "Endereço",
+      addressPlaceholder: "Avenida Colonial 123",
+      cityLabel: "Cidade",
+      cityPlaceholder: "Lima",
+      fullNameLabel: "Nome completo",
+      firstNamePlaceholder: "Nome",
+      lastNamePPlaceholder: "Sobrenome",
+      lastNameMPlaceholder: "Segundo sobrenome",
+      positionLabel: "Cargo",
+      positionPlaceholder: "Super Admin",
+      adminEmailLabel: "E-mail do administrador",
+      adminEmailPlaceholder: "admin@empresa.com",
+      adminEmailHint: "Será o usuário para entrar na INXORA.",
+      passwordLabel: "Senha",
+      passwordPlaceholder: "Crie uma senha segura",
+      confirmPasswordLabel: "Repita a senha",
+      confirmPasswordPlaceholder: "Digite a senha novamente",
+      pwdRules: [
+        "Entre 8 e 64 caracteres",
+        "Pelo menos uma letra maiúscula (A-Z)",
+        "Pelo menos uma letra minúscula (a-z)",
+        "Pelo menos um número (0-9)",
+        "Pelo menos um caractere especial (!@#$%…)",
+      ],
+      pwdMustMeet: "Sua senha deve cumprir:",
+      pwdStrength: "Segurança:",
+      pwdWeak: "Fraca",
+      pwdMedium: "Média",
+      pwdStrong: "Forte",
+      pwdShow: "Mostrar senha",
+      pwdHide: "Ocultar senha",
+      pwdMatch: "As senhas coincidem.",
+      pwdNoMatch: "As senhas não coincidem.",
+      pwdLengthError: "A senha deve ter entre 8 e 64 caracteres.",
+      pwdComplexityError:
+        "A senha deve incluir pelo menos uma maiúscula, uma minúscula, um número e um caractere especial.",
+      submit: "Criar conta",
+      submitting: "Criando conta…",
+      submitError:
+        "Não foi possível criar sua conta. Verifique os dados ou tente novamente em alguns minutos.",
+      legalPre: "Ao criar sua conta você aceita nossos ",
+      legalTerms: "Termos e Condições de Uso",
+      legalMid: ", o ",
+      legalPilot: "Acordo de Usuário Piloto",
+      legalAnd: " e a ",
+      legalPrivacy: "Política de Privacidade e Confidencialidade",
+      legalEnd: ".",
+      successTitle: "Conta criada!",
+      successSubPre: "Enviamos um e-mail de confirmação para ",
+      successSubPost:
+        ". Siga as instruções para ativar sua conta e começar a usar a INXORA.",
+      successCta: "Ir para Entrar",
     },
   },
 };

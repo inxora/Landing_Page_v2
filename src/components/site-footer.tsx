@@ -292,7 +292,7 @@ const SiteFooter: FunctionComponent = () => {
               </li>
               <li>
                 <Link className={styles.link} to={ROUTES.acuerdoPiloto}>
-                  Acuerdo de Usuario Piloto
+                  {t.footer.linkAcuerdoPiloto}
                 </Link>
               </li>
               <li>

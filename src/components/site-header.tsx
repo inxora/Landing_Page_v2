@@ -264,7 +264,7 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
               </a>
             </nav>
             <Box className={styles.menuPanelFooter}>
-              <LanguageSelector menuAlign="left" />
+              <LanguageSelector mode="modal" onSelect={closeMenu} />
               <AccountMenu variant="mobile" onNavigate={closeMenu} />
             </Box>
           </div>
