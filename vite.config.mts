@@ -12,7 +12,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       "/api": {
-        target: "https://api.inxora.com",
+        target: "https://apisaas.inxora.com",
         changeOrigin: true,
         secure: true,
       },
