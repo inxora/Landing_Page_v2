@@ -523,6 +523,14 @@
 
 /* Desktop: globos más grandes y con más presencia */
 @media screen and (min-width: 1201px) {
+  /* Gutter lateral: el dashboard se estrecha y los globos flotan en el
+     espacio libre (fondo del hero), no encima de los datos de la tabla. */
+  .heroMockupWrap :global(.dash-mock-container.dash-wrap),
+  .heroVideoCard {
+    max-width: 86%;
+    margin-inline: auto;
+  }
+
   .heroBubble {
     width: clamp(8.4rem, 9.6vw, 10.25rem);
     padding: 0.8rem 0.85rem 0.9rem;
@@ -543,26 +551,36 @@
     font-size: 0.82rem;
     line-height: 1.3;
   }
+  /* Los globos se anclan a los bordes del wrap (dentro del gutter) y solo
+     rozan la esquina redondeada del dashboard. La fila inferior se sube
+     bien por encima del widget de Sara (fixed en la esquina del viewport). */
   .heroBubbleTL {
-    top: 1%;
-    left: -5%;
+    top: 4%;
+    left: -1%;
   }
   .heroBubbleTR {
-    top: -4%;
-    right: -5%;
+    top: -1%;
+    right: -1%;
   }
   .heroBubbleBL {
-    bottom: 14%;
-    left: -6%;
+    bottom: 6%;
+    left: -1%;
   }
   .heroBubbleBR {
-    bottom: 3%;
-    right: -5%;
+    bottom: 26%;
+    right: -1%;
   }
 }
 
 /* Tablet: globos más compactos y casi sin sobresalir */
 @media screen and (max-width: 1200px) {
+  /* Gutter más leve: el mockup ya está centrado en columna única. */
+  .heroMockupWrap :global(.dash-mock-container.dash-wrap),
+  .heroVideoCard {
+    max-width: 92%;
+    margin-inline: auto;
+  }
+
   .heroBubble {
     width: clamp(6.5rem, 17vw, 7.6rem);
     padding: 0.55rem 0.55rem 0.65rem;
@@ -580,7 +598,7 @@
     font-size: 0.72rem;
   }
   .heroBubbleTL {
-    top: 1%;
+    top: 2%;
     left: -1%;
   }
   .heroBubbleTR {
@@ -588,11 +606,11 @@
     right: -1%;
   }
   .heroBubbleBL {
-    bottom: 11%;
+    bottom: 6%;
     left: -1%;
   }
   .heroBubbleBR {
-    bottom: 3%;
+    bottom: 20%;
     right: -1%;
   }
 }
