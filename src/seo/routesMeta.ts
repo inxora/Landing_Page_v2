@@ -9,9 +9,9 @@ export type RouteSeo = {
 const brand = "INXORA";
 
 const home: RouteSeo = {
-  title: `${brand} - Centraliza tus proveedores`,
+  title: `${brand} - ERP de Compras, Inventario, Ventas y Finanzas`,
   description:
-    "INXORA SaaS es tu software de control y seguimiento de proveedores para equipos de compras industriales. Centraliza evaluaciones, contratos y pagos en un solo panel. Recupera la trazabilidad de tu cadena de suministro.",
+    "INXORA es el ERP en la nube para empresas industriales: centraliza compras y proveedores, inventario y almacenes, ventas, facturación electrónica y finanzas en un solo panel. Automatiza cotizaciones con IA.",
 };
 
 const ROUTES_META: Record<string, RouteSeo> = {
@@ -19,42 +19,42 @@ const ROUTES_META: Record<string, RouteSeo> = {
   [ROUTES.nosotros]: {
     title: `Nosotros · ${brand}`,
     description:
-      "Conoce la misión de INXORA: digitalizar la gestión de proveedores en Perú y Latinoamérica con tecnología SaaS para equipos de compras industriales.",
+      "Conoce la misión de INXORA: digitalizar la gestión empresarial de la industria en Perú y Latinoamérica con un ERP en la nube para compras, inventario, ventas y finanzas.",
   },
   [ROUTES.contacto]: {
     title: `Contacto · ${brand}`,
     description:
-      "Contacta con el equipo INXORA: dirección en Lima, teléfono, correo y canales para soporte y consultas comerciales sobre nuestra plataforma SaaS.",
+      "Contacta con el equipo INXORA: dirección en Lima, teléfono, correo y canales para soporte y consultas comerciales sobre nuestro ERP en la nube.",
   },
   [ROUTES.faq]: {
     title: `Preguntas frecuentes · ${brand}`,
     description:
-      "Respuestas sobre el uso de la plataforma INXORA, onboarding, integración, planes y soporte para equipos de compras industriales.",
+      "Respuestas sobre el ERP INXORA: onboarding, integración, módulos de compras, inventario, ventas y finanzas, planes y soporte para empresas industriales.",
   },
   [ROUTES.cotizaciones]: {
     title: `Solicitar demo · ${brand}`,
     description:
-      "Solicita una demo personalizada de INXORA: te mostramos cómo centralizar la gestión de tus proveedores y recuperar la trazabilidad de tus compras.",
+      "Solicita una demo personalizada de INXORA: te mostramos cómo gestionar compras, proveedores, inventario, ventas, facturación y finanzas en una sola plataforma.",
   },
   [ROUTES.catalogo]: {
     title: `Funcionalidades · ${brand}`,
     description:
-      "Explora las funcionalidades de INXORA: evaluación de proveedores, gestión de contratos, seguimiento de pagos y trazabilidad de compras en un solo panel.",
+      "Explora las funcionalidades del ERP INXORA: compras y proveedores, inventario y almacenes, ventas, facturación electrónica, cuentas por cobrar y pagar, y analítica en un solo panel.",
   },
   [ROUTES.suministros]: {
     title: `Gestión de proveedores · ${brand}`,
     description:
-      "INXORA centraliza la gestión de proveedores industriales: evaluaciones, contratos, pagos y trazabilidad de tu cadena de suministro en una sola plataforma.",
+      "INXORA centraliza la gestión de proveedores y compras industriales: evaluación, cotizaciones, órdenes de compra y trazabilidad, integrado con inventario y finanzas en un ERP.",
   },
   [ROUTES.seguridad]: {
     title: `Seguridad y cumplimiento · ${brand}`,
     description:
-      "Gestiona el cumplimiento y los criterios de seguridad de tus proveedores industriales con INXORA: auditoría, trazabilidad y control en un solo panel.",
+      "Gestiona el cumplimiento y los criterios de seguridad de tus proveedores industriales con el ERP INXORA: auditoría, trazabilidad y control en un solo panel.",
   },
   [ROUTES.herramientas]: {
     title: `Herramientas de gestión · ${brand}`,
     description:
-      "Herramientas de control y seguimiento de proveedores para equipos de compras industriales. Digitaliza tu proceso de abastecimiento con INXORA.",
+      "Herramientas de gestión empresarial para la industria: compras, inventario, ventas y finanzas. Digitaliza tus operaciones con el ERP INXORA.",
   },
   [ROUTES.avisoLegal]: {
     title: `Aviso legal · ${brand}`,
