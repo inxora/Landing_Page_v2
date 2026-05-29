@@ -2,14 +2,8 @@ import { FunctionComponent } from "react";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import styles from "./results-section.module.css";
 
-/** Iconos + imágenes por índice (no dependen del idioma). */
+/** Material Symbols por índice — un icono representa cada resultado. */
 const RESULT_ICONS = ["schedule", "groups", "trending_up", "fact_check"] as const;
-const RESULT_IMAGES = [
-  "/ahorro_tiempo.webp",
-  "/Mayor_control.webp",
-  "/Mejores_decisiones.webp",
-  "/Orden_y_trazabilidad.webp",
-] as const;
 
 export const ResultsSection: FunctionComponent = () => {
   const t = useLandingTranslations();
@@ -34,18 +28,10 @@ export const ResultsSection: FunctionComponent = () => {
           <div className={styles.cardsGrid}>
             {t.results.items.map((item, index) => (
               <div key={index} className={styles.card}>
-                <div className={styles.cardImageWrapper}>
-                  <img
-                    className={styles.cardImage}
-                    src={RESULT_IMAGES[index]}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                  <div className={styles.iconWrapper}>
-                    <span className={`material-symbols-rounded ${styles.icon}`}>
-                      {RESULT_ICONS[index]}
-                    </span>
-                  </div>
+                <div className={styles.iconPanel} aria-hidden>
+                  <span className={`material-symbols-rounded ${styles.icon}`}>
+                    {RESULT_ICONS[index]}
+                  </span>
                 </div>
                 <h3 className={styles.cardTitle}>{item.title}</h3>
                 <p className={styles.cardDescription}>{item.description}</p>

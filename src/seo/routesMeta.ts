@@ -9,9 +9,9 @@ export type RouteSeo = {
 const brand = "INXORA";
 
 const home: RouteSeo = {
-  title: `${brand} - ERP de Compras, Inventario, Ventas y Finanzas`,
+  title: `${brand} - Plataforma para compras, ventas y proveedores con IA`,
   description:
-    "INXORA es el ERP en la nube para empresas industriales: centraliza compras y proveedores, inventario y almacenes, ventas, facturación electrónica y finanzas en un solo panel. Automatiza cotizaciones con IA.",
+    "Plataforma con asistencia inteligente para compras, ventas, proveedores y seguimiento operativo. NIX-IA te ayuda a centralizar tu operación en un solo lugar. Controla. Decide. Crece.",
 };
 
 const ROUTES_META: Record<string, RouteSeo> = {
@@ -19,42 +19,42 @@ const ROUTES_META: Record<string, RouteSeo> = {
   [ROUTES.nosotros]: {
     title: `Nosotros · ${brand}`,
     description:
-      "Conoce la misión de INXORA: digitalizar la gestión empresarial de la industria en Perú y Latinoamérica con un ERP en la nube para compras, inventario, ventas y finanzas.",
+      "Conoce la misión de INXORA: ayudar a las empresas a centralizar compras, ventas, proveedores y seguimiento operativo con una plataforma inteligente impulsada por NIX-IA.",
   },
   [ROUTES.contacto]: {
     title: `Contacto · ${brand}`,
     description:
-      "Contacta con el equipo INXORA: dirección en Lima, teléfono, correo y canales para soporte y consultas comerciales sobre nuestro ERP en la nube.",
+      "Contacta con el equipo INXORA: WhatsApp +51 946 885 531, correo contacto@inxora.com y canales para soporte y consultas comerciales sobre nuestra plataforma.",
   },
   [ROUTES.faq]: {
     title: `Preguntas frecuentes · ${brand}`,
     description:
-      "Respuestas sobre el ERP INXORA: onboarding, integración, módulos de compras, inventario, ventas y finanzas, planes y soporte para empresas industriales.",
+      "Respuestas sobre cómo usar INXORA: compras, ventas, proveedores, seguimiento operativo, NIX-IA, planes y soporte para tu equipo.",
   },
   [ROUTES.cotizaciones]: {
     title: `Solicitar demo · ${brand}`,
     description:
-      "Solicita una demo personalizada de INXORA: te mostramos cómo gestionar compras, proveedores, inventario, ventas, facturación y finanzas en una sola plataforma.",
+      "Solicita una demo personalizada de INXORA y descubre cómo organizar compras, ventas, proveedores y seguimiento en una sola plataforma con NIX-IA.",
   },
   [ROUTES.catalogo]: {
     title: `Funcionalidades · ${brand}`,
     description:
-      "Explora las funcionalidades del ERP INXORA: compras y proveedores, inventario y almacenes, ventas, facturación electrónica, cuentas por cobrar y pagar, y analítica en un solo panel.",
+      "Explora las funcionalidades de INXORA: compras y cotizaciones, ventas y clientes, gestión de proveedores, seguimiento operativo y NIX-IA, tu asistente inteligente.",
   },
   [ROUTES.suministros]: {
     title: `Gestión de proveedores · ${brand}`,
     description:
-      "INXORA centraliza la gestión de proveedores y compras industriales: evaluación, cotizaciones, órdenes de compra y trazabilidad, integrado con inventario y finanzas en un ERP.",
+      "INXORA centraliza la gestión de proveedores: evaluación, cotizaciones, órdenes y seguimiento, todo en una plataforma con asistencia inteligente.",
   },
   [ROUTES.seguridad]: {
     title: `Seguridad y cumplimiento · ${brand}`,
     description:
-      "Gestiona el cumplimiento y los criterios de seguridad de tus proveedores industriales con el ERP INXORA: auditoría, trazabilidad y control en un solo panel.",
+      "Seguridad y trazabilidad en INXORA: compliance, datos protegidos, control de roles y seguimiento de cada acción en tiempo real.",
   },
   [ROUTES.herramientas]: {
     title: `Herramientas de gestión · ${brand}`,
     description:
-      "Herramientas de gestión empresarial para la industria: compras, inventario, ventas y finanzas. Digitaliza tus operaciones con el ERP INXORA.",
+      "Herramientas para organizar tu operación: compras, ventas, proveedores y seguimiento, con NIX-IA como asistente inteligente.",
   },
   [ROUTES.avisoLegal]: {
     title: `Aviso legal · ${brand}`,

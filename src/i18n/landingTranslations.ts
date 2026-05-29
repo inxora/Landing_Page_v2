@@ -35,7 +35,7 @@ export type PlatformVisualCopy = {
 
 export type ProcessStepCopy = {
   title: string;
-  subtitle: string;
+  body: string;
 };
 
 export type LandingCopy = {
@@ -108,14 +108,27 @@ export type LandingCopy = {
     lede: string;
     pillars: [AdvantagePillarCopy, AdvantagePillarCopy, AdvantagePillarCopy];
   };
-  process: {
+  processFlow: {
     kicker: string;
     headlineLine1: string;
     headlineLine2: string;
     ledeLine1: string;
     ledeLine2: string;
-    steps: [ProcessStepCopy, ProcessStepCopy, ProcessStepCopy, ProcessStepCopy];
-    ctaQuote: string;
+    ledeAccent: string;
+    centerTitle: string;
+    centerSubtitle: string;
+    flowBadge: { title: string; body: string };
+    controlBadge: { title: string; body: string };
+    steps: [
+      ProcessStepCopy,
+      ProcessStepCopy,
+      ProcessStepCopy,
+      ProcessStepCopy,
+      ProcessStepCopy,
+      ProcessStepCopy,
+      ProcessStepCopy,
+      ProcessStepCopy,
+    ];
   };
   suppliers: {
     kicker: string;
@@ -291,18 +304,18 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       closeMenu: "Cerrar menú",
     },
     hero: {
-      h1Line1: "Control total sobre tus proveedores",
-      h1Em: "Sin Excel, sin riesgos ocultos.",
-      sub: "INXORA es tu software de control y seguimiento de proveedores. Centraliza evaluaciones, contratos y pagos en un solo panel. Recupera la trazabilidad de tu cadena de suministro hoy.",
+      h1Line1: "Organiza tu operación",
+      h1Em: "mientras haces crecer tu negocio.",
+      sub: "Plataforma con asistencia inteligente para compras, ventas, proveedores y seguimiento operativo. NIX-IA te ayuda a centralizar, cotizar, aprobar y dar seguimiento — todo en un solo lugar.",
       ctaSubscribe: "Solicitar Demo",
       ctaDemo: "Hablar por WhatsApp",
       play: "Ver el producto en 60 s",
       closeVideo: "Cerrar video",
       bubbles: [
-        "Centraliza todos tus proveedores",
-        "Automatiza solicitudes y cotizaciones",
-        "Compara opciones en segundos",
-        "Genera órdenes de compra fácilmente",
+        "Compras y cotizaciones",
+        "Ventas y clientes",
+        "Proveedores centralizados",
+        "Seguimiento en tiempo real",
       ],
     },
     trusted: {
@@ -412,20 +425,33 @@ export const landingTranslations: Record<Language, LandingCopy> = {
         },
       ],
     },
-    process: {
-      kicker: "Nuestro paso a paso",
-      headlineLine1: "Comienza ahora",
-      headlineLine2: "y pide tu producto en Inxora",
-      ledeLine1:
-        "Tenemos un proceso simple y eficiente para obtener los suministros industriales",
-      ledeLine2: "que tu empresa necesita",
+    processFlow: {
+      kicker: "Todo tu proceso conectado",
+      headlineLine1: "Todo tu proceso",
+      headlineLine2: "conectado.",
+      ledeLine1: "Desde la solicitud hasta la entrega,",
+      ledeLine2: "cada etapa fluye en",
+      ledeAccent: "un solo sistema.",
+      centerTitle: "INXORA",
+      centerSubtitle: "Tu operación, siempre conectada.",
+      flowBadge: {
+        title: "Un flujo único.",
+        body: "Información centralizada, equipos alineados y decisiones más rápidas.",
+      },
+      controlBadge: {
+        title: "Todo conectado. Todo bajo control.",
+        body: "Menos duplicidad, menos errores, más eficiencia.",
+      },
       steps: [
-        { title: "Cotiza con Sara", subtitle: "En minutos" },
-        { title: "Confirma tu pedido", subtitle: "Al instante" },
-        { title: "Envío y pago", subtitle: "Seguro" },
-        { title: "Soporte técnico", subtitle: "Constante" },
+        { title: "Solicitud", body: "El cliente o área interna realiza una solicitud." },
+        { title: "Cotización", body: "Genera y envía cotizaciones de manera ágil." },
+        { title: "Proveedor", body: "Selecciona al proveedor adecuado y negocia." },
+        { title: "Aprobación", body: "Flujos de aprobación claros y transparentes." },
+        { title: "Venta / Factura", body: "Convierte la operación en venta y factura." },
+        { title: "Seguimiento", body: "Monitorea pedidos, avances y estados en tiempo real." },
+        { title: "Entrega", body: "Controla la entrega y cierra el ciclo con éxito." },
+        { title: "Reportes", body: "Información centralizada para decisiones más rápidas." },
       ],
-      ctaQuote: "Cotizar ahora",
     },
     suppliers: {
       kicker: "Nuestros proveedores",
@@ -441,17 +467,17 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     pricing: pricingSectionCopy.es,
     excelCta: excelCtaCopy.es,
     assistance: {
-      label: "Estoy lista para ayudarte",
-      chatTitle: "Sara Xora",
-      chatSubtitle: "Asistente virtual",
+      label: "¡Hola! Soy NIX-IA",
+      chatTitle: "NIX-IA",
+      chatSubtitle: "Asistente inteligente",
       inputPlaceholder: "Escribe algo…",
       sendAria: "Enviar mensaje",
       attachAria: "Adjuntar imagen",
       closeAria: "Cerrar asistente",
-      openChatAria: "Abrir chat con Sara Xora",
+      openChatAria: "Abrir chat con NIX-IA",
       disclaimer:
-        "Sara puede cometer errores. Verifica la información importante.",
-      typing: "Sara está escribiendo…",
+        "NIX-IA puede cometer errores. Verifica la información importante.",
+      typing: "NIX-IA está escribiendo…",
       errorGeneric: "No se pudo enviar el mensaje. Inténtalo de nuevo.",
       error422:
         "Solo imágenes JPEG, PNG o WebP (máx. 5 archivos, 5 MB cada una).",
@@ -460,7 +486,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     },
     footer: {
       slogan:
-        "Tu socio estratégico en suministros industriales y equipos de seguridad.",
+        "NIX-IA TRABAJA CONTIGO EN CADA ETAPA DE TU OPERACIÓN.",
       navEmpresa: "Empresa",
       navCategorias: "Categorías",
       navEnlaces: "Enlaces útiles",
@@ -642,18 +668,18 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       closeMenu: "Close menu",
     },
     hero: {
-      h1Line1: "Total control of your industrial suppliers",
-      h1Em: "No spreadsheets. No hidden risks.",
-      sub: "INXORA is your supplier control and tracking software. Centralize assessments, contracts, and payments in one place—and restore end-to-end traceability across your supply chain.",
+      h1Line1: "Organize your operation",
+      h1Em: "while you grow your business.",
+      sub: "AI-assisted platform for purchasing, sales, suppliers and operational tracking. NIX-IA helps you centralize, quote, approve and track — all in one place.",
       ctaSubscribe: "Request a demo",
       ctaDemo: "Chat on WhatsApp",
       play: "60-second product tour",
       closeVideo: "Close video",
       bubbles: [
-        "Centralize all your suppliers",
-        "Automate requests and quotes",
-        "Compare options in seconds",
-        "Generate purchase orders easily",
+        "Purchasing & quotes",
+        "Sales & clients",
+        "Centralized suppliers",
+        "Real-time tracking",
       ],
     },
     trusted: {
@@ -763,20 +789,33 @@ export const landingTranslations: Record<Language, LandingCopy> = {
         },
       ],
     },
-    process: {
-      kicker: "Our step-by-step process",
-      headlineLine1: "Start today",
-      headlineLine2: "and order through Inxora",
-      ledeLine1:
-        "A simple, efficient process to get the industrial supplies",
-      ledeLine2: "your business needs",
+    processFlow: {
+      kicker: "Your entire process, connected",
+      headlineLine1: "Your entire process",
+      headlineLine2: "connected.",
+      ledeLine1: "From the first request to final delivery,",
+      ledeLine2: "every stage flows in",
+      ledeAccent: "one single system.",
+      centerTitle: "INXORA",
+      centerSubtitle: "Your operation, always connected.",
+      flowBadge: {
+        title: "One unified flow.",
+        body: "Centralized information, aligned teams and faster decisions.",
+      },
+      controlBadge: {
+        title: "All connected. All under control.",
+        body: "Less duplication, fewer errors, more efficiency.",
+      },
       steps: [
-        { title: "Quote with Sara", subtitle: "In minutes" },
-        { title: "Confirm your order", subtitle: "Instantly" },
-        { title: "Shipping & payment", subtitle: "Secure" },
-        { title: "Technical support", subtitle: "Always on" },
+        { title: "Request", body: "Customer or internal team submits a request." },
+        { title: "Quotation", body: "Generate and send quotes in a snap." },
+        { title: "Supplier", body: "Pick the right supplier and negotiate." },
+        { title: "Approval", body: "Clear, transparent approval workflows." },
+        { title: "Sale / Invoice", body: "Turn the operation into a sale and invoice." },
+        { title: "Tracking", body: "Monitor orders, progress and status in real time." },
+        { title: "Delivery", body: "Control the delivery and close the loop." },
+        { title: "Reports", body: "Centralized data for faster decisions." },
       ],
-      ctaQuote: "Quote now",
     },
     suppliers: {
       kicker: "Our suppliers",
@@ -792,17 +831,17 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     pricing: pricingSectionCopy.en,
     excelCta: excelCtaCopy.en,
     assistance: {
-      label: "I’m ready to help you",
-      chatTitle: "Sara Xora",
-      chatSubtitle: "Virtual assistant",
+      label: "Hi! I’m NIX-IA",
+      chatTitle: "NIX-IA",
+      chatSubtitle: "Smart assistant",
       inputPlaceholder: "Type a message…",
       sendAria: "Send message",
       attachAria: "Attach image",
       closeAria: "Close assistant",
-      openChatAria: "Open chat with Sara Xora",
+      openChatAria: "Open chat with NIX-IA",
       disclaimer:
-        "Sara may make mistakes. Double-check important information.",
-      typing: "Sara is typing…",
+        "NIX-IA may make mistakes. Double-check important information.",
+      typing: "NIX-IA is typing…",
       errorGeneric: "Couldn’t send your message. Please try again.",
       error422:
         "Only JPEG, PNG, or WebP images (max. 5 files, 5 MB each).",
@@ -811,7 +850,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     },
     footer: {
       slogan:
-        "Your strategic partner for industrial supplies and safety equipment.",
+        "NIX-IA WORKS WITH YOU AT EVERY STAGE OF YOUR OPERATION.",
       navEmpresa: "Company",
       navCategorias: "Categories",
       navEnlaces: "Useful links",
@@ -992,18 +1031,18 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       closeMenu: "Fechar menu",
     },
     hero: {
-      h1Line1: "Controle total dos seus fornecedores",
-      h1Em: "Sem planilhas, sem riscos invisíveis.",
-      sub: "A INXORA é o seu software de controle e acompanhamento de fornecedores. Centralize avaliações, contratos e pagamentos em um só painel. Recupere a rastreabilidade da cadeia de suprimentos hoje.",
+      h1Line1: "Organize sua operação",
+      h1Em: "enquanto faz seu negócio crescer.",
+      sub: "Plataforma com assistência inteligente para compras, vendas, fornecedores e acompanhamento operacional. A NIX-IA ajuda a centralizar, cotar, aprovar e acompanhar — tudo em um só lugar.",
       ctaSubscribe: "Solicitar Demo",
       ctaDemo: "Falar pelo WhatsApp",
       play: "Ver o produto em 60 s",
       closeVideo: "Fechar vídeo",
       bubbles: [
-        "Centralize todos os seus fornecedores",
-        "Automatize solicitações e cotações",
-        "Compare opções em segundos",
-        "Gere ordens de compra facilmente",
+        "Compras e cotações",
+        "Vendas e clientes",
+        "Fornecedores centralizados",
+        "Acompanhamento em tempo real",
       ],
     },
     trusted: {
@@ -1113,20 +1152,33 @@ export const landingTranslations: Record<Language, LandingCopy> = {
         },
       ],
     },
-    process: {
-      kicker: "Nosso passo a passo",
-      headlineLine1: "Comece agora",
-      headlineLine2: "e peça seu produto na Inxora",
-      ledeLine1:
-        "Temos um processo simples e eficiente para obter os insumos industriais",
-      ledeLine2: "que sua empresa precisa",
+    processFlow: {
+      kicker: "Todo o seu processo conectado",
+      headlineLine1: "Todo o seu processo",
+      headlineLine2: "conectado.",
+      ledeLine1: "Da solicitação até a entrega,",
+      ledeLine2: "cada etapa flui em",
+      ledeAccent: "um único sistema.",
+      centerTitle: "INXORA",
+      centerSubtitle: "Sua operação, sempre conectada.",
+      flowBadge: {
+        title: "Um fluxo único.",
+        body: "Informação centralizada, equipes alinhadas e decisões mais rápidas.",
+      },
+      controlBadge: {
+        title: "Tudo conectado. Tudo sob controle.",
+        body: "Menos duplicação, menos erros, mais eficiência.",
+      },
       steps: [
-        { title: "Cotar com a Sara", subtitle: "Em minutos" },
-        { title: "Confirme seu pedido", subtitle: "Na hora" },
-        { title: "Envio e pagamento", subtitle: "Seguro" },
-        { title: "Suporte técnico", subtitle: "Contínuo" },
+        { title: "Solicitação", body: "O cliente ou área interna faz uma solicitação." },
+        { title: "Cotação", body: "Gere e envie cotações de forma ágil." },
+        { title: "Fornecedor", body: "Selecione o fornecedor adequado e negocie." },
+        { title: "Aprovação", body: "Fluxos de aprovação claros e transparentes." },
+        { title: "Venda / Fatura", body: "Converte a operação em venda e fatura." },
+        { title: "Acompanhamento", body: "Monitore pedidos, avanços e status em tempo real." },
+        { title: "Entrega", body: "Controle a entrega e feche o ciclo com sucesso." },
+        { title: "Relatórios", body: "Informação centralizada para decisões mais rápidas." },
       ],
-      ctaQuote: "Cotar agora",
     },
     suppliers: {
       kicker: "Nossos fornecedores",
@@ -1142,17 +1194,17 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     pricing: pricingSectionCopy.pt,
     excelCta: excelCtaCopy.pt,
     assistance: {
-      label: "Estou pronta para ajudar você",
-      chatTitle: "Sara Xora",
-      chatSubtitle: "Assistente virtual",
+      label: "Olá! Sou a NIX-IA",
+      chatTitle: "NIX-IA",
+      chatSubtitle: "Assistente inteligente",
       inputPlaceholder: "Escreva algo…",
       sendAria: "Enviar mensagem",
       attachAria: "Anexar imagem",
       closeAria: "Fechar assistente",
-      openChatAria: "Abrir chat com Sara Xora",
+      openChatAria: "Abrir chat com a NIX-IA",
       disclaimer:
-        "A Sara pode cometer erros. Verifique informações importantes.",
-      typing: "A Sara está escrevendo…",
+        "A NIX-IA pode cometer erros. Verifique informações importantes.",
+      typing: "A NIX-IA está escrevendo…",
       errorGeneric: "Não foi possível enviar a mensagem. Tente novamente.",
       error422:
         "Somente imagens JPEG, PNG ou WebP (máx. 5 arquivos, 5 MB cada).",
@@ -1161,7 +1213,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
     },
     footer: {
       slogan:
-        "Seu parceiro estratégico em insumos industriais e equipamentos de segurança.",
+        "A NIX-IA TRABALHA COM VOCÊ EM CADA ETAPA DA SUA OPERAÇÃO.",
       navEmpresa: "Empresa",
       navCategorias: "Categorias",
       navEnlaces: "Links úteis",

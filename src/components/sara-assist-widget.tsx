@@ -386,7 +386,7 @@ export const SaraAssistWidget: FunctionComponent = () => {
           <img
             className={styles.spacerIcon}
             alt=""
-            src="/Spacer@2x.png"
+            src="/NIX-IA.png"
             onClick={openPanel}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
@@ -410,7 +410,7 @@ export const SaraAssistWidget: FunctionComponent = () => {
             <img
               className={styles.headerAvatar}
               alt=""
-              src="/Spacer@2x.png"
+              src="/NIX-IA.png"
             />
             <div className={styles.headerText}>
               <h2 className={styles.headerTitle} id={panelTitleId}>

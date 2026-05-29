@@ -6,6 +6,7 @@ import HeroSection from "../components/hero-section";
 import ProblemSection from "../components/problem-section";
 import AdvantagesSection from "../components/advantages-section";
 import PlatformSection from "../components/platform-section";
+import ProcessFlowSection from "../components/process-flow-section";
 import RecognitionsSection from "../components/recognitions-section";
 import ExcelCtaSection from "../components/excel-cta-section";
 import ResultsSection from "../components/results-section";
@@ -51,6 +52,10 @@ const LandingPage: FunctionComponent = () => {
       <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="plataforma" className={styles.sectionAnchor}>
         <PlatformSection />
+      </div>
+      <div className={styles.brandRibbonDivider} aria-hidden />
+      <div id="proceso" className={styles.sectionAnchor}>
+        <ProcessFlowSection />
       </div>
       <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="resultados" className={styles.sectionAnchor}>

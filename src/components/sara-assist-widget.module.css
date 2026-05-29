@@ -39,12 +39,13 @@
 }
 
 .spacerIcon {
-  width: 80px;
-  height: 80px;
+  width: 112px;
+  height: 112px;
   position: relative;
   border-radius: 999px;
   max-height: 100%;
   object-fit: cover;
+  background: #fff;
   cursor: pointer;
   box-shadow: 0 4px 20px rgba(23, 29, 76, 0.12);
   border: 2px solid var(--color-white);
@@ -315,8 +316,8 @@
     border-radius: 12px 12px 0 12px;
   }
   .spacerIcon {
-    width: 64px;
-    height: 64px;
+    width: 92px;
+    height: 92px;
   }
 }
 
@@ -328,8 +329,8 @@
     max-width: min(200px, calc(100vw - 96px));
   }
   .spacerIcon {
-    width: 56px;
-    height: 56px;
+    width: 76px;
+    height: 76px;
   }
 }
 
@@ -344,7 +345,7 @@
     max-width: min(170px, calc(100vw - 84px));
   }
   .spacerIcon {
-    width: 50px;
-    height: 50px;
+    width: 64px;
+    height: 64px;
   }
 }
