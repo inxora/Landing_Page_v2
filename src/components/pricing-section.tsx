@@ -11,6 +11,7 @@ import type { PricingFeatureIcon } from "../i18n/pricingPlans";
 import styles from "./pricing-section.module.css";
 
 export type PricingSectionProps = { className?: string };
+export type BillingCycle = "monthly" | "annual";
 
 function FeatureIcon({ icon }: { icon: PricingFeatureIcon }) {
   if (icon === "check")
@@ -22,9 +23,12 @@ function FeatureIcon({ icon }: { icon: PricingFeatureIcon }) {
 
 function PlanCard({
   plan,
+  cycle,
 }: {
   plan: ReturnType<typeof useLandingTranslations>["pricing"]["plans"][number];
+  cycle: BillingCycle;
 }) {
+  const priceInfo = cycle === "annual" ? plan.annual : plan.monthly;
   return (
     <article className={plan.popularLabel ? styles.cardPopular : styles.card}>
       {plan.popularLabel && (
@@ -35,24 +39,30 @@ function PlanCard({
       )}
       <h3 className={styles.planName}>{plan.name}</h3>
       <div className={styles.priceRow}>
-        <span className={styles.price}>{plan.price}</span>
-        <span className={styles.period}>{plan.period}</span>
+        <span className={styles.price}>{priceInfo.price}</span>
+        <span className={styles.period}>{priceInfo.period}</span>
       </div>
       <p className={styles.description}>{plan.description}</p>
-      {plan.groups.map((group) => (
-        <div key={group.title} className={styles.group}>
-          <div className={styles.groupTitle}>{group.title}</div>
-          <ul className={styles.list}>
-            {group.items.map((item, i) => (
-              <li key={`${group.title}-${i}`} className={styles.row}>
-                <span className={styles.iconCell}><FeatureIcon icon={item.icon} /></span>
-                <span className={styles.rowText}>{item.text}</span>
-                {item.badge && <span className={styles.badge}>{item.badge}</span>}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {plan.groups.map((group, gi) => {
+        /* El ítem de implementación se cuelga del último grupo
+           (típicamente "Soporte") y varía según el ciclo activo. */
+        const isLast = gi === plan.groups.length - 1;
+        const items  = isLast ? [...group.items, plan.implementation[cycle]] : group.items;
+        return (
+          <div key={group.title} className={styles.group}>
+            <div className={styles.groupTitle}>{group.title}</div>
+            <ul className={styles.list}>
+              {items.map((item, i) => (
+                <li key={`${group.title}-${i}`} className={styles.row}>
+                  <span className={styles.iconCell}><FeatureIcon icon={item.icon} /></span>
+                  <span className={styles.rowText}>{item.text}</span>
+                  {item.badge && <span className={styles.badge}>{item.badge}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
       <a className={styles.cta} href={WHATSAPP_QUOTE_URL} target="_blank" rel="noopener noreferrer">
         {plan.cta}
         <span className={["material-symbols-rounded", styles.ctaIcon].join(" ")} aria-hidden>north_east</span>
@@ -68,9 +78,11 @@ const RESUME_AFTER_MS = 1000; // reinicia autoplay tras inactividad
 const PricingSection: FunctionComponent<PricingSectionProps> = ({ className = "" }) => {
   const t = useLandingTranslations();
   const plans = t.pricing.plans;
+  const billing = t.pricing.billing;
 
   const [isMobile, setIsMobile] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
+  const [cycle, setCycle] = useState<BillingCycle>("monthly");
 
   /* refs de timers */
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -161,10 +173,37 @@ const PricingSection: FunctionComponent<PricingSectionProps> = ({ className = ""
         <h2 className={styles.title} id="pricing-heading">{t.pricing.title}</h2>
         <p className={styles.lede}>{t.pricing.lede}</p>
 
+        {/* Toggle Mensual / Anual */}
+        <div
+          className={styles.billingToggle}
+          role="tablist"
+          aria-label={billing.monthly + " / " + billing.annual}
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={cycle === "monthly"}
+            className={[styles.billingBtn, cycle === "monthly" ? styles.billingBtnActive : ""].join(" ")}
+            onClick={() => setCycle("monthly")}
+          >
+            {billing.monthly}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={cycle === "annual"}
+            className={[styles.billingBtn, cycle === "annual" ? styles.billingBtnActive : ""].join(" ")}
+            onClick={() => setCycle("annual")}
+          >
+            {billing.annual}
+            <span className={styles.billingHint}>{billing.annualHint}</span>
+          </button>
+        </div>
+
         {/* Desktop: grid */}
         {!isMobile && (
           <div className={styles.grid}>
-            {plans.map((p) => <PlanCard key={p.name} plan={p} />)}
+            {plans.map((p) => <PlanCard key={p.name} plan={p} cycle={cycle} />)}
           </div>
         )}
 
@@ -191,7 +230,7 @@ const PricingSection: FunctionComponent<PricingSectionProps> = ({ className = ""
                   className={styles.sliderSlide}
                   aria-hidden={i !== activeIdx}
                 >
-                  <PlanCard plan={p} />
+                  <PlanCard plan={p} cycle={cycle} />
                 </div>
               ))}
             </div>

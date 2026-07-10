@@ -10,6 +10,7 @@ import ProcessFlowSection from "../components/process-flow-section";
 import RecognitionsSection from "../components/recognitions-section";
 import ExcelCtaSection from "../components/excel-cta-section";
 import ResultsSection from "../components/results-section";
+import PricingSection from "../components/pricing-section";
 import VideoSection from "../components/video-section";
 import styles from "./landing-page.module.css";
 
@@ -61,7 +62,10 @@ const LandingPage: FunctionComponent = () => {
       <div id="resultados" className={styles.sectionAnchor}>
         <ResultsSection />
       </div>
-      <div id="planes" aria-hidden />
+      <div className={styles.brandRibbonDivider} aria-hidden />
+      <div id="planes" className={styles.sectionAnchor}>
+        <PricingSection />
+      </div>
       <div className={styles.brandRibbonDivider} aria-hidden />
       <div id="respaldados" className={styles.sectionAnchor}>
         <RecognitionsSection />

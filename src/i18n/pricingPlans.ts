@@ -13,138 +13,131 @@ export type PricingGroup = {
   items: PricingFeature[];
 };
 
+export type PricingCycle = {
+  price:  string;   // Ej: "$53" o "$583"
+  period: string;   // Ej: "/ mes  (S/ 180)"
+};
+
 export type PricingPlanData = {
   name: string;
-  price: string;
-  period: string;
+  /* Precios por ciclo — el toggle Mensual/Anual del componente elige
+     cuál renderizar. Regla: annual = monthly × 11 (1 mes gratis). */
+  monthly: PricingCycle;
+  annual:  PricingCycle;
   description: string;
   popularLabel?: string;
   enterpriseBadge?: string;
   groups: PricingGroup[];
+  /* Ítem de implementación — se pinta al final del último grupo y
+     cambia según el ciclo activo: mensual muestra el precio único,
+     anual muestra que está incluido. */
+  implementation: {
+    monthly: PricingFeature;
+    annual:  PricingFeature;
+  };
   cta: string;
+};
+
+export type PricingBillingLabels = {
+  monthly: string;
+  annual:  string;
+  /** Ej: "Ahorra 1 mes" — chip al lado del toggle Anual. */
+  annualHint: string;
 };
 
 export type PricingSectionCopy = {
   kicker: string;
   title: string;
   lede: string;
-  plans: [PricingPlanData, PricingPlanData, PricingPlanData];
+  billing: PricingBillingLabels;
+  /* N planes. Hoy son 2 activos (Start / Growth). Al sumar Scale u
+     otros, extender el array — el componente `pricing-section.tsx`
+     itera por `plans.length` y centra automáticamente. */
+  plans: PricingPlanData[];
 };
 
 const es: PricingSectionCopy = {
   kicker: "Planes",
   title: "Elige el plan que encaja con tu operación",
-  lede: "Precios orientativos en USD. Escala cuando tu equipo crezca.",
+  lede: "Precios en USD (equivalente en soles al costado). Todos incluyen IGV.",
+  billing: {
+    monthly:    "Mensual",
+    annual:     "Anual",
+    annualHint: "1 mes gratis",
+  },
   plans: [
     {
-      name: "Básico",
-      price: "$99",
-      period: "/ mes",
+      name: "Start",
+      monthly: { price: "$53",  period: "/ mes  (S/ 180)"   },
+      annual:  { price: "$583", period: "/ año  (S/ 1,980)" },
       description:
-        "Para equipos pequeños que inician su gestión de compras industriales.",
+        "Personalización operativa para arrancar con ventas, compras, inventario y caja.",
       groups: [
         {
           title: "Acceso y usuarios",
           items: [
-            { text: "2 usuarios", icon: "check", badge: "máx" },
-            { text: "20 proveedores activos", icon: "check", badge: "máx" },
-            { text: "Roles admin / comprador", icon: "check" },
+            { text: "5 usuarios", icon: "check", badge: "máx" },
+            { text: "Personalización operativa", icon: "check" },
           ],
         },
         {
-          title: "Módulos",
+          title: "Módulos incluidos",
           items: [
-            { text: "15 cotizaciones / mes", icon: "check", badge: "límite" },
-            { text: "10 solicitudes / mes", icon: "check", badge: "límite" },
-            { text: "5 órdenes de compra / mes", icon: "check", badge: "límite" },
-            { text: "Dashboard básico", icon: "check" },
-            { text: "Catálogo de productos", icon: "check" },
-            { text: "Análisis avanzado", icon: "dash" },
+            { text: "Ventas y compras", icon: "check" },
+            { text: "Inventario y caja", icon: "check" },
+            { text: "Facturación electrónica", icon: "check" },
+            { text: "Catálogo de productos + proveedores", icon: "check" },
           ],
         },
         {
-          title: "IA y soporte",
+          title: "Soporte",
           items: [
-            { text: "Sara Xora (asistente IA)", icon: "dash" },
-            { text: "Chat con asesores INXORA", icon: "dash" },
             { text: "Soporte por email", icon: "check" },
           ],
         },
       ],
-      cta: "Empezar básico",
+      implementation: {
+        monthly: { text: "Implementación: $53 (S/ 180) único", icon: "dash" },
+        annual:  { text: "Sin costo de implementación",         icon: "star" },
+      },
+      cta: "Empezar con Start",
     },
     {
-      name: "Pro",
-      price: "$249",
-      period: "/ mes",
+      name: "Growth",
+      monthly: { price: "$104",   period: "/ mes  (S/ 354)"   },
+      annual:  { price: "$1,144", period: "/ año  (S/ 3,894)" },
       description:
-        "Para empresas en crecimiento con flujos de compra frecuentes y equipos activos.",
+        "Indicadores comerciales, logística y seguimiento para equipos que ya están operando y necesitan analítica.",
       popularLabel: "Más popular",
       groups: [
         {
           title: "Acceso y usuarios",
           items: [
             { text: "8 usuarios", icon: "check", badge: "máx" },
-            { text: "100 proveedores activos", icon: "check", badge: "máx" },
-            { text: "Roles admin / comprador", icon: "check" },
+            { text: "Roles y permisos avanzados", icon: "check" },
           ],
         },
         {
-          title: "Módulos",
+          title: "Módulos incluidos",
           items: [
-            { text: "Cotizaciones ilimitadas", icon: "check" },
-            { text: "Solicitudes ilimitadas", icon: "check" },
-            { text: "Órdenes ilimitadas", icon: "check" },
-            { text: "Dashboard completo + KPIs", icon: "check" },
-            { text: "Análisis básico (gasto, categorías)", icon: "check" },
+            { text: "Todo lo de Start", icon: "check" },
+            { text: "Logística y seguimiento", icon: "star" },
+            { text: "Reportes y análisis", icon: "star" },
+            { text: "Indicadores comerciales", icon: "star" },
           ],
         },
         {
-          title: "IA y soporte",
+          title: "Soporte",
           items: [
-            { text: "Sara Xora", icon: "star", badge: "300 consultas/mes" },
-            { text: "Chat con asesores INXORA", icon: "star" },
-            { text: "Soporte prioritario (48h)", icon: "check" },
+            { text: "Soporte prioritario", icon: "check" },
           ],
         },
       ],
-      cta: "Empezar Pro",
-    },
-    {
-      name: "Enterprise",
-      price: "$599",
-      period: "/ mes",
-      description:
-        "Para operaciones industriales con múltiples equipos, países y volúmenes altos.",
-      enterpriseBadge: "Enterprise",
-      groups: [
-        {
-          title: "Acceso y usuarios",
-          items: [
-            { text: "Usuarios ilimitados", icon: "check" },
-            { text: "Proveedores ilimitados", icon: "check" },
-            { text: "Soporte multipaís / multimoneda", icon: "check" },
-          ],
-        },
-        {
-          title: "Módulos",
-          items: [
-            { text: "Todo ilimitado", icon: "check" },
-            { text: "Análisis avanzado (top proveedores, ROI)", icon: "check" },
-            { text: "Acceso API + webhooks", icon: "check" },
-            { text: "Historial de precios + auditoría", icon: "check" },
-          ],
-        },
-        {
-          title: "IA y soporte",
-          items: [
-            { text: "Sara Xora ilimitada", icon: "star" },
-            { text: "Asesor INXORA dedicado", icon: "star" },
-            { text: "Soporte 24/7 + onboarding", icon: "check" },
-          ],
-        },
-      ],
-      cta: "Hablar con ventas",
+      implementation: {
+        monthly: { text: "Implementación: $104 (S/ 354) único", icon: "dash" },
+        annual:  { text: "Sin costo de implementación",          icon: "star" },
+      },
+      cta: "Empezar con Growth",
     },
   ],
 };
@@ -152,115 +145,85 @@ const es: PricingSectionCopy = {
 const en: PricingSectionCopy = {
   kicker: "Plans",
   title: "Pick the plan that fits your operation",
-  lede: "Indicative prices in USD. Scale as your team grows.",
+  lede: "Prices in USD (local Sol equivalent alongside). VAT included.",
+  billing: {
+    monthly:    "Monthly",
+    annual:     "Annual",
+    annualHint: "1 month free",
+  },
   plans: [
     {
-      name: "Basic",
-      price: "$99",
-      period: "/ month",
-      description: "For small teams starting structured industrial procurement.",
+      name: "Start",
+      monthly: { price: "$53",  period: "/ mo  (S/ 180)"   },
+      annual:  { price: "$583", period: "/ yr  (S/ 1,980)" },
+      description:
+        "Operational setup to run sales, purchases, inventory and cash.",
       groups: [
         {
           title: "Access & users",
           items: [
-            { text: "2 users", icon: "check", badge: "max" },
-            { text: "20 active suppliers", icon: "check", badge: "max" },
-            { text: "Admin / buyer roles", icon: "check" },
+            { text: "5 users", icon: "check", badge: "max" },
+            { text: "Operational customization", icon: "check" },
           ],
         },
         {
-          title: "Modules",
+          title: "Included modules",
           items: [
-            { text: "15 quotes / month", icon: "check", badge: "limit" },
-            { text: "10 requests / month", icon: "check", badge: "limit" },
-            { text: "5 purchase orders / month", icon: "check", badge: "limit" },
-            { text: "Basic dashboard", icon: "check" },
-            { text: "Product catalog", icon: "check" },
-            { text: "Advanced analytics", icon: "dash" },
+            { text: "Sales & purchases", icon: "check" },
+            { text: "Inventory & cash", icon: "check" },
+            { text: "Electronic invoicing", icon: "check" },
+            { text: "Product & supplier catalog", icon: "check" },
           ],
         },
         {
-          title: "AI & support",
+          title: "Support",
           items: [
-            { text: "Sara Xora (AI assistant)", icon: "dash" },
-            { text: "Chat with INXORA advisors", icon: "dash" },
             { text: "Email support", icon: "check" },
           ],
         },
       ],
-      cta: "Start on Basic",
+      implementation: {
+        monthly: { text: "Setup: $53 (S/ 180) one-off", icon: "dash" },
+        annual:  { text: "Setup included",              icon: "star" },
+      },
+      cta: "Start with Start",
     },
     {
-      name: "Pro",
-      price: "$249",
-      period: "/ month",
-      description: "For growing companies with frequent buying flows and active teams.",
+      name: "Growth",
+      monthly: { price: "$104",   period: "/ mo  (S/ 354)"   },
+      annual:  { price: "$1,144", period: "/ yr  (S/ 3,894)" },
+      description:
+        "Commercial KPIs, logistics tracking, and reporting for teams already operating and needing analytics.",
       popularLabel: "Most popular",
       groups: [
         {
           title: "Access & users",
           items: [
             { text: "8 users", icon: "check", badge: "max" },
-            { text: "100 active suppliers", icon: "check", badge: "max" },
-            { text: "Admin / buyer roles", icon: "check" },
+            { text: "Advanced roles & permissions", icon: "check" },
           ],
         },
         {
-          title: "Modules",
+          title: "Included modules",
           items: [
-            { text: "Unlimited quotes", icon: "check" },
-            { text: "Unlimited requests", icon: "check" },
-            { text: "Unlimited orders", icon: "check" },
-            { text: "Full dashboard + KPIs", icon: "check" },
-            { text: "Basic analytics (spend, categories)", icon: "check" },
+            { text: "Everything in Start", icon: "check" },
+            { text: "Logistics & tracking", icon: "star" },
+            { text: "Reports & analytics", icon: "star" },
+            { text: "Commercial KPIs", icon: "star" },
           ],
         },
         {
-          title: "AI & support",
+          title: "Support",
           items: [
-            { text: "Sara Xora", icon: "star", badge: "300 queries/mo" },
-            { text: "Chat with INXORA advisors", icon: "star" },
-            { text: "Priority support (48h)", icon: "check" },
+            { text: "Priority support", icon: "check" },
           ],
         },
       ],
-      cta: "Start on Pro",
-    },
-    {
-      name: "Enterprise",
-      price: "$599",
-      period: "/ month",
-      description:
-        "For industrial operations with multiple teams, countries, and high volumes.",
-      enterpriseBadge: "Enterprise",
-      groups: [
-        {
-          title: "Access & users",
-          items: [
-            { text: "Unlimited users", icon: "check" },
-            { text: "Unlimited suppliers", icon: "check" },
-            { text: "Multi-country / multi-currency", icon: "check" },
-          ],
-        },
-        {
-          title: "Modules",
-          items: [
-            { text: "Everything unlimited", icon: "check" },
-            { text: "Advanced analytics (top suppliers, ROI)", icon: "check" },
-            { text: "API access + webhooks", icon: "check" },
-            { text: "Price history + audit trail", icon: "check" },
-          ],
-        },
-        {
-          title: "AI & support",
-          items: [
-            { text: "Unlimited Sara Xora", icon: "star" },
-            { text: "Dedicated INXORA advisor", icon: "star" },
-            { text: "24/7 support + onboarding", icon: "check" },
-          ],
-        },
-      ],
-      cta: "Talk to sales",
+      implementation: {
+        monthly: { text: "Setup: $104 (S/ 354) one-off", icon: "dash" },
+        annual:  { text: "Setup included",               icon: "star" },
+      },
+      cta: "Start with Growth",
     },
   ],
 };
@@ -268,117 +231,85 @@ const en: PricingSectionCopy = {
 const pt: PricingSectionCopy = {
   kicker: "Planos",
   title: "Escolha o plano que combina com sua operação",
-  lede: "Preços indicativos em USD. Escale conforme o time cresce.",
+  lede: "Preços em USD (equivalente em soles ao lado). Incluem ICMS/VAT.",
+  billing: {
+    monthly:    "Mensal",
+    annual:     "Anual",
+    annualHint: "1 mês grátis",
+  },
   plans: [
     {
-      name: "Básico",
-      price: "$99",
-      period: "/ mês",
+      name: "Start",
+      monthly: { price: "$53",  period: "/ mês  (S/ 180)"   },
+      annual:  { price: "$583", period: "/ ano  (S/ 1,980)" },
       description:
-        "Para equipes pequenas que começam a gestão de compras industriais.",
+        "Configuração operacional para começar com vendas, compras, estoque e caixa.",
       groups: [
         {
           title: "Acesso e usuários",
           items: [
-            { text: "2 usuários", icon: "check", badge: "máx" },
-            { text: "20 fornecedores ativos", icon: "check", badge: "máx" },
-            { text: "Perfis admin / comprador", icon: "check" },
+            { text: "5 usuários", icon: "check", badge: "máx" },
+            { text: "Personalização operacional", icon: "check" },
           ],
         },
         {
-          title: "Módulos",
+          title: "Módulos inclusos",
           items: [
-            { text: "15 cotações / mês", icon: "check", badge: "limite" },
-            { text: "10 solicitações / mês", icon: "check", badge: "limite" },
-            { text: "5 ordens de compra / mês", icon: "check", badge: "limite" },
-            { text: "Dashboard básico", icon: "check" },
-            { text: "Catálogo de produtos", icon: "check" },
-            { text: "Análise avançada", icon: "dash" },
+            { text: "Vendas e compras", icon: "check" },
+            { text: "Estoque e caixa", icon: "check" },
+            { text: "Faturamento eletrônico", icon: "check" },
+            { text: "Catálogo de produtos e fornecedores", icon: "check" },
           ],
         },
         {
-          title: "IA e suporte",
+          title: "Suporte",
           items: [
-            { text: "Sara Xora (assistente IA)", icon: "dash" },
-            { text: "Chat com assessores INXORA", icon: "dash" },
             { text: "Suporte por e-mail", icon: "check" },
           ],
         },
       ],
-      cta: "Começar no Básico",
+      implementation: {
+        monthly: { text: "Implantação: $53 (S/ 180) único", icon: "dash" },
+        annual:  { text: "Implantação incluída",             icon: "star" },
+      },
+      cta: "Começar com Start",
     },
     {
-      name: "Pro",
-      price: "$249",
-      period: "/ mês",
+      name: "Growth",
+      monthly: { price: "$104",   period: "/ mês  (S/ 354)"   },
+      annual:  { price: "$1,144", period: "/ ano  (S/ 3,894)" },
       description:
-        "Para empresas em crescimento com fluxos de compra frequentes e equipes ativas.",
+        "KPIs comerciais, logística e relatórios para equipes já em operação que precisam de analítica.",
       popularLabel: "Mais popular",
       groups: [
         {
           title: "Acesso e usuários",
           items: [
             { text: "8 usuários", icon: "check", badge: "máx" },
-            { text: "100 fornecedores ativos", icon: "check", badge: "máx" },
-            { text: "Perfis admin / comprador", icon: "check" },
+            { text: "Perfis e permissões avançados", icon: "check" },
           ],
         },
         {
-          title: "Módulos",
+          title: "Módulos inclusos",
           items: [
-            { text: "Cotações ilimitadas", icon: "check" },
-            { text: "Solicitações ilimitadas", icon: "check" },
-            { text: "Ordens ilimitadas", icon: "check" },
-            { text: "Dashboard completo + KPIs", icon: "check" },
-            { text: "Análise básica (gasto, categorias)", icon: "check" },
+            { text: "Tudo do Start", icon: "check" },
+            { text: "Logística e rastreamento", icon: "star" },
+            { text: "Relatórios e análises", icon: "star" },
+            { text: "KPIs comerciais", icon: "star" },
           ],
         },
         {
-          title: "IA e suporte",
+          title: "Suporte",
           items: [
-            { text: "Sara Xora", icon: "star", badge: "300 consultas/mês" },
-            { text: "Chat com assessores INXORA", icon: "star" },
-            { text: "Suporte prioritário (48h)", icon: "check" },
+            { text: "Suporte prioritário", icon: "check" },
           ],
         },
       ],
-      cta: "Começar no Pro",
-    },
-    {
-      name: "Enterprise",
-      price: "$599",
-      period: "/ mês",
-      description:
-        "Para operações industriais com várias equipes, países e volumes altos.",
-      enterpriseBadge: "Enterprise",
-      groups: [
-        {
-          title: "Acesso e usuários",
-          items: [
-            { text: "Usuários ilimitados", icon: "check" },
-            { text: "Fornecedores ilimitados", icon: "check" },
-            { text: "Multipaís / multimoneda", icon: "check" },
-          ],
-        },
-        {
-          title: "Módulos",
-          items: [
-            { text: "Tudo ilimitado", icon: "check" },
-            { text: "Análise avançada (top fornecedores, ROI)", icon: "check" },
-            { text: "Acesso API + webhooks", icon: "check" },
-            { text: "Histórico de preços + auditoria", icon: "check" },
-          ],
-        },
-        {
-          title: "IA e suporte",
-          items: [
-            { text: "Sara Xora ilimitada", icon: "star" },
-            { text: "Assessor INXORA dedicado", icon: "star" },
-            { text: "Suporte 24/7 + onboarding", icon: "check" },
-          ],
-        },
-      ],
-      cta: "Falar com vendas",
+      implementation: {
+        monthly: { text: "Implantação: $104 (S/ 354) único", icon: "dash" },
+        annual:  { text: "Implantação incluída",              icon: "star" },
+      },
+      cta: "Começar com Growth",
     },
   ],
 };

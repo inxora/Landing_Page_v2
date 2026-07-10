@@ -11,8 +11,14 @@ import {
   createTheme,
   StyledEngineProvider,
 } from "@mui/material";
+import { initSentry } from "./lib/sentry";
 
 import "./global.css";
+
+// Observabilidad: no-op sin DSN (dev local típico). En prod captura
+// errores + traza del flujo signup + Session Replay al 100% cuando hay
+// error, con maskAllText/blockAllMedia por privacidad.
+initSentry();
 
 const muiTheme = createTheme();
 

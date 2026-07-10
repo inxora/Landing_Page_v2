@@ -8,12 +8,20 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 import { ROUTES } from "../routes/paths";
 import {
+  type Paquete,
   type Pais,
   type RegistroPayload,
+  consultarDni,
   consultarRuc,
   fetchPaises,
+  fetchPaquetes,
   registrarEmpresa,
 } from "../services/gestionApi";
+import {
+  sentryTrackConsultarDoc,
+  sentryTrackRubroElegido,
+  sentryTrackSubmit,
+} from "../lib/sentry";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import type { LandingCopy } from "../i18n/landingTranslations";
 import styles from "./crear-cuenta-page.module.css";
@@ -25,6 +33,34 @@ type SignupCopy = LandingCopy["signup"];
 type FormState = RegistroPayload & {
   admin_password_confirm: string;
 };
+
+/* TZ del navegador con fallback UTC — se usa como default del selector. */
+function detectarTimezone(): string {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+  } catch {
+    return "UTC";
+  }
+}
+
+/* Lista de zonas horarias del navegador (Intl.supportedValuesOf) con
+   fallback a un set curado si el runtime no lo soporta. Mismo criterio
+   que EmpresaInfoCard en app-inxora. */
+function timezonesDisponibles(): string[] {
+  try {
+    return (Intl as unknown as { supportedValuesOf?: (k: string) => string[] })
+      .supportedValuesOf?.("timeZone") ?? [];
+  } catch {
+    /* fallthrough */
+  }
+  return [
+    "UTC",
+    "America/Lima", "America/Bogota", "America/Santiago",
+    "America/Mexico_City", "America/Argentina/Buenos_Aires",
+    "America/Sao_Paulo", "America/New_York", "Europe/Madrid",
+    "Europe/London", "Europe/Berlin",
+  ];
+}
 
 const INITIAL: FormState = {
   empresa_nombre: "",
@@ -42,7 +78,44 @@ const INITIAL: FormState = {
   admin_password: "",
   admin_password_confirm: "",
   admin_cargo: "",
+  codigo_paquete: "",
+  empresa_timezone: detectarTimezone(),
 };
+
+/* Icono material-symbols por rubro. Fallback si el catálogo trae un
+   código que aún no mapeamos → sale un icono genérico de business. */
+const RUBRO_ICON: Record<string, string> = {
+  ferreteria:   "handyman",
+  construccion: "apartment",
+  produccion:   "precision_manufacturing",
+  taller:       "build",
+  mostrador:    "point_of_sale",
+};
+
+function iconoRubro(codigo: string): string {
+  return RUBRO_ICON[codigo] ?? "business_center";
+}
+
+/* Etiqueta amigable por función (código técnico → nombre para la landing).
+   Fallback: el código snake_case capitalizado. */
+const FUNCION_LABEL: Record<string, string> = {
+  caja_diaria:                     "Caja diaria con arqueo",
+  documentos_internos:             "Notas de venta / ticket 80mm",
+  gestion_despachos_avanzada:      "Despachos multi-vehículo",
+  compras_con_recepcion_separada:  "Recepción separada de compras",
+  precios_avanzado:                "Precios dinámicos + aprobaciones",
+  solicitudes_compra:              "Requerimientos con doble firma",
+};
+
+function labelFuncion(codigo: string): string {
+  return (
+    FUNCION_LABEL[codigo] ??
+    codigo.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+  );
+}
+
+/* Lista precomputada a nivel módulo — no cambia entre renders. */
+const TIMEZONES = timezonesDisponibles();
 
 function isPeru(pais: Pais | undefined): boolean {
   if (!pais) return false;
@@ -111,6 +184,13 @@ const CrearCuentaPage = () => {
   const [paisesLoading, setPaisesLoading] = useState(true);
   const [paisesError, setPaisesError] = useState<string | null>(null);
 
+  /* Catálogo de rubros (paquetes). Trae ACTIVOS + PRÓXIMAMENTE — los
+     inactivos se pintan deshabilitados con badge. Sin rubro elegido el
+     submit no procede (validación explícita, no HTML5). */
+  const [paquetes, setPaquetes] = useState<Paquete[]>([]);
+  const [paquetesLoading, setPaquetesLoading] = useState(true);
+  const [paquetesError, setPaquetesError] = useState<string | null>(null);
+
   const [rucLoading, setRucLoading] = useState(false);
   const [rucError, setRucError] = useState<string | null>(null);
 
@@ -136,6 +216,24 @@ const CrearCuentaPage = () => {
     return () => ctrl.abort();
   }, [s.countryError]);
 
+  /* Cargar rubros (paquetes) al montar. Traemos también los inactivos
+     para exhibirlos como "Próximamente" — el UX vende el roadmap. */
+  useEffect(() => {
+    const ctrl = new AbortController();
+    setPaquetesLoading(true);
+    fetchPaquetes(ctrl.signal)
+      .then((data) => {
+        setPaquetes(Array.isArray(data) ? data : []);
+        setPaquetesError(null);
+      })
+      .catch((err: unknown) => {
+        if ((err as { name?: string })?.name === "AbortError") return;
+        setPaquetesError(s.rubroError);
+      })
+      .finally(() => setPaquetesLoading(false));
+    return () => ctrl.abort();
+  }, [s.rubroError]);
+
   const selectedPais = useMemo(
     () => paises.find((p) => p.codigo === form.empresa_pais),
     [paises, form.empresa_pais],
@@ -152,16 +250,55 @@ const CrearCuentaPage = () => {
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
       setForm((f) => ({ ...f, [field]: e.target.value }));
 
+  /* Consulta el documento (RUC o DNI en Perú) contra el catálogo del
+     backend y autocompleta datos. Enruta por `empresa_tipo_documento`:
+     - RUC (11 dígitos) → nombre + dirección + ciudad de la empresa.
+     - DNI (8 dígitos)  → nombre completo como empresa + apellidos + nombres
+       del admin. Es la vía para personas naturales que se registran
+       como empresa unipersonal. */
   const handleConsultarRuc = useCallback(async () => {
-    const ruc = form.empresa_numero_documento.trim();
-    if (!/^\d{11}$/.test(ruc)) {
+    const numero = form.empresa_numero_documento.trim();
+    const tipo = form.empresa_tipo_documento;
+
+    if (tipo === "DNI") {
+      if (!/^\d{8}$/.test(numero)) {
+        setRucError(s.dniDigitsError);
+        sentryTrackConsultarDoc("DNI", false, "digits");
+        return;
+      }
+      setRucError(null);
+      setRucLoading(true);
+      try {
+        const data = await consultarDni(numero);
+        setForm((f) => ({
+          ...f,
+          empresa_nombre: data.nombre_completo || f.empresa_nombre,
+          empresa_direccion: data.direccion || f.empresa_direccion,
+          admin_nombre: data.nombres || f.admin_nombre,
+          admin_apellido_paterno:
+            data.apellido_paterno || f.admin_apellido_paterno,
+          admin_apellido_materno:
+            data.apellido_materno || f.admin_apellido_materno,
+        }));
+        sentryTrackConsultarDoc("DNI", true);
+      } catch {
+        setRucError(s.dniValidateError);
+        sentryTrackConsultarDoc("DNI", false, "api");
+      } finally {
+        setRucLoading(false);
+      }
+      return;
+    }
+
+    if (!/^\d{11}$/.test(numero)) {
       setRucError(s.rucDigitsError);
+      sentryTrackConsultarDoc("RUC", false, "digits");
       return;
     }
     setRucError(null);
     setRucLoading(true);
     try {
-      const data = await consultarRuc(ruc);
+      const data = await consultarRuc(numero);
       setForm((f) => ({
         ...f,
         empresa_nombre: data.nombre || f.empresa_nombre,
@@ -169,16 +306,34 @@ const CrearCuentaPage = () => {
         empresa_ciudad:
           data.distrito || data.provincia || data.departamento || f.empresa_ciudad,
       }));
+      sentryTrackConsultarDoc("RUC", true);
     } catch {
       setRucError(s.rucValidateError);
+      sentryTrackConsultarDoc("RUC", false, "api");
     } finally {
       setRucLoading(false);
     }
-  }, [form.empresa_numero_documento, s.rucDigitsError, s.rucValidateError]);
+  }, [
+    form.empresa_numero_documento,
+    form.empresa_tipo_documento,
+    s.rucDigitsError,
+    s.rucValidateError,
+    s.dniDigitsError,
+    s.dniValidateError,
+  ]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
+    sentryTrackSubmit("start");
+
+    /* Rubro obligatorio — el paquete define qué funciones se activan y
+       cataloga la empresa. Sin rubro no seguimos. */
+    if (!form.codigo_paquete) {
+      setSubmitError(s.rubroRequired);
+      sentryTrackSubmit("error", "no-rubro");
+      return;
+    }
 
     const pwdCode = getPasswordErrorCode(form.admin_password);
     if (pwdCode === "length") {
@@ -211,14 +366,22 @@ const CrearCuentaPage = () => {
       admin_email: form.admin_email.trim(),
       admin_password: form.admin_password,
       admin_cargo: form.admin_cargo.trim(),
+      codigo_paquete: form.codigo_paquete,
+      empresa_timezone: form.empresa_timezone,
     };
 
     setSubmitting(true);
     try {
       await registrarEmpresa(payload);
       setSubmitted(true);
+      sentryTrackSubmit("ok", form.codigo_paquete);
     } catch (err) {
-      setSubmitError(extractApiError(err, s.submitError));
+      const msg = extractApiError(err, s.submitError);
+      setSubmitError(msg);
+      // Estatus HTTP si el helper lo capturó en `err.status` — útil para
+      // separar 409 (email/RUC duplicado) de 500 (bug real).
+      const status = (err as { status?: number })?.status;
+      sentryTrackSubmit("error", status ? `${status}: ${msg}` : msg);
     } finally {
       setSubmitting(false);
     }
@@ -279,6 +442,83 @@ const CrearCuentaPage = () => {
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
+          {/* ── Rubro (paquete a aplicar) ── */}
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>{s.rubroSection}</h2>
+            <p className={styles.sectionSubtitle}>{s.rubroSubtitle}</p>
+
+            {paquetesLoading && (
+              <p className={styles.rubroStatus}>{s.rubroLoading}</p>
+            )}
+            {paquetesError && (
+              <p className={styles.fieldError}>{paquetesError}</p>
+            )}
+
+            {!paquetesLoading && !paquetesError && (
+              <div
+                className={styles.rubroGrid}
+                role="radiogroup"
+                aria-label={s.rubroSection}
+              >
+                {paquetes.map((p) => {
+                  const seleccionado = form.codigo_paquete === p.codigo;
+                  const disabled = !p.activo;
+                  return (
+                    <button
+                      key={p.codigo}
+                      type="button"
+                      role="radio"
+                      aria-checked={seleccionado}
+                      aria-disabled={disabled}
+                      disabled={disabled}
+                      onClick={() => {
+                        if (disabled) return;
+                        sentryTrackRubroElegido(p.codigo);
+                        setForm((f) => ({ ...f, codigo_paquete: p.codigo }));
+                      }}
+                      className={[
+                        styles.rubroCard,
+                        seleccionado && styles.rubroCardSelected,
+                        disabled && styles.rubroCardDisabled,
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                      title={disabled ? s.rubroSoonHint : undefined}
+                    >
+                      {disabled && (
+                        <span className={styles.rubroBadge}>{s.rubroSoon}</span>
+                      )}
+                      <span
+                        className={`material-symbols-rounded ${styles.rubroIcon}`}
+                        aria-hidden
+                      >
+                        {iconoRubro(p.codigo)}
+                      </span>
+                      <h3 className={styles.rubroNombre}>{p.nombre}</h3>
+                      {p.descripcion && (
+                        <p className={styles.rubroDesc}>{p.descripcion}</p>
+                      )}
+                      {!disabled && p.verticales.length > 0 && (
+                        <div className={styles.rubroFuncionesWrap}>
+                          <span className={styles.rubroFuncionesLabel}>
+                            {s.rubroIncludes}
+                          </span>
+                          <ul className={styles.rubroFuncionesList}>
+                            {p.verticales.map((f) => (
+                              <li key={f} className={styles.rubroFuncionChip}>
+                                {labelFuncion(f)}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </section>
+
           {/* ── Datos de la empresa ── */}
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>{s.companySection}</h2>
@@ -302,6 +542,28 @@ const CrearCuentaPage = () => {
                 ))}
               </select>
               {paisesError && <p className={styles.fieldError}>{paisesError}</p>}
+            </Field>
+
+            {/* Zona horaria — misma lista que app-inxora (Intl.supportedValuesOf
+                con fallback a set curado). Default = TZ del navegador. */}
+            <Field
+              label={s.timezoneLabel}
+              htmlFor="empresa_timezone"
+              hint={s.timezoneHint}
+            >
+              <select
+                id="empresa_timezone"
+                className={styles.input}
+                value={form.empresa_timezone}
+                onChange={set("empresa_timezone")}
+                required
+              >
+                {TIMEZONES.map((tz) => (
+                  <option key={tz} value={tz}>
+                    {tz}
+                  </option>
+                ))}
+              </select>
             </Field>
 
             <Field
@@ -343,16 +605,24 @@ const CrearCuentaPage = () => {
                   onChange={set("empresa_numero_documento")}
                   required
                 />
-                {peruSelected && form.empresa_tipo_documento === "RUC" && (
-                  <button
-                    type="button"
-                    className={styles.secondaryBtn}
-                    onClick={handleConsultarRuc}
-                    disabled={rucLoading}
-                  >
-                    {rucLoading ? s.consultingRuc : s.consultRuc}
-                  </button>
-                )}
+                {peruSelected &&
+                  (form.empresa_tipo_documento === "RUC" ||
+                    form.empresa_tipo_documento === "DNI") && (
+                    <button
+                      type="button"
+                      className={styles.secondaryBtn}
+                      onClick={handleConsultarRuc}
+                      disabled={rucLoading}
+                    >
+                      {rucLoading
+                        ? form.empresa_tipo_documento === "DNI"
+                          ? s.consultingDni
+                          : s.consultingRuc
+                        : form.empresa_tipo_documento === "DNI"
+                          ? s.consultDni
+                          : s.consultRuc}
+                    </button>
+                  )}
               </div>
               {rucError && <p className={styles.fieldError}>{rucError}</p>}
               <p className={styles.controlNote}>{s.docHint}</p>

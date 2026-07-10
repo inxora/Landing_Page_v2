@@ -637,3 +637,149 @@ select.input {
   color: #16a34a;
   font-weight: 500;
 }
+
+/* ── Selector de rubro (paso 1 del registro) ── */
+
+.sectionSubtitle {
+  margin: -12px 0 0;
+  font-size: 0.9rem;
+  color: rgba(23, 29, 76, 0.6);
+  line-height: 1.4;
+}
+
+.rubroStatus {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(23, 29, 76, 0.6);
+}
+
+.rubroGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.rubroCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px 18px;
+  border: 1.5px solid rgba(23, 29, 76, 0.12);
+  border-radius: 14px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.05s,
+    box-shadow 0.15s;
+  font-family: inherit;
+  color: var(--inx-navy);
+}
+
+.rubroCard:hover:not(:disabled) {
+  border-color: rgba(23, 29, 76, 0.35);
+  background: rgba(23, 29, 76, 0.02);
+}
+
+.rubroCard:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.rubroCard:focus-visible {
+  outline: 2px solid var(--inx-navy);
+  outline-offset: 2px;
+}
+
+.rubroCardSelected {
+  border-color: var(--inx-navy);
+  background: rgba(23, 29, 76, 0.04);
+  box-shadow: 0 0 0 3px rgba(23, 29, 76, 0.08);
+}
+
+.rubroCardDisabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: rgba(23, 29, 76, 0.02);
+}
+
+.rubroBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: rgba(23, 29, 76, 0.08);
+  color: rgba(23, 29, 76, 0.7);
+}
+
+.rubroIcon {
+  font-size: 32px;
+  color: var(--inx-navy);
+  line-height: 1;
+}
+
+.rubroCardSelected .rubroIcon {
+  color: var(--inx-orange, #f97316);
+}
+
+.rubroNombre {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--inx-navy);
+}
+
+.rubroDesc {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: rgba(23, 29, 76, 0.65);
+}
+
+.rubroFuncionesWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(23, 29, 76, 0.12);
+  width: 100%;
+}
+
+.rubroFuncionesLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(23, 29, 76, 0.55);
+}
+
+.rubroFuncionesList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.rubroFuncionChip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(23, 29, 76, 0.06);
+  color: rgba(23, 29, 76, 0.75);
+}
+
+@media (max-width: 640px) {
+  .rubroGrid {
+    grid-template-columns: 1fr;
+  }
+}

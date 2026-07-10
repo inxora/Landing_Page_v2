@@ -208,6 +208,16 @@ export type LandingCopy = {
     title: string;
     haveAccount: string;
     signIn: string;
+    rubroSection: string;
+    rubroSubtitle: string;
+    rubroRequired: string;
+    rubroLoading: string;
+    rubroError: string;
+    rubroSoon: string;
+    rubroIncludes: string;
+    rubroSoonHint: string;
+    timezoneLabel: string;
+    timezoneHint: string;
     companySection: string;
     adminSection: string;
     countryLabel: string;
@@ -224,9 +234,13 @@ export type LandingCopy = {
     docTypeOther: string;
     consultRuc: string;
     consultingRuc: string;
+    consultDni: string;
+    consultingDni: string;
     docHint: string;
     rucDigitsError: string;
     rucValidateError: string;
+    dniDigitsError: string;
+    dniValidateError: string;
     companyNameLabel: string;
     companyNamePlaceholder: string;
     companyEmailLabel: string;
@@ -562,6 +576,20 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       title: "Crea tu cuenta de INXORA",
       haveAccount: "¿Ya tienes una cuenta?",
       signIn: "Iniciar sesión",
+      rubroSection: "Elige tu rubro",
+      rubroSubtitle:
+        "Tu selección define las funciones que activaremos para tu empresa. Podrás sumar más desde Configuración.",
+      rubroRequired: "Elige un rubro para continuar.",
+      rubroLoading: "Cargando rubros…",
+      rubroError:
+        "No pudimos cargar los rubros. Refresca la página o vuelve a intentar más tarde.",
+      rubroSoon: "Próximamente",
+      rubroIncludes: "Funciones incluidas",
+      rubroSoonHint:
+        "Estamos trabajando en este rubro. Regístrate con otro y te avisaremos cuando esté disponible.",
+      timezoneLabel: "Zona horaria",
+      timezoneHint:
+        "Se usa para toda fecha y hora que veas en la plataforma. Autodetectada según tu navegador; podés cambiarla.",
       companySection: "Datos de la empresa",
       adminSection: "Usuario administrador",
       countryLabel: "País",
@@ -579,10 +607,15 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       docTypeOther: "Otro",
       consultRuc: "Consultar RUC",
       consultingRuc: "Consultando…",
+      consultDni: "Consultar DNI",
+      consultingDni: "Consultando…",
       docHint: "Con el RUC podemos autocompletar los datos de tu empresa.",
       rucDigitsError: "El RUC debe tener 11 dígitos.",
       rucValidateError:
         "No pudimos validar el RUC. Verifica el número o intenta de nuevo.",
+      dniDigitsError: "El DNI debe tener 8 dígitos.",
+      dniValidateError:
+        "No pudimos validar el DNI. Verifica el número o intenta de nuevo.",
       companyNameLabel: "Razón social / Nombre",
       companyNamePlaceholder: "TEST S.A.C",
       companyEmailLabel: "Email corporativo",
@@ -926,6 +959,20 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       title: "Create your INXORA account",
       haveAccount: "Already have an account?",
       signIn: "Sign in",
+      rubroSection: "Pick your industry",
+      rubroSubtitle:
+        "Your choice sets the features we'll activate for your company. You can add more later from Settings.",
+      rubroRequired: "Pick an industry to continue.",
+      rubroLoading: "Loading industries…",
+      rubroError:
+        "We couldn't load the industries. Refresh the page or try again later.",
+      rubroSoon: "Coming soon",
+      rubroIncludes: "Included features",
+      rubroSoonHint:
+        "This industry is in the works. Sign up with another one and we'll let you know when it's ready.",
+      timezoneLabel: "Time zone",
+      timezoneHint:
+        "Used for every date and time you'll see in the platform. Auto-detected from your browser; you can change it.",
       companySection: "Company details",
       adminSection: "Administrator user",
       countryLabel: "Country",
@@ -942,10 +989,15 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       docTypeOther: "Other",
       consultRuc: "Look up RUC",
       consultingRuc: "Looking up…",
+      consultDni: "Look up DNI",
+      consultingDni: "Looking up…",
       docHint: "With the RUC we can autofill your company details.",
       rucDigitsError: "The RUC must have 11 digits.",
       rucValidateError:
         "We couldn't validate the RUC. Check the number or try again.",
+      dniDigitsError: "The DNI must have 8 digits.",
+      dniValidateError:
+        "We couldn't validate the DNI. Check the number or try again.",
       companyNameLabel: "Legal / company name",
       companyNamePlaceholder: "TEST S.A.C",
       companyEmailLabel: "Company email",
@@ -1289,6 +1341,20 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       title: "Crie sua conta INXORA",
       haveAccount: "Já tem uma conta?",
       signIn: "Entrar",
+      rubroSection: "Escolha seu setor",
+      rubroSubtitle:
+        "Sua escolha define os recursos que ativaremos para sua empresa. Você pode adicionar mais depois em Configurações.",
+      rubroRequired: "Escolha um setor para continuar.",
+      rubroLoading: "Carregando setores…",
+      rubroError:
+        "Não foi possível carregar os setores. Atualize a página ou tente novamente mais tarde.",
+      rubroSoon: "Em breve",
+      rubroIncludes: "Recursos incluídos",
+      rubroSoonHint:
+        "Este setor está em desenvolvimento. Cadastre-se com outro e avisaremos quando estiver disponível.",
+      timezoneLabel: "Fuso horário",
+      timezoneHint:
+        "Usado para todas as datas e horários exibidos na plataforma. Detectado automaticamente pelo navegador; você pode alterá-lo.",
       companySection: "Dados da empresa",
       adminSection: "Usuário administrador",
       countryLabel: "País",
@@ -1306,10 +1372,15 @@ export const landingTranslations: Record<Language, LandingCopy> = {
       docTypeOther: "Outro",
       consultRuc: "Consultar RUC",
       consultingRuc: "Consultando…",
+      consultDni: "Consultar DNI",
+      consultingDni: "Consultando…",
       docHint: "Com o RUC podemos preencher automaticamente os dados da sua empresa.",
       rucDigitsError: "O RUC deve ter 11 dígitos.",
       rucValidateError:
         "Não foi possível validar o RUC. Verifique o número ou tente novamente.",
+      dniDigitsError: "O DNI deve ter 8 dígitos.",
+      dniValidateError:
+        "Não foi possível validar o DNI. Verifique o número ou tente novamente.",
       companyNameLabel: "Razão social / Nome",
       companyNamePlaceholder: "TEST S.A.C",
       companyEmailLabel: "E-mail corporativo",
