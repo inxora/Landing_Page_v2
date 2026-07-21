@@ -154,8 +154,11 @@ function getPasswordErrorCode(pwd: string): "length" | "complexity" | null {
   return null;
 }
 
-/* Extrae un mensaje legible de un error de la API (incl. 422 de FastAPI,
-   cuyo body es { detail: [{ msg, loc, ... }] }). */
+/* Extrae un mensaje legible de un error de la API. Cubre:
+   · 422 FastAPI validación:  { detail: [{ msg, loc }, ...] }
+   · 4xx HTTPException:       { detail: "mensaje string" }
+   · Envoltorio { message }   (algunos handlers custom).
+   · err.detail string directo. */
 function extractApiError(err: unknown, fallback: string): string {
   const detail = (err as { detail?: unknown })?.detail;
   const fromList = (list: unknown): string | undefined => {
@@ -169,6 +172,8 @@ function extractApiError(err: unknown, fallback: string): string {
   if (Array.isArray(detail)) return fromList(detail) ?? fallback;
   if (detail && typeof detail === "object") {
     const obj = detail as { detail?: unknown; message?: string };
+    // FastAPI HTTPException(detail=str) → body = { detail: "..." }.
+    if (typeof obj.detail === "string" && obj.detail.trim()) return obj.detail;
     return fromList(obj.detail) ?? obj.message ?? fallback;
   }
   if (typeof detail === "string") return detail;
