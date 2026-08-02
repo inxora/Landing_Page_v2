@@ -1,5 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import { Box, Link } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import { ROUTES } from "../routes/paths";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import { useLanguage } from "../context/LanguageContext";
 import { buildWhatsAppDemoUrl } from "../constants/whatsapp";
@@ -91,12 +93,13 @@ const HeroSection: FunctionComponent<HeroSectionProps> = ({
         </Box>
         <Box className={styles.instantContainerParent}>
           <Link
+            component={RouterLink}
             className={[styles.instantContainer, styles.btnZoomPrimary].join(
               " ",
             )}
             underline="none"
             sx={heroCtaSxPrimary}
-            href="#demo"
+            to={ROUTES.crearCuenta}
           >
             {t.hero.ctaSubscribe}
             <span

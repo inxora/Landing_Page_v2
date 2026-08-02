@@ -10,7 +10,11 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
-import LanguageSelector from "./language-selector";
+// 2026-08-02 — Selector de idioma desactivado temporalmente. El landing
+// sirve solo en español mientras el i18n se refactoriza a `react-i18next`
+// (mismo patrón que app-inxora). Para reactivar: descomentar el import
+// y las dos ocurrencias abajo en desktop (~L213) y mobile (~L267).
+// import LanguageSelector from "./language-selector";
 import AccountMenu from "./account-menu";
 import styles from "./site-header.module.css";
 
@@ -210,7 +214,7 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
           </a>
         </nav>
         <Box className={styles.headerActionsDesktop}>
-          <LanguageSelector variant="onDark" />
+          {/* <LanguageSelector variant="onDark" /> desactivado — ver import arriba */}
           <AccountMenu variant="desktop" />
         </Box>
         <button
@@ -264,7 +268,7 @@ const SiteHeader: FunctionComponent<SiteHeaderProps> = ({
               </a>
             </nav>
             <Box className={styles.menuPanelFooter}>
-              <LanguageSelector mode="modal" onSelect={closeMenu} />
+              {/* <LanguageSelector mode="modal" onSelect={closeMenu} /> desactivado */}
               <AccountMenu variant="mobile" onNavigate={closeMenu} />
             </Box>
           </div>

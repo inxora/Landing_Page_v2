@@ -308,8 +308,17 @@
   border: 1px solid rgba(23, 29, 76, 0.08);
 }
 
-.cta {
+/* Contenedor de los 2 CTAs (primario + secundario) apilados. */
+.ctaStack {
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Base compartida — usada por primario y secundario. */
+.cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -324,16 +333,31 @@
   font-weight: 500;
   letter-spacing: -0.01em;
   text-decoration: none;
-  color: var(--inx-navy);
-  background: #fff;
-  border: 1px solid rgba(23, 29, 76, 0.18);
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease;
 }
 
-.cta:hover {
+/* Primario: relleno azul INXORA — "Empezar prueba gratis 7 días". */
+.ctaPrimary {
+  color: #fff;
+  background: var(--inx-cyan, #139ed4);
+  border: 1px solid var(--inx-cyan, #139ed4);
+}
+.ctaPrimary:hover {
+  background: #0e7fac;
+  border-color: #0e7fac;
+  color: #fff;
+}
+
+/* Secundario: outline — "Suscribirme ahora". */
+.ctaSecondary {
+  color: var(--inx-navy);
+  background: #fff;
+  border: 1px solid rgba(23, 29, 76, 0.18);
+}
+.ctaSecondary:hover {
   background: rgba(19, 158, 212, 0.08);
   border-color: rgba(19, 158, 212, 0.45);
   color: var(--inx-navy);

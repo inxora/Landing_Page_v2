@@ -589,7 +589,7 @@ export const landingTranslations: Record<Language, LandingCopy> = {
         "Estamos trabajando en este rubro. Regístrate con otro y te avisaremos cuando esté disponible.",
       timezoneLabel: "Zona horaria",
       timezoneHint:
-        "Se usa para toda fecha y hora que veas en la plataforma. Autodetectada según tu navegador; podés cambiarla.",
+        "Se usa para toda fecha y hora que veas en la plataforma. Autodetectada según tu navegador; puedes cambiarla.",
       companySection: "Datos de la empresa",
       adminSection: "Usuario administrador",
       countryLabel: "País",

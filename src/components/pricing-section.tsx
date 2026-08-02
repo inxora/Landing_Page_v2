@@ -5,7 +5,8 @@ import {
   useRef,
   useState,
 } from "react";
-import { WHATSAPP_QUOTE_URL } from "../constants/whatsapp";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../routes/paths";
 import { useLandingTranslations } from "../hooks/useLandingTranslations";
 import type { PricingFeatureIcon } from "../i18n/pricingPlans";
 import styles from "./pricing-section.module.css";
@@ -21,6 +22,13 @@ function FeatureIcon({ icon }: { icon: PricingFeatureIcon }) {
   return <span className={`material-symbols-rounded ${styles.star}`} aria-hidden>auto_awesome</span>;
 }
 
+/* Convierte "Start" → "start" para pasarlo como `?plan=start` al
+   endpoint /suscripcion/checkout. Los códigos válidos son start,
+   growth y scale — igual que `plan.codigo` en la BD. */
+function planCodigoDe(name: string): string {
+  return name.trim().toLowerCase();
+}
+
 function PlanCard({
   plan,
   cycle,
@@ -29,6 +37,13 @@ function PlanCard({
   cycle: BillingCycle;
 }) {
   const priceInfo = cycle === "annual" ? plan.annual : plan.monthly;
+  const codigo = planCodigoDe(plan.name);
+  /* Ambos CTA llevan al mismo signup — la diferencia es el flag
+     `checkout=1` que, en `crear-cuenta-page.tsx`, dispara el flow
+     de Mercado Pago apenas termina el registro. */
+  const trialHref    = `${ROUTES.crearCuenta}?plan=${codigo}&periodicidad=${cycle}`;
+  const checkoutHref = `${trialHref}&checkout=1`;
+
   return (
     <article className={plan.popularLabel ? styles.cardPopular : styles.card}>
       {plan.popularLabel && (
@@ -43,11 +58,18 @@ function PlanCard({
         <span className={styles.period}>{priceInfo.period}</span>
       </div>
       <p className={styles.description}>{plan.description}</p>
-      {plan.groups.map((group, gi) => {
-        /* El ítem de implementación se cuelga del último grupo
-           (típicamente "Soporte") y varía según el ciclo activo. */
-        const isLast = gi === plan.groups.length - 1;
-        const items  = isLast ? [...group.items, plan.implementation[cycle]] : group.items;
+      {plan.groups.map((group) => {
+        /* 2026-08-02 — El ítem de implementación se oculta
+           temporalmente mientras se define cómo cobrarla (Jefferson:
+           "ya luego definiremos como cobrar la implementación"). Los
+           datos siguen en el i18n (`plan.implementation[cycle]`) —
+           cuando decidamos, alcanza con volver a envolver aquí:
+              const isLast = gi === plan.groups.length - 1;
+              const items  = isLast
+                ? [...group.items, plan.implementation[cycle]]
+                : group.items;
+           Ver `pricingPlans.ts` para los textos por moneda/ciclo. */
+        const items = group.items;
         return (
           <div key={group.title} className={styles.group}>
             <div className={styles.groupTitle}>{group.title}</div>
@@ -63,10 +85,15 @@ function PlanCard({
           </div>
         );
       })}
-      <a className={styles.cta} href={WHATSAPP_QUOTE_URL} target="_blank" rel="noopener noreferrer">
-        {plan.cta}
-        <span className={["material-symbols-rounded", styles.ctaIcon].join(" ")} aria-hidden>north_east</span>
-      </a>
+      <div className={styles.ctaStack}>
+        <Link to={trialHref} className={`${styles.cta} ${styles.ctaPrimary}`}>
+          {plan.ctaPrimary}
+          <span className={["material-symbols-rounded", styles.ctaIcon].join(" ")} aria-hidden>north_east</span>
+        </Link>
+        <Link to={checkoutHref} className={`${styles.cta} ${styles.ctaSecondary}`}>
+          {plan.ctaSecondary}
+        </Link>
+      </div>
     </article>
   );
 }

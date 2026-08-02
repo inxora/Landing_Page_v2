@@ -20,7 +20,7 @@ export const infoPagesEs = {
   },
   cotizaciones: {
     title: "Cotizaciones",
-    html: `<p>Para recibir una cotización rápida sobre suministros industriales, contáctenos por WhatsApp con su lista de ítems, cantidades y datos de empresa.</p>
+    html: `<p>Para recibir una cotización rápida sobre suministros industriales, cuentactenos por WhatsApp con su lista de ítems, cantidades y datos de empresa.</p>
 <p><a href="https://api.whatsapp.com/send?phone=51913087207" target="_blank" rel="noopener noreferrer">Abrir WhatsApp con INXORA</a></p>`,
   },
   catalogo: {

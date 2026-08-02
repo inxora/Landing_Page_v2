@@ -19,7 +19,12 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     server: {
       host: true,
-      port: 5173,
+      // Landing en 5174 — reservamos 5173 para el app-inxora (SaaS) para
+      // que ambos puedan correr simultáneos en dev sin chocar. `strictPort`
+      // hace que Vite falle si 5174 está ocupado en vez de saltar a otro
+      // puerto random (evita URLs sorpresa en el callback SSO).
+      port: 5174,
+      strictPort: true,
       proxy: {
         "/api": {
           target: proxyTarget,

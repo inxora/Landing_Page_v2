@@ -18,10 +18,15 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(
 
 const STORAGE_KEY = "inxora_lang";
 
+// 2026-08-02 — Mientras el selector de idioma esté desactivado
+// (ver `site-header.tsx`), forzamos español y limpiamos cualquier
+// valor cacheado previo. Sin selector visible, un usuario con
+// `inxora_lang=en` en localStorage no podría cambiarlo y quedaría
+// atrapado viendo la landing en un idioma que no eligió. Cuando el
+// selector vuelva, revertir a la lógica original de `readStoredLang`.
 function readStoredLang(): Language {
   try {
-    const v = localStorage.getItem(STORAGE_KEY) as Language | null;
-    if (v === "es" || v === "en" || v === "pt") return v;
+    localStorage.removeItem(STORAGE_KEY);
   } catch {
     /* ignore */
   }

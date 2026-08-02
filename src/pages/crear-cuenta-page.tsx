@@ -5,7 +5,8 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useSearchParams } from "react-router-dom";
+import { Paso1ElegirPlan, type EleccionPlan } from "./crear-cuenta/Paso1ElegirPlan";
 import { ROUTES } from "../routes/paths";
 import {
   type Paquete,
@@ -15,6 +16,7 @@ import {
   consultarRuc,
   fetchPaises,
   fetchPaquetes,
+  iniciarCheckoutSuscripcion,
   registrarEmpresa,
 } from "../services/gestionApi";
 import {
@@ -27,6 +29,13 @@ import type { LandingCopy } from "../i18n/landingTranslations";
 import styles from "./crear-cuenta-page.module.css";
 
 const SAAS_LOGIN_URL = "https://saas.inxora.com";
+/* URL SSO del saas: le pasamos tokens JWT por query, el saas los mete
+   en el authStore y redirige al dashboard sin pantalla intermedia.
+   Override con VITE_SAAS_CALLBACK_URL en .env.development (dev local
+   → http://localhost:5173/callback) o Vercel env (prod). */
+const SAAS_CALLBACK_URL =
+  (import.meta.env.VITE_SAAS_CALLBACK_URL as string | undefined)?.trim() ||
+  "https://saas.inxora.com/callback";
 
 type SignupCopy = LandingCopy["signup"];
 
@@ -183,6 +192,64 @@ function extractApiError(err: unknown, fallback: string): string {
 const CrearCuentaPage = () => {
   const t = useLandingTranslations();
   const s = t.signup;
+
+  /* Query params vienen del pricing del landing:
+       /crear-cuenta?plan=growth&periodicidad=anual&checkout=1
+     - `plan` + `periodicidad` → se muestran como chip arriba del form.
+     - `checkout=1` → post-registro, en vez de redirigir al login SaaS,
+       llamamos a /suscripcion/checkout y mandamos al usuario a MP.
+     - `moneda` → default PEN (MP-Perú solo acepta PEN por ahora). */
+  const [sp, setSp] = useSearchParams();
+  const planPreseleccionado = sp.get("plan");           // 'start' | 'growth' | null
+  const periodicidadPreseleccionada = sp.get("periodicidad"); // 'mensual' | 'anual' | 'monthly' | 'annual' | null
+  const modoCheckout = sp.get("checkout") === "1";
+  const monedaCheckout = (sp.get("moneda") as "USD" | "PEN") || "PEN";
+
+  /* Signup en 2 pasos estilo Netflix (2026-08-02):
+     Paso 1 = elige tu plan · Paso 2 = form de registro.
+     Si el usuario llegó desde el pricing (o sea `?plan=` en URL),
+     salta directo al paso 2. Sin query → arranca en paso 1. */
+  const [paso, setPaso] = useState<1 | 2>(planPreseleccionado ? 2 : 1);
+
+  /* Trackea si el usuario entró en la página desde paso 1 (sin plan
+     en URL). Se congela al montar — no cambia después de avanzar al
+     paso 2. Se usa para:
+       · Mostrar el progress indicator (● Plan · ○ Cuenta) también
+         en el paso 2 cuando el usuario pasó por el 1.
+       · Renderizar el botón "Cambiar de plan" en el header (vuelve
+         al paso 1) en vez del "Volver al inicio" (que sale a home).
+       · Renderizar el mini "Cambiar" al lado del chip. */
+  const [pasoPor1] = useState<boolean>(!planPreseleccionado);
+
+  /* Etiqueta legible para el chip — normaliza el valor del query
+     param (puede venir como 'annual'/'monthly' del pricing, o
+     'anual'/'mensual' del paso 1) al vocabulario en español. */
+  const labelPeriodicidad = (v: string | null): string => {
+    if (!v) return "";
+    if (v === "annual"  || v === "anual")   return "Anual";
+    if (v === "monthly" || v === "mensual") return "Mensual";
+    return v;
+  };
+
+  const handleEleccionPlan = (eleccion: EleccionPlan) => {
+    /* Actualizar URL para que sea bookmarkeable y consistente con las
+       otras entradas (pricing del landing). `replace=true` porque no
+       queremos que "volver" del navegador regrese al paso 1 con URL
+       vieja — mejor que salga del signup. */
+    const nuevo = new URLSearchParams();
+    nuevo.set("plan", eleccion.plan);
+    nuevo.set("periodicidad", eleccion.periodicidad);
+    if (eleccion.checkout) nuevo.set("checkout", "1");
+    setSp(nuevo, { replace: true });
+    setPaso(2);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const volverAPaso1 = () => {
+    setSp(new URLSearchParams(), { replace: true });
+    setPaso(1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const [form, setForm] = useState<FormState>(INITIAL);
   const [paises, setPaises] = useState<Pais[]>([]);
@@ -377,9 +444,80 @@ const CrearCuentaPage = () => {
 
     setSubmitting(true);
     try {
-      await registrarEmpresa(payload);
-      setSubmitted(true);
+      const resp = await registrarEmpresa(payload);
       sentryTrackSubmit("ok", form.codigo_paquete);
+
+      /* Flujo "Suscribirme ahora": el signup vino desde pricing con
+         `?checkout=1&plan=...&periodicidad=...`. Encadenar el checkout
+         MP con el token JWT recién emitido y redirigir al init_point.
+         El pricing pasa `annual|monthly` (inglés — enum `BillingCycle`);
+         acá lo normalizamos al vocabulario español que espera el backend. */
+      const periodicidadBackend =
+        periodicidadPreseleccionada === "anual" || periodicidadPreseleccionada === "annual"
+          ? "anual"
+          : "mensual";
+
+      /* SSO al saas: guardamos los tokens en localStorage para que
+         `CallbackPage` los recoja al aterrizar. Usamos localStorage
+         (no query params) porque MP tiene un límite de longitud en
+         `back_url` y los JWT (~400 chars c/u) hacen que la URL supere
+         los ~2000 chars aceptados por MP → devuelve "Tenemos un
+         problema". El TTL (10 min) evita que tokens viejos de una
+         sesión abandonada auto-loguen a otro visitante que use el
+         mismo navegador. */
+      try {
+        localStorage.setItem(
+          "inxora_sso_pending",
+          JSON.stringify({
+            token:     resp.token_acceso,
+            refresh:   resp.token_refresh,
+            issued_at: Date.now(),
+          }),
+        );
+      } catch {
+        /* localStorage bloqueado (modo privado antiguo) — el callback
+           caerá a login normal, no rompemos el flujo. */
+      }
+      const callbackUrl = SAAS_CALLBACK_URL;
+
+      if (
+        modoCheckout &&
+        (planPreseleccionado === "start" || planPreseleccionado === "growth" || planPreseleccionado === "scale")
+      ) {
+        try {
+          const co = await iniciarCheckoutSuscripcion(
+            {
+              codigo_plan: planPreseleccionado,
+              periodicidad: periodicidadBackend,
+              moneda: monedaCheckout,
+              email_pagador: payload.admin_email,
+              // Tras el pago MP redirige al callback SSO del saas con
+              // los tokens en el query → usuario entra logueado al
+              // dashboard sin pantalla intermedia.
+              back_url_override: callbackUrl,
+            },
+            resp.token_acceso,
+          );
+          window.location.assign(co.url);
+          return; // el navegador va a MP; no seguimos.
+        } catch (chkErr) {
+          const chkMsg = extractApiError(chkErr, s.submitError);
+          setSubmitError(
+            `Cuenta creada, pero no pudimos iniciar el pago automáticamente: ${chkMsg}. ` +
+            `Iniciá sesión y suscribite desde Configuración.`,
+          );
+          sentryTrackSubmit("error", `checkout_falla: ${chkMsg}`);
+          // NO marcamos `submitted=true` para que el usuario vea el
+          // banner de error rojo arriba del form en vez del pantallazo
+          // verde "cuenta creada" (que ocultaría el error).
+          return;
+        }
+      }
+
+      /* Flujo "Prueba gratis" (sin checkout): auto-loguear directo al
+         saas — sin pantalla intermedia ni email mentiroso. */
+      window.location.assign(callbackUrl);
+      return;
     } catch (err) {
       const msg = extractApiError(err, s.submitError);
       setSubmitError(msg);
@@ -425,27 +563,150 @@ const CrearCuentaPage = () => {
     <main className={styles.page}>
       <div className={styles.card}>
         <header className={styles.cardHeader}>
-          <RouterLink to={ROUTES.home} className={styles.backLink}>
-            <span className="material-symbols-rounded" aria-hidden>
-              arrow_back
-            </span>
-            {s.back}
-          </RouterLink>
+          {/* Si el usuario está en paso 2 y arrancó en paso 1, el link
+              vuelve al selector de plan (no al home). En el resto de
+              casos va al home como antes. */}
+          {paso === 2 && pasoPor1 ? (
+            <button
+              type="button"
+              onClick={volverAPaso1}
+              className={styles.backLink}
+              style={{ background: "transparent", border: "none", cursor: "pointer" }}
+            >
+              <span className="material-symbols-rounded" aria-hidden>
+                arrow_back
+              </span>
+              Cambiar de plan
+            </button>
+          ) : (
+            <RouterLink to={ROUTES.home} className={styles.backLink}>
+              <span className="material-symbols-rounded" aria-hidden>
+                arrow_back
+              </span>
+              {s.back}
+            </RouterLink>
+          )}
         </header>
 
         <div className={styles.intro}>
           <RouterLink to={ROUTES.home} className={styles.brand}>
             <img src="/LOGO-35.svg" alt="INXORA" />
           </RouterLink>
-          <h1 className={styles.title}>{s.title}</h1>
-          <p className={styles.sub}>
-            {s.haveAccount}{" "}
-            <a className={styles.loginLink} href={SAAS_LOGIN_URL}>
-              {s.signIn}
-            </a>
-          </p>
+
+          {pasoPor1 && (
+            <ol
+              aria-label="Pasos del registro"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: 20,
+                listStyle: "none",
+                padding: 0,
+                margin: "0 0 16px 0",
+                fontSize: 13,
+              }}
+            >
+              <li style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--inx-navy)", fontWeight: 500 }}>
+                <span style={{
+                  display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  width: 22, height: 22, borderRadius: "50%",
+                  background: "var(--inx-cyan, #139ed4)", color: "#fff",
+                  fontSize: 12, fontWeight: 600,
+                }}>1</span>
+                Plan
+              </li>
+              <li style={{
+                display: "flex", alignItems: "center", gap: 6,
+                color: paso === 2 ? "var(--inx-navy)" : "rgba(23,29,76,0.4)",
+                fontWeight: paso === 2 ? 500 : 400,
+              }}>
+                <span style={{
+                  display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  width: 22, height: 22, borderRadius: "50%",
+                  background: paso === 2 ? "var(--inx-cyan, #139ed4)" : "rgba(23,29,76,0.10)",
+                  color: paso === 2 ? "#fff" : "rgba(23,29,76,0.5)",
+                  fontSize: 12, fontWeight: 600,
+                }}>2</span>
+                Cuenta
+              </li>
+            </ol>
+          )}
+
+          {paso === 2 && (
+            <>
+              <h1 className={styles.title}>{s.title}</h1>
+              <p className={styles.sub}>
+                {s.haveAccount}{" "}
+                <a className={styles.loginLink} href={SAAS_LOGIN_URL}>
+                  {s.signIn}
+                </a>
+              </p>
+              {/* Chip visible cuando el signup vino del pricing (con o sin
+                  checkout auto). Confirma al usuario qué eligió antes de
+                  completar el form + permite volver a cambiarlo. */}
+              {planPreseleccionado && (
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    marginTop: 12,
+                    padding: "6px 12px",
+                    borderRadius: 999,
+                    background: modoCheckout ? "rgba(19,158,212,0.10)" : "rgba(23,29,76,0.06)",
+                    border: `1px solid ${modoCheckout ? "rgba(19,158,212,0.35)" : "rgba(23,29,76,0.15)"}`,
+                    fontSize: 13,
+                    color: "var(--inx-navy)",
+                  }}
+                >
+                  <span className="material-symbols-rounded" aria-hidden style={{ fontSize: 16 }}>
+                    {modoCheckout ? "credit_card" : "bolt"}
+                  </span>
+                  <span>
+                    {modoCheckout
+                      ? "Después del registro: pagar plan "
+                      : "Prueba gratis con plan "}
+                    <strong style={{ textTransform: "capitalize" }}>{planPreseleccionado}</strong>
+                    {periodicidadPreseleccionada && (
+                      <> · <strong>{labelPeriodicidad(periodicidadPreseleccionada)}</strong></>
+                    )}
+                  </span>
+                  {/* Link para volver al paso 1 y cambiar la elección.
+                      Solo aparece si arrancó desde paso 1 — si vino del
+                      pricing del landing lo mandamos a cambiar allá para
+                      no perder contexto. */}
+                  {pasoPor1 && (
+                    <button
+                      type="button"
+                      onClick={volverAPaso1}
+                      style={{
+                        marginLeft: 4, padding: "2px 8px", borderRadius: 999,
+                        border: "1px solid transparent", background: "transparent",
+                        color: "var(--inx-cyan, #139ed4)", fontSize: 12,
+                        fontWeight: 500, cursor: "pointer",
+                      }}
+                    >
+                      Cambiar
+                    </button>
+                  )}
+                </div>
+              )}
+            </>
+          )}
         </div>
 
+        {paso === 1 && (
+          <Paso1ElegirPlan
+            onElegir={handleEleccionPlan}
+            periodicidadInicial={
+              periodicidadPreseleccionada === "anual" || periodicidadPreseleccionada === "annual"
+                ? "annual"
+                : "monthly"
+            }
+          />
+        )}
+
+        {paso === 2 && (
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
           {/* ── Rubro (paquete a aplicar) ── */}
           <section className={styles.section}>
@@ -870,6 +1131,7 @@ const CrearCuentaPage = () => {
             {s.legalEnd}
           </p>
         </form>
+        )}
       </div>
     </main>
   );

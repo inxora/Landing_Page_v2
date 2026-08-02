@@ -1,0 +1,238 @@
+/* Paso 1 del signup — estilos consistentes con pricing-section pero
+   compactos (menos features, cards más chicas para que quepan sin
+   scroll en desktop). */
+
+.wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.title {
+  font-family: var(--font-hero-display);
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 600;
+  color: var(--inx-navy);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  font-size: 14px;
+  color: rgba(23, 29, 76, 0.65);
+  margin: 0;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── Toggle Mensual / Anual ── */
+.billingToggle {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(23, 29, 76, 0.04);
+  border: 1px solid rgba(23, 29, 76, 0.08);
+  margin: 0 auto 24px;
+  display: flex;
+  width: fit-content;
+}
+
+.billingBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: rgba(23, 29, 76, 0.7);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.billingBtn:hover {
+  color: var(--inx-navy);
+}
+
+.billingBtnActive {
+  background: #fff;
+  color: var(--inx-navy);
+  box-shadow: 0 1px 2px rgba(23, 29, 76, 0.08);
+}
+
+.billingHint {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(19, 158, 212, 0.12);
+  color: var(--inx-cyan, #139ed4);
+  font-weight: 600;
+}
+
+/* ── Grid de cards ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Card ── */
+.card,
+.cardPopular {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid rgba(23, 29, 76, 0.10);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  border-color: rgba(19, 158, 212, 0.30);
+  box-shadow: 0 4px 12px rgba(23, 29, 76, 0.06);
+}
+
+.cardPopular {
+  border-color: var(--inx-cyan, #139ed4);
+  box-shadow: 0 6px 20px rgba(19, 158, 212, 0.12);
+}
+
+.badgePopular {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--inx-cyan, #139ed4);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.planName {
+  font-family: var(--font-hero-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--inx-navy);
+  margin: 0 0 10px 0;
+  letter-spacing: -0.01em;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.price {
+  font-family: var(--font-hero-display);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--inx-navy);
+  letter-spacing: -0.02em;
+}
+
+.period {
+  font-size: 13px;
+  color: rgba(23, 29, 76, 0.55);
+}
+
+.description {
+  font-size: 13px;
+  color: rgba(23, 29, 76, 0.65);
+  line-height: 1.45;
+  margin: 0 0 16px 0;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--inx-navy);
+}
+
+.check {
+  font-size: 18px;
+  color: var(--inx-cyan, #139ed4);
+  flex-shrink: 0;
+}
+
+/* ── CTAs ── */
+.ctaStack {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-family: var(--font-hero-display);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.ctaPrimary {
+  color: #fff;
+  background: var(--inx-cyan, #139ed4);
+  border: 1px solid var(--inx-cyan, #139ed4);
+}
+
+.ctaPrimary:hover {
+  background: #0e7fac;
+  border-color: #0e7fac;
+}
+
+.ctaSecondary {
+  color: var(--inx-navy);
+  background: #fff;
+  border: 1px solid rgba(23, 29, 76, 0.18);
+}
+
+.ctaSecondary:hover {
+  background: rgba(19, 158, 212, 0.08);
+  border-color: rgba(19, 158, 212, 0.45);
+}

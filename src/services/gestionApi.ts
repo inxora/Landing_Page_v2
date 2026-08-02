@@ -138,9 +138,52 @@ export function consultarDni(
   });
 }
 
-export function registrarEmpresa(payload: RegistroPayload): Promise<unknown> {
-  return request("/auth/registro", {
+/* Respuesta del registro. Incluye tokens JWT desde 2026-08-01 para
+   que el landing pueda encadenar el checkout Mercado Pago inmediato
+   ("Suscribirme ahora") sin un login extra. */
+export type RegistroResponse = {
+  mensaje:       string;
+  empresa_id:    string;
+  usuario_id:    string;
+  token_acceso:  string;
+  token_refresh: string;
+};
+
+export function registrarEmpresa(payload: RegistroPayload): Promise<RegistroResponse> {
+  return request<RegistroResponse>("/auth/registro", {
     method: "POST",
     body: JSON.stringify(payload),
+  });
+}
+
+/* ─── Suscripción · Mercado Pago (2026-08-01) ─────────────────
+ * Endpoints privados (requieren JWT). Se usan solo desde el landing
+ * en el flujo "Suscribirme ahora": registro → tokens → checkout. */
+
+export type IniciarCheckoutPayload = {
+  codigo_plan:    "start" | "growth" | "scale";
+  periodicidad?:  "mensual" | "anual";
+  moneda?:        "USD" | "PEN";
+  email_pagador?: string;
+  /* Override del back_url que MP usa post-pago. El landing lo usa
+     para armar el SSO al saas: `saas.inxora.com/callback?token=...`. */
+  back_url_override?: string;
+};
+
+export type CheckoutRespuesta = {
+  url:              string;   // init_point de MP al que redirigir
+  mp_preapproval_id: string;
+};
+
+export function iniciarCheckoutSuscripcion(
+  payload: IniciarCheckoutPayload,
+  tokenAcceso: string,
+): Promise<CheckoutRespuesta> {
+  return request<CheckoutRespuesta>("/suscripcion/checkout", {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      Authorization: `Bearer ${tokenAcceso}`,
+    },
   });
 }

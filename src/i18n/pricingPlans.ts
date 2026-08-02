@@ -35,7 +35,12 @@ export type PricingPlanData = {
     monthly: PricingFeature;
     annual:  PricingFeature;
   };
-  cta: string;
+  /* CTA primario: "Empezar prueba gratis 7 días" — lleva al signup
+     y crea la empresa en modo demo (trial 7 días). */
+  ctaPrimary: string;
+  /* CTA secundario: "Suscribirme ahora" — mismo signup pero al
+     terminar redirige a Mercado Pago con el plan pre-seleccionado. */
+  ctaSecondary: string;
 };
 
 export type PricingBillingLabels = {
@@ -100,7 +105,8 @@ const es: PricingSectionCopy = {
         monthly: { text: "Implementación: $53 (S/ 180) único", icon: "dash" },
         annual:  { text: "Sin costo de implementación",         icon: "star" },
       },
-      cta: "Empezar con Start",
+      ctaPrimary:   "Empezar prueba gratis 7 días",
+      ctaSecondary: "Suscribirme ahora",
     },
     {
       name: "Growth",
@@ -137,7 +143,8 @@ const es: PricingSectionCopy = {
         monthly: { text: "Implementación: $104 (S/ 354) único", icon: "dash" },
         annual:  { text: "Sin costo de implementación",          icon: "star" },
       },
-      cta: "Empezar con Growth",
+      ctaPrimary:   "Empezar prueba gratis 7 días",
+      ctaSecondary: "Suscribirme ahora",
     },
   ],
 };
@@ -186,7 +193,8 @@ const en: PricingSectionCopy = {
         monthly: { text: "Setup: $53 (S/ 180) one-off", icon: "dash" },
         annual:  { text: "Setup included",              icon: "star" },
       },
-      cta: "Start with Start",
+      ctaPrimary:   "Start 7-day free trial",
+      ctaSecondary: "Subscribe now",
     },
     {
       name: "Growth",
@@ -223,7 +231,8 @@ const en: PricingSectionCopy = {
         monthly: { text: "Setup: $104 (S/ 354) one-off", icon: "dash" },
         annual:  { text: "Setup included",               icon: "star" },
       },
-      cta: "Start with Growth",
+      ctaPrimary:   "Start 7-day free trial",
+      ctaSecondary: "Subscribe now",
     },
   ],
 };
@@ -272,7 +281,8 @@ const pt: PricingSectionCopy = {
         monthly: { text: "Implantação: $53 (S/ 180) único", icon: "dash" },
         annual:  { text: "Implantação incluída",             icon: "star" },
       },
-      cta: "Começar com Start",
+      ctaPrimary:   "Iniciar teste grátis 7 dias",
+      ctaSecondary: "Assinar agora",
     },
     {
       name: "Growth",
@@ -309,7 +319,8 @@ const pt: PricingSectionCopy = {
         monthly: { text: "Implantação: $104 (S/ 354) único", icon: "dash" },
         annual:  { text: "Implantação incluída",              icon: "star" },
       },
-      cta: "Começar com Growth",
+      ctaPrimary:   "Iniciar teste grátis 7 dias",
+      ctaSecondary: "Assinar agora",
     },
   ],
 };
